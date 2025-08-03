@@ -192,6 +192,10 @@
         .skill-card {
             background-color: #1a1a1a; border: 1px solid var(--border-color); padding: 1.5rem;
         }
+        /* --- THIS IS THE CHANGE --- */
+        .skill-card h3 {
+            color: var(--primary-blue);
+        }
         
         .faq-accordion { max-width: 800px; margin: 0 auto; }
         .faq-item { border-bottom: 1px solid var(--border-color); }
@@ -212,11 +216,19 @@
 
         .contact-section { text-align: center; padding-top: 40px; }
         .contact-section h3 { font-size: 1.5rem; color: var(--primary-blue); margin-bottom: 1rem; }
-        .contact-section a {
+        /* --- NEW STYLES FOR CONTACT INFO --- */
+        .contact-info {
+            line-height: 2; /* Adds space between the lines of contact info */
+        }
+        .contact-info a {
             font-size: 1.2rem; color: var(--text-color);
             text-decoration: underline; transition: color 0.3s ease;
         }
-        .contact-section a:hover { color: var(--primary-blue); }
+        .contact-info a:hover { color: var(--primary-blue); }
+        .contact-info p {
+            font-size: 1.1rem;
+            margin: 0.5rem 0;
+        }
 
         .main-footer { text-align: center; padding: 2rem; border-top: 1px solid var(--border-color); }
         .social-links { margin-bottom: 1rem; }
@@ -286,7 +298,7 @@
             
             <p class="lang" data-de="Fachinformatiker für Systemintegration" data-en="IT Specialist for System Integration">Fachinformatiker für Systemintegration</p>
             <p class="lang" data-de="Mehrsprachiger IT-Auszubildender mit Leidenschaft für Netzwerke und Cybersicherheit, der praktische Erfahrung mit globaler Denkweise verbindet, um effektive Technologielösungen zu liefern. Motiviert, sich weiterzuentwickeln und von Marokko bis Deutschland Wirkung zu zeigen." data-en="Multilingual IT trainee with a passion for networks and cybersecurity, combining hands-on experience with a global mindset to deliver effective technology solutions. Motivated to grow and make an impact from Morocco to Germany.">
-                Mehrsprachiger IT-Auszubildender mit Leidenschaft für Netzwerke und Cybersicherheit, der praktische Erfahrung mit globaler Denkweise verbindet, um effektive Technologielösungen zu liefern. Motiviert, sich weiterzuentwickeln und von Marokko bis Deutschland Wirkung zu zeigen.
+                Mehrsprachiger IT-Auszubildender mit Leidenschaft für Netzwerke und Cybersicherheit...
             </p>
             <p class="location lang" data-de="Wohnort: Taza, Marokko" data-en="Based in: Taza, Morocco">Wohnort: Taza, Marokko</p>
         </div>
@@ -312,7 +324,6 @@
     <div class="container" id="bildung">
         <h2 class="lang" data-de="Bildungsweg" data-en="Education">Bildungsweg</h2>
         <div class="timeline-wrapper">
-            <!-- ========== TIMELINE ITEMS REVERSED: NEWEST FIRST ========== -->
             <div class="timeline-item" data-aos="fade-up"><div class="timeline-content"><span class="date">2024 - 2026</span><h3 class="lang" data-de="Fachinstitut für Angewandte Technologie, Taza" data-en="Specialized Institute Of Applied Technology Taza">Fachinstitut für Angewandte Technologie, Taza</h3><p class="degree lang" data-de="Laufende Ausbildung in IT-Netzwerken und -Systemen" data-en="Ongoing apprenticeship in IT Networks and Systems">Laufende Ausbildung in IT-Netzwerken und -Systemen</p><ul><li class="lang" data-de="Mitwirkung an von Studenten geleiteten Sitzungen zu Linux, Virtualisierung und Windows Server." data-en="Contributed to student-led sessions on Linux, Virtualization, and Windows Server administration.">Mitwirkung an von Studenten geleiteten Sitzungen zu Linux, Virtualisierung und Windows Server.</li><li class="lang" data-de="Aktiv in Lerngruppen zur CCNA-Vorbereitung, GNS3 und technischer Fehlerbehebung." data-en="Active in peer study groups for GNS3, CCNA preparation, and technical troubleshooting.">Aktiv in Lerngruppen zur CCNA-Vorbereitung, GNS3 und technischer Fehlerbehebung.</li></ul></div></div>
             <div class="timeline-item" data-aos="fade-up"><div class="timeline-content"><span class="date">2023 - 2024</span><h3>Klinikum Hann. Münden</h3><p class="degree lang" data-de="Sechsmonatige Ausbildung zum Pflegefachmann" data-en="Six months of vocational training as a nursing specialist">Sechsmonatige Ausbildung zum Pflegefachmann</p><ul><li class="lang" data-de="Einhaltung strenger regulatorischer Standards, einschließlich Datenschutz- und Sicherheitsprotokollen." data-en="Adhered to strict regulatory standards, including data protection and safety protocols.">Einhaltung strenger regulatorischer Standards, einschließlich Datenschutz- und Sicherheitsprotokollen.</li><li class="lang" data-de="Verbesserung der Sprachkenntnisse durch tägliche Praxis und kulturelle Nuancen." data-en="Improved language skills through daily real-world interactions, mastering local expressions and cultural nuances.">Verbesserung der Sprachkenntnisse durch tägliche Praxis und kulturelle Nuancen.</li></ul></div></div>
             <div class="timeline-item" data-aos="fade-up"><div class="timeline-content"><span class="date">2021 - 2022</span><h3 class="lang" data-de="Interdisziplinäre Fakultät von Taza" data-en="Faculté Polydisciplinaire de Taza">Interdisziplinäre Fakultät von Taza</h3><p class="degree lang" data-de="Einjähriges Grundstudium in Mathematik und Informatik" data-en="One year of foundational studies in Mathematics and Computer Science">Einjähriges Grundstudium in Mathematik und Informatik</p><ul><li class="lang" data-de="Studium mathematischer Kernkonzepte wie Analysis, lineare Algebra und diskrete Mathematik." data-en="Studied key mathematical concepts such as calculus, linear algebra, and discrete mathematics.">Studium mathematischer Kernkonzepte wie Analysis, lineare Algebra und diskrete Mathematik.</li><li class="lang" data-de="Anwendung mathematischer Logik zur Lösung von Problemen in Algorithmen und Informatik." data-en="Applied mathematical reasoning to solve problems related to algorithms and computer science.">Anwendung mathematischer Logik zur Lösung von Problemen in Algorithmen und Informatik.</li></ul></div></div>
@@ -350,10 +361,16 @@
     </div>
 
     <div class="container contact-section" id="kontakt" data-aos="fade-up">
-        <h3 class="lang" data-de="Benötigen Sie weitere Informationen?" data-en="Need additional information?">Benötigen Sie weitere Informationen?</h3>
-        <p><a href="mailto:walid@gourideche.com">walid@gourideche.com</a></p>
+        <h3 class="lang" data-de="Zögern Sie nicht, mich für weitere Informationen zu kontaktieren." data-en="Do not hesitate to contact me for any more information.">Zögern Sie nicht, mich für weitere Informationen zu kontaktieren.</h3>
+        <div class="contact-info">
+            <p><a href="mailto:walid@gourideche.com">walid@gourideche.com</a></p>
+            <p><a href="tel:+212698585528">+212-698585528</a></p>
+            <p>
+                Cite Al Amane Imm A Apt 1<br>
+                35000 Taza
+            </p>
+        </div>
     </div>
-
 
     <footer class="main-footer">
         <div class="social-links">
