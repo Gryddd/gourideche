@@ -151,6 +151,9 @@
         .timeline-content {
             padding: 20px; background-color: #1a1a1a;
             border: 1px solid var(--border-color); text-align: left;
+            /* --- THE FIX: Prevents long words from overflowing --- */
+            overflow-wrap: break-word;
+            word-wrap: break-word; /* Older browser support */
         }
         .timeline-content h3 { color: var(--primary-blue); }
         
@@ -260,7 +263,6 @@
             <img src="images/aura.jpg" alt="Ein professionelles Foto von Walid Gourideche">
         </div>
         <div class="hero-text" data-aos="fade-up" data-aos-delay="200">
-            <!-- ========== RESTORED H1 TITLE ========== -->
             <h1>> Walid Gourideche</h1>
             
             <p class="lang" data-de="Fachinformatiker für Systemintegration" data-en="IT Specialist for System Integration">Fachinformatiker für Systemintegration</p>
