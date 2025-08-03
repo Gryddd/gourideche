@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Walid Gourideche | Fachinformatiker für Systemintegration</title>
     
-    <!-- Updated Google Fonts: Space Mono for headings, Inter for body -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -18,7 +17,6 @@
             --primary-blue: #00bfff;
             --text-color: #e0e0e0;
             --border-color: #333333;
-            /* Updated Fonts */
             --font-heading: 'Space Mono', monospace;
             --font-body: 'Inter', sans-serif;
         }
@@ -28,13 +26,13 @@
         body {
             background-color: var(--background);
             color: var(--text-color);
-            font-family: var(--font-body); /* Default to body font */
+            font-family: var(--font-body);
             margin: 0;
             padding: 0;
             overflow-x: hidden;
         }
         h1, h2, h3, .nav-links a {
-            font-family: var(--font-heading); /* Apply heading font */
+            font-family: var(--font-heading);
         }
         #background-video {
             position: fixed; right: 0; bottom: 0; min-width: 100%; min-height: 100%;
@@ -45,12 +43,12 @@
             background-color: rgba(13, 13, 13, 0.85); backdrop-filter: blur(5px);
         }
 
-        /* --- START OF UPDATED NAVIGATION BAR & NEW MOBILE MENU STYLES --- */
         .main-nav {
             position: fixed; top: 0; left: 0; width: 100%;
-            background-color: rgba(13, 13, 13, 0.7); backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border-color); z-index: 1001;
-            padding: 0.5rem 2rem; box-sizing: border-box;
+            background-color: rgba(13, 13, 13, 0.7); 
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1001; padding: 0.5rem 2rem; box-sizing: border-box;
         }
         .nav-content {
             display: flex; justify-content: space-between; align-items: center;
@@ -72,18 +70,15 @@
         }
         .lang-toggle:hover { background-color: var(--primary-blue); color: var(--background); }
         
-        /* Mobile Menu Styles */
         .mobile-menu-icon {
-            display: none; /* Hidden on desktop */
-            cursor: pointer;
-            z-index: 1002;
+            display: none; cursor: pointer; z-index: 1002;
         }
         .mobile-menu-icon div {
             width: 25px; height: 3px; background-color: var(--primary-blue);
             margin: 5px 0; transition: 0.4s;
         }
         .mobile-nav-overlay {
-            height: 100%; width: 0; /* Hidden by default */
+            height: 100%; width: 0;
             position: fixed; z-index: 1001; top: 0; left: 0;
             background-color: rgba(13, 13, 13, 0.95);
             overflow-x: hidden; transition: 0.5s;
@@ -100,7 +95,6 @@
         .mobile-nav-overlay a:hover, .mobile-nav-overlay a:focus {
             color: var(--primary-blue);
         }
-        /* --- END OF UPDATED NAVIGATION BAR & NEW MOBILE MENU STYLES --- */
         
         .container {
             width: 90%; max-width: 1100px; margin: 0 auto;
@@ -130,8 +124,8 @@
         .hero-text p { font-size: 1.1rem; line-height: 1.6; }
         .hero-text .location { color: var(--primary-blue); font-weight: bold; }
         h2 {
-            font-size: 2rem; color: var(--primary-blue);
-            margin-bottom: 50px; text-transform: uppercase; text-align: center;
+            text-align: center; font-size: 2rem; color: var(--primary-blue);
+            margin-bottom: 50px; text-transform: uppercase;
         }
         h2::before, h2::after { content: ' -- '; }
         
@@ -154,11 +148,19 @@
             padding: 20px; background-color: #1a1a1a;
             border: 1px solid var(--border-color); text-align: left;
         }
+        /* --- CHANGED RULE: Titles are now blue --- */
+        .timeline-content h3 { color: var(--primary-blue); }
+        
         .timeline-content .degree, .timeline-content .position {
             font-style: italic; display: block; margin-top: 5px; margin-bottom: 15px;
         }
         .timeline-content .date { font-weight: bold; color: var(--text-color); margin-bottom: 10px; display: block; }
         .timeline-content ul { padding-left: 20px; margin: 0; }
+        
+        /* --- NEW RULE: Adds space between bullet points --- */
+        .timeline-content ul li:not(:last-child) {
+            margin-bottom: 10px;
+        }
 
         .skills-grid {
             display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;
@@ -196,16 +198,15 @@
         .social-links { margin-bottom: 1rem; }
         .social-links a { color: var(--primary-blue); margin: 0 15px; text-decoration: none; font-weight: bold; }
         
-        /* Mobile Responsive Styles */
         @media screen and (max-width: 768px) {
             .nav-links, .lang-toggle {
-                display: none; /* Hide desktop nav and button */
+                display: none;
             }
             .mobile-menu-icon {
-                display: block; /* Show hamburger icon */
+                display: block;
             }
             .main-nav {
-                justify-content: flex-end; /* Align icon to the right */
+                justify-content: flex-end;
             }
             .nav-content {
                 justify-content: flex-end;
@@ -223,7 +224,6 @@
     </video>
     <div class="video-overlay"></div>
 
-    <!-- ========== UPDATED NAVIGATION BAR ========== -->
     <nav class="main-nav">
         <div class="nav-content">
             <div class="nav-links">
@@ -235,7 +235,6 @@
             </div>
             <button id="lang-toggle" class="lang-toggle" data-de="Switch to English" data-en="Auf Deutsch umschalten">Switch to English</button>
             
-            <!-- Hamburger Icon for Mobile -->
             <div class="mobile-menu-icon" onclick="toggleNav()">
                 <div></div>
                 <div></div>
@@ -244,7 +243,6 @@
         </div>
     </nav>
     
-    <!-- Mobile Navigation Overlay -->
     <div id="mobile-nav" class="mobile-nav-overlay">
         <div class="mobile-nav-overlay-content">
             <a href="#bildung" class="lang" data-de="Bildungsweg" data-en="Education" onclick="toggleNav()">Bildungsweg</a>
@@ -252,7 +250,6 @@
             <a href="#kompetenzen" class="lang" data-de="Kompetenzen" data-en="Skills" onclick="toggleNav()">Kompetenzen</a>
             <a href="#faq" class="lang" data-de="FAQ" data-en="FAQ" onclick="toggleNav()">FAQ</a>
             <a href="#kontakt" class="lang" data-de="Kontakt" data-en="Contact" onclick="toggleNav()">Kontakt</a>
-            <!-- Mobile Language Toggle -->
             <button id="lang-toggle-mobile" class="lang-toggle" style="margin-top: 20px;" data-de="Switch to English" data-en="Auf Deutsch umschalten">Switch to English</button>
         </div>
     </div>
