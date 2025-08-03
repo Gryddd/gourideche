@@ -28,56 +28,24 @@
             font-family: var(--font-body); margin: 0; padding: 0; overflow-x: hidden;
         }
         h1, h2, h3, .nav-links a { font-family: var(--font-heading); }
-
-        /* --- START OF DYNAMIC PARALLAX BACKGROUND STYLES --- */
-        .parallax-container {
-            height: 100vh;
-            overflow-x: hidden;
-            overflow-y: auto;
-            perspective: 2px; /* Controls parallax depth. Higher number = less effect. */
-            position: relative;
-            transform-style: preserve-3d;
-        }
-        .background-video-wrapper {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            z-index: -2;
-            /* The magic: Push back in 3D space and scale up to fill the view */
-            transform: translateZ(-2px) scale(2); 
-        }
         #background-video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+            position: fixed; right: 0; bottom: 0; min-width: 100%; min-height: 100%;
+            width: auto; height: auto; z-index: -2; object-fit: cover;
         }
         .video-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
             background-color: rgba(13, 13, 13, 0.85); backdrop-filter: blur(5px);
-        }
-        /* --- END OF DYNAMIC BACKGROUND STYLES --- */
-
-        /* --- LAYOUT SIZE CONTROL WRAPPER --- */
-        .site-wrapper {
-            max-width: 1200px; /* This sets the maximum width of all your content */
-            margin: 0 auto;    /* This centers the content on wider screens */
-            position: relative;
-            z-index: 2;
-            background-color: transparent; /* Must be transparent for parallax */
         }
 
         .main-nav {
             position: fixed; top: 0; left: 0; width: 100%;
             background-color: rgba(13, 13, 13, 0.7); backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--border-color);
-            z-index: 1001;
+            z-index: 1001; padding: 0.5rem 2rem; box-sizing: border-box;
         }
         .nav-content {
             display: flex; justify-content: space-between; align-items: center;
             max-width: 1200px; margin: 0 auto;
-            padding: 0.5rem 2rem; box-sizing: border-box;
         }
         .nav-links { display: flex; gap: 1.5rem; }
         .nav-links a {
@@ -94,7 +62,9 @@
         .lang-toggle:hover { background-color: var(--primary-blue); color: var(--background); }
         
         .mobile-menu-icon { display: none; cursor: pointer; z-index: 1002;
-            position: fixed; top: 15px; right: 20px;
+            position: fixed;
+            top: 15px;
+            right: 20px;
         }
         .mobile-menu-icon div {
             width: 25px; height: 3px; background-color: var(--primary-blue);
@@ -120,13 +90,14 @@
         .mobile-nav-overlay a:hover, .mobile-nav-overlay a:focus { color: var(--primary-blue); }
         
         .container {
-            width: 90%; margin: 0 auto;
+            width: 90%; max-width: 1100px; margin: 0 auto;
             padding-top: 150px; padding-bottom: 100px;
+            position: relative; z-index: 2;
         }
         .hero {
             display: flex; align-items: center; justify-content: center;
             min-height: 100vh; gap: 4rem; flex-wrap: wrap;
-            padding: 2rem; text-align: center; padding-top: 80px; box-sizing: border-box;
+            padding: 2rem; text-align: center; padding-top: 80px;
         }
         .hero-image { width: 300px; height: 300px; flex-shrink: 0; }
         .hero-image img {
@@ -302,7 +273,7 @@
                 border-bottom: none;
             }
             .nav-content {
-                display: none;
+                display: none; /* Hide desktop nav content entirely */
             }
             .mobile-menu-icon {
                 display: block;
@@ -317,214 +288,221 @@
             }
         }
     </style>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WRJ21ZJL53"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-WRJ21ZJL53');
+    </script>
 </head>
 <body>
 
-    <div class="parallax-container">
-        <div class="background-video-wrapper">
-            <video autoplay loop muted playsinline id="background-video">
-                <source src="videos/background.mp4" type="video/mp4">
-            </video>
+    <video autoplay loop muted playsinline id="background-video">
+        <source src="videos/background.mp4" type="video/mp4">
+    </video>
+    <div class="video-overlay"></div>
+
+    <nav class="main-nav">
+        <div class="nav-content">
+            <div class="nav-links">
+                <a href="#intro-video" class="lang" data-de="Intro-Video" data-en="Intro Video">Intro-Video</a>
+                <a href="#bildung" class="lang" data-de="Bildungsweg" data-en="Education">Bildungsweg</a>
+                <a href="#erfahrung" class="lang" data-de="Erfahrung" data-en="Experience">Erfahrung</a>
+                <a href="#kompetenzen" class="lang" data-de="Kompetenzen" data-en="Skills">Kompetenzen</a>
+                <a href="#faq" class="lang" data-de="FAQ" data-en="FAQ">FAQ</a>
+                <a href="#kontakt" class="lang" data-de="Kontakt" data-en="Contact">Kontakt</a>
+            </div>
+            <button id="lang-toggle" class="lang-toggle" data-de="Switch to English" data-en="Auf Deutsch umschalten">Switch to English</button>
         </div>
-        <div class="video-overlay"></div>
-        
-        <div class="site-wrapper">
-            <nav class="main-nav">
-                <div class="nav-content">
-                    <div class="nav-links">
-                        <a href="#intro-video" class="lang" data-de="Intro-Video" data-en="Intro Video">Intro-Video</a>
-                        <a href="#bildung" class="lang" data-de="Bildungsweg" data-en="Education">Bildungsweg</a>
-                        <a href="#erfahrung" class="lang" data-de="Erfahrung" data-en="Experience">Erfahrung</a>
-                        <a href="#kompetenzen" class="lang" data-de="Kompetenzen" data-en="Skills">Kompetenzen</a>
-                        <a href="#faq" class="lang" data-de="FAQ" data-en="FAQ">FAQ</a>
-                        <a href="#kontakt" class="lang" data-de="Kontakt" data-en="Contact">Kontakt</a>
-                    </div>
-                    <button id="lang-toggle" class="lang-toggle" data-de="Switch to English" data-en="Auf Deutsch umschalten">Switch to English</button>
-                </div>
-            </nav>
-            
-            <div class="mobile-menu-icon" onclick="toggleNav(this)">
-                <div class="bar1"></div>
-                <div class="bar2"></div>
-                <div class="bar3"></div>
-            </div>
-            
-            <div id="mobile-nav" class="mobile-nav-overlay">
-                <div class="mobile-nav-overlay-content">
-                    <a href="#intro-video" class="lang" data-de="Intro-Video" data-en="Intro Video" onclick="toggleNav(document.querySelector('.mobile-menu-icon'))">Intro-Video</a>
-                    <a href="#bildung" class="lang" data-de="Bildungsweg" data-en="Education" onclick="toggleNav(document.querySelector('.mobile-menu-icon'))">Bildungsweg</a>
-                    <a href="#erfahrung" class="lang" data-de="Erfahrung" data-en="Experience" onclick="toggleNav(document.querySelector('.mobile-menu-icon'))">Erfahrung</a>
-                    <a href="#kompetenzen" class="lang" data-de="Kompetenzen" data-en="Skills" onclick="toggleNav(document.querySelector('.mobile-menu-icon'))">Kompetenzen</a>
-                    <a href="#faq" class="lang" data-de="FAQ" data-en="FAQ" onclick="toggleNav(document.querySelector('.mobile-menu-icon'))">FAQ</a>
-                    <a href="#kontakt" class="lang" data-de="Kontakt" data-en="Contact" onclick="toggleNav(document.querySelector('.mobile-menu-icon'))">Kontakt</a>
-                    <button id="lang-toggle-mobile" class="lang-toggle" style="margin-top: 20px;" data-de="Switch to English" data-en="Auf Deutsch umschalten">Switch to English</button>
-                </div>
-            </div>
-            
-            <section class="hero" id="hero">
-                <div class="hero-image" data-aos="fade-up">
-                    <img src="images/aura.jpg" alt="Ein professionelles Foto von Walid Gourideche">
-                </div>
-                <div class="hero-text" data-aos="fade-up" data-aos-delay="200">
-                    <h1>> Walid Gourideche</h1>
-                    <p class="lang" data-de="Fachinformatiker für Systemintegration" data-en="IT Specialist for System Integration">Fachinformatiker für Systemintegration</p>
-                    <p class="lang" data-de="Mehrsprachiger IT-Auszubildender mit Leidenschaft für Netzwerke und Cybersicherheit, der praktische Erfahrung mit globaler Denkweise verbindet, um effektive Technologielösungen zu liefern. Motiviert, sich weiterzuentwickeln und von Marokko bis Deutschland Wirkung zu zeigen." data-en="Multilingual IT trainee with a passion for networks and cybersecurity, combining hands-on experience with a global mindset to deliver effective technology solutions. Motivated to grow and make an impact from Morocco to Germany.">
-                        Mehrsprachiger IT-Auszubildender mit Leidenschaft für Netzwerke und Cybersicherheit, der praktische Erfahrung mit globaler Denkweise verbindet, um effektive Technologielösungen zu liefern. Motiviert, sich weiterzuentwickeln und von Marokko bis Deutschland Wirkung zu zeigen.
-                    </p>
-                    <p class="location lang" data-de="Wohnort: Taza, Marokko" data-en="Based in: Taza, Morocco">Wohnort: Taza, Marokko</p>
-                </div>
-            </section>
-
-            <div class="container" id="intro-video">
-                <h2 class="lang" data-de="Video-Vorstellung" data-en="Video Introduction">Video-Vorstellung</h2>
-                <div class="video-thumbnail" data-aos="fade-up" id="open-video-modal">
-                    <img src="images/video-thumbnail.jpg" alt="Video Introduction Thumbnail">
-                    <div class="play-button"></div>
-                </div>
-            </div>
-
-            <div id="video-modal" class="modal">
-                <div class="modal-content">
-                    <span class="close-button" id="close-video-modal">×</span>
-                    <div class="video-responsive-wrapper">
-                        <iframe id="youtube-player" width="560" height="315" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    </div>
-                </div>
-            </div>
-
-            <div class="container" id="bildung">
-                <h2 class="lang" data-de="Bildungsweg" data-en="Education">Bildungsweg</h2>
-                <div class="timeline-wrapper">
-                    <div class="timeline-item" data-aos="fade-up"><div class="timeline-content"><div class="timeline-text"><span class="date">2024 - 2026</span><h3 class="lang" data-de="Fachinstitut für Angewandte Technologie, Taza" data-en="Specialized Institute Of Applied Technology Taza">Fachinstitut für Angewandte Technologie, Taza</h3><p class="degree lang" data-de="Laufende Ausbildung in IT-Netzwerken und -Systemen" data-en="Ongoing apprenticeship in IT Networks and Systems">Laufende Ausbildung in IT-Netzwerken und -Systemen</p><ul><li class="lang" data-de="Mitwirkung an von Studenten geleiteten Sitzungen zu Linux, Virtualisierung und Windows Server." data-en="Contributed to student-led sessions on Linux, Virtualization, and Windows Server administration.">Mitwirkung an von Studenten geleiteten Sitzungen zu Linux, Virtualisierung und Windows Server.</li><li class="lang" data-de="Aktiv in Lerngruppen zur CCNA-Vorbereitung, GNS3 und technischer Fehlerbehebung." data-en="Active in peer study groups for GNS3, CCNA preparation, and technical troubleshooting.">Aktiv in Lerngruppen zur CCNA-Vorbereitung, GNS3 und technischer Fehlerbehebung.</li></ul></div></div></div>
-                    <div class="timeline-item" data-aos="fade-up"><div class="timeline-content"><div class="timeline-text"><span class="date">2023 - 2024</span><h3>Klinikum Hann. Münden</h3><p class="degree lang" data-de="Sechsmonatige Ausbildung zum Pflegefachmann" data-en="Six months of vocational training as a nursing specialist">Sechsmonatige Ausbildung zum Pflegefachmann</p><ul><li class="lang" data-de="Einhaltung strenger regulatorischer Standards, einschließlich Datenschutz- und Sicherheitsprotokollen." data-en="Adhered to strict regulatory standards, including data protection and safety protocols.">Einhaltung strenger regulatorischer Standards, einschließlich Datenschutz- und Sicherheitsprotokollen.</li><li class="lang" data-de="Verbesserung der Sprachkenntnisse durch tägliche Praxis und kulturelle Nuancen." data-en="Improved language skills through daily real-world interactions, mastering local expressions and cultural nuances.">Verbesserung der Sprachkenntnisse durch tägliche Praxis und kulturelle Nuancen.</li></ul></div></div></div>
-                    <div class="timeline-item" data-aos="fade-up"><div class="timeline-content"><div class="timeline-text"><span class="date">2021 - 2022</span><h3 class="lang" data-de="Interdisziplinäre Fakultät von Taza" data-en="Faculté Polydisciplinaire de Taza">Interdisziplinäre Fakultät von Taza</h3><p class="degree lang" data-de="Einjähriges Grundstudium in Mathematik und Informatik" data-en="One year of foundational studies in Mathematics and Computer Science">Einjähriges Grundstudium in Mathematik und Informatik</p><ul><li class="lang" data-de="Studium mathematischer Kernkonzepte wie Analysis, lineare Algebra und diskrete Mathematik." data-en="Studied key mathematical concepts such as calculus, linear algebra, and discrete mathematics.">Studium mathematischer Kernkonzepte wie Analysis, lineare Algebra und diskrete Mathematik.</li><li class="lang" data-de="Anwendung mathematischer Logik zur Lösung von Problemen in Algorithmen und Informatik." data-en="Applied mathematical reasoning to solve problems related to algorithms and computer science.">Anwendung mathematischer Logik zur Lösung von Problemen in Algorithmen und Informatik.</li></ul></div></div></div>
-                    <div class="timeline-item" data-aos="fade-up"><div class="timeline-content"><div class="timeline-text"><span class="date">2020 - 2021</span><h3 class="lang" data-de="Weiterführende Schule Al Falah 2, Taza" data-en="High School AL Falah 2 Taza">Weiterführende Schule Al Falah 2, Taza</h3><p class="degree lang" data-de="Internationales Abitur, Schwerpunkt Physik" data-en="International Baccalaureate, major in Physics">Internationales Abitur, Schwerpunkt Physik</p></div></div></div>
-                </div>
-            </div>
-
-            <div class="container" id="erfahrung">
-                <h2 class="lang" data-de="Berufserfahrung" data-en="Professional Experience">Berufserfahrung</h2>
-                <div class="timeline-wrapper">
-                    <div class="timeline-item" data-aos="fade-up"><div class="timeline-content"><div class="timeline-text"><span class="date">Juni 2025 - Sep. 2025</span><h3>Click service Taza</h3><p class="position lang" data-de="IT-Spezialist" data-en="IT Specialist">IT-Spezialist</p><ul><li class="lang" data-de="Installation, Konfiguration und Aktualisierung von Software und Betriebssystemen für Kunden." data-en="Installed, configured, and updated software and operating systems for clients.">Installation, Konfiguration und Aktualisierung von Software und Betriebssystemen für Kunden.</li><li class="lang" data-de="Verwaltung des IT-Inventars und Sicherstellung des Lagerbestands." data-en="Managed inventory of IT equipment and accessories, ensuring proper stock levels.">Verwaltung des IT-Inventars und Sicherstellung des Lagerbestands.</li><li class="lang" data-de="Einrichtung und Wartung lokaler Netzwerke, einschließlich Router und WLAN-Konfigurationen." data-en="Set up and maintained local networks, including routers and Wi-Fi configurations.">Einrichtung und Wartung lokaler Netzwerke, einschließlich Router und WLAN-Konfigurationen.</li></ul></div></div></div>
-                    <div class="timeline-item" data-aos="fade-up"><div class="timeline-content"><div class="timeline-text"><span class="date">Okt. 2022 - Dez. 2022</span><h3 class="lang" data-de="Gesundheitsministerium, Zweigstelle Taza" data-en="Ministry of Health branch TAZA">Gesundheitsministerium, Zweigstelle Taza</h3><p class="position lang" data-de="Praktikant Systemadministration" data-en="System Administration Assistant Intern">Praktikant Systemadministration</p><ul><li class="lang" data-de="Unterstützung bei der Bereitstellung von VMs mit VirtualBox/VMware für interne Tests." data-en="Assisted in deploying and managing virtual machines using VirtualBox/VMware for internal use and isolated service testing.">Unterstützung bei der Bereitstellung von VMs mit VirtualBox/VMware für interne Tests.</li><li class="lang" data-de="Mithilfe bei Active-Directory-Aufgaben (Benutzerkonten, Gruppenrichtlinien)." data-en="Supported Active Directory tasks, including user account creation, password resets, and group policy application.">Mithilfe bei Active-Directory-Aufgaben (Benutzerkonten, Gruppenrichtlinien).</li><li class="lang" data-de="Unterstützung bei der Konfiguration der lokalen Netzwerkinfrastruktur (DNS/DHCP)." data-en="Helped configure and maintain local network infrastructure, including basic DNS/DHCP settings.">Unterstützung bei der Konfiguration der lokalen Netzwerkinfrastruktur (DNS/DHCP).</li></ul></div></div></div>
-                    <div class="timeline-item" data-aos="fade-up"><div class="timeline-content"><div class="timeline-text"><span class="date">Mai 2022 - Juli 2022</span><h3 class="lang" data-de="Seniorenresidenz Taza Inc." data-en="Elder care residential TAZA inc.">Seniorenresidenz Taza Inc.</h3><p class="position lang" data-de="Praktikant IT-Beratung" data-en="IT Consultant Intern">Praktikant IT-Beratung</p><ul><li class="lang" data-de="Entwurf und Bereitstellung von IT-Systemen zur Verbesserung der internen Kommunikation." data-en="Designed and deployed IT systems to enhance staff communication and operational efficiency.">Entwurf und Bereitstellung von IT-Systemen zur Verbesserung der internen Kommunikation.</li><li class="lang" data-de="Installation und Konfiguration von Hardware und Netzwerkgeräten." data-en="Installed and configured hardware and network devices, ensuring stable and secure connectivity.">Installation und Konfiguration von Hardware und Netzwerkgeräten.</li><li class="lang" data-de="Durchführung von Anwenderschulungen und technischem Support." data-en="Delivered user training and ongoing technical support, empowering staff to utilize new technology confidently.">Durchführung von Anwenderschulungen und technischem Support.</li></ul></div></div></div>
-                </div>
-            </div>
-            
-            <div class="container" id="kompetenzen">
-                <h2 class="lang" data-de="Kernkompetenzen" data-en="Core Competencies">Kernkompetenzen</h2>
-                <div class="skills-grid">
-                    <div class="skill-card" data-aos="fade-up"><h3 class="lang" data-de="Netzwerkadministration" data-en="Network Administration">Netzwerkadministration</h3><p>Cisco, GNS3, Wireshark, DNS, DHCP, etc.</p></div>
-                    <div class="skill-card" data-aos="fade-up" data-aos-delay="100"><h3 class="lang" data-de="Systemadministration" data-en="System Administration">Systemadministration</h3><p>Windows Server, Linux, Active Directory, VirtualBox/VMware, etc.</p></div>
-                    <div class="skill-card" data-aos="fade-up" data-aos-delay="200"><h3 class="lang" data-de="IT-Support & Hardware" data-en="IT Support & Hardware">IT-Support & Hardware</h3><p>Software-Installation, Fehleranalyse, Kundenberatung, etc.</p></div>
-                </div>
-            </div>
-
-            <div class="container" id="faq">
-                <h2 class="lang" data-de="Häufig Gestellte Fragen" data-en="Frequently Asked Questions">Häufig Gestellte Fragen</h2>
-                <div class="faq-accordion" data-aos="fade-up">
-                    <div class="faq-item"><button class="faq-question"><span class="lang" data-de="<i>Sie sind nicht in Deutschland. Wie sollen wir Sie überhaupt hierherbringen?</i>" data-en="<i>You are not in Germany. How would we manage the relocation process?</i>"><i>Sie sind nicht in Deutschland. Wie sollen wir Sie überhaupt hierherbringen?</i></span></button><div class="faq-answer"><p class="lang" data-de="Ich verstehe diese Frage gut. Aber mit den richtigen Unterlagen und Dokumenten kann das Ganze wirklich reibungslos ablaufen. Ich war bereits in Deutschland und habe den Visaprozess selbst durchlaufen, daher kenne ich mich mit dem Ablauf aus. Ich kann die nötigen Schritte selbstständig übernehmen und mache es für beide Seiten so einfach wie möglich. Falls Sie sich ein Bild vom Ablauf machen möchten, empfehle ich <a href='https://www.youtube.com/watch?v=VDlhPi9LNps' target='_blank' class='faq-video-link'>dieses kurze Video, das den Prozess gut erklärt</a>." data-en="I understand this concern. However, with the right paperwork, the process can be very smooth. Having already been to Germany and gone through the visa process myself, I am familiar with the procedure. I can handle the necessary steps independently to make it as simple as possible for both sides. If you would like to get an idea of the process, I recommend <a href='https://www.youtube.com/watch?v=VDlhPi9LNps' target='_blank' class='faq-video-link'>this short video that explains it well</a>.">Ich verstehe diese Frage gut. Aber mit den richtigen Unterlagen und Dokumenten kann das Ganze wirklich reibungslos ablaufen. Ich war bereits in Deutschland und habe den Visaprozess selbst durchlaufen, daher kenne ich mich mit dem Ablauf aus. Ich kann die nötigen Schritte selbstständig übernehmen und mache es für beide Seiten so einfach wie möglich. Falls Sie sich ein Bild vom Ablauf machen möchten, empfehle ich <a href="https://www.youtube.com/watch?v=VDlhPi9LNps" target="_blank" class="faq-video-link">dieses kurze Video, das den Prozess gut erklärt</a>.</p></div></div>
-                    <div class="faq-item"><button class="faq-question"><span class="lang" data-de="<i>Wo werden Sie wohnen? Wir bieten keine Unterkunft an. Wie organisieren Sie das?</i>" data-en="<i>Where would you live? We don't offer accommodation. How would you organize that?</i>"><i>Wo werden Sie wohnen? Wir bieten keine Unterkunft an. Wie organisieren Sie das?</i></span></button><div class="faq-answer"><p class="lang" data-de="Da ich bereits in Deutschland war, verfüge ich über ein gutes Netzwerk für Unterkunft und soziale Kontakte, die mir eine schnelle und zuverlässige Wohnungssuche ermöglichen. Somit ist die Wohnungsfrage für mich gesichert." data-en="Since I have already been to Germany, I have a good network for accommodation and social contacts that enable me to find housing quickly and reliably. Therefore, the housing issue is secured for me.">Da ich bereits in Deutschland war, verfüge ich über ein gutes Netzwerk für Unterkunft und soziale Kontakte, die mir eine schnelle und zuverlässige Wohnungssuche ermöglichen. Somit ist die Wohnungsfrage für mich gesichert.</p></div></div>
-                    <div class="faq-item"><button class="faq-question"><span class="lang" data-de="<i>Sie haben Erfahrung in der Pflege, sind aber IT-orientiert. Wie passt das zusammen?</i>" data-en="<i>You have experience in nursing but are focused on IT. How does that fit together?</i>"><i>Sie haben Erfahrung in der Pflege, sind aber IT-orientiert. Wie passt das zusammen?</i></span></button><div class="faq-answer"><p class="lang" data-de="Ich bin eigentlich im IT-Bereich orientiert, aber ich finde, dass ein grundlegendes Verständnis für Pflege und Gesundheit in vielen Lebenslagen wichtig ist. Als ich das Ausbildungsangebot im Pflegebereich bekam, habe ich es als Chance gesehen – erstens, um das deutsche Arbeitsumfeld besser kennenzulernen, und zweitens, um soziale und menschliche Fähigkeiten zu entwickeln, die mir auch in der IT weiterhelfen können. Diese Erfahrung hat mir definitiv geholfen, und ich bin dankbar dafür." data-en="I am fundamentally oriented towards IT, but I believe that a basic understanding of nursing and health is important in many aspects of life. When I received the training offer in the nursing field, I saw it as an opportunity—firstly, to get to know the German work environment better, and secondly, to develop social and interpersonal skills that can also help me in IT. This experience has definitely helped me, and I am grateful for it.">Ich bin eigentlich im IT-Bereich orientiert, aber ich finde, dass ein grundlegendes Verständnis für Pflege und Gesundheit in vielen Lebenslagen wichtig ist. Als ich das Ausbildungsangebot im Pflegebereich bekam, habe ich es als Chance gesehen – erstens, um das deutsche Arbeitsumfeld besser kennenzulernen, und zweitens, um soziale und menschliche Fähigkeiten zu entwickeln, die mir auch in der IT weiterhelfen können. Diese Erfahrung hat mir definitiv geholfen, und ich bin dankbar dafür.</p></div></div>
-                    <div class="faq-item"><button class="faq-question"><span class="lang" data-de="<i>Warum Deutschland?</i>" data-en="<i>Why Germany?</i>"><i>Warum Deutschland?</i></span></button><div class="faq-answer"><p class="lang" data-de="Deutschland bietet sehr gute Ausbildungsmöglichkeiten und berufliche Perspektiven, besonders im IT-Bereich. Außerdem schätze ich die hohe Arbeitsqualität und die internationale Atmosphäre hier." data-en="Germany offers excellent training opportunities and career prospects, especially in the IT sector. Furthermore, I appreciate the high quality of work and the international atmosphere here.">Deutschland bietet sehr gute Ausbildungsmöglichkeiten und berufliche Perspektiven, besonders im IT-Bereich. Außerdem schätze ich die hohe Arbeitsqualität und die internationale Atmosphäre hier.</p></div></div>
-                    <div class="faq-item"><button class="faq-question"><span class="lang" data-de="<i>Wie gut sind Ihre Deutsch- und Englischkenntnisse?</i>" data-en="<i>How proficient are your German and English skills?</i>"><i>Wie gut sind Ihre Deutsch- und Englischkenntnisse?</i></span></button><div class="faq-answer"><p class="lang" data-de="Mein Deutsch hat sich während meines Aufenthalts in Deutschland stark verbessert, sodass ich mich gut an verschiedene Situationen anpassen kann. Mein Englisch habe ich auf ein Niveau der muttersprachlichen Kompetenz gebracht." data-en="My German improved significantly during my stay in Germany, allowing me to adapt well to various situations. I have brought my English to a level of native-like proficiency.">Mein Deutsch hat sich während meines Aufenthalts in Deutschland stark verbessert, sodass ich mich gut an verschiedene Situationen anpassen kann. Mein Englisch habe ich auf ein Niveau der muttersprachlichen Kompetenz gebracht.</p></div></div>
-                </div>
-            </div>
-
-            <div class="container contact-section" id="kontakt" data-aos="fade-up">
-                <h3 class="lang" data-de="Zögern Sie nicht, mich für weitere Informationen zu kontaktieren." data-en="Do not hesitate to contact me for any more information.">Zögern Sie nicht, mich für weitere Informationen zu kontaktieren.</h3>
-                <div class="contact-grid">
-                    <div class="flip-card" data-aos="fade-up" data-aos-delay="100"><div class="flip-card-inner"><div class="flip-card-front"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"/></svg><h4 class="lang" data-de="Email" data-en="Email">Email</h4></div><div class="flip-card-back"><a href="mailto:walid@gourideche.com">walid@gourideche.com</a></div></div></div>
-                    <div class="flip-card" data-aos="fade-up" data-aos-delay="200"><div class="flip-card-inner"><div class="flip-card-front"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg><h4 class="lang" data-de="Telefon" data-en="Phone">Telefon</h4></div><div class="flip-card-back"><a href="tel:+212698585528">+212-698585528</a></div></div></div>
-                    <div class="flip-card" data-aos="fade-up" data-aos-delay="300"><div class="flip-card-inner"><div class="flip-card-front"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg><h4 class="lang" data-de="Adresse" data-en="Address">Adresse</h4></div><div class="flip-card-back"><p>Cite Al Amane Imm A Apt 1<br>35000 Taza</p></div></div></div>
-                    <div class="flip-card" data-aos="fade-up" data-aos-delay="400"><div class="flip-card-inner"><div class="flip-card-front"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-11h-13v11h13M6.5 12.5a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1h-1m3.5 0a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1h-1m3.5 0a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1h-1z"/></svg><h4 class="lang" data-de="LinkedIn" data-en="LinkedIn">LinkedIn</h4></div><div class="flip-card-back"><a href="https://www.linkedin.com/in/walidgourideche/" target="_blank"><span class="lang" data-de="Mein LinkedIn" data-en="My LinkedIn">Mein LinkedIn</span></a></div></div></div>
-                </div>
-            </div>
-
-            <footer class="main-footer">
-                <p>© 2025 Walid Gourideche. <span class="lang" data-de="Alle Rechte vorbehalten." data-en="All Rights Reserved.">Alle Rechte vorbehalten.</span></p>
-            </footer>
+    </nav>
+    
+    <div class="mobile-menu-icon" onclick="toggleNav(this)">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+    </div>
+    
+    <div id="mobile-nav" class="mobile-nav-overlay">
+        <div class="mobile-nav-overlay-content">
+            <a href="#intro-video" class="lang" data-de="Intro-Video" data-en="Intro Video" onclick="toggleNav(document.querySelector('.mobile-menu-icon'))">Intro-Video</a>
+            <a href="#bildung" class="lang" data-de="Bildungsweg" data-en="Education" onclick="toggleNav(document.querySelector('.mobile-menu-icon'))">Bildungsweg</a>
+            <a href="#erfahrung" class="lang" data-de="Erfahrung" data-en="Experience" onclick="toggleNav(document.querySelector('.mobile-menu-icon'))">Erfahrung</a>
+            <a href="#kompetenzen" class="lang" data-de="Kompetenzen" data-en="Skills" onclick="toggleNav(document.querySelector('.mobile-menu-icon'))">Kompetenzen</a>
+            <a href="#faq" class="lang" data-de="FAQ" data-en="FAQ" onclick="toggleNav(document.querySelector('.mobile-menu-icon'))">FAQ</a>
+            <a href="#kontakt" class="lang" data-de="Kontakt" data-en="Contact" onclick="toggleNav(document.querySelector('.mobile-menu-icon'))">Kontakt</a>
+            <button id="lang-toggle-mobile" class="lang-toggle" style="margin-top: 20px;" data-de="Switch to English" data-en="Auf Deutsch umschalten">Switch to English</button>
         </div>
+    </div>
+    
+    <section class="hero" id="hero">
+        <div class="hero-image" data-aos="fade-up">
+            <img src="images/aura.jpg" alt="Ein professionelles Foto von Walid Gourideche">
+        </div>
+        <div class="hero-text" data-aos="fade-up" data-aos-delay="200">
+            <h1>> Walid Gourideche</h1>
+            
+            <p class="lang" data-de="Fachinformatiker für Systemintegration" data-en="IT Specialist for System Integration">Fachinformatiker für Systemintegration</p>
+            <p class="lang" data-de="Mehrsprachiger IT-Auszubildender mit Leidenschaft für Netzwerke und Cybersicherheit, der praktische Erfahrung mit globaler Denkweise verbindet, um effektive Technologielösungen zu liefern. Motiviert, sich weiterzuentwickeln und von Marokko bis Deutschland Wirkung zu zeigen." data-en="Multilingual IT trainee with a passion for networks and cybersecurity, combining hands-on experience with a global mindset to deliver effective technology solutions. Motivated to grow and make an impact from Morocco to Germany.">
+                Mehrsprachiger IT-Auszubildender mit Leidenschaft für Netzwerke und Cybersicherheit, der praktische Erfahrung mit globaler Denkweise verbindet, um effektive Technologielösungen zu liefern. Motiviert, sich weiterzuentwickeln und von Marokko bis Deutschland Wirkung zu zeigen.
+            </p>
+            <p class="location lang" data-de="Wohnort: Taza, Marokko" data-en="Based in: Taza, Morocco">Wohnort: Taza, Marokko</p>
+        </div>
+    </section>
 
-        <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-        <script>
-          AOS.init({
-              duration: 1000,
-              once: true,
-          });
+    <div class="container" id="intro-video">
+        <h2 class="lang" data-de="Video-Vorstellung" data-en="Video Introduction">Video-Vorstellung</h2>
+        <div class="video-thumbnail" data-aos="fade-up" id="open-video-modal">
+            <img src="images/video-thumbnail.jpg" alt="Video Introduction Thumbnail">
+            <div class="play-button"></div>
+        </div>
+    </div>
 
-          document.addEventListener('DOMContentLoaded', function() {
-              const toggleButton = document.getElementById('lang-toggle');
-              const mobileToggleButton = document.getElementById('lang-toggle-mobile');
-              const translatableElements = document.querySelectorAll('.lang');
-              let currentLang = 'de';
+    <div id="video-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" id="close-video-modal">×</span>
+            <div class="video-responsive-wrapper">
+                <iframe id="youtube-player" width="560" height="315" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
 
-              function switchLanguage() {
-                  currentLang = currentLang === 'de' ? 'en' : 'de';
-                  document.documentElement.lang = currentLang;
-                  translatableElements.forEach(el => {
-                      if (el.dataset[currentLang]) {
-                        el.innerHTML = el.dataset[currentLang];
-                      }
-                  });
-                  toggleButton.innerText = toggleButton.dataset[currentLang];
-                  mobileToggleButton.innerText = mobileToggleButton.dataset[currentLang];
-              }
+    <div class="container" id="bildung">
+        <h2 class="lang" data-de="Bildungsweg" data-en="Education">Bildungsweg</h2>
+        <div class="timeline-wrapper">
+            <div class="timeline-item" data-aos="fade-up"><div class="timeline-content"><span class="date">2024 - 2026</span><h3 class="lang" data-de="Fachinstitut für Angewandte Technologie, Taza" data-en="Specialized Institute Of Applied Technology Taza">Fachinstitut für Angewandte Technologie, Taza</h3><p class="degree lang" data-de="Laufende Ausbildung in IT-Netzwerken und -Systemen" data-en="Ongoing apprenticeship in IT Networks and Systems">Laufende Ausbildung in IT-Netzwerken und -Systemen</p><ul><li class="lang" data-de="Mitwirkung an von Studenten geleiteten Sitzungen zu Linux, Virtualisierung und Windows Server." data-en="Contributed to student-led sessions on Linux, Virtualization, and Windows Server administration.">Mitwirkung an von Studenten geleiteten Sitzungen zu Linux, Virtualisierung und Windows Server.</li><li class="lang" data-de="Aktiv in Lerngruppen zur CCNA-Vorbereitung, GNS3 und technischer Fehlerbehebung." data-en="Active in peer study groups for GNS3, CCNA preparation, and technical troubleshooting.">Aktiv in Lerngruppen zur CCNA-Vorbereitung, GNS3 und technischer Fehlerbehebung.</li></ul></div></div>
+            <div class="timeline-item" data-aos="fade-up"><div class="timeline-content"><span class="date">2023 - 2024</span><h3>Klinikum Hann. Münden</h3><p class="degree lang" data-de="Sechsmonatige Ausbildung zum Pflegefachmann" data-en="Six months of vocational training as a nursing specialist">Sechsmonatige Ausbildung zum Pflegefachmann</p><ul><li class="lang" data-de="Einhaltung strenger regulatorischer Standards, einschließlich Datenschutz- und Sicherheitsprotokollen." data-en="Adhered to strict regulatory standards, including data protection and safety protocols.">Einhaltung strenger regulatorischer Standards, einschließlich Datenschutz- und Sicherheitsprotokollen.</li><li class="lang" data-de="Verbesserung der Sprachkenntnisse durch tägliche Praxis und kulturelle Nuancen." data-en="Improved language skills through daily real-world interactions, mastering local expressions and cultural nuances.">Verbesserung der Sprachkenntnisse durch tägliche Praxis und kulturelle Nuancen.</li></ul></div></div>
+            <div class="timeline-item" data-aos="fade-up"><div class="timeline-content"><span class="date">2021 - 2022</span><h3 class="lang" data-de="Interdisziplinäre Fakultät von Taza" data-en="Faculté Polydisciplinaire de Taza">Interdisziplinäre Fakultät von Taza</h3><p class="degree lang" data-de="Einjähriges Grundstudium in Mathematik und Informatik" data-en="One year of foundational studies in Mathematics and Computer Science">Einjähriges Grundstudium in Mathematik und Informatik</p><ul><li class="lang" data-de="Studium mathematischer Kernkonzepte wie Analysis, lineare Algebra und diskrete Mathematik." data-en="Studied key mathematical concepts such as calculus, linear algebra, and discrete mathematics.">Studium mathematischer Kernkonzepte wie Analysis, lineare Algebra und diskrete Mathematik.</li><li class="lang" data-de="Anwendung mathematischer Logik zur Lösung von Problemen in Algorithmen und Informatik." data-en="Applied mathematical reasoning to solve problems related to algorithms and computer science.">Anwendung mathematischer Logik zur Lösung von Problemen in Algorithmen und Informatik.</li></ul></div></div>
+            <div class="timeline-item" data-aos="fade-up"><div class="timeline-content"><span class="date">2020 - 2021</span><h3 class="lang" data-de="Weiterführende Schule Al Falah 2, Taza" data-en="High School AL Falah 2 Taza">Weiterführende Schule Al Falah 2, Taza</h3><p class="degree lang" data-de="Internationales Abitur, Schwerpunkt Physik" data-en="International Baccalaureate, major in Physics">Internationales Abitur, Schwerpunkt Physik</p></div></div>
+        </div>
+    </div>
 
-              toggleButton.addEventListener('click', switchLanguage);
-              mobileToggleButton.addEventListener('click', switchLanguage);
+    <div class="container" id="erfahrung">
+        <h2 class="lang" data-de="Berufserfahrung" data-en="Professional Experience">Berufserfahrung</h2>
+        <div class="timeline-wrapper">
+            <div class="timeline-item" data-aos="fade-up"><div class="timeline-content"><span class="date">Juni 2025 - Sep. 2025</span><h3>Click service Taza</h3><p class="position lang" data-de="IT-Spezialist" data-en="IT Specialist">IT-Spezialist</p><ul><li class="lang" data-de="Installation, Konfiguration und Aktualisierung von Software und Betriebssystemen für Kunden." data-en="Installed, configured, and updated software and operating systems for clients.">Installation, Konfiguration und Aktualisierung von Software und Betriebssystemen für Kunden.</li><li class="lang" data-de="Verwaltung des IT-Inventars und Sicherstellung des Lagerbestands." data-en="Managed inventory of IT equipment and accessories, ensuring proper stock levels.">Verwaltung des IT-Inventars und Sicherstellung des Lagerbestands.</li><li class="lang" data-de="Einrichtung und Wartung lokaler Netzwerke, einschließlich Router und WLAN-Konfigurationen." data-en="Set up and maintained local networks, including routers and Wi-Fi configurations.">Einrichtung und Wartung lokaler Netzwerke, einschließlich Router und WLAN-Konfigurationen.</li></ul></div></div>
+            <div class="timeline-item" data-aos="fade-up"><div class="timeline-content"><span class="date">Okt. 2022 - Dez. 2022</span><h3 class="lang" data-de="Gesundheitsministerium, Zweigstelle Taza" data-en="Ministry of Health branch TAZA">Gesundheitsministerium, Zweigstelle Taza</h3><p class="position lang" data-de="Praktikant Systemadministration" data-en="System Administration Assistant Intern">Praktikant Systemadministration</p><ul><li class="lang" data-de="Unterstützung bei der Bereitstellung von VMs mit VirtualBox/VMware für interne Tests." data-en="Assisted in deploying and managing virtual machines using VirtualBox/VMware for internal use and isolated service testing.">Unterstützung bei der Bereitstellung von VMs mit VirtualBox/VMware für interne Tests.</li><li class="lang" data-de="Mithilfe bei Active-Directory-Aufgaben (Benutzerkonten, Gruppenrichtlinien)." data-en="Supported Active Directory tasks, including user account creation, password resets, and group policy application.">Mithilfe bei Active-Directory-Aufgaben (Benutzerkonten, Gruppenrichtlinien).</li><li class="lang" data-de="Unterstützung bei der Konfiguration der lokalen Netzwerkinfrastruktur (DNS/DHCP)." data-en="Helped configure and maintain local network infrastructure, including basic DNS/DHCP settings.">Unterstützung bei der Konfiguration der lokalen Netzwerkinfrastruktur (DNS/DHCP).</li></ul></div></div>
+            <div class="timeline-item" data-aos="fade-up"><div class="timeline-content"><span class="date">Mai 2022 - Juli 2022</span><h3 class="lang" data-de="Seniorenresidenz Taza Inc." data-en="Elder care residential TAZA inc.">Seniorenresidenz Taza Inc.</h3><p class="position lang" data-de="Praktikant IT-Beratung" data-en="IT Consultant Intern">Praktikant IT-Beratung</p><ul><li class="lang" data-de="Entwurf und Bereitstellung von IT-Systemen zur Verbesserung der internen Kommunikation." data-en="Designed and deployed IT systems to enhance staff communication and operational efficiency.">Entwurf und Bereitstellung von IT-Systemen zur Verbesserung der internen Kommunikation.</li><li class="lang" data-de="Installation und Konfiguration von Hardware und Netzwerkgeräten." data-en="Installed and configured hardware and network devices, ensuring stable and secure connectivity.">Installation und Konfiguration von Hardware und Netzwerkgeräten.</li><li class="lang" data-de="Durchführung von Anwenderschulungen und technischem Support." data-en="Delivered user training and ongoing technical support, empowering staff to utilize new technology confidently.">Durchführung von Anwenderschulungen und technischem Support.</li></ul></div></div>
+        </div>
+    </div>
+    
+    <div class="container" id="kompetenzen">
+        <h2 class="lang" data-de="Kernkompetenzen" data-en="Core Competencies">Kernkompetenzen</h2>
+        <div class="skills-grid">
+            <div class="skill-card" data-aos="fade-up"><h3 class="lang" data-de="Netzwerkadministration" data-en="Network Administration">Netzwerkadministration</h3><p>Cisco, GNS3, Wireshark, DNS, DHCP, etc.</p></div>
+            <div class="skill-card" data-aos="fade-up" data-aos-delay="100"><h3 class="lang" data-de="Systemadministration" data-en="System Administration">Systemadministration</h3><p>Windows Server, Linux, Active Directory, VirtualBox/VMware, etc.</p></div>
+            <div class="skill-card" data-aos="fade-up" data-aos-delay="200"><h3 class="lang" data-de="IT-Support & Hardware" data-en="IT Support & Hardware">IT-Support & Hardware</h3><p>Software-Installation, Fehleranalyse, Kundenberatung, etc.</p></div>
+        </div>
+    </div>
 
-              const faqQuestions = document.querySelectorAll('.faq-question');
-              faqQuestions.forEach(question => {
-                  question.addEventListener('click', () => {
-                      const answer = question.nextElementSibling;
-                      question.classList.toggle('active');
-                      if (answer.style.maxHeight) {
-                          answer.style.maxHeight = null;
-                      } else {
-                          answer.style.maxHeight = answer.scrollHeight + 'px';
-                      }
-                  });
+    <div class="container" id="faq">
+        <h2 class="lang" data-de="Häufig Gestellte Fragen" data-en="Frequently Asked Questions">Häufig Gestellte Fragen</h2>
+        <div class="faq-accordion" data-aos="fade-up">
+            <div class="faq-item"><button class="faq-question"><span class="lang" data-de="<i>Sie sind nicht in Deutschland. Wie sollen wir Sie überhaupt hierherbringen?</i>" data-en="<i>You are not in Germany. How would we manage the relocation process?</i>"><i>Sie sind nicht in Deutschland. Wie sollen wir Sie überhaupt hierherbringen?</i></span></button><div class="faq-answer"><p class="lang" data-de="Ich verstehe diese Frage gut. Aber mit den richtigen Unterlagen und Dokumenten kann das Ganze wirklich reibungslos ablaufen. Ich war bereits in Deutschland und habe den Visaprozess selbst durchlaufen, daher kenne ich mich mit dem Ablauf aus. Ich kann die nötigen Schritte selbstständig übernehmen und mache es für beide Seiten so einfach wie möglich. Falls Sie sich ein Bild vom Ablauf machen möchten, empfehle ich <a href='https://www.youtube.com/watch?v=VDlhPi9LNps' target='_blank' class='faq-video-link'>dieses kurze Video, das den Prozess gut erklärt</a>." data-en="I understand this concern. However, with the right paperwork, the process can be very smooth. Having already been to Germany and gone through the visa process myself, I am familiar with the procedure. I can handle the necessary steps independently to make it as simple as possible for both sides. If you would like to get an idea of the process, I recommend <a href='https://www.youtube.com/watch?v=VDlhPi9LNps' target='_blank' class='faq-video-link'>this short video that explains it well</a>.">Ich verstehe diese Frage gut. Aber mit den richtigen Unterlagen und Dokumenten kann das Ganze wirklich reibungslos ablaufen. Ich war bereits in Deutschland und habe den Visaprozess selbst durchlaufen, daher kenne ich mich mit dem Ablauf aus. Ich kann die nötigen Schritte selbstständig übernehmen und mache es für beide Seiten so einfach wie möglich. Falls Sie sich ein Bild vom Ablauf machen möchten, empfehle ich <a href="https://www.youtube.com/watch?v=VDlhPi9LNps" target="_blank" class="faq-video-link">dieses kurze Video, das den Prozess gut erklärt</a>.</p></div></div>
+            <div class="faq-item"><button class="faq-question"><span class="lang" data-de="<i>Wo werden Sie wohnen? Wir bieten keine Unterkunft an. Wie organisieren Sie das?</i>" data-en="<i>Where would you live? We don't offer accommodation. How would you organize that?</i>"><i>Wo werden Sie wohnen? Wir bieten keine Unterkunft an. Wie organisieren Sie das?</i></span></button><div class="faq-answer"><p class="lang" data-de="Da ich bereits in Deutschland war, verfüge ich über ein gutes Netzwerk für Unterkunft und soziale Kontakte, die mir eine schnelle und zuverlässige Wohnungssuche ermöglichen. Somit ist die Wohnungsfrage für mich gesichert." data-en="Since I have already been to Germany, I have a good network for accommodation and social contacts that enable me to find housing quickly and reliably. Therefore, the housing issue is secured for me.">Da ich bereits in Deutschland war, verfüge ich über ein gutes Netzwerk für Unterkunft und soziale Kontakte, die mir eine schnelle und zuverlässige Wohnungssuche ermöglichen. Somit ist die Wohnungsfrage für mich gesichert.</p></div></div>
+            <div class="faq-item"><button class="faq-question"><span class="lang" data-de="<i>Sie haben Erfahrung in der Pflege, sind aber IT-orientiert. Wie passt das zusammen?</i>" data-en="<i>You have experience in nursing but are focused on IT. How does that fit together?</i>"><i>Sie haben Erfahrung in der Pflege, sind aber IT-orientiert. Wie passt das zusammen?</i></span></button><div class="faq-answer"><p class="lang" data-de="Ich bin eigentlich im IT-Bereich orientiert, aber ich finde, dass ein grundlegendes Verständnis für Pflege und Gesundheit in vielen Lebenslagen wichtig ist. Als ich das Ausbildungsangebot im Pflegebereich bekam, habe ich es als Chance gesehen – erstens, um das deutsche Arbeitsumfeld besser kennenzulernen, und zweitens, um soziale und menschliche Fähigkeiten zu entwickeln, die mir auch in der IT weiterhelfen können. Diese Erfahrung hat mir definitiv geholfen, und ich bin dankbar dafür." data-en="I am fundamentally oriented towards IT, but I believe that a basic understanding of nursing and health is important in many aspects of life. When I received the training offer in the nursing field, I saw it as an opportunity—firstly, to get to know the German work environment better, and secondly, to develop social and interpersonal skills that can also help me in IT. This experience has definitely helped me, and I am grateful for it.">Ich bin eigentlich im IT-Bereich orientiert, aber ich finde, dass ein grundlegendes Verständnis für Pflege und Gesundheit in vielen Lebenslagen wichtig ist. Als ich das Ausbildungsangebot im Pflegebereich bekam, habe ich es als Chance gesehen – erstens, um das deutsche Arbeitsumfeld besser kennenzulernen, und zweitens, um soziale und menschliche Fähigkeiten zu entwickeln, die mir auch in der IT weiterhelfen können. Diese Erfahrung hat mir definitiv geholfen, und ich bin dankbar dafür.</p></div></div>
+            <div class="faq-item"><button class="faq-question"><span class="lang" data-de="<i>Warum Deutschland?</i>" data-en="<i>Why Germany?</i>"><i>Warum Deutschland?</i></span></button><div class="faq-answer"><p class="lang" data-de="Deutschland bietet sehr gute Ausbildungsmöglichkeiten und berufliche Perspektiven, besonders im IT-Bereich. Außerdem schätze ich die hohe Arbeitsqualität und die internationale Atmosphäre hier." data-en="Germany offers excellent training opportunities and career prospects, especially in the IT sector. Furthermore, I appreciate the high quality of work and the international atmosphere here.">Deutschland bietet sehr gute Ausbildungsmöglichkeiten und berufliche Perspektiven, besonders im IT-Bereich. Außerdem schätze ich die hohe Arbeitsqualität und die internationale Atmosphäre hier.</p></div></div>
+            <div class="faq-item"><button class="faq-question"><span class="lang" data-de="<i>Wie gut sind Ihre Deutsch- und Englischkenntnisse?</i>" data-en="<i>How proficient are your German and English skills?</i>"><i>Wie gut sind Ihre Deutsch- und Englischkenntnisse?</i></span></button><div class="faq-answer"><p class="lang" data-de="Mein Deutsch hat sich während meines Aufenthalts in Deutschland stark verbessert, sodass ich mich gut an verschiedene Situationen anpassen kann. Mein Englisch habe ich auf ein Niveau der muttersprachlichen Kompetenz gebracht." data-en="My German improved significantly during my stay in Germany, allowing me to adapt well to various situations. I have brought my English to a level of native-like proficiency.">Mein Deutsch hat sich während meines Aufenthalts in Deutschland stark verbessert, sodass ich mich gut an verschiedene Situationen anpassen kann. Mein Englisch habe ich auf ein Niveau der muttersprachlichen Kompetenz gebracht.</p></div></div>
+        </div>
+    </div>
+
+    <div class="container contact-section" id="kontakt" data-aos="fade-up">
+        <h3 class="lang" data-de="Zögern Sie nicht, mich für weitere Informationen zu kontaktieren." data-en="Do not hesitate to contact me for any more information.">Zögern Sie nicht, mich für weitere Informationen zu kontaktieren.</h3>
+        <div class="contact-grid">
+            <div class="flip-card" data-aos="fade-up" data-aos-delay="100"><div class="flip-card-inner"><div class="flip-card-front"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"/></svg><h4 class="lang" data-de="Email" data-en="Email">Email</h4></div><div class="flip-card-back"><a href="mailto:walid@gourideche.com">walid@gourideche.com</a></div></div></div>
+            <div class="flip-card" data-aos="fade-up" data-aos-delay="200"><div class="flip-card-inner"><div class="flip-card-front"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg><h4 class="lang" data-de="Telefon" data-en="Phone">Telefon</h4></div><div class="flip-card-back"><a href="tel:+212698585528">+212-698585528</a></div></div></div>
+            <div class="flip-card" data-aos="fade-up" data-aos-delay="300"><div class="flip-card-inner"><div class="flip-card-front"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg><h4 class="lang" data-de="Adresse" data-en="Address">Adresse</h4></div><div class="flip-card-back"><p>Cite Al Amane Imm A Apt 1<br>35000 Taza</p></div></div></div>
+            <div class="flip-card" data-aos="fade-up" data-aos-delay="400"><div class="flip-card-inner"><div class="flip-card-front"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-11h-13v11h13M6.5 12.5a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1h-1m3.5 0a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1h-1m3.5 0a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1h-1z"/></svg><h4 class="lang" data-de="LinkedIn" data-en="LinkedIn">LinkedIn</h4></div><div class="flip-card-back"><a href="https://www.linkedin.com/in/walidgourideche/" target="_blank"><span class="lang" data-de="Mein LinkedIn" data-en="My LinkedIn">Mein LinkedIn</span></a></div></div></div>
+        </div>
+    </div>
+
+    <footer class="main-footer">
+        <p>© 2025 Walid Gourideche. <span class="lang" data-de="Alle Rechte vorbehalten." data-en="All Rights Reserved.">Alle Rechte vorbehalten.</span></p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+      AOS.init({
+          duration: 1000,
+          once: true,
+      });
+
+      document.addEventListener('DOMContentLoaded', function() {
+          const toggleButton = document.getElementById('lang-toggle');
+          const mobileToggleButton = document.getElementById('lang-toggle-mobile');
+          const translatableElements = document.querySelectorAll('.lang');
+          let currentLang = 'de';
+
+          function switchLanguage() {
+              currentLang = currentLang === 'de' ? 'en' : 'de';
+              document.documentElement.lang = currentLang;
+              translatableElements.forEach(el => {
+                  if (el.dataset[currentLang]) {
+                    el.innerHTML = el.dataset[currentLang];
+                  }
               });
+              toggleButton.innerText = toggleButton.dataset[currentLang];
+              mobileToggleButton.innerText = mobileToggleButton.dataset[currentLang];
+          }
 
-              const videoModal = document.getElementById('video-modal');
-              const openModalBtn = document.getElementById('open-video-modal');
-              const closeModalBtn = document.getElementById('close-video-modal');
-              const youtubePlayer = document.getElementById('youtube-player');
-              
-              const youtubeVideoId = 'R_rKRfh7ceU';
-              
-              const videoSrc = `https://www.youtube.com/embed/${youtubeVideoId}?autoplay=1`;
+          toggleButton.addEventListener('click', switchLanguage);
+          mobileToggleButton.addEventListener('click', switchLanguage);
 
-              openModalBtn.addEventListener('click', () => {
-                  youtubePlayer.src = videoSrc;
-                  videoModal.style.display = 'block';
-              });
-
-              function closeModal() {
-                  videoModal.style.display = 'none';
-                  youtubePlayer.src = ''; 
-              }
-
-              closeModalBtn.addEventListener('click', closeModal);
-              
-              window.addEventListener('click', (event) => {
-                  if (event.target == videoModal) {
-                      closeModal();
+          const faqQuestions = document.querySelectorAll('.faq-question');
+          faqQuestions.forEach(question => {
+              question.addEventListener('click', () => {
+                  const answer = question.nextElementSibling;
+                  question.classList.toggle('active');
+                  if (answer.style.maxHeight) {
+                      answer.style.maxHeight = null;
+                  } else {
+                      answer.style.maxHeight = answer.scrollHeight + 'px';
                   }
               });
           });
 
-          function toggleNav(icon) {
-              const overlay = document.getElementById("mobile-nav");
-              icon.classList.toggle("change");
+          const videoModal = document.getElementById('video-modal');
+          const openModalBtn = document.getElementById('open-video-modal');
+          const closeModalBtn = document.getElementById('close-video-modal');
+          const youtubePlayer = document.getElementById('youtube-player');
+          
+          const youtubeVideoId = 'R_rKRfh7ceU';
+          
+          const videoSrc = `https://www.youtube.com/embed/${youtubeVideoId}?autoplay=1`;
 
-              if (overlay.style.width === "100%") {
-                  overlay.style.width = "0%";
-              } else {
-                  overlay.style.width = "100%";
-              }
+          openModalBtn.addEventListener('click', () => {
+              youtubePlayer.src = videoSrc;
+              videoModal.style.display = 'block';
+          });
+
+          function closeModal() {
+              videoModal.style.display = 'none';
+              youtubePlayer.src = ''; 
           }
-        </script>
-    </body>
-    </html>
+
+          closeModalBtn.addEventListener('click', closeModal);
+          
+          window.addEventListener('click', (event) => {
+              if (event.target == videoModal) {
+                  closeModal();
+              }
+          });
+      });
+
+      function toggleNav(icon) {
+          const overlay = document.getElementById("mobile-nav");
+          icon.classList.toggle("change");
+
+          if (overlay.style.width === "100%") {
+              overlay.style.width = "0%";
+          } else {
+              overlay.style.width = "100%";
+          }
+      }
+    </script>
+
+</body>
+</html>
