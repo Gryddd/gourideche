@@ -79,12 +79,8 @@
             overflow-x: hidden; transition: 0.5s;
         }
         .mobile-nav-overlay-content {
-            position: relative; 
-            /* --- THIS IS THE ONLY CHANGE --- */
-            top: 80px; 
-            width: 100%;
-            text-align: center; 
-            margin-top: 0; /* Removed margin-top to use the fixed top value */
+            position: relative; top: 80px; width: 100%;
+            text-align: center; margin-top: 0;
         }
         .mobile-nav-overlay a {
             padding: 15px; text-decoration: none; font-size: 24px;
@@ -95,13 +91,14 @@
         
         .container {
             width: 90%; max-width: 1100px; margin: 0 auto;
-            padding-top: 150px; padding-bottom: 100px;
+            padding-top: 80px; padding-bottom: 100px;
             position: relative; z-index: 2;
         }
         .hero {
             display: flex; align-items: center; justify-content: center;
             min-height: 100vh; gap: 4rem; flex-wrap: wrap;
-            padding: 2rem; text-align: center; padding-top: 80px;
+            padding: 2rem; text-align: center; 
+            box-sizing: border-box;
         }
         .hero-image { width: 300px; height: 300px; flex-shrink: 0; }
         .hero-image img {
