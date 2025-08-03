@@ -192,10 +192,7 @@
         .skill-card {
             background-color: #1a1a1a; border: 1px solid var(--border-color); padding: 1.5rem;
         }
-        /* --- THIS IS THE CHANGE --- */
-        .skill-card h3 {
-            color: var(--primary-blue);
-        }
+        .skill-card h3 { color: var(--primary-blue); }
         
         .faq-accordion { max-width: 800px; margin: 0 auto; }
         .faq-item { border-bottom: 1px solid var(--border-color); }
@@ -214,21 +211,69 @@
         .faq-answer p { padding: 0 20px 20px 20px; margin: 0; line-height: 1.7; color: var(--text-color); }
         .faq-video-link { color: var(--primary-blue); font-weight: bold; text-decoration: underline; }
 
+        /* --- START OF DYNAMIC CONTACT SECTION STYLES --- */
         .contact-section { text-align: center; padding-top: 40px; }
-        .contact-section h3 { font-size: 1.5rem; color: var(--primary-blue); margin-bottom: 1rem; }
-        /* --- NEW STYLES FOR CONTACT INFO --- */
-        .contact-info {
-            line-height: 2; /* Adds space between the lines of contact info */
+        .contact-section h3 { font-size: 1.5rem; color: var(--primary-blue); margin-bottom: 2.5rem; }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
         }
-        .contact-info a {
-            font-size: 1.2rem; color: var(--text-color);
-            text-decoration: underline; transition: color 0.3s ease;
+        .flip-card {
+            background-color: transparent;
+            height: 200px;
+            perspective: 1000px; /* For 3D effect */
         }
-        .contact-info a:hover { color: var(--primary-blue); }
-        .contact-info p {
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #1a1a1a;
+            border: 1px solid var(--border-color);
+            box-sizing: border-box;
+        }
+        .flip-card-back {
+            transform: rotateY(180deg);
+            padding: 20px;
             font-size: 1.1rem;
-            margin: 0.5rem 0;
+            line-height: 1.6;
         }
+        .flip-card-back a {
+            color: var(--primary-blue);
+            text-decoration: none;
+        }
+        .flip-card-front svg {
+            width: 50px;
+            height: 50px;
+            fill: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+        .flip-card-front h4 {
+            font-family: var(--font-heading);
+            font-size: 1.2rem;
+            margin: 0;
+            color: var(--text-color);
+        }
+        /* --- END OF DYNAMIC CONTACT SECTION STYLES --- */
 
         .main-footer { text-align: center; padding: 2rem; border-top: 1px solid var(--border-color); }
         .social-links { margin-bottom: 1rem; }
@@ -298,7 +343,7 @@
             
             <p class="lang" data-de="Fachinformatiker für Systemintegration" data-en="IT Specialist for System Integration">Fachinformatiker für Systemintegration</p>
             <p class="lang" data-de="Mehrsprachiger IT-Auszubildender mit Leidenschaft für Netzwerke und Cybersicherheit, der praktische Erfahrung mit globaler Denkweise verbindet, um effektive Technologielösungen zu liefern. Motiviert, sich weiterzuentwickeln und von Marokko bis Deutschland Wirkung zu zeigen." data-en="Multilingual IT trainee with a passion for networks and cybersecurity, combining hands-on experience with a global mindset to deliver effective technology solutions. Motivated to grow and make an impact from Morocco to Germany.">
-                Mehrsprachiger IT-Auszubildender mit Leidenschaft für Netzwerke und Cybersicherheit...
+                Mehrsprachiger IT-Auszubildender mit Leidenschaft für Netzwerke und Cybersicherheit, der praktische Erfahrung mit globaler Denkweise verbindet, um effektive Technologielösungen zu liefern. Motiviert, sich weiterzuentwickeln und von Marokko bis Deutschland Wirkung zu zeigen.
             </p>
             <p class="location lang" data-de="Wohnort: Taza, Marokko" data-en="Based in: Taza, Morocco">Wohnort: Taza, Marokko</p>
         </div>
@@ -362,13 +407,43 @@
 
     <div class="container contact-section" id="kontakt" data-aos="fade-up">
         <h3 class="lang" data-de="Zögern Sie nicht, mich für weitere Informationen zu kontaktieren." data-en="Do not hesitate to contact me for any more information.">Zögern Sie nicht, mich für weitere Informationen zu kontaktieren.</h3>
-        <div class="contact-info">
-            <p><a href="mailto:walid@gourideche.com">walid@gourideche.com</a></p>
-            <p><a href="tel:+212698585528">+212-698585528</a></p>
-            <p>
-                Cite Al Amane Imm A Apt 1<br>
-                35000 Taza
-            </p>
+        <div class="contact-grid">
+            <div class="flip-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"/></svg>
+                        <h4 class="lang" data-de="Email" data-en="Email">Email</h4>
+                    </div>
+                    <div class="flip-card-back">
+                        <a href="mailto:walid@gourideche.com">walid@gourideche.com</a>
+                    </div>
+                </div>
+            </div>
+            <div class="flip-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                        <h4 class="lang" data-de="Telefon" data-en="Phone">Telefon</h4>
+                    </div>
+                    <div class="flip-card-back">
+                        <a href="tel:+212698585528">+212-698585528</a>
+                    </div>
+                </div>
+            </div>
+            <div class="flip-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                        <h4 class="lang" data-de="Adresse" data-en="Address">Adresse</h4>
+                    </div>
+                    <div class="flip-card-back">
+                        <p>
+                            Cite Al Amane Imm A Apt 1<br>
+                            35000 Taza
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
