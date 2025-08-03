@@ -247,6 +247,9 @@
         .flip-card-back {
             transform: rotateY(180deg); padding: 15px;
             font-size: 1rem; line-height: 1.6;
+            /* --- THIS IS THE FIX --- */
+            overflow-wrap: break-word;
+            word-wrap: break-word;
         }
         .flip-card-back a { color: var(--primary-blue); text-decoration: none; }
         .flip-card-front svg {
@@ -286,18 +289,6 @@
             }
         }
     </style>
-
-    <!-- ========== GOOGLE ANALYTICS SCRIPT ========== -->
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WRJ21ZJL53"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-WRJ21ZJL53');
-    </script>
-    <!-- ========== END OF GOOGLE ANALYTICS ========== -->
 </head>
 <body>
 
@@ -412,53 +403,10 @@
     <div class="container contact-section" id="kontakt" data-aos="fade-up">
         <h3 class="lang" data-de="Zögern Sie nicht, mich für weitere Informationen zu kontaktieren." data-en="Do not hesitate to contact me for any more information.">Zögern Sie nicht, mich für weitere Informationen zu kontaktieren.</h3>
         <div class="contact-grid">
-            <div class="flip-card" data-aos="fade-up" data-aos-delay="100">
-                <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"/></svg>
-                        <h4 class="lang" data-de="Email" data-en="Email">Email</h4>
-                    </div>
-                    <div class="flip-card-back">
-                        <a href="mailto:walid@gourideche.com">walid@gourideche.com</a>
-                    </div>
-                </div>
-            </div>
-            <div class="flip-card" data-aos="fade-up" data-aos-delay="200">
-                <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-                        <h4 class="lang" data-de="Telefon" data-en="Phone">Telefon</h4>
-                    </div>
-                    <div class="flip-card-back">
-                        <a href="tel:+212698585528">+212-698585528</a>
-                    </div>
-                </div>
-            </div>
-            <div class="flip-card" data-aos="fade-up" data-aos-delay="300">
-                <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-                        <h4 class="lang" data-de="Adresse" data-en="Address">Adresse</h4>
-                    </div>
-                    <div class="flip-card-back">
-                        <p>
-                            Cite Al Amane Imm A Apt 1<br>
-                            35000 Taza
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="flip-card" data-aos="fade-up" data-aos-delay="400">
-                <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-11h-13v11h13M6.5 12.5a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1h-1m3.5 0a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1h-1m3.5 0a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1h-1z"/></svg>
-                        <h4 class="lang" data-de="LinkedIn" data-en="LinkedIn">LinkedIn</h4>
-                    </div>
-                    <div class="flip-card-back">
-                        <a href="https://www.linkedin.com/in/walidgourideche/" target="_blank">linkedin.com/in/walidgourideche</a>
-                    </div>
-                </div>
-            </div>
+            <div class="flip-card" data-aos="fade-up" data-aos-delay="100"><div class="flip-card-inner"><div class="flip-card-front"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"/></svg><h4 class="lang" data-de="Email" data-en="Email">Email</h4></div><div class="flip-card-back"><a href="mailto:walid@gourideche.com">walid@gourideche.com</a></div></div></div>
+            <div class="flip-card" data-aos="fade-up" data-aos-delay="200"><div class="flip-card-inner"><div class="flip-card-front"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg><h4 class="lang" data-de="Telefon" data-en="Phone">Telefon</h4></div><div class="flip-card-back"><a href="tel:+212698585528">+212-698585528</a></div></div></div>
+            <div class="flip-card" data-aos="fade-up" data-aos-delay="300"><div class="flip-card-inner"><div class="flip-card-front"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg><h4 class="lang" data-de="Adresse" data-en="Address">Adresse</h4></div><div class="flip-card-back"><p>Cite Al Amane Imm A Apt 1<br>35000 Taza</p></div></div></div>
+            <div class="flip-card" data-aos="fade-up" data-aos-delay="400"><div class="flip-card-inner"><div class="flip-card-front"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-11h-13v11h13M6.5 12.5a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1h-1m3.5 0a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1h-1m3.5 0a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1h-1z"/></svg><h4 class="lang" data-de="LinkedIn" data-en="LinkedIn">LinkedIn</h4></div><div class="flip-card-back"><a href="https://www.linkedin.com/in/walidgourideche/" target="_blank">linkedin.com/in/walidgourideche</a></div></div></div>
         </div>
     </div>
 
