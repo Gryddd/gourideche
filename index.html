@@ -61,7 +61,11 @@
         }
         .lang-toggle:hover { background-color: var(--primary-blue); color: var(--background); }
         
-        .mobile-menu-icon { display: none; cursor: pointer; z-index: 1002; }
+        .mobile-menu-icon { display: none; cursor: pointer; z-index: 1002;
+            position: fixed;
+            top: 15px;
+            right: 20px;
+        }
         .mobile-menu-icon div {
             width: 25px; height: 3px; background-color: var(--primary-blue);
             margin: 5px 0; transition: 0.4s;
@@ -211,74 +215,57 @@
         .faq-answer p { padding: 0 20px 20px 20px; margin: 0; line-height: 1.7; color: var(--text-color); }
         .faq-video-link { color: var(--primary-blue); font-weight: bold; text-decoration: underline; }
 
-        /* --- START OF DYNAMIC CONTACT SECTION STYLES --- */
         .contact-section { text-align: center; padding-top: 40px; }
         .contact-section h3 { font-size: 1.5rem; color: var(--primary-blue); margin-bottom: 2.5rem; }
         .contact-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            max-width: 900px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            max-width: 1000px;
             margin: 0 auto;
         }
         .flip-card {
             background-color: transparent;
-            height: 200px;
-            perspective: 1000px; /* For 3D effect */
+            height: 180px;
+            perspective: 1000px;
         }
         .flip-card-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            text-align: center;
-            transition: transform 0.6s;
+            position: relative; width: 100%; height: 100%;
+            text-align: center; transition: transform 0.6s;
             transform-style: preserve-3d;
         }
-        .flip-card:hover .flip-card-inner {
-            transform: rotateY(180deg);
-        }
+        .flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
         .flip-card-front, .flip-card-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            position: absolute; width: 100%; height: 100%;
+            -webkit-backface-visibility: hidden; backface-visibility: hidden;
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
             background-color: #1a1a1a;
             border: 1px solid var(--border-color);
             box-sizing: border-box;
         }
         .flip-card-back {
-            transform: rotateY(180deg);
-            padding: 20px;
-            font-size: 1.1rem;
-            line-height: 1.6;
+            transform: rotateY(180deg); padding: 15px;
+            font-size: 1rem; line-height: 1.6;
         }
-        .flip-card-back a {
-            color: var(--primary-blue);
-            text-decoration: none;
-        }
+        .flip-card-back a { color: var(--primary-blue); text-decoration: none; }
         .flip-card-front svg {
-            width: 50px;
-            height: 50px;
-            fill: var(--primary-blue);
-            margin-bottom: 1rem;
+            width: 40px; height: 40px;
+            fill: var(--primary-blue); margin-bottom: 1rem;
         }
         .flip-card-front h4 {
-            font-family: var(--font-heading);
-            font-size: 1.2rem;
-            margin: 0;
-            color: var(--text-color);
+            font-family: var(--font-heading); font-size: 1.1rem;
+            margin: 0; color: var(--text-color);
         }
-        /* --- END OF DYNAMIC CONTACT SECTION STYLES --- */
 
         .main-footer { text-align: center; padding: 2rem; border-top: 1px solid var(--border-color); }
-        .social-links { margin-bottom: 1rem; }
-        .social-links a { color: var(--primary-blue); margin: 0 15px; text-decoration: none; font-weight: bold; }
+        .main-footer p { margin: 0; }
         
+        @media screen and (max-width: 900px) {
+            .contact-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
         @media screen and (max-width: 768px) {
             .nav-links, .lang-toggle {
                 display: none;
@@ -293,7 +280,24 @@
             h2 { font-size: 1.8rem; }
             .hero-text { text-align: center; }
         }
+        @media screen and (max-width: 500px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
+
+    <!-- ========== GOOGLE ANALYTICS SCRIPT ========== -->
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WRJ21ZJL53"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-WRJ21ZJL53');
+    </script>
+    <!-- ========== END OF GOOGLE ANALYTICS ========== -->
 </head>
 <body>
 
@@ -444,13 +448,21 @@
                     </div>
                 </div>
             </div>
+            <div class="flip-card" data-aos="fade-up" data-aos-delay="400">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-11h-13v11h13M6.5 12.5a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1h-1m3.5 0a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1h-1m3.5 0a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1h-1z"/></svg>
+                        <h4 class="lang" data-de="LinkedIn" data-en="LinkedIn">LinkedIn</h4>
+                    </div>
+                    <div class="flip-card-back">
+                        <a href="https://www.linkedin.com/in/walidgourideche/" target="_blank">linkedin.com/in/walidgourideche</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
     <footer class="main-footer">
-        <div class="social-links">
-            <a href="https://www.linkedin.com/in/walidgourideche/" target="_blank">LinkedIn</a>
-        </div>
         <p>© 2025 Walid Gourideche. <span class="lang" data-de="Alle Rechte vorbehalten." data-en="All Rights Reserved.">Alle Rechte vorbehalten.</span></p>
     </footer>
 
