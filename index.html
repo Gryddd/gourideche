@@ -91,13 +91,18 @@
         
         .container {
             width: 90%; max-width: 1100px; margin: 0 auto;
-            padding-top: 150px; padding-bottom: 100px;
+            /* --- THIS IS THE CHANGE --- */
+            padding-top: 80px; 
+            padding-bottom: 100px;
             position: relative; z-index: 2;
         }
         .hero {
             display: flex; align-items: center; justify-content: center;
             min-height: 100vh; gap: 4rem; flex-wrap: wrap;
-            padding: 2rem; text-align: center; padding-top: 80px;
+            padding: 2rem; text-align: center; 
+            /* --- THIS IS THE CHANGE --- */
+            padding-top: 60px; /* Reduced to account for smaller container padding */
+            box-sizing: border-box;
         }
         .hero-image { width: 300px; height: 300px; flex-shrink: 0; }
         .hero-image img {
@@ -273,7 +278,7 @@
                 border-bottom: none;
             }
             .nav-content {
-                display: none; /* Hide desktop nav content entirely */
+                display: none; 
             }
             .mobile-menu-icon {
                 display: block;
@@ -288,16 +293,6 @@
             }
         }
     </style>
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WRJ21ZJL53"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-WRJ21ZJL53');
-    </script>
 </head>
 <body>
 
@@ -503,6 +498,5 @@
           }
       }
     </script>
-
 </body>
 </html>
