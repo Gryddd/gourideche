@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Walid Gourideche | Fachinformatiker für Systemintegration</title>
     
-    <!-- ========== ADD THIS LINE FOR YOUR FAVICON ========== -->
     <link rel="icon" type="image/png" href="images/favicon.png">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -117,12 +116,15 @@
         }
         .hero-text { flex-basis: 500px; text-align: left; }
 
-        .hero-logo {
-            max-width: 100%;
-            height: auto;
-            margin-bottom: 1rem;
+        h1 {
+            border-right: 2px solid var(--primary-blue); font-size: 2.5rem;
+            white-space: nowrap; overflow: hidden; margin: 0;
+            animation: typing 2s steps(22, end), blink-caret .75s step-end infinite;
+            display: inline-block;
         }
-
+        @keyframes typing { from { width: 0 } to { width: 100% } }
+        @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: var(--primary-blue); } }
+        
         .hero-text p { font-size: 1.1rem; line-height: 1.6; }
         .hero-text .location { color: var(--primary-blue); font-weight: bold; }
         h2 {
@@ -213,7 +215,6 @@
             h1 { font-size: 2rem; }
             h2 { font-size: 1.8rem; }
             .hero-text { text-align: center; }
-            .hero-logo { margin-left: auto; margin-right: auto; }
         }
     </style>
 </head>
@@ -259,7 +260,8 @@
             <img src="images/aura.jpg" alt="Ein professionelles Foto von Walid Gourideche">
         </div>
         <div class="hero-text" data-aos="fade-up" data-aos-delay="200">
-            <img src="images/logo.png" alt="Walid Gourideche Logo" class="hero-logo">
+            <!-- ========== RESTORED H1 TITLE ========== -->
+            <h1>> Walid Gourideche</h1>
             
             <p class="lang" data-de="Fachinformatiker für Systemintegration" data-en="IT Specialist for System Integration">Fachinformatiker für Systemintegration</p>
             <p class="lang" data-de="Mehrsprachiger IT-Auszubildender mit Leidenschaft für Netzwerke und Cybersicherheit, der praktische Erfahrung mit globaler Denkweise verbindet, um effektive Technologielösungen zu liefern. Motiviert, sich weiterzuentwickeln und von Marokko bis Deutschland Wirkung zu zeigen." data-en="Multilingual IT trainee with a passion for networks and cybersecurity, combining hands-on experience with a global mindset to deliver effective technology solutions. Motivated to grow and make an impact from Morocco to Germany.">
@@ -368,7 +370,7 @@
           if (overlay.style.width === "100%") {
               overlay.style.width = "0%";
           } else {
-              overlay.style.width = "10.0%";
+              overlay.style.width = "100%";
           }
       }
     </script>
