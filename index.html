@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Walid Gourideche | Fachinformatiker für Systemintegration</title>
     
+    <!-- Updated Google Fonts: Space Mono for headings, Inter for body -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
@@ -17,7 +18,9 @@
             --primary-blue: #00bfff;
             --text-color: #e0e0e0;
             --border-color: #333333;
-            --font-mono: 'Roboto Mono', monospace;
+            /* Updated Fonts */
+            --font-heading: 'Space Mono', monospace;
+            --font-body: 'Inter', sans-serif;
         }
         html {
             scroll-behavior: smooth;
@@ -25,320 +28,191 @@
         body {
             background-color: var(--background);
             color: var(--text-color);
-            font-family: var(--font-mono);
+            font-family: var(--font-body); /* Default to body font */
             margin: 0;
             padding: 0;
             overflow-x: hidden;
         }
-
+        h1, h2, h3, .nav-links a {
+            font-family: var(--font-heading); /* Apply heading font */
+        }
         #background-video {
-            position: fixed;
-            right: 0;
-            bottom: 0;
-            min-width: 100%;
-            min-height: 100%;
-            width: auto;
-            height: auto;
-            z-index: -2;
-            object-fit: cover;
+            position: fixed; right: 0; bottom: 0; min-width: 100%; min-height: 100%;
+            width: auto; height: auto; z-index: -2; object-fit: cover;
         }
         .video-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background-color: rgba(13, 13, 13, 0.85);
-            backdrop-filter: blur(5px);
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+            background-color: rgba(13, 13, 13, 0.85); backdrop-filter: blur(5px);
         }
 
+        /* --- START OF UPDATED NAVIGATION BAR & NEW MOBILE MENU STYLES --- */
         .main-nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background-color: rgba(13, 13, 13, 0.7); 
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border-color);
-            z-index: 1001;
-            padding: 0.5rem 2rem;
-            box-sizing: border-box;
+            position: fixed; top: 0; left: 0; width: 100%;
+            background-color: rgba(13, 13, 13, 0.7); backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color); z-index: 1001;
+            padding: 0.5rem 2rem; box-sizing: border-box;
         }
         .nav-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
+            display: flex; justify-content: space-between; align-items: center;
+            max-width: 1200px; margin: 0 auto;
         }
         .nav-links {
-            display: flex;
-            gap: 1.5rem;
+            display: flex; gap: 1.5rem;
         }
         .nav-links a {
-            color: var(--text-color);
-            text-decoration: none;
-            font-size: 1rem;
-            padding: 0.5rem;
-            transition: color 0.3s ease;
+            color: var(--text-color); text-decoration: none; font-size: 1rem;
+            padding: 0.5rem; transition: color 0.3s ease;
         }
-        .nav-links a:hover {
-            color: var(--primary-blue);
-        }
+        .nav-links a:hover { color: var(--primary-blue); }
         .lang-toggle {
-            background-color: transparent;
-            border: 1px solid var(--primary-blue);
-            color: var(--primary-blue);
-            padding: 8px 15px;
-            cursor: pointer;
-            font-family: var(--font-mono);
-            font-size: 0.9rem;
+            background-color: transparent; border: 1px solid var(--primary-blue);
+            color: var(--primary-blue); padding: 8px 15px; cursor: pointer;
+            font-family: var(--font-heading); font-size: 0.9rem;
             transition: background-color 0.3s, color 0.3s;
         }
-        .lang-toggle:hover {
-            background-color: var(--primary-blue);
-            color: var(--background);
+        .lang-toggle:hover { background-color: var(--primary-blue); color: var(--background); }
+        
+        /* Mobile Menu Styles */
+        .mobile-menu-icon {
+            display: none; /* Hidden on desktop */
+            cursor: pointer;
+            z-index: 1002;
         }
-
+        .mobile-menu-icon div {
+            width: 25px; height: 3px; background-color: var(--primary-blue);
+            margin: 5px 0; transition: 0.4s;
+        }
+        .mobile-nav-overlay {
+            height: 100%; width: 0; /* Hidden by default */
+            position: fixed; z-index: 1001; top: 0; left: 0;
+            background-color: rgba(13, 13, 13, 0.95);
+            overflow-x: hidden; transition: 0.5s;
+        }
+        .mobile-nav-overlay-content {
+            position: relative; top: 25%; width: 100%;
+            text-align: center; margin-top: 30px;
+        }
+        .mobile-nav-overlay a {
+            padding: 15px; text-decoration: none; font-size: 24px;
+            color: var(--text-color); display: block; transition: 0.3s;
+            font-family: var(--font-heading);
+        }
+        .mobile-nav-overlay a:hover, .mobile-nav-overlay a:focus {
+            color: var(--primary-blue);
+        }
+        /* --- END OF UPDATED NAVIGATION BAR & NEW MOBILE MENU STYLES --- */
+        
         .container {
-            width: 90%;
-            max-width: 1100px;
-            margin: 0 auto;
-            padding-top: 150px;
-            padding-bottom: 100px;
-            position: relative;
-            z-index: 2;
+            width: 90%; max-width: 1100px; margin: 0 auto;
+            padding-top: 150px; padding-bottom: 100px;
+            position: relative; z-index: 2;
         }
         .hero {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            gap: 4rem;
-            flex-wrap: wrap;
-            padding: 2rem;
-            text-align: center;
-            padding-top: 80px;
+            display: flex; align-items: center; justify-content: center;
+            min-height: 100vh; gap: 4rem; flex-wrap: wrap;
+            padding: 2rem; text-align: center; padding-top: 80px;
         }
-        .hero-image {
-            width: 300px;
-            height: 300px;
-            flex-shrink: 0;
-        }
+        .hero-image { width: 300px; height: 300px; flex-shrink: 0; }
         .hero-image img {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid var(--primary-blue);
+            width: 100%; height: 100%; border-radius: 50%;
+            object-fit: cover; border: 3px solid var(--primary-blue);
             box-shadow: 0 0 25px rgba(0, 191, 255, 0.4);
         }
-        .hero-text {
-            flex-basis: 500px;
-            text-align: left;
-        }
+        .hero-text { flex-basis: 500px; text-align: left; }
         h1 {
-            border-right: 2px solid var(--primary-blue);
-            font-size: 2.5rem;
-            white-space: nowrap;
-            overflow: hidden;
-            margin: 0;
+            border-right: 2px solid var(--primary-blue); font-size: 2.5rem;
+            white-space: nowrap; overflow: hidden; margin: 0;
             animation: typing 2s steps(22, end), blink-caret .75s step-end infinite;
             display: inline-block;
         }
         @keyframes typing { from { width: 0 } to { width: 100% } }
         @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: var(--primary-blue); } }
-        .hero-text p {
-            font-size: 1.1rem;
-            line-height: 1.6;
-        }
-        .hero-text .location {
-            color: var(--primary-blue);
-            font-weight: bold;
-        }
+        .hero-text p { font-size: 1.1rem; line-height: 1.6; }
+        .hero-text .location { color: var(--primary-blue); font-weight: bold; }
         h2 {
-            text-align: center;
-            font-size: 2rem;
-            color: var(--primary-blue);
-            margin-bottom: 50px;
-            text-transform: uppercase;
+            font-size: 2rem; color: var(--primary-blue);
+            margin-bottom: 50px; text-transform: uppercase; text-align: center;
         }
         h2::before, h2::after { content: ' -- '; }
         
         .timeline-wrapper {
-            position: relative;
-            max-width: 750px;
-            margin: 0 auto;
+            position: relative; max-width: 750px; margin: 0 auto;
         }
         .timeline-wrapper::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 20px;
-            width: 3px;
-            background-color: var(--border-color);
+            content: ''; position: absolute; top: 0; bottom: 0;
+            left: 20px; width: 3px; background-color: var(--border-color);
         }
         .timeline-item {
-            position: relative;
-            padding-left: 60px;
-            margin-bottom: 50px;
+            position: relative; padding-left: 60px; margin-bottom: 50px;
         }
         .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: 14px;
-            top: 8px;
-            width: 15px;
-            height: 15px;
-            background-color: var(--primary-blue);
-            border-radius: 50%;
-            z-index: 1;
+            content: ''; position: absolute; left: 14px; top: 8px;
+            width: 15px; height: 15px;
+            background-color: var(--primary-blue); border-radius: 50%; z-index: 1;
         }
         .timeline-content {
-            padding: 20px;
-            background-color: #1a1a1a;
-            border: 1px solid var(--border-color);
-            text-align: left;
-        }
-        .timeline-content h3 {
-            color: var(--primary-blue);
-            margin-top: 0;
-            font-size: 1.2rem;
+            padding: 20px; background-color: #1a1a1a;
+            border: 1px solid var(--border-color); text-align: left;
         }
         .timeline-content .degree, .timeline-content .position {
-            font-style: italic;
-            display: block;
-            margin-top: 5px;
-            margin-bottom: 15px;
+            font-style: italic; display: block; margin-top: 5px; margin-bottom: 15px;
         }
-        .timeline-content .date {
-            font-weight: bold;
-            color: var(--text-color);
-            margin-bottom: 10px;
-            display: block;
-        }
-        .timeline-content ul {
-            padding-left: 20px;
-            margin: 0;
-        }
+        .timeline-content .date { font-weight: bold; color: var(--text-color); margin-bottom: 10px; display: block; }
+        .timeline-content ul { padding-left: 20px; margin: 0; }
 
         .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;
         }
         .skill-card {
-            background-color: #1a1a1a;
-            border: 1px solid var(--border-color);
-            padding: 2rem;
-        }
-        .skill-card h3 {
-            color: var(--primary-blue);
-            margin-top: 0;
+            background-color: #1a1a1a; border: 1px solid var(--border-color); padding: 1.5rem;
         }
         
-        .faq-accordion {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        .faq-item {
-            border-bottom: 1px solid var(--border-color);
-        }
+        .faq-accordion { max-width: 800px; margin: 0 auto; }
+        .faq-item { border-bottom: 1px solid var(--border-color); }
         .faq-question {
-            background: none;
-            border: none;
-            width: 100%;
-            text-align: left;
-            padding: 20px 10px;
-            font-family: var(--font-mono);
-            font-size: 1.1rem;
-            color: var(--primary-blue);
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            background: none; border: none; width: 100%; text-align: left;
+            padding: 20px 10px; font-family: var(--font-heading);
+            font-size: 1.1rem; color: var(--primary-blue); cursor: pointer;
+            display: flex; justify-content: space-between; align-items: center;
         }
-        .faq-question i {
-            font-style: italic;
-        }
+        .faq-question i { font-style: italic; }
         .faq-question::after {
-            content: '+';
-            font-size: 1.5rem;
-            color: var(--primary-blue);
-            transition: transform 0.3s ease;
+            content: '+'; font-size: 1.5rem; color: var(--primary-blue); transition: transform 0.3s ease;
         }
-        .faq-question.active::after {
-            content: '-';
-            transform: rotate(180deg);
-        }
-        .faq-answer {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out;
-        }
-        .faq-answer p {
-            padding: 0 20px 20px 20px;
-            margin: 0;
-            line-height: 1.7;
-            color: var(--text-color);
-        }
-        .faq-video-link {
-            color: var(--primary-blue);
-            font-weight: bold;
-            text-decoration: underline;
-        }
+        .faq-question.active::after { content: '-'; transform: rotate(180deg); }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
+        .faq-answer p { padding: 0 20px 20px 20px; margin: 0; line-height: 1.7; color: var(--text-color); }
+        .faq-video-link { color: var(--primary-blue); font-weight: bold; text-decoration: underline; }
 
-        .contact-section {
-            text-align: center;
-            padding-top: 40px;
-        }
-        .contact-section h3 {
-            font-size: 1.5rem;
-            color: var(--primary-blue);
-            margin-bottom: 1rem;
-        }
+        .contact-section { text-align: center; padding-top: 40px; }
+        .contact-section h3 { font-size: 1.5rem; color: var(--primary-blue); margin-bottom: 1rem; }
         .contact-section a {
-            font-size: 1.2rem;
-            color: var(--text-color);
-            text-decoration: underline;
-            transition: color 0.3s ease;
+            font-size: 1.2rem; color: var(--text-color);
+            text-decoration: underline; transition: color 0.3s ease;
         }
-        .contact-section a:hover {
-            color: var(--primary-blue);
-        }
+        .contact-section a:hover { color: var(--primary-blue); }
 
-        .main-footer {
-            text-align: center;
-            padding: 2rem;
-            border-top: 1px solid var(--border-color);
-        }
-        .social-links {
-            margin-bottom: 1rem;
-        }
-        .social-links a {
-            color: var(--primary-blue);
-            margin: 0 15px;
-            text-decoration: none;
-            font-weight: bold;
-        }
+        .main-footer { text-align: center; padding: 2rem; border-top: 1px solid var(--border-color); }
+        .social-links { margin-bottom: 1rem; }
+        .social-links a { color: var(--primary-blue); margin: 0 15px; text-decoration: none; font-weight: bold; }
         
-        /* This is the media query that makes the design mobile-friendly */
+        /* Mobile Responsive Styles */
         @media screen and (max-width: 768px) {
+            .nav-links, .lang-toggle {
+                display: none; /* Hide desktop nav and button */
+            }
+            .mobile-menu-icon {
+                display: block; /* Show hamburger icon */
+            }
+            .main-nav {
+                justify-content: flex-end; /* Align icon to the right */
+            }
             .nav-content {
-                flex-direction: column;
-                gap: 0.5rem;
-                padding: 0.5rem 0;
+                justify-content: flex-end;
             }
-            .nav-links {
-                justify-content: center;
-                flex-wrap: wrap;
-                gap: 0 1rem;
-            }
-            .hero-text {
-                text-align: center; /* Center text on mobile when stacked */
-            }
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.8rem; }
+            .hero-text { text-align: center; }
         }
     </style>
 </head>
@@ -349,6 +223,7 @@
     </video>
     <div class="video-overlay"></div>
 
+    <!-- ========== UPDATED NAVIGATION BAR ========== -->
     <nav class="main-nav">
         <div class="nav-content">
             <div class="nav-links">
@@ -359,8 +234,28 @@
                 <a href="#kontakt" class="lang" data-de="Kontakt" data-en="Contact">Kontakt</a>
             </div>
             <button id="lang-toggle" class="lang-toggle" data-de="Switch to English" data-en="Auf Deutsch umschalten">Switch to English</button>
+            
+            <!-- Hamburger Icon for Mobile -->
+            <div class="mobile-menu-icon" onclick="toggleNav()">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
         </div>
     </nav>
+    
+    <!-- Mobile Navigation Overlay -->
+    <div id="mobile-nav" class="mobile-nav-overlay">
+        <div class="mobile-nav-overlay-content">
+            <a href="#bildung" class="lang" data-de="Bildungsweg" data-en="Education" onclick="toggleNav()">Bildungsweg</a>
+            <a href="#erfahrung" class="lang" data-de="Erfahrung" data-en="Experience" onclick="toggleNav()">Erfahrung</a>
+            <a href="#kompetenzen" class="lang" data-de="Kompetenzen" data-en="Skills" onclick="toggleNav()">Kompetenzen</a>
+            <a href="#faq" class="lang" data-de="FAQ" data-en="FAQ" onclick="toggleNav()">FAQ</a>
+            <a href="#kontakt" class="lang" data-de="Kontakt" data-en="Contact" onclick="toggleNav()">Kontakt</a>
+            <!-- Mobile Language Toggle -->
+            <button id="lang-toggle-mobile" class="lang-toggle" style="margin-top: 20px;" data-de="Switch to English" data-en="Auf Deutsch umschalten">Switch to English</button>
+        </div>
+    </div>
     
     <section class="hero" id="hero">
         <div class="hero-image" data-aos="fade-up">
@@ -437,10 +332,11 @@
 
       document.addEventListener('DOMContentLoaded', function() {
           const toggleButton = document.getElementById('lang-toggle');
+          const mobileToggleButton = document.getElementById('lang-toggle-mobile');
           const translatableElements = document.querySelectorAll('.lang');
           let currentLang = 'de';
 
-          toggleButton.addEventListener('click', function() {
+          function switchLanguage() {
               currentLang = currentLang === 'de' ? 'en' : 'de';
               document.documentElement.lang = currentLang;
               translatableElements.forEach(el => {
@@ -449,7 +345,11 @@
                   }
               });
               toggleButton.innerText = toggleButton.dataset[currentLang];
-          });
+              mobileToggleButton.innerText = mobileToggleButton.dataset[currentLang];
+          }
+
+          toggleButton.addEventListener('click', switchLanguage);
+          mobileToggleButton.addEventListener('click', switchLanguage);
 
           const faqQuestions = document.querySelectorAll('.faq-question');
           faqQuestions.forEach(question => {
@@ -464,6 +364,15 @@
               });
           });
       });
+
+      function toggleNav() {
+          const overlay = document.getElementById("mobile-nav");
+          if (overlay.style.width === "100%") {
+              overlay.style.width = "0%";
+          } else {
+              overlay.style.width = "100%";
+          }
+      }
     </script>
 
 </body>
