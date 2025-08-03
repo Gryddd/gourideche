@@ -79,6 +79,18 @@
             width: 25px; height: 3px; background-color: var(--primary-blue);
             margin: 5px 0; transition: 0.4s;
         }
+        /* --- START OF HAMBURGER TO "X" ANIMATION --- */
+        .change .bar1 {
+            transform: translate(0, 8px) rotate(-45deg);
+        }
+        .change .bar2 {
+            opacity: 0;
+        }
+        .change .bar3 {
+            transform: translate(0, -8px) rotate(45deg);
+        }
+        /* --- END OF HAMBURGER TO "X" ANIMATION --- */
+
         .mobile-nav-overlay {
             height: 100%; width: 0;
             position: fixed; z-index: 1001; top: 0; left: 0;
@@ -151,9 +163,7 @@
         .timeline-content {
             padding: 20px; background-color: #1a1a1a;
             border: 1px solid var(--border-color); text-align: left;
-            /* --- THE FIX: Prevents long words from overflowing --- */
-            overflow-wrap: break-word;
-            word-wrap: break-word; /* Older browser support */
+            overflow-wrap: break-word; word-wrap: break-word;
         }
         .timeline-content h3 { color: var(--primary-blue); }
         
@@ -239,21 +249,21 @@
             </div>
             <button id="lang-toggle" class="lang-toggle" data-de="Switch to English" data-en="Auf Deutsch umschalten">Switch to English</button>
             
-            <div class="mobile-menu-icon" onclick="toggleNav()">
-                <div></div>
-                <div></div>
-                <div></div>
+            <div class="mobile-menu-icon" onclick="toggleNav(this)">
+                <div class="bar1"></div>
+                <div class="bar2"></div>
+                <div class="bar3"></div>
             </div>
         </div>
     </nav>
     
     <div id="mobile-nav" class="mobile-nav-overlay">
         <div class="mobile-nav-overlay-content">
-            <a href="#bildung" class="lang" data-de="Bildungsweg" data-en="Education" onclick="toggleNav()">Bildungsweg</a>
-            <a href="#erfahrung" class="lang" data-de="Erfahrung" data-en="Experience" onclick="toggleNav()">Erfahrung</a>
-            <a href="#kompetenzen" class="lang" data-de="Kompetenzen" data-en="Skills" onclick="toggleNav()">Kompetenzen</a>
-            <a href="#faq" class="lang" data-de="FAQ" data-en="FAQ" onclick="toggleNav()">FAQ</a>
-            <a href="#kontakt" class="lang" data-de="Kontakt" data-en="Contact" onclick="toggleNav()">Kontakt</a>
+            <a href="#bildung" class="lang" data-de="Bildungsweg" data-en="Education" onclick="toggleNav(document.querySelector('.mobile-menu-icon'))">Bildungsweg</a>
+            <a href="#erfahrung" class="lang" data-de="Erfahrung" data-en="Experience" onclick="toggleNav(document.querySelector('.mobile-menu-icon'))">Erfahrung</a>
+            <a href="#kompetenzen" class="lang" data-de="Kompetenzen" data-en="Skills" onclick="toggleNav(document.querySelector('.mobile-menu-icon'))">Kompetenzen</a>
+            <a href="#faq" class="lang" data-de="FAQ" data-en="FAQ" onclick="toggleNav(document.querySelector('.mobile-menu-icon'))">FAQ</a>
+            <a href="#kontakt" class="lang" data-de="Kontakt" data-en="Contact" onclick="toggleNav(document.querySelector('.mobile-menu-icon'))">Kontakt</a>
             <button id="lang-toggle-mobile" class="lang-toggle" style="margin-top: 20px;" data-de="Switch to English" data-en="Auf Deutsch umschalten">Switch to English</button>
         </div>
     </div>
@@ -286,7 +296,7 @@
     <div class="container" id="erfahrung">
         <h2 class="lang" data-de="Berufserfahrung" data-en="Professional Experience">Berufserfahrung</h2>
         <div class="timeline-wrapper">
-            <div class="timeline-item" data-aos="fade-up"><div class="timeline-content"><span class="date">Mai 2022 - Juli 2022</span><h3 class="lang" data-de="Seniorenresidenz Taza Inc." data-en="Elder care residential TAZA inc.">Seniorenresidenz Taza Inc.</h3><p class="position lang" data-de="Praktikant IT-Beratung" data-en="IT Consultant Intern">Praktikant IT-Beratung</p><ul><li class="lang" data-de="Entwurf und Bereitstellung von IT-Systemen zur Verbesserung der internen Kommunikation." data-en="Designed and deployed IT systems to enhance staff communication and operational efficiency.">Entwurf und Bereitstellung von IT-Systemen zur Verbesserung der internen Kommunikation.</li><li class="lang" data-de="Installation und Konfiguration von Hardware und Netzwerkgeräten." data-en="Installed and configured hardware and network devices, ensuring stable and secure connectivity.">Installation und Konfiguration von Hardware und Netzwerkgeräten.</li><li class="lang" data-de="Durchführung von Anwenderschulungen und technischem Support." data-en="Delivered user training and ongoing technical support, empowering staff to utilize new technology confidently.">Durchführung von Anwenderschulungen und technischem Support.</li></ul></div></div>
+            <div class="timeline-item" data-aos="fade-up"><div class="timeline-content"><span class="date">Mai 2022 - Juli 2022</span><h3 class="lang" data-de="Seniorenresidenz Taza Inc." data-en="Elder care residential TAZA inc.">Seniorenresidenz Taza Inc.</h3><p class="position lang" data-de="Praktikant IT-Beratung" data-en="IT Consultant Intern">Praktikant IT-Beratung</p><ul><li class="lang" data-de="Entwurf und Bereitstellung von IT-Systemen zur Verbesserung der internen Kommunikation." data-en="Designed and deployed IT systems to enhance staff communication and operational efficiency.">Entwurf und Bereitstellung von IT-Systemen zur Verbesserung der internen Kommunikation.</li><li class="lang" data-de="Installation und Konfiguration von Hardware und Netzwerkgeräten." data-en="Installed and configured hardware and network devices, ensuring stable and secure connectivity.">Installation und Konfiguration von Hardware und Netzwerkgeräten.</li><li class="lang" data-de="Durchführung von Anwendersschulungen und technischem Support." data-en="Delivered user training and ongoing technical support, empowering staff to utilize new technology confidently.">Durchführung von Anwenderschulungen und technischem Support.</li></ul></div></div>
             <div class="timeline-item" data-aos="fade-up"><div class="timeline-content"><span class="date">Okt. 2022 - Dez. 2022</span><h3 class="lang" data-de="Gesundheitsministerium, Zweigstelle Taza" data-en="Ministry of Health branch TAZA">Gesundheitsministerium, Zweigstelle Taza</h3><p class="position lang" data-de="Praktikant Systemadministration" data-en="System Administration Assistant Intern">Praktikant Systemadministration</p><ul><li class="lang" data-de="Unterstützung bei der Bereitstellung von VMs mit VirtualBox/VMware für interne Tests." data-en="Assisted in deploying and managing virtual machines using VirtualBox/VMware for internal use and isolated service testing.">Unterstützung bei der Bereitstellung von VMs mit VirtualBox/VMware für interne Tests.</li><li class="lang" data-de="Mithilfe bei Active-Directory-Aufgaben (Benutzerkonten, Gruppenrichtlinien)." data-en="Supported Active Directory tasks, including user account creation, password resets, and group policy application.">Mithilfe bei Active-Directory-Aufgaben (Benutzerkonten, Gruppenrichtlinien).</li><li class="lang" data-de="Unterstützung bei der Konfiguration der lokalen Netzwerkinfrastruktur (DNS/DHCP)." data-en="Helped configure and maintain local network infrastructure, including basic DNS/DHCP settings.">Unterstützung bei der Konfiguration der lokalen Netzwerkinfrastruktur (DNS/DHCP).</li></ul></div></div>
             <div class="timeline-item" data-aos="fade-up"><div class="timeline-content"><span class="date">Juni 2025 - Sep. 2025</span><h3>Click service Taza</h3><p class="position lang" data-de="IT-Spezialist" data-en="IT Specialist">IT-Spezialist</p><ul><li class="lang" data-de="Installation, Konfiguration und Aktualisierung von Software und Betriebssystemen für Kunden." data-en="Installed, configured, and updated software and operating systems for clients.">Installation, Konfiguration und Aktualisierung von Software und Betriebssystemen für Kunden.</li><li class="lang" data-de="Verwaltung des IT-Inventars und Sicherstellung des Lagerbestands." data-en="Managed inventory of IT equipment and accessories, ensuring proper stock levels.">Verwaltung des IT-Inventars und Sicherstellung des Lagerbestands.</li><li class="lang" data-de="Einrichtung und Wartung lokaler Netzwerke, einschließlich Router und WLAN-Konfigurationen." data-en="Set up and maintained local networks, including routers and Wi-Fi configurations.">Einrichtung und Wartung lokaler Netzwerke, einschließlich Router und WLAN-Konfigurationen.</li></ul></div></div>
         </div>
@@ -367,8 +377,11 @@
           });
       });
 
-      function toggleNav() {
+      function toggleNav(icon) {
           const overlay = document.getElementById("mobile-nav");
+          // Toggle the "X" animation class on the icon
+          icon.classList.toggle("change");
+
           if (overlay.style.width === "100%") {
               overlay.style.width = "0%";
           } else {
