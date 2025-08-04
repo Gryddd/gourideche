@@ -320,7 +320,6 @@
             width: 40px; height: 40px;
             fill: var(--primary-blue); margin-bottom: 1rem;
         }
-        /* IMPROVEMENT: Specific size adjustment for LinkedIn logo */
         .flip-card-front .linkedin-logo {
             width: 45px;
             height: 45px;
@@ -377,10 +376,23 @@
             font-size: 1.1rem;
             transition: background-color 0.3s, color 0.3s;
             align-self: center;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
         }
         .submit-btn:hover {
             background-color: var(--primary-blue);
             color: var(--background);
+        }
+        .submit-btn:disabled {
+            background-color: #0080a7;
+            border-color: #0080a7;
+            color: var(--background);
+            cursor: not-allowed;
+        }
+        .submit-btn svg {
+            width: 20px;
+            height: 20px;
         }
 
 
@@ -593,7 +605,11 @@
                         <label for="message" class="lang" data-de="Nachricht" data-en="Message" data-fr="Message">Nachricht</label>
                         <textarea id="message" name="message" class="lang-placeholder" data-de="Ihre Nachricht..." data-en="Your message..." data-fr="Votre message..." required></textarea>
                     </div>
-                    <button type="submit" class="submit-btn lang" data-de="Senden" data-en="Send" data-fr="Envoyer">Senden</button>
+                    <button type="submit" class="submit-btn" 
+                        data-de="Senden" data-en="Send" data-fr="Envoyer"
+                        data-sent-de="Gesendet!" data-sent-en="Sent!" data-sent-fr="Envoyé!">
+                        <span class="lang" data-de="Senden" data-en="Send" data-fr="Envoyer">Senden</span>
+                    </button>
                 </form>
             </div>
         </section>
@@ -751,6 +767,41 @@
           mobileMenuIcon.addEventListener('click', toggleNav);
           mobileNavLinks.forEach(link => {
             link.addEventListener('click', toggleNav);
+          });
+          
+          const contactForm = document.getElementById('contact-form');
+          const submitBtn = contactForm.querySelector('.submit-btn');
+
+          contactForm.addEventListener('submit', function(event) {
+              event.preventDefault();
+              const formData = new FormData(contactForm);
+              
+              fetch(contactForm.action, {
+                  method: 'POST',
+                  body: formData,
+                  headers: {
+                      'Accept': 'application/json'
+                  }
+              }).then(response => {
+                  if (response.ok) {
+                      const successKey = 'sent' + currentLang.charAt(0).toUpperCase() + currentLang.slice(1);
+                      const successText = submitBtn.dataset[successKey];
+                      
+                      submitBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> <span>${successText}</span>`;
+                      submitBtn.disabled = true;
+                      contactForm.reset();
+                  } else {
+                       response.json().then(data => {
+                          if (Object.hasOwn(data, 'errors')) {
+                            alert(data["errors"].map(error => error["message"]).join(", "));
+                          } else {
+                            alert('Oops! There was a problem submitting your form');
+                          }
+                       })
+                  }
+              }).catch(error => {
+                  alert('Oops! There was a network error.');
+              });
           });
       });
     </script>
