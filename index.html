@@ -89,7 +89,6 @@
         }
         .nav-links a:hover { color: var(--primary-blue); }
         
-        /* NEW Language Selector Styles */
         .language-selector ul {
             margin: 0; padding: 0; list-style: none; display: flex; align-items: center; gap: 0.75rem;
         }
@@ -111,10 +110,10 @@
             margin-top: 30px; display: flex; justify-content: center;
         }
 
-        .mobile-menu-icon { display: none; cursor: pointer; z-index: 1002;
-            position: fixed;
-            top: 15px;
-            right: 20px;
+        .mobile-menu-icon { 
+            display: none; cursor: pointer; z-index: 1002;
+            position: fixed; top: 15px; right: 20px;
+            background: none; border: none; padding: 0;
         }
         .mobile-menu-icon div {
             width: 25px; height: 3px; background-color: var(--primary-blue);
@@ -150,10 +149,13 @@
             box-sizing: border-box;
         }
         .hero-image { width: 300px; height: 300px; flex-shrink: 0; }
-        .hero-image img {
+        .hero-image picture, .hero-image img {
             width: 100%; height: 100%; border-radius: 50%;
-            object-fit: cover; border: 3px solid var(--primary-blue);
-            box-shadow: 0 0 25px rgba(0, 191, 255, 0.4);
+            object-fit: cover;
+        }
+        .hero-image img {
+             border: 3px solid var(--primary-blue);
+             box-shadow: 0 0 25px rgba(0, 191, 255, 0.4);
         }
         .hero-text { flex-basis: 500px; text-align: left; }
         h1 {
@@ -175,7 +177,7 @@
             position: relative; cursor: pointer; max-width: 800px;
             margin: 0 auto; border: 1px solid var(--border-color);
         }
-        .video-thumbnail img { width: 100%; display: block; }
+        .video-thumbnail picture, .video-thumbnail img { width: 100%; display: block; }
         .play-button {
             position: absolute; top: 50%; left: 50%;
             transform: translate(-50%, -50%);
@@ -310,7 +312,19 @@
             word-wrap: break-word;
             hyphens: auto;
         }
-        .flip-card-back a { color: var(--primary-blue); text-decoration: none; }
+        .flip-card-back a { 
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            color: var(--primary-blue); 
+            text-decoration: none; 
+        }
+        .flip-card-back a svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--primary-blue);
+        }
         .flip-card-front svg {
             width: 40px; height: 40px;
             fill: var(--primary-blue); margin-bottom: 1rem;
@@ -319,18 +333,70 @@
             font-family: var(--font-heading); font-size: 1.1rem;
             margin: 0; color: var(--text-color);
         }
+        
+        .contact-form-section {
+            padding-top: 80px;
+        }
+        #contact-form {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+        .form-group label {
+            margin-bottom: 0.5rem;
+            font-family: var(--font-heading);
+            color: var(--primary-blue);
+        }
+        .form-group input, .form-group textarea {
+            background-color: #1a1a1a;
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 1rem;
+            font-family: var(--font-body);
+            font-size: 1rem;
+            border-radius: 0;
+        }
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+        }
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        .submit-btn {
+            background-color: transparent;
+            border: 1px solid var(--primary-blue);
+            color: var(--primary-blue);
+            padding: 1rem 2rem;
+            cursor: pointer;
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            transition: background-color 0.3s, color 0.3s;
+            align-self: center;
+        }
+        .submit-btn:hover {
+            background-color: var(--primary-blue);
+            color: var(--background);
+        }
+
 
         .main-footer { text-align: center; padding: 2rem; border-top: 1px solid var(--border-color); }
         .main-footer p { margin: 0; }
         
-        /* Tablet layout */
         @media screen and (min-width: 600px) {
             .contact-grid {
                 grid-template-columns: repeat(3, 1fr);
             }
         }
         
-        /* Desktop layout for 5 cards */
         @media screen and (min-width: 1024px) {
             .contact-grid {
                 grid-template-columns: repeat(5, 1fr);
@@ -378,7 +444,6 @@
                 <a href="#faq" class="lang" data-de="FAQ" data-en="FAQ" data-fr="FAQ">FAQ</a>
                 <a href="#kontakt" class="lang" data-de="Kontakt" data-en="Contact" data-fr="Contact">Kontakt</a>
             </div>
-            <!-- NEW LANGUAGE SELECTOR UI -->
             <div id="lang-selector-desktop" class="language-selector">
                 <ul>
                     <li class="language-item" data-lang="de">Deutsch 🇩🇪</li>
@@ -389,11 +454,11 @@
         </div>
     </nav>
     
-    <div class="mobile-menu-icon">
+    <button class="mobile-menu-icon lang-aria" aria-label="Menü öffnen" data-de="Menü öffnen" data-en="Open menu" data-fr="Ouvrir le menu">
         <div class="bar1"></div>
         <div class="bar2"></div>
         <div class="bar3"></div>
-    </div>
+    </button>
     
     <div id="mobile-nav" class="mobile-nav-overlay">
         <div class="mobile-nav-overlay-content">
@@ -403,7 +468,6 @@
             <a href="#kompetenzen" class="lang" data-de="Kompetenzen" data-en="Skills" data-fr="Compétences">Kompetenzen</a>
             <a href="#faq" class="lang" data-de="FAQ" data-en="FAQ" data-fr="FAQ">FAQ</a>
             <a href="#kontakt" class="lang" data-de="Kontakt" data-en="Contact" data-fr="Contact">Kontakt</a>
-            <!-- NEW MOBILE LANGUAGE SELECTOR -->
             <div id="lang-selector-mobile" class="language-selector">
                  <ul>
                     <li class="language-item" data-lang="de">Deutsch 🇩🇪</li>
@@ -417,7 +481,10 @@
     <main>
         <section class="hero" id="hero">
             <div class="hero-image" data-aos="fade-up">
-                <img id="profile-picture" src="images/aura.jpg" alt="Ein professionelles Foto von Walid Gourideche" loading="lazy">
+                <picture>
+                    <source srcset="images/aura.webp" type="image/webp">
+                    <img id="profile-picture" src="images/aura.jpg" alt="Ein professionelles Foto von Walid Gourideche" loading="lazy">
+                </picture>
             </div>
             <div class="hero-text" data-aos="fade-up" data-aos-delay="200">
                 <h1>> Walid Gourideche</h1>
@@ -433,7 +500,10 @@
         <section class="container" id="intro-video">
             <h2 class="lang" data-de="Video-Vorstellung" data-en="Video Introduction" data-fr="Présentation Vidéo">Video-Vorstellung</h2>
             <div class="video-thumbnail" data-aos="fade-up" id="open-video-modal">
-                <img src="images/video-thumbnail.jpg" alt="Video Introduction Thumbnail" loading="lazy">
+                <picture>
+                    <source srcset="images/video-thumbnail.webp" type="image/webp">
+                    <img src="images/video-thumbnail.jpg" alt="Video Introduction Thumbnail" loading="lazy">
+                </picture>
                 <div class="play-button"></div>
             </div>
         </section>
@@ -488,17 +558,16 @@
         </section>
 
         <section class="container contact-section" id="kontakt" data-aos="fade-up">
-            <h3 class="lang" data-de="Zögern Sie nicht, mich für weitere Informationen zu kontaktieren." data-en="Do not hesitate to contact me for any more information." data-fr="N'hésitez pas à me contacter pour toute information complémentaire.">Zögern Sie nicht, mich für weitere Informationen zu kontaktieren.</h3>
+            <h3 class="lang" data-de="Kontaktieren Sie mich" data-en="Get In Touch" data-fr="Contactez-moi">Kontaktieren Sie mich</h3>
             <div class="contact-grid">
                 <div class="flip-card" data-aos="fade-up" data-aos-delay="100"><div class="flip-card-inner"><div class="flip-card-front"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"/></svg><h4 class="lang" data-de="Email" data-en="Email" data-fr="Email">Email</h4></div><div class="flip-card-back"><a href="mailto:walid@gourideche.com">walid@gourideche.com</a></div></div></div>
                 <div class="flip-card" data-aos="fade-up" data-aos-delay="200"><div class="flip-card-inner"><div class="flip-card-front"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg><h4 class="lang" data-de="Telefon" data-en="Phone" data-fr="Téléphone">Telefon</h4></div><div class="flip-card-back"><a href="tel:+212698585528">+212-698585528</a></div></div></div>
                 <div class="flip-card" data-aos="fade-up" data-aos-delay="300"><div class="flip-card-inner"><div class="flip-card-front"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg><h4 class="lang" data-de="Adresse" data-en="Address" data-fr="Adresse">Adresse</h4></div><div class="flip-card-back"><p>Cite Al Amane Imm A Apt 1<br>35000 Taza</p></div></div></div>
-                <div class="flip-card" data-aos="fade-up" data-aos-delay="400"><div class="flip-card-inner"><div class="flip-card-front"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-11h-13v11h13M6.5 12.5a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1h-1m3.5 0a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1h-1m3.5 0a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1h-1z"/></svg><h4 class="lang" data-de="LinkedIn" data-en="LinkedIn" data-fr="LinkedIn">LinkedIn</h4></div><div class="flip-card-back"><a href="https://www.linkedin.com/in/walidgourideche/" target="_blank"><span class="lang" data-de="Mein LinkedIn" data-en="My LinkedIn" data-fr="Mon LinkedIn">Mein LinkedIn</span></a></div></div></div>
+                <div class="flip-card" data-aos="fade-up" data-aos-delay="400"><div class="flip-card-inner"><div class="flip-card-front"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-11h-13v11h13M6.5 12.5a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1h-1m3.5 0a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1h-1m3.5 0a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1h-1z"/></svg><h4 class="lang" data-de="LinkedIn" data-en="LinkedIn" data-fr="LinkedIn">LinkedIn</h4></div><div class="flip-card-back"><a href="https://www.linkedin.com/in/walidgourideche/" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-7 5h-2v7h2v-7m-3-1a1 1 0 0 0-1 1 1 1 0 0 0 1 1 1 1 0 0 0 1-1 1 1 0 0 0-1-1m7 1v2h-1c-1.3 0-2 1-2 2v3h2v-3c0-.6.4-1 1-1h1v4h2v-7h-2z"/></svg><span class="lang" data-de="Mein LinkedIn" data-en="My LinkedIn" data-fr="Mon LinkedIn">Mein LinkedIn</span></a></div></div></div>
                 
                 <div class="flip-card" data-aos="fade-up" data-aos-delay="500">
                     <div class="flip-card-inner">
                         <div class="flip-card-front">
-                            <!-- CLEANER, NEW ICON -->
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14,2H6A2,2,0,0,0,4,4V20a2,2,0,0,0,2,2H18a2,2,0,0,0,2-2V8L14,2M18,20H6V4h7V9h5v11Z"/></svg>
                             <h4 class="lang" data-de="Unterlagen" data-en="Documents" data-fr="Documents">Unterlagen</h4>
                         </div>
@@ -507,7 +576,25 @@
                         </div>
                     </div>
                 </div>
+            </div>
 
+            <div class="contact-form-section" data-aos="fade-up">
+                <h3 class="lang" data-de="Schreiben Sie mir eine Nachricht" data-en="Send Me a Message" data-fr="Envoyez-moi un message">Schreiben Sie mir eine Nachricht</h3>
+                <form id="contact-form" action="https://formspree.io/f/mwpqnjqo" method="POST">
+                    <div class="form-group">
+                        <label for="name" class="lang" data-de="Name" data-en="Name" data-fr="Nom">Name</label>
+                        <input type="text" id="name" name="name" class="lang-placeholder" data-de="Ihr Name" data-en="Your Name" data-fr="Votre Nom" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="lang" data-de="Email" data-en="Email" data-fr="Email">Email</label>
+                        <input type="email" id="email" name="email" class="lang-placeholder" data-de="Ihre Email" data-en="Your Email" data-fr="Votre Email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message" class="lang" data-de="Nachricht" data-en="Message" data-fr="Message">Nachricht</label>
+                        <textarea id="message" name="message" class="lang-placeholder" data-de="Ihre Nachricht..." data-en="Your message..." data-fr="Votre message..." required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn lang" data-de="Senden" data-en="Send" data-fr="Envoyer">Senden</button>
+                </form>
             </div>
         </section>
     </main>
@@ -525,9 +612,10 @@
               once: true,
           });
           
-          // --- NEW Language Selector Logic ---
           const languageItems = document.querySelectorAll('.language-item');
           const translatableElements = document.querySelectorAll('.lang');
+          const translatablePlaceholders = document.querySelectorAll('.lang-placeholder');
+          const translatableAria = document.querySelectorAll('.lang-aria');
           const profilePicture = document.getElementById('profile-picture');
           let currentLang = 'de';
 
@@ -536,14 +624,10 @@
               en: "A professional portrait of Walid Gourideche",
               fr: "Un portrait professionnel de Walid Gourideche"
           };
-
+          
           function updateLanguageSelectorUI(selectedLang) {
               languageItems.forEach(item => {
-                  if (item.getAttribute('data-lang') === selectedLang) {
-                      item.classList.add('active');
-                  } else {
-                      item.classList.remove('active');
-                  }
+                  item.classList.toggle('active', item.getAttribute('data-lang') === selectedLang);
               });
           }
 
@@ -552,9 +636,15 @@
               document.documentElement.lang = currentLang;
               
               translatableElements.forEach(el => {
-                  if (el.dataset[currentLang]) {
-                      el.innerHTML = el.dataset[currentLang];
-                  }
+                  if (el.dataset[currentLang]) { el.innerHTML = el.dataset[currentLang]; }
+              });
+
+              translatablePlaceholders.forEach(el => {
+                  if (el.dataset[currentLang]) { el.placeholder = el.dataset[currentLang]; }
+              });
+              
+              translatableAria.forEach(el => {
+                  if (el.dataset[currentLang]) { el.setAttribute('aria-label', el.dataset[currentLang]); }
               });
 
               if (profilePicture) {
@@ -571,10 +661,8 @@
               });
           });
           
-          // Set initial active state
           updateLanguageSelectorUI(currentLang);
 
-          
           const faqItems = document.querySelectorAll('.faq-item');
           faqItems.forEach(item => {
               const questionButton = item.querySelector('.faq-question');
