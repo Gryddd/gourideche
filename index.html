@@ -109,23 +109,22 @@
             transform: rotate(180deg);
         }
         
-        /* === FINAL, PERFECTLY CENTERED DROPDOWN MENU === */
+        /* === UPDATED DROPDOWN MENU STYLE === */
         .nav-dropdown-menu {
             list-style: none; padding: 0; margin: 0;
             position: absolute;
-            top: 100%;
+            top: calc(100% + 0.5rem); /* Positions the menu below the nav bar's padding */
             left: 50%;
-            background-color: rgba(26, 26, 26, 0.9);
+            background-color: rgba(13, 13, 13, 0.8);
             border: 1px solid var(--border-color);
-            border-top: none;
-            backdrop-filter: blur(5px);
+            border-top: none; /* Makes it connect seamlessly to the nav bar's bottom border */
+            backdrop-filter: blur(10px);
             opacity: 0; visibility: hidden;
-            transform: translateX(-50%) translateY(10px);
-            transition: opacity 0.3s ease, transform 0.2s ease, visibility 0.3s ease;
+            transform: translateX(-50%); /* Center the menu horizontally */
+            transition: opacity 0.2s ease, visibility 0.2s ease; /* Simple fade transition */
         }
         .nav-dropdown.active .nav-dropdown-menu {
             opacity: 1; visibility: visible;
-            transform: translateX(-50%) translateY(0);
         }
         .nav-dropdown-menu li, .nav-dropdown-menu a {
             color: var(--text-color); cursor: pointer;
@@ -133,7 +132,7 @@
             font-size: 0.9rem;
             opacity: 0.8; transition: background-color 0.2s, opacity 0.2s;
             display: block; text-decoration: none;
-            text-align: center; /* Center the text inside the menu items */
+            text-align: center;
             white-space: nowrap;
         }
         .nav-dropdown-menu li:hover, .nav-dropdown-menu a:hover {
@@ -341,8 +340,9 @@
         .skill-card {
             background-color: #1a1a1a; border: 1px solid var(--border-color); padding: 1.5rem;
         }
-        .skill-card h3 { color: var(--primary-blue); }
-
+        .skill-card h3 { color: var(--primary-blue); margin-top: 0; }
+        .skill-card p { margin-bottom: 0; }
+        
         .project-item {
             display: grid;
             grid-template-columns: 1fr 1.5fr;
@@ -611,7 +611,7 @@
                 </div>
             </div>
 
-            <!-- Language switcher (now separate) -->
+            <!-- Language switcher -->
             <div id="lang-desktop-dropdown" class="nav-dropdown">
                 <button class="nav-dropdown-toggle">
                     <span class="lang" data-de="Sprache" data-en="Language" data-fr="Langue">Sprache</span>
@@ -728,9 +728,33 @@
         <section class="container" id="kompetenzen">
             <h2 class="lang" data-de="Kernkompetenzen" data-en="Core Competencies" data-fr="Compétences Clés">Kernkompetenzen</h2>
             <div class="skills-grid">
-                <div class="skill-card" data-aos="fade-up"><h3 class="lang" data-de="Netzwerkadministration" data-en="Network Administration" data-fr="Administration Réseau">Netzwerkadministration</h3><p>Cisco, GNS3, Wireshark, DNS, DHCP, etc.</p></div>
-                <div class="skill-card" data-aos="fade-up" data-aos-delay="100"><h3 class="lang" data-de="Systemadministration" data-en="System Administration" data-fr="Administration Système">Systemadministration</h3><p>Windows Server, Linux, Active Directory, VirtualBox/VMware, etc.</p></div>
-                <div class="skill-card" data-aos="fade-up" data-aos-delay="200"><h3 class="lang" data-de="IT-Support & Hardware" data-en="IT Support & Hardware" data-fr="Support Informatique & Matériel">IT-Support & Hardware</h3><p>Software-Installation, Fehleranalyse, Kundenberatung, etc.</p></div>
+                <div class="skill-card" data-aos="fade-up">
+                    <h3 class="lang" data-de="Netzwerkadministration" data-en="Network Administration" data-fr="Administration Réseau">Netzwerkadministration</h3>
+                    <p class="lang" 
+                       data-de="Cisco (IOS), GNS3, Wireshark, DNS, DHCP, TCP/IP, Subnetting, VLAN, Routing & Switching" 
+                       data-en="Cisco (IOS), GNS3, Wireshark, DNS, DHCP, TCP/IP, Subnetting, VLAN, Routing & Switching" 
+                       data-fr="Cisco (IOS), GNS3, Wireshark, DNS, DHCP, TCP/IP, Subnetting, VLAN, Routage & Commutation">
+                       Cisco (IOS), GNS3, Wireshark, DNS, DHCP, TCP/IP, Subnetting, VLAN, Routing & Switching
+                    </p>
+                </div>
+                <div class="skill-card" data-aos="fade-up" data-aos-delay="100">
+                    <h3 class="lang" data-de="Systemadministration" data-en="System Administration" data-fr="Administration Système">Systemadministration</h3>
+                    <p class="lang" 
+                       data-de="Windows Server, Linux (Ubuntu/Debian), Active Directory, VirtualBox, VMware, Benutzerverwaltung, Rechtevergabe" 
+                       data-en="Windows Server, Linux (Ubuntu/Debian), Active Directory, VirtualBox, VMware, User Management, Permissions" 
+                       data-fr="Windows Server, Linux (Ubuntu/Debian), Active Directory, VirtualBox, VMware, Gestion des utilisateurs, Attribution des droits">
+                       Windows Server, Linux (Ubuntu/Debian), Active Directory, VirtualBox, VMware, Benutzerverwaltung, Rechtevergabe
+                    </p>
+                </div>
+                <div class="skill-card" data-aos="fade-up" data-aos-delay="200">
+                    <h3 class="lang" data-de="IT-Support & Hardware" data-en="IT Support & Hardware" data-fr="Support Informatique & Matériel">IT-Support & Hardware</h3>
+                    <p class="lang" 
+                       data-de="Softwareinstallation, Fehleranalyse, Hardwarediagnose, Kundenberatung, technische Dokumentation" 
+                       data-en="Software Installation, Troubleshooting, Hardware Diagnostics, Customer Support, Technical Documentation" 
+                       data-fr="Installation de logiciels, Dépannage, Diagnostic matériel, Conseil client, Documentation technique">
+                       Softwareinstallation, Fehleranalyse, Hardwarediagnose, Kundenberatung, technische Dokumentation
+                    </p>
+                </div>
             </div>
         </section>
 
@@ -888,7 +912,13 @@
                   switchLanguage(newLang);
 
                   const activeToggles = document.querySelectorAll('.nav-dropdown.active, .mobile-toggle.active');
-                  activeToggles.forEach(toggle => toggle.classList.remove('active'));
+                  activeToggles.forEach(toggle => {
+                      toggle.classList.remove('active');
+                      const list = toggle.nextElementSibling;
+                      if (list && list.style.maxHeight) {
+                          list.style.maxHeight = null;
+                      }
+                  });
               });
           });
           
@@ -1011,8 +1041,10 @@
           mobileMenuIcon.addEventListener('click', toggleNav);
           mobileNavLinks.forEach(link => {
             link.addEventListener('click', (e) => {
-                if (link.getAttribute('href')?.startsWith('#') || link.hasAttribute('download')) {
-                    toggleNav();
+                if (link.getAttribute('href')?.startsWith('#') || link.hasAttribute('download') || link.classList.contains('language-item')) {
+                    setTimeout(() => {
+                        toggleNav();
+                    }, 150); // Small delay to allow language to switch
                 }
             });
           });
