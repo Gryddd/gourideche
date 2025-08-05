@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Walid Gourideche's Portfolio</title>
+    <title>Walid Gourideche | Fachinformatiker für Systemintegration</title>
     
     <!-- SEO and Social Sharing Meta Tags -->
     <meta name="description" content="Portfolio von Walid Gourideche, einem mehrsprachigen Fachinformatiker für Systemintegration mit Leidenschaft für Netzwerke, Systemadministration und Cybersicherheit.">
@@ -126,7 +126,12 @@
         .nav-dropdown.active .nav-dropdown-menu {
             opacity: 1; visibility: visible;
         }
-        .nav-dropdown-menu li, .nav-dropdown-menu a {
+        .nav-dropdown-menu li {
+            padding: 0;
+            margin: 0;
+        }
+        .nav-dropdown-menu a {
+            font-family: var(--font-heading); /* <<< THIS IS THE FIX */
             color: var(--text-color); cursor: pointer;
             padding: 10px 20px;
             font-size: 0.9rem;
@@ -135,12 +140,12 @@
             text-align: center;
             white-space: nowrap;
         }
-        .nav-dropdown-menu li:hover, .nav-dropdown-menu a:hover {
+        .nav-dropdown-menu a:hover {
             background-color: var(--primary-blue);
             color: var(--background) !important;
             opacity: 1;
         }
-        .nav-dropdown-menu li.active {
+        .nav-dropdown-menu a.active {
             opacity: 1; color: var(--primary-blue); font-weight: bold;
         }
         
@@ -618,9 +623,9 @@
                     <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
                 </button>
                 <ul class="nav-dropdown-menu">
-                    <li class="language-item" data-lang="de">Deutsch</li>
-                    <li class="language-item" data-lang="en">English</li>
-                    <li class="language-item" data-lang="fr">Français</li>
+                    <li><a href="#" class="language-item" data-lang="de">Deutsch</a></li>
+                    <li><a href="#" class="language-item" data-lang="en">English</a></li>
+                    <li><a href="#" class="language-item" data-lang="fr">Français</a></li>
                 </ul>
             </div>
         </div>
@@ -659,9 +664,9 @@
                     <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
                 </button>
                  <ul class="mobile-list">
-                    <li class="language-item" data-lang="de">Deutsch</li>
-                    <li class="language-item" data-lang="en">English</li>
-                    <li class="language-item" data-lang="fr">Français</li>
+                    <li><a href="#" class="language-item" data-lang="de">Deutsch</a></li>
+                    <li><a href="#" class="language-item" data-lang="en">English</a></li>
+                    <li><a href="#" class="language-item" data-lang="fr">Français</a></li>
                 </ul>
             </div>
         </div>
@@ -908,6 +913,7 @@
 
           languageItems.forEach(item => {
               item.addEventListener('click', (e) => {
+                  e.preventDefault();
                   const newLang = item.getAttribute('data-lang');
                   switchLanguage(newLang);
 
