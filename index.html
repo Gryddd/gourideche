@@ -60,7 +60,7 @@
             font-family: var(--font-body); margin: 0; padding: 0; overflow-x: hidden;
             font-weight: 400; /* Default body weight */
         }
-        h1, h2, h3, .nav-links a { font-family: var(--font-heading); }
+        h1, h2, h3, .nav-links a, .nav-dropdown button { font-family: var(--font-heading); }
         #background-video {
             position: fixed; right: 0; bottom: 0; min-width: 100%; min-height: 100%;
             width: auto; height: auto; z-index: -2; object-fit: cover;
@@ -76,7 +76,7 @@
         }
         .main-nav {
             position: fixed; top: 0; left: 0; width: 100%;
-            background-color: rgba(13, 13, 13, 0.6); /* Made more transparent */
+            background-color: rgba(13, 13, 13, 0.6);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--border-color);
             z-index: 1001; padding: 0.5rem 2rem; box-sizing: border-box;
@@ -85,63 +85,70 @@
             display: flex; justify-content: space-between; align-items: center;
             max-width: 1200px; margin: 0 auto;
         }
-        .nav-links { display: flex; gap: 1.5rem; }
+        .nav-links { display: flex; gap: 1.2rem; align-items: center; }
         .nav-links a {
             color: var(--text-color); text-decoration: none; font-size: 1rem;
             padding: 0.5rem; transition: color 0.3s ease;
         }
         .nav-links a:hover { color: var(--primary-blue); }
         
-        .language-selector {
-            position: relative; /* For dropdown positioning */
+        .nav-dropdown {
+            position: relative;
         }
-        .lang-toggle-desktop {
+        .nav-dropdown-toggle {
             background: none; border: none; color: var(--text-color);
             cursor: pointer; display: inline-flex; align-items: center;
             gap: 0.5rem; font-family: var(--font-heading); font-size: 1rem;
             padding: 0.5rem;
         }
-        .lang-toggle-desktop .arrow-icon {
+        .nav-dropdown-toggle .arrow-icon {
             width: 12px; height: 12px; fill: var(--text-color);
             transition: transform 0.3s ease;
         }
-        .language-selector.active .lang-toggle-desktop .arrow-icon {
+        .nav-dropdown.active .nav-dropdown-toggle .arrow-icon {
             transform: rotate(180deg);
         }
-        .lang-list-desktop {
+        
+        /* === FINAL, PERFECTLY CENTERED DROPDOWN MENU === */
+        .nav-dropdown-menu {
             list-style: none; padding: 0; margin: 0;
-            position: absolute; top: calc(100% + 5px); right: 0;
+            position: absolute;
+            top: 100%;
+            left: 50%;
             background-color: rgba(26, 26, 26, 0.9);
             border: 1px solid var(--border-color);
+            border-top: none;
             backdrop-filter: blur(5px);
-            width: 150px;
             opacity: 0; visibility: hidden;
-            transform: translateY(10px);
-            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+            transform: translateX(-50%) translateY(10px);
+            transition: opacity 0.3s ease, transform 0.2s ease, visibility 0.3s ease;
         }
-        .language-selector.active .lang-list-desktop {
+        .nav-dropdown.active .nav-dropdown-menu {
             opacity: 1; visibility: visible;
-            transform: translateY(0);
+            transform: translateX(-50%) translateY(0);
         }
-        .lang-list-desktop li {
+        .nav-dropdown-menu li, .nav-dropdown-menu a {
             color: var(--text-color); cursor: pointer;
-            padding: 10px 15px; font-size: 0.9rem;
+            padding: 10px 20px;
+            font-size: 0.9rem;
             opacity: 0.8; transition: background-color 0.2s, opacity 0.2s;
+            display: block; text-decoration: none;
+            text-align: center; /* Center the text inside the menu items */
+            white-space: nowrap;
         }
-        .lang-list-desktop li:hover {
+        .nav-dropdown-menu li:hover, .nav-dropdown-menu a:hover {
             background-color: var(--primary-blue);
-            color: var(--background);
+            color: var(--background) !important;
             opacity: 1;
         }
-        .lang-list-desktop li.active {
+        .nav-dropdown-menu li.active {
             opacity: 1; color: var(--primary-blue); font-weight: bold;
         }
         
-        .mobile-language-selector {
-            margin-top: 30px;
-            text-align: center;
+        .mobile-language-selector, .mobile-documents-selector {
+            margin-top: 20px; text-align: center;
         }
-        .lang-toggle {
+        .mobile-toggle {
             background: none;
             border: 1px solid var(--border-color);
             color: var(--text-color);
@@ -152,27 +159,21 @@
             display: inline-flex;
             align-items: center;
             gap: 10px;
+            width: 80%;
+            justify-content: center;
         }
-        .lang-toggle .arrow-icon {
-            width: 12px;
-            height: 12px;
-            fill: var(--text-color);
+        .mobile-toggle .arrow-icon {
+            width: 12px; height: 12px; fill: var(--text-color);
             transition: transform 0.3s ease;
         }
-        .lang-toggle.active .arrow-icon {
-            transform: rotate(180deg);
+        .mobile-toggle.active .arrow-icon { transform: rotate(180deg); }
+        .mobile-list {
+            list-style: none; padding: 0;
+            margin: 10px 0 0 0; max-height: 0;
+            overflow: hidden; transition: max-height 0.3s ease-out;
+            background-color: #1a1a1a;
         }
-        .lang-list {
-            list-style: none;
-            padding: 0;
-            margin: 10px 0 0 0;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out;
-        }
-        .lang-list li {
-            padding: 10px;
-        }
+        .mobile-list li a { font-size: 18px !important; padding: 12px !important; }
 
         .mobile-menu-icon { 
             display: none; cursor: pointer; z-index: 1002;
@@ -189,14 +190,14 @@
         .mobile-nav-overlay {
             height: 100%; width: 0; position: fixed; z-index: 1001; top: 0; left: 0;
             background-color: rgba(13, 13, 13, 0.95);
-            overflow-x: hidden; transition: 0.5s;
+            overflow: auto; transition: 0.5s;
         }
         .mobile-nav-overlay-content {
-            position: relative; top: 80px; width: 100%;
-            text-align: center; margin-top: 0;
+            position: relative; top: 25px; width: 100%;
+            text-align: center; margin-top: 0; padding-bottom: 20px;
         }
         .mobile-nav-overlay a {
-            padding: 15px; text-decoration: none; font-size: 24px;
+            padding: 12px; text-decoration: none; font-size: 22px;
             color: var(--text-color); display: block; transition: 0.3s;
             font-family: var(--font-heading);
         }
@@ -362,18 +363,17 @@
             margin-top: 0;
             font-size: 1.5rem;
         }
-        /* UPDATED STYLISH PROJECT TITLES */
         .project-description h4 {
             color: var(--primary-blue);
-            margin-top: 2rem; /* More space above */
-            margin-bottom: 0.75rem; /* A bit more space below */
+            margin-top: 2rem;
+            margin-bottom: 0.75rem;
             font-family: var(--font-heading);
-            font-weight: 700; /* Makes the font bold */
-            font-size: 1.2rem; /* Slightly larger text */
-            text-transform: uppercase; /* STYLISH: ALL CAPS */
-            letter-spacing: 1px; /* STYLISH: Adds space between letters */
-            border-left: 3px solid var(--primary-blue); /* STYLISH: Adds a blue accent line */
-            padding-left: 10px; /* Space between line and text */
+            font-weight: 700;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-left: 3px solid var(--primary-blue);
+            padding-left: 10px;
         }
         .project-description p, .project-description li {
             font-weight: 300;
@@ -474,31 +474,6 @@
             margin: 0; color: var(--text-color);
         }
         
-        /* STYLES FOR THE DOCUMENT FLIP-CARD BACK */
-        .flip-card-back.document-links {
-            display: flex;
-            flex-direction: column;
-            justify-content: center; /* Vertically centers the links */
-            align-items: center; /* Horizontally centers the links */
-            padding: 0; /* Remove padding to allow links to fill space */
-        }
-
-        .flip-card-back.document-links a {
-            color: var(--text-color);
-            text-decoration: none;
-            font-size: 1rem;
-            padding: 18px 20px; /* Generous clickable area */
-            width: 100%;
-            box-sizing: border-box;
-            text-align: center;
-            transition: background-color 0.2s, color 0.2s;
-        }
-
-        .flip-card-back.document-links a:hover {
-            background-color: var(--primary-blue);
-            color: var(--background);
-        }
-
         .contact-form-section {
             padding-top: 80px;
         }
@@ -577,16 +552,10 @@
 
         @media screen and (min-width: 768px) {
             .contact-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-        
-        @media screen and (min-width: 1024px) {
-            .contact-grid {
                 grid-template-columns: repeat(4, 1fr);
             }
         }
-
+        
         @media screen and (max-width: 1023px) { /* Adjusted breakpoint for mobile/tablet */
             .main-nav {
                 background-color: transparent;
@@ -621,24 +590,37 @@
 
     <nav class="main-nav">
         <div class="nav-content">
+            <!-- Main navigation links -->
             <div class="nav-links">
                 <a href="#intro-video" class="lang" data-de="Intro-Video" data-en="Intro Video" data-fr="Vidéo d'introduction">Intro-Video</a>
-                <a href="#bildung" class="lang" data-de="Bildungsweg" data-en="Education" data-fr="Parcours Éducatif">Bildungsweg</a>
+                <a href="#bildung" class="lang" data-de="Bildung" data-en="Education" data-fr="Éducation">Bildung</a>
                 <a href="#erfahrung" class="lang" data-de="Erfahrung" data-en="Experience" data-fr="Expérience">Erfahrung</a>
-                <a href="#kompetenzen" class="lang" data-de="Kompetenzen" data-en="Skills" data-fr="Compétences">Kompetenzen</a>
                 <a href="#projekte" class="lang" data-de="Projekte" data-en="Projects" data-fr="Projets">Projekte</a>
-                <a href="#faq" class="lang" data-de="FAQ" data-en="FAQ" data-fr="FAQ">FAQ</a>
                 <a href="#kontakt" class="lang" data-de="Kontakt" data-en="Contact" data-fr="Contact">Kontakt</a>
+                
+                <div id="documents-desktop-dropdown" class="nav-dropdown">
+                    <button class="nav-dropdown-toggle">
+                        <span class="lang" data-de="Dokumente" data-en="Documents" data-fr="Documents">Dokumente</span>
+                        <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+                    </button>
+                    <ul class="nav-dropdown-menu">
+                        <li><a href="resume/lebenslauf.pdf" download="Walid_Gourideche_Lebenslauf.pdf" class="lang" data-de="Lebenslauf" data-en="CV / Resume" data-fr="CV">Lebenslauf</a></li>
+                        <li><a href="resume/anschreiben.pdf" download="Walid_Gourideche_Anschreiben.pdf" class="lang" data-de="Anschreiben" data-en="Cover Letter" data-fr="Lettre de Motivation">Anschreiben</a></li>
+                        <li><a href="resume/zeugnisse.pdf" download="Walid_Gourideche_Zeugnisse.pdf" class="lang" data-de="Zeugnisse" data-en="Certificates" data-fr="Certificats">Zeugnisse</a></li>
+                    </ul>
+                </div>
             </div>
-            <div id="lang-selector-desktop" class="language-selector">
-                <button class="lang-toggle-desktop">
+
+            <!-- Language switcher (now separate) -->
+            <div id="lang-desktop-dropdown" class="nav-dropdown">
+                <button class="nav-dropdown-toggle">
                     <span class="lang" data-de="Sprache" data-en="Language" data-fr="Langue">Sprache</span>
                     <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
                 </button>
-                <ul class="lang-list-desktop">
-                    <li class="language-item" data-lang="de">Deutsch 🇩🇪</li>
-                    <li class="language-item" data-lang="en">English 🇬🇧</li>
-                    <li class="language-item" data-lang="fr">Français 🇫🇷</li>
+                <ul class="nav-dropdown-menu">
+                    <li class="language-item" data-lang="de">Deutsch</li>
+                    <li class="language-item" data-lang="en">English</li>
+                    <li class="language-item" data-lang="fr">Français</li>
                 </ul>
             </div>
         </div>
@@ -655,19 +637,31 @@
             <a href="#intro-video" class="lang" data-de="Intro-Video" data-en="Intro Video" data-fr="Vidéo d'introduction">Intro-Video</a>
             <a href="#bildung" class="lang" data-de="Bildungsweg" data-en="Education" data-fr="Parcours Éducatif">Bildungsweg</a>
             <a href="#erfahrung" class="lang" data-de="Erfahrung" data-en="Experience" data-fr="Expérience">Erfahrung</a>
-            <a href="#kompetenzen" class="lang" data-de="Kompetenzen" data-en="Skills" data-fr="Compétences">Kompetenzen</a>
             <a href="#projekte" class="lang" data-de="Projekte" data-en="Projects" data-fr="Projets">Projekte</a>
             <a href="#faq" class="lang" data-de="FAQ" data-en="FAQ" data-fr="FAQ">FAQ</a>
             <a href="#kontakt" class="lang" data-de="Kontakt" data-en="Contact" data-fr="Contact">Kontakt</a>
+            
+            <div class="mobile-documents-selector">
+                <button class="mobile-toggle">
+                    <span class="lang" data-de="Dokumente" data-en="Documents" data-fr="Documents">Dokumente</span>
+                    <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+                </button>
+                 <ul class="mobile-list">
+                    <li><a href="resume/lebenslauf.pdf" download="Walid_Gourideche_Lebenslauf.pdf" class="lang" data-de="Lebenslauf" data-en="CV / Resume" data-fr="CV">Lebenslauf</a></li>
+                    <li><a href="resume/anschreiben.pdf" download="Walid_Gourideche_Anschreiben.pdf" class="lang" data-de="Anschreiben" data-en="Cover Letter" data-fr="Lettre de Motivation">Anschreiben</a></li>
+                    <li><a href="resume/zeugnisse.pdf" download="Walid_Gourideche_Zeugnisse.pdf" class="lang" data-de="Zeugnisse" data-en="Certificates" data-fr="Certificats">Zeugnisse</a></li>
+                </ul>
+            </div>
+
             <div class="mobile-language-selector">
-                <button class="lang-toggle">
+                <button class="mobile-toggle">
                     <span class="lang" data-de="Sprache wählen" data-en="Select Language" data-fr="Choisir la langue">Sprache wählen</span>
                     <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
                 </button>
-                 <ul class="lang-list">
-                    <li class="language-item" data-lang="de">Deutsch 🇩🇪</li>
-                    <li class="language-item" data-lang="en">English 🇬🇧</li>
-                    <li class="language-item" data-lang="fr">Français 🇫🇷</li>
+                 <ul class="mobile-list">
+                    <li class="language-item" data-lang="de">Deutsch</li>
+                    <li class="language-item" data-lang="en">English</li>
+                    <li class="language-item" data-lang="fr">Français</li>
                 </ul>
             </div>
         </div>
@@ -740,7 +734,7 @@
             </div>
         </section>
 
-        <!-- ========== START: UPDATED PROJECT SECTION ========== -->
+        <!-- ========== PROJECT SECTION ========== -->
         <section class="container" id="projekte">
             <h2 class="lang" data-de="Projekt: Home-Lab" data-en="Project: Home Lab" data-fr="Projet : Labo Maison">Projekt: Home-Lab</h2>
             <div class="project-item" data-aos="fade-up">
@@ -772,7 +766,6 @@
                 </div>
             </div>
         </section>
-        <!-- ========== END: UPDATED PROJECT SECTION ========== -->
 
         <section class="container" id="faq">
             <h2 class="lang" data-de="Häufig Gestellte Fragen" data-en="Frequently Asked Questions" data-fr="Questions Fréquemment Posées">Häufig Gestellte Fragen</h2>
@@ -797,22 +790,6 @@
                         <path d="M10.15 14.75h3.3v10.95h-3.3zM11.8 8.3a1.9 1.9 0 1 1 0 3.8 1.9 1.9 0 0 1 0-3.8zM15.9 14.75h3.15v1.5h.05c.45-.85 1.55-1.75 3.2-1.75 3.45 0 4.1 2.3 4.1 5.3v5.9h-3.3v-5.25c0-1.25-.02-2.85-1.75-2.85-1.75 0-2.02 1.4-2.02 2.75v5.35h-3.3z"/>
                     </svg>
                     <h4 class="lang" data-de="LinkedIn" data-en="LinkedIn" data-fr="LinkedIn">LinkedIn</h4></div><div class="flip-card-back"><a href="https://www.linkedin.com/in/walidgourideche/" target="_blank"><span class="lang" data-de="Mein LinkedIn" data-en="My LinkedIn" data-fr="Mon LinkedIn">Mein LinkedIn</span></a></div></div></div>
-                
-                <!-- NEW FLIP-CARD FOR DOCUMENTS -->
-                <div class="flip-card" data-aos="fade-up" data-aos-delay="500">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14,2H6A2,2,0,0,0,4,4V20a2,2,0,0,0,2,2H18a2,2,0,0,0,2-2V8L14,2M18,20H6V4h7V9h5v11Z"/></svg>
-                            <h4 class="lang" data-de="Dokumente" data-en="Documents" data-fr="Documents">Documents</h4>
-                        </div>
-                        <div class="flip-card-back document-links">
-                            <a href="resume/lebenslauf.pdf" download="Walid_Gourideche_Lebenslauf.pdf" class="lang" data-de="Lebenslauf" data-en="CV / Resume" data-fr="CV">CV / Resume</a>
-                            <a href="resume/anschreiben.pdf" download="Walid_Gourideche_Anschreiben.pdf" class="lang" data-de="Anschreiben" data-en="Cover Letter" data-fr="Lettre de Motivation">Cover Letter</a>
-                            <a href="resume/zeugnisse.pdf" download="Walid_Gourideche_Zeugnisse.pdf" class="lang" data-de="Zeugnisse" data-en="Certificates" data-fr="Certificats">Certificates</a>
-                        </div>
-                    </div>
-                </div>
-
             </div>
 
             <div class="contact-form-section" data-aos="fade-up">
@@ -910,14 +887,13 @@
                   const newLang = item.getAttribute('data-lang');
                   switchLanguage(newLang);
 
-                  // Close any open dropdowns after selection
-                  const activeToggles = document.querySelectorAll('.lang-toggle.active, .language-selector.active');
+                  const activeToggles = document.querySelectorAll('.nav-dropdown.active, .mobile-toggle.active');
                   activeToggles.forEach(toggle => toggle.classList.remove('active'));
               });
           });
           
           updateLanguageSelectorUI(currentLang);
-          switchLanguage(currentLang); // Set initial language on load
+          switchLanguage(currentLang);
 
           const faqItems = document.querySelectorAll('.faq-item');
           faqItems.forEach(item => {
@@ -937,29 +913,32 @@
               });
           });
 
-          // Mobile Language Toggle
-          const mobileLangToggle = document.querySelector('.lang-toggle');
-          if (mobileLangToggle) {
-              const langList = mobileLangToggle.nextElementSibling;
-              mobileLangToggle.addEventListener('click', () => {
-                  mobileLangToggle.classList.toggle('active');
-                  if (langList.style.maxHeight) {
-                      langList.style.maxHeight = null;
+          const mobileToggles = document.querySelectorAll('.mobile-toggle');
+          mobileToggles.forEach(toggle => {
+              const list = toggle.nextElementSibling;
+              toggle.addEventListener('click', () => {
+                  toggle.classList.toggle('active');
+                  if (list.style.maxHeight) {
+                      list.style.maxHeight = null;
                   } else {
-                      langList.style.maxHeight = langList.scrollHeight + 'px';
+                      list.style.maxHeight = list.scrollHeight + 'px';
                   }
               });
-          }
+          });
           
-          // Desktop Language Toggle
-          const desktopLangSelector = document.getElementById('lang-selector-desktop');
-          if (desktopLangSelector) {
-              const desktopLangToggleBtn = desktopLangSelector.querySelector('.lang-toggle-desktop');
-              desktopLangToggleBtn.addEventListener('click', (event) => {
+          const desktopDropdowns = document.querySelectorAll('.nav-dropdown');
+          desktopDropdowns.forEach(dropdown => {
+              const toggleBtn = dropdown.querySelector('.nav-dropdown-toggle');
+              toggleBtn.addEventListener('click', (event) => {
                   event.stopPropagation();
-                  desktopLangSelector.classList.toggle('active');
+                  desktopDropdowns.forEach(otherDropdown => {
+                      if (otherDropdown !== dropdown) {
+                          otherDropdown.classList.remove('active');
+                      }
+                  });
+                  dropdown.classList.toggle('active');
               });
-          }
+          });
 
 
           const videoModal = document.getElementById('video-modal');
@@ -1021,7 +1000,7 @@
 
           const mobileMenuIcon = document.querySelector('.mobile-menu-icon');
           const mobileNavOverlay = document.getElementById("mobile-nav");
-          const mobileNavLinks = mobileNavOverlay.querySelectorAll('a');
+          const mobileNavLinks = mobileNavOverlay.querySelectorAll('a, .language-item');
 
           function toggleNav() {
               mobileMenuIcon.classList.toggle("change");
@@ -1032,7 +1011,7 @@
           mobileMenuIcon.addEventListener('click', toggleNav);
           mobileNavLinks.forEach(link => {
             link.addEventListener('click', (e) => {
-                if (link.getAttribute('href').startsWith('#')) {
+                if (link.getAttribute('href')?.startsWith('#') || link.hasAttribute('download')) {
                     toggleNav();
                 }
             });
@@ -1083,7 +1062,6 @@
               });
           });
           
-          // SCRIPT FOR ALL FLIP-CARDS (TOUCH & CLICK FRIENDLY)
           const flipCards = document.querySelectorAll('.flip-card');
           flipCards.forEach(card => {
               card.addEventListener('click', function(event) {
@@ -1100,18 +1078,16 @@
               });
           });
 
-          // Global click listener to close popups (flip-cards, lang menus)
           document.addEventListener('click', function (event) {
-              // Close flipped cards if click is outside
               if (!event.target.closest('.flip-card')) {
                   document.querySelectorAll('.flip-card-inner.is-flipped').forEach(function (inner) {
                       inner.classList.remove('is-flipped');
                   });
               }
-              // Close desktop language selector if click is outside
-              const desktopLangSelector = document.getElementById('lang-selector-desktop');
-              if (desktopLangSelector && !desktopLangSelector.contains(event.target)) {
-                  desktopLangSelector.classList.remove('active');
+              if (!event.target.closest('.nav-dropdown')) {
+                  document.querySelectorAll('.nav-dropdown').forEach(function (dropdown) {
+                      dropdown.classList.remove('active');
+                  });
               }
           });
       });
