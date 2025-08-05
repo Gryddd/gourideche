@@ -76,7 +76,8 @@
         }
         .main-nav {
             position: fixed; top: 0; left: 0; width: 100%;
-            background-color: rgba(13, 13, 13, 0.7); backdrop-filter: blur(10px);
+            background-color: rgba(13, 13, 13, 0.6); /* Made more transparent */
+            backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--border-color);
             z-index: 1001; padding: 0.5rem 2rem; box-sizing: border-box;
         }
@@ -108,8 +109,42 @@
         .language-selector li:not(:last-child)::after {
             content: '|'; color: var(--border-color); margin-left: 0.75rem;
         }
-        #lang-selector-mobile {
-            margin-top: 30px; display: flex; justify-content: center;
+        
+        .mobile-language-selector {
+            margin-top: 30px;
+            text-align: center;
+        }
+        .lang-toggle {
+            background: none;
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            font-family: var(--font-heading);
+            font-size: 18px;
+            padding: 10px 20px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .lang-toggle .arrow-icon {
+            width: 12px;
+            height: 12px;
+            fill: var(--text-color);
+            transition: transform 0.3s ease;
+        }
+        .lang-toggle.active .arrow-icon {
+            transform: rotate(180deg);
+        }
+        .lang-list {
+            list-style: none;
+            padding: 0;
+            margin: 10px 0 0 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        .lang-list li {
+            padding: 10px;
         }
 
         .mobile-menu-icon { 
@@ -346,7 +381,7 @@
             transform: rotateY(180deg);
             font-size: 0.9rem;
             line-height: 1.6;
-            overflow-wrap: break-word; /* Replaced word-break for better wrapping */
+            overflow-wrap: break-word;
         }
         .flip-card-back a { 
             color: var(--primary-blue); 
@@ -436,7 +471,13 @@
         .main-footer { text-align: center; padding: 2rem; border-top: 1px solid var(--border-color); }
         .main-footer p { margin: 0; }
         
-        @media screen and (min-width: 600px) {
+        @media screen and (min-width: 480px) {
+            .contact-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media screen and (min-width: 768px) {
             .contact-grid {
                 grid-template-columns: repeat(3, 1fr);
             }
@@ -448,7 +489,7 @@
             }
         }
 
-        @media screen and (max-width: 768px) {
+        @media screen and (max-width: 1023px) { /* Adjusted breakpoint for mobile/tablet */
             .main-nav {
                 background-color: transparent;
                 border-bottom: none;
@@ -464,11 +505,6 @@
             .hero-text { text-align: center; }
         }
 
-        @media screen and (max-width: 599px) {
-             .contact-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
     </style>
 </head>
 <body>
@@ -513,8 +549,12 @@
             <a href="#kompetenzen" class="lang" data-de="Kompetenzen" data-en="Skills" data-fr="Compétences">Kompetenzen</a>
             <a href="#faq" class="lang" data-de="FAQ" data-en="FAQ" data-fr="FAQ">FAQ</a>
             <a href="#kontakt" class="lang" data-de="Kontakt" data-en="Contact" data-fr="Contact">Kontakt</a>
-            <div id="lang-selector-mobile" class="language-selector">
-                 <ul>
+            <div class="mobile-language-selector">
+                <button class="lang-toggle">
+                    <span class="lang" data-de="Sprache wählen" data-en="Select Language" data-fr="Choisir la langue">Sprache wählen</span>
+                    <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+                </button>
+                 <ul class="lang-list">
                     <li class="language-item" data-lang="de">Deutsch 🇩🇪</li>
                     <li class="language-item" data-lang="en">English 🇬🇧</li>
                     <li class="language-item" data-lang="fr">Français 🇫🇷</li>
@@ -716,6 +756,10 @@
               item.addEventListener('click', () => {
                   const newLang = item.getAttribute('data-lang');
                   switchLanguage(newLang);
+                  const langToggle = document.querySelector('.lang-toggle');
+                  if (langToggle && langToggle.classList.contains('active')) {
+                      langToggle.click(); // Close the dropdown after selection
+                  }
               });
           });
           
@@ -738,6 +782,19 @@
                   }
               });
           });
+
+          const langToggle = document.querySelector('.lang-toggle');
+          if (langToggle) {
+              const langList = langToggle.nextElementSibling;
+              langToggle.addEventListener('click', () => {
+                  langToggle.classList.toggle('active');
+                  if (langList.style.maxHeight) {
+                      langList.style.maxHeight = null;
+                  } else {
+                      langList.style.maxHeight = langList.scrollHeight + 'px';
+                  }
+              });
+          }
 
           const videoModal = document.getElementById('video-modal');
           const openModalBtn = document.getElementById('open-video-modal');
