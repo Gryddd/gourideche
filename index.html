@@ -314,6 +314,42 @@
             background-color: #1a1a1a; border: 1px solid var(--border-color); padding: 1.5rem;
         }
         .skill-card h3 { color: var(--primary-blue); }
+
+        .project-item {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 2rem;
+            align-items: start;
+            background-color: #1a1a1a;
+            border: 1px solid var(--border-color);
+            padding: 2rem;
+            text-align: left;
+        }
+        .project-image img {
+            width: 100%;
+            height: auto;
+            border: 1px solid var(--border-color);
+        }
+        .project-description h3 {
+            color: var(--primary-blue);
+            margin-top: 0;
+            font-size: 1.5rem;
+        }
+        .project-description h4 {
+            color: var(--primary-blue);
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            font-family: var(--font-heading);
+        }
+        .project-description p, .project-description li {
+            font-weight: 300;
+            line-height: 1.7;
+            opacity: 0.9;
+        }
+        .project-description ul {
+            padding-left: 20px;
+            margin-top: 0;
+        }
         
         .faq-accordion { max-width: 800px; margin: 0 auto; }
         .faq-item { border-bottom: 1px solid var(--border-color); }
@@ -485,7 +521,7 @@
         
         @media screen and (min-width: 1024px) {
             .contact-grid {
-                grid-template-columns: repeat(5, 1fr);
+                grid-template-columns: repeat(4, 1fr);
             }
         }
 
@@ -503,6 +539,12 @@
             h1 { font-size: 2rem; }
             h2 { font-size: 1.8rem; }
             .hero-text { text-align: center; }
+        }
+        
+        @media screen and (max-width: 900px) {
+            .project-item {
+                grid-template-columns: 1fr;
+            }
         }
 
     </style>
@@ -522,6 +564,7 @@
                 <a href="#bildung" class="lang" data-de="Bildungsweg" data-en="Education" data-fr="Parcours Éducatif">Bildungsweg</a>
                 <a href="#erfahrung" class="lang" data-de="Erfahrung" data-en="Experience" data-fr="Expérience">Erfahrung</a>
                 <a href="#kompetenzen" class="lang" data-de="Kompetenzen" data-en="Skills" data-fr="Compétences">Kompetenzen</a>
+                <a href="#projekte" class="lang" data-de="Projekte" data-en="Projects" data-fr="Projets">Projekte</a>
                 <a href="#faq" class="lang" data-de="FAQ" data-en="FAQ" data-fr="FAQ">FAQ</a>
                 <a href="#kontakt" class="lang" data-de="Kontakt" data-en="Contact" data-fr="Contact">Kontakt</a>
             </div>
@@ -547,6 +590,7 @@
             <a href="#bildung" class="lang" data-de="Bildungsweg" data-en="Education" data-fr="Parcours Éducatif">Bildungsweg</a>
             <a href="#erfahrung" class="lang" data-de="Erfahrung" data-en="Experience" data-fr="Expérience">Erfahrung</a>
             <a href="#kompetenzen" class="lang" data-de="Kompetenzen" data-en="Skills" data-fr="Compétences">Kompetenzen</a>
+            <a href="#projekte" class="lang" data-de="Projekte" data-en="Projects" data-fr="Projets">Projekte</a>
             <a href="#faq" class="lang" data-de="FAQ" data-en="FAQ" data-fr="FAQ">FAQ</a>
             <a href="#kontakt" class="lang" data-de="Kontakt" data-en="Contact" data-fr="Contact">Kontakt</a>
             <div class="mobile-language-selector">
@@ -630,6 +674,39 @@
             </div>
         </section>
 
+        <section class="container" id="projekte">
+            <h2 class="lang" data-de="Projekt: Home-Lab" data-en="Project: Home Lab" data-fr="Projet : Labo Maison">Projekt: Home-Lab</h2>
+            <div class="project-item" data-aos="fade-up">
+                <div class="project-image">
+                    <picture>
+                        <source srcset="images/homelab.webp" type="image/webp">
+                        <img src="images/homelab.jpg" alt="Ein Foto meines Home-Lab-Setups mit Servern, NAS und Switch." loading="lazy" 
+                            class="lang-alt" 
+                            data-de="Ein Foto meines Home-Lab-Setups mit Servern, NAS und Switch."
+                            data-en="A photo of my home lab setup, showing servers, a NAS, and a switch."
+                            data-fr="Une photo de mon installation de laboratoire à domicile, montrant des serveurs, un NAS et un commutateur.">
+                    </picture>
+                </div>
+                <div class="project-description">
+                    <h3 class="lang" data-de="Zuverlässiges und redundantes Heimnetzwerk" data-en="Reliable and Redundant Home Network" data-fr="Réseau Domestique Fiable et Redondant">Zuverlässiges und redundantes Heimnetzwerk</h3>
+                    <p class="lang" data-de="Dieses Projekt demonstriert meine Fähigkeit, eine stabile, redundante und praxisnahe IT-Infrastruktur zu planen und umzusetzen. Alle Komponenten sind für spezifische Rollen konfiguriert, um Effizienz und Ausfallsicherheit zu gewährleisten." data-en="This project demonstrates my ability to design and implement a stable, redundant, and practical IT infrastructure. All components are configured for specific roles to ensure efficiency and resilience." data-fr="Ce projet démontre ma capacité à concevoir et à mettre en œuvre une infrastructure informatique stable, redondante et pratique. Tous les composants sont configurés pour des rôles spécifiques afin d'assurer l'efficacité et la résilience.">Dieses Projekt demonstriert meine Fähigkeit, eine stabile, redundante und praxisnahe IT-Infrastruktur zu planen und umzusetzen. Alle Komponenten sind für spezifische Rollen konfiguriert, um Effizienz und Ausfallsicherheit zu gewährleisten.</p>
+                    
+                    <h4 class="lang" data-de="Primärserver (Das „Arbeitstier“)" data-en="Primary Server (The 'Workhorse')" data-fr="Serveur Principal (Le « Cheval de Trait »)">Primärserver (Das „Arbeitstier“)</h4>
+                    <p class="lang" data-de="Ein Lenovo ThinkCentre Mini-PC, auf dem Ubuntu Server läuft. Er hostet Dienste wie einen Plex Media Server und Samba für die Dateifreigabe und greift dabei auf Daten vom NAS zu." data-en="A Lenovo ThinkCentre mini PC running Ubuntu Server. It hosts services like a Plex media server and Samba for file sharing, accessing all data from the NAS." data-fr="Un mini PC Lenovo ThinkCentre sous Ubuntu Server. Il héberge des services tels qu'un serveur multimédia Plex et Samba pour le partage de fichiers, accédant à toutes les données depuis le NAS.">Ein Lenovo ThinkCentre Mini-PC, auf dem Ubuntu Server läuft. Er hostet Dienste wie einen Plex Media Server und Samba für die Dateifreigabe und greift dabei auf Daten vom NAS zu.</p>
+
+                    <h4 class="lang" data-de="Zentraler Datenspeicher (Der „Tresor“)" data-en="Central Data Hub (The 'Vault')" data-fr="Hub de Données Central (Le « Coffre-fort »)">Zentraler Datenspeicher (Der „Tresor“)</h4>
+                    <p class="lang" data-de="Ein Network Attached Storage (NAS) dient als zentraler, ausfallsicherer Speicherort für alle wichtigen Dateien, Dokumente und Medien, optimiert für den 24/7-Betrieb." data-en="A Network Attached Storage (NAS) serves as the central, fail-safe repository for all important files, documents, and media, optimized for 24/7 operation." data-fr="Un stockage en réseau (NAS) sert de référentiel central et sécurisé pour tous les fichiers, documents et médias importants, optimisé pour un fonctionnement 24/7.">Ein Network Attached Storage (NAS) dient als zentraler, ausfallsicherer Speicherort für alle wichtigen Dateien, Dokumente und Medien, optimiert für den 24/7-Betrieb.</p>
+
+                    <h4 class="lang" data-de="Netzwerk-Kern (Der „Verkehrsregler“)" data-en="Network Core (The 'Traffic Controller')" data-fr="Cœur du Réseau (Le « Contrôleur de Trafic »)">Netzwerk-Kern (Der „Verkehrsregler“)</h4>
+                    <p class="lang" data-de="Ein Cisco Business 220 Series Switch bildet das Herzstück des Netzwerks. Er verbindet die Server, das NAS und alle Endgeräte und sorgt für eine schnelle und stabile Kommunikation zwischen allen Komponenten." data-en="A Cisco Business 220 Series switch forms the heart of the network. It connects the servers, the NAS, and all end-user devices, ensuring fast and stable communication between all components." data-fr="Un commutateur Cisco Business 220 Series constitue le cœur du réseau. Il connecte les serveurs, le NAS et tous les appareils des utilisateurs finaux, assurant une communication rapide et stable entre tous les composants.">Ein Cisco Business 220 Series Switch bildet das Herzstück des Netzwerks. Er verbindet die Server, das NAS und alle Endgeräte und sorgt für eine schnelle und stabile Kommunikation zwischen allen Komponenten.</p>
+
+                    <h4 class="lang" data-de="Backup-Server (Die „Reserve“)" data-en="Ready-to-Go Backup Server (The 'Spare')" data-fr="Serveur de Secours Prêt à l'Emploi (Le « Rechange »)">Backup-Server (Die „Reserve“)</h4>
+                    <p class="lang" data-de="Ein zweiter, identisch konfigurierter Lenovo Mini-PC. Im Falle eines Hardwareausfalls des Primärservers kann dieser durch einfaches Umstecken der Kabel sofort einspringen, was die Ausfallzeit auf ein Minimum reduziert." data-en="A second, identically configured Lenovo mini PC. In the event of a hardware failure on the primary server, this can be swapped in immediately by simply moving the cables, minimizing downtime." data-fr="Un second mini PC Lenovo configuré à l'identique. En cas de défaillance matérielle du serveur principal, celui-ci peut être échangé immédiatement en déplaçant simplement les câbles, minimisant ainsi les temps d'arrêt.">Ein zweiter, identisch konfigurierter Lenovo Mini-PC. Im Falle eines Hardwareausfalls des Primärservers kann dieser durch einfaches Umstecken der Kabel sofort einspringen, was die Ausfallzeit auf ein Minimum reduziert.</p>
+                </div>
+            </div>
+        </section>
+
+
         <section class="container" id="faq">
             <h2 class="lang" data-de="Häufig Gestellte Fragen" data-en="Frequently Asked Questions" data-fr="Questions Fréquemment Posées">Häufig Gestellte Fragen</h2>
             <div class="faq-accordion" data-aos="fade-up">
@@ -658,10 +735,34 @@
                     <div class="flip-card-inner">
                         <div class="flip-card-front">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14,2H6A2,2,0,0,0,4,4V20a2,2,0,0,0,2,2H18a2,2,0,0,0,2-2V8L14,2M18,20H6V4h7V9h5v11Z"/></svg>
-                            <h4 class="lang" data-de="Unterlagen" data-en="Documents" data-fr="Documents">Unterlagen</h4>
+                            <h4 class="lang" data-de="Lebenslauf" data-en="CV" data-fr="CV">Lebenslauf</h4>
                         </div>
                         <div class="flip-card-back">
-                            <a href="resume/unterlagen.pdf" download="Walid_Gourideche_Unterlagen.pdf" class="lang" data-de="Unterlagen<br>herunterladen" data-en="Download<br>Documents" data-fr="Télécharger<br>Documents">Unterlagen<br>herunterladen</a>
+                            <a href="resume/lebenslauf.pdf" download="Walid_Gourideche_Lebenslauf.pdf" class="lang" data-de="Lebenslauf<br>herunterladen" data-en="Download<br>CV" data-fr="Télécharger<br>CV">Lebenslauf<br>herunterladen</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flip-card" data-aos="fade-up" data-aos-delay="600">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.13,5.12L18.88,8.87M3,17.25V21H6.75L17.81,9.94L14.06,6.19L3,17.25Z" /></svg>
+                            <h4 class="lang" data-de="Anschreiben" data-en="Cover Letter" data-fr="Lettre de Motivation">Anschreiben</h4>
+                        </div>
+                        <div class="flip-card-back">
+                            <a href="resume/anschreiben.pdf" download="Walid_Gourideche_Anschreiben.pdf" class="lang" data-de="Anschreiben<br>herunterladen" data-en="Download<br>Cover Letter" data-fr="Télécharger<br>Lettre de Motivation">Anschreiben<br>herunterladen</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flip-card" data-aos="fade-up" data-aos-delay="700">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12,2A7,7 0 0,0 5,9C5,14.25 12,22 12,22C12,22 19,14.25 19,9A7,7 0 0,0 12,2M12,4A5,5 0 0,1 17,9C17,10.74 15.93,12.82 14.65,14.83C13.62,16.43 12.64,17.9 12,19.23C11.36,17.89 10.38,16.42 9.35,14.82C8.07,12.81 7,10.73 7,9A5,5 0 0,1 12,4M12,7A2,2 0 0,0 10,9A2,2 0 0,0 12,11A2,2 0 0,0 14,9A2,2 0 0,0 12,7Z" /></svg>
+                            <h4 class="lang" data-de="Zeugnisse" data-en="Certificates" data-fr="Certificats">Zeugnisse</h4>
+                        </div>
+                        <div class="flip-card-back">
+                            <a href="resume/zeugnisse.pdf" download="Walid_Gourideche_Zeugnisse.pdf" class="lang" data-de="Zeugnisse<br>herunterladen" data-en="Download<br>Certificates" data-fr="Télécharger<br>Certificats">Zeugnisse<br>herunterladen</a>
                         </div>
                     </div>
                 </div>
@@ -714,6 +815,7 @@
           const translatableElements = document.querySelectorAll('.lang');
           const translatablePlaceholders = document.querySelectorAll('.lang-placeholder');
           const translatableAria = document.querySelectorAll('.lang-aria');
+          const translatableAlt = document.querySelectorAll('.lang-alt');
           const profilePicture = document.getElementById('profile-picture');
           let currentLang = 'de';
 
@@ -745,6 +847,10 @@
                   if (el.dataset[currentLang]) { el.setAttribute('aria-label', el.dataset[currentLang]); }
               });
 
+              translatableAlt.forEach(el => {
+                  if (el.dataset[currentLang]) { el.setAttribute('alt', el.dataset[currentLang]); }
+              });
+
               if (profilePicture) {
                   profilePicture.alt = altTexts[currentLang];
               }
@@ -764,6 +870,7 @@
           });
           
           updateLanguageSelectorUI(currentLang);
+          switchLanguage(currentLang); // Set initial language on load
 
           const faqItems = document.querySelectorAll('.faq-item');
           faqItems.forEach(item => {
@@ -865,7 +972,11 @@
           
           mobileMenuIcon.addEventListener('click', toggleNav);
           mobileNavLinks.forEach(link => {
-            link.addEventListener('click', toggleNav);
+            link.addEventListener('click', (e) => {
+                if (link.getAttribute('href').startsWith('#')) {
+                    toggleNav();
+                }
+            });
           });
           
           const contactForm = document.getElementById('contact-form');
@@ -875,7 +986,8 @@
               event.preventDefault();
               
               const originalBtnText = submitBtn.querySelector('span').innerHTML;
-              const sendingText = submitBtn.dataset['sending' + currentLang.charAt(0).toUpperCase() + currentLang.slice(1)];
+              const sendingTextKey = 'sending' + currentLang.charAt(0).toUpperCase() + currentLang.slice(1);
+              const sendingText = submitBtn.dataset[sendingTextKey];
               
               submitBtn.disabled = true;
               submitBtn.innerHTML = `<span>${sendingText}</span>`;
@@ -890,7 +1002,8 @@
                   }
               }).then(response => {
                   if (response.ok) {
-                      const successText = submitBtn.dataset['sent' + currentLang.charAt(0).toUpperCase() + currentLang.slice(1)];
+                      const successTextKey = 'sent' + currentLang.charAt(0).toUpperCase() + currentLang.slice(1);
+                      const successText = submitBtn.dataset[successTextKey];
                       submitBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> <span>${successText}</span>`;
                       contactForm.reset();
                   } else {
