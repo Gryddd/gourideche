@@ -344,9 +344,9 @@
         }
         .flip-card-back {
             transform: rotateY(180deg);
-            font-size: 0.9rem; /* Adjusted font size */
+            font-size: 0.9rem;
             line-height: 1.6;
-            word-break: break-all;
+            overflow-wrap: break-word; /* Replaced word-break for better wrapping */
         }
         .flip-card-back a { 
             color: var(--primary-blue); 
