@@ -92,22 +92,49 @@
         }
         .nav-links a:hover { color: var(--primary-blue); }
         
-        .language-selector ul {
-            margin: 0; padding: 0; list-style: none; display: flex; align-items: center; gap: 0.75rem;
+        .language-selector {
+            position: relative; /* For dropdown positioning */
         }
-        .language-selector li {
+        .lang-toggle-desktop {
+            background: none; border: none; color: var(--text-color);
+            cursor: pointer; display: inline-flex; align-items: center;
+            gap: 0.5rem; font-family: var(--font-heading); font-size: 1rem;
+            padding: 0.5rem;
+        }
+        .lang-toggle-desktop .arrow-icon {
+            width: 12px; height: 12px; fill: var(--text-color);
+            transition: transform 0.3s ease;
+        }
+        .language-selector.active .lang-toggle-desktop .arrow-icon {
+            transform: rotate(180deg);
+        }
+        .lang-list-desktop {
+            list-style: none; padding: 0; margin: 0;
+            position: absolute; top: calc(100% + 5px); right: 0;
+            background-color: rgba(26, 26, 26, 0.9);
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(5px);
+            width: 150px;
+            opacity: 0; visibility: hidden;
+            transform: translateY(10px);
+            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+        }
+        .language-selector.active .lang-list-desktop {
+            opacity: 1; visibility: visible;
+            transform: translateY(0);
+        }
+        .lang-list-desktop li {
             color: var(--text-color); cursor: pointer;
-            font-family: var(--font-body); font-size: 0.9rem;
-            opacity: 0.7; transition: opacity 0.3s, color 0.3s;
+            padding: 10px 15px; font-size: 0.9rem;
+            opacity: 0.8; transition: background-color 0.2s, opacity 0.2s;
         }
-        .language-selector li:hover {
-            opacity: 1; color: var(--primary-blue);
+        .lang-list-desktop li:hover {
+            background-color: var(--primary-blue);
+            color: var(--background);
+            opacity: 1;
         }
-        .language-selector li.active {
+        .lang-list-desktop li.active {
             opacity: 1; color: var(--primary-blue); font-weight: bold;
-        }
-        .language-selector li:not(:last-child)::after {
-            content: '|'; color: var(--border-color); margin-left: 0.75rem;
         }
         
         .mobile-language-selector {
@@ -335,11 +362,18 @@
             margin-top: 0;
             font-size: 1.5rem;
         }
+        /* UPDATED STYLISH PROJECT TITLES */
         .project-description h4 {
             color: var(--primary-blue);
-            margin-top: 1.5rem;
-            margin-bottom: 0.5rem;
+            margin-top: 2rem; /* More space above */
+            margin-bottom: 0.75rem; /* A bit more space below */
             font-family: var(--font-heading);
+            font-weight: 700; /* Makes the font bold */
+            font-size: 1.2rem; /* Slightly larger text */
+            text-transform: uppercase; /* STYLISH: ALL CAPS */
+            letter-spacing: 1px; /* STYLISH: Adds space between letters */
+            border-left: 3px solid var(--primary-blue); /* STYLISH: Adds a blue accent line */
+            padding-left: 10px; /* Space between line and text */
         }
         .project-description p, .project-description li {
             font-weight: 300;
@@ -402,7 +436,10 @@
             text-align: center; transition: transform 0.6s;
             transform-style: preserve-3d;
         }
-        .flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
+        .flip-card:hover .flip-card-inner,
+        .flip-card-inner.is-flipped { 
+            transform: rotateY(180deg); 
+        }
         .flip-card-front, .flip-card-back {
             position: absolute; width: 100%; height: 100%;
             -webkit-backface-visibility: hidden; backface-visibility: hidden;
@@ -437,6 +474,31 @@
             margin: 0; color: var(--text-color);
         }
         
+        /* STYLES FOR THE DOCUMENT FLIP-CARD BACK */
+        .flip-card-back.document-links {
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Vertically centers the links */
+            align-items: center; /* Horizontally centers the links */
+            padding: 0; /* Remove padding to allow links to fill space */
+        }
+
+        .flip-card-back.document-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 1rem;
+            padding: 18px 20px; /* Generous clickable area */
+            width: 100%;
+            box-sizing: border-box;
+            text-align: center;
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+        .flip-card-back.document-links a:hover {
+            background-color: var(--primary-blue);
+            color: var(--background);
+        }
+
         .contact-form-section {
             padding-top: 80px;
         }
@@ -569,7 +631,11 @@
                 <a href="#kontakt" class="lang" data-de="Kontakt" data-en="Contact" data-fr="Contact">Kontakt</a>
             </div>
             <div id="lang-selector-desktop" class="language-selector">
-                <ul>
+                <button class="lang-toggle-desktop">
+                    <span class="lang" data-de="Sprache" data-en="Language" data-fr="Langue">Sprache</span>
+                    <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+                </button>
+                <ul class="lang-list-desktop">
                     <li class="language-item" data-lang="de">Deutsch 🇩🇪</li>
                     <li class="language-item" data-lang="en">English 🇬🇧</li>
                     <li class="language-item" data-lang="fr">Français 🇫🇷</li>
@@ -674,6 +740,7 @@
             </div>
         </section>
 
+        <!-- ========== START: UPDATED PROJECT SECTION ========== -->
         <section class="container" id="projekte">
             <h2 class="lang" data-de="Projekt: Home-Lab" data-en="Project: Home Lab" data-fr="Projet : Labo Maison">Projekt: Home-Lab</h2>
             <div class="project-item" data-aos="fade-up">
@@ -689,23 +756,23 @@
                 </div>
                 <div class="project-description">
                     <h3 class="lang" data-de="Zuverlässiges und redundantes Heimnetzwerk" data-en="Reliable and Redundant Home Network" data-fr="Réseau Domestique Fiable et Redondant">Zuverlässiges und redundantes Heimnetzwerk</h3>
-                    <p class="lang" data-de="Dieses Projekt demonstriert meine Fähigkeit, eine stabile, redundante und praxisnahe IT-Infrastruktur zu planen und umzusetzen. Alle Komponenten sind für spezifische Rollen konfiguriert, um Effizienz und Ausfallsicherheit zu gewährleisten." data-en="This project demonstrates my ability to design and implement a stable, redundant, and practical IT infrastructure. All components are configured for specific roles to ensure efficiency and resilience." data-fr="Ce projet démontre ma capacité à concevoir et à mettre en œuvre une infrastructure informatique stable, redondante et pratique. Tous les composants sont configurés pour des rôles spécifiques afin d'assurer l'efficacité et la résilience.">Dieses Projekt demonstriert meine Fähigkeit, eine stabile, redundante und praxisnahe IT-Infrastruktur zu planen und umzusetzen. Alle Komponenten sind für spezifische Rollen konfiguriert, um Effizienz und Ausfallsicherheit zu gewährleisten.</p>
+                    <p class="lang" data-de="Dieses Projekt zeigt den Aufbau einer stabilen und ausfallsicheren IT-Infrastruktur. Jede Komponente hat eine spezifische Rolle, um hohe Effizienz und Redundanz zu gewährleisten." data-en="This project showcases a stable and resilient IT infrastructure. Each component has a specific role to ensure high efficiency and redundancy." data-fr="Ce projet présente une infrastructure informatique stable et résiliente. Chaque composant a un rôle spécifique pour assurer une efficacité et une redondance élevées.">Dieses Projekt zeigt den Aufbau einer stabilen und ausfallsicheren IT-Infrastruktur. Jede Komponente hat eine spezifische Rolle, um hohe Effizienz und Redundanz zu gewährleisten.</p>
                     
-                    <h4 class="lang" data-de="Primärserver (Das „Arbeitstier“)" data-en="Primary Server (The 'Workhorse')" data-fr="Serveur Principal (Le « Cheval de Trait »)">Primärserver (Das „Arbeitstier“)</h4>
-                    <p class="lang" data-de="Ein Lenovo ThinkCentre Mini-PC, auf dem Ubuntu Server läuft. Er hostet Dienste wie einen Plex Media Server und Samba für die Dateifreigabe und greift dabei auf Daten vom NAS zu." data-en="A Lenovo ThinkCentre mini PC running Ubuntu Server. It hosts services like a Plex media server and Samba for file sharing, accessing all data from the NAS." data-fr="Un mini PC Lenovo ThinkCentre sous Ubuntu Server. Il héberge des services tels qu'un serveur multimédia Plex et Samba pour le partage de fichiers, accédant à toutes les données depuis le NAS.">Ein Lenovo ThinkCentre Mini-PC, auf dem Ubuntu Server läuft. Er hostet Dienste wie einen Plex Media Server und Samba für die Dateifreigabe und greift dabei auf Daten vom NAS zu.</p>
+                    <h4 class="lang" data-de="Primärserver" data-en="Primary Server" data-fr="Serveur Principal">Primärserver</h4>
+                    <p class="lang" data-de="Ein Lenovo ThinkCentre Mini-PC mit Ubuntu Server. Er hostet Dienste wie Plex und Samba für die Dateifreigabe und greift auf den zentralen NAS-Speicher zu." data-en="A Lenovo ThinkCentre Mini-PC with Ubuntu Server. It hosts services like Plex and Samba for file sharing, accessing the central NAS storage." data-fr="Un mini-PC Lenovo ThinkCentre avec Ubuntu Server. Il héberge des services comme Plex et Samba pour le partage de fichiers, accédant au stockage NAS central.">Ein Lenovo ThinkCentre Mini-PC mit Ubuntu Server. Er hostet Dienste wie Plex und Samba für die Dateifreigabe und greift auf den zentralen NAS-Speicher zu.</p>
 
-                    <h4 class="lang" data-de="Zentraler Datenspeicher (Der „Tresor“)" data-en="Central Data Hub (The 'Vault')" data-fr="Hub de Données Central (Le « Coffre-fort »)">Zentraler Datenspeicher (Der „Tresor“)</h4>
-                    <p class="lang" data-de="Ein Network Attached Storage (NAS) dient als zentraler, ausfallsicherer Speicherort für alle wichtigen Dateien, Dokumente und Medien, optimiert für den 24/7-Betrieb." data-en="A Network Attached Storage (NAS) serves as the central, fail-safe repository for all important files, documents, and media, optimized for 24/7 operation." data-fr="Un stockage en réseau (NAS) sert de référentiel central et sécurisé pour tous les fichiers, documents et médias importants, optimisé pour un fonctionnement 24/7.">Ein Network Attached Storage (NAS) dient als zentraler, ausfallsicherer Speicherort für alle wichtigen Dateien, Dokumente und Medien, optimiert für den 24/7-Betrieb.</p>
+                    <h4 class="lang" data-de="Zentraler Datenspeicher (NAS)" data-en="Central Storage (NAS)" data-fr="Stockage Central (NAS)">Zentraler Datenspeicher (NAS)</h4>
+                    <p class="lang" data-de="Ein Network Attached Storage (NAS) dient als zentraler und ausfallsicherer Speicher für alle wichtigen Dateien, optimiert für den Dauerbetrieb." data-en="A Network Attached Storage (NAS) serves as the central and fail-safe repository for all important files, optimized for 24/7 operation." data-fr="Un stockage en réseau (NAS) sert de référentiel central et sécurisé pour tous les fichiers importants, optimisé pour un fonctionnement 24/7.">Ein Network Attached Storage (NAS) dient als zentraler und ausfallsicherer Speicher für alle wichtigen Dateien, optimiert für den Dauerbetrieb.</p>
 
-                    <h4 class="lang" data-de="Netzwerk-Kern (Der „Verkehrsregler“)" data-en="Network Core (The 'Traffic Controller')" data-fr="Cœur du Réseau (Le « Contrôleur de Trafic »)">Netzwerk-Kern (Der „Verkehrsregler“)</h4>
-                    <p class="lang" data-de="Ein Cisco Business 220 Series Switch bildet das Herzstück des Netzwerks. Er verbindet die Server, das NAS und alle Endgeräte und sorgt für eine schnelle und stabile Kommunikation zwischen allen Komponenten." data-en="A Cisco Business 220 Series switch forms the heart of the network. It connects the servers, the NAS, and all end-user devices, ensuring fast and stable communication between all components." data-fr="Un commutateur Cisco Business 220 Series constitue le cœur du réseau. Il connecte les serveurs, le NAS et tous les appareils des utilisateurs finaux, assurant une communication rapide et stable entre tous les composants.">Ein Cisco Business 220 Series Switch bildet das Herzstück des Netzwerks. Er verbindet die Server, das NAS und alle Endgeräte und sorgt für eine schnelle und stabile Kommunikation zwischen allen Komponenten.</p>
+                    <h4 class="lang" data-de="Netzwerk-Infrastruktur" data-en="Network Infrastructure" data-fr="Infrastructure Réseau">Netzwerk-Infrastruktur</h4>
+                    <p class="lang" data-de="Ein Cisco Business 220 Switch bildet den Kern des Netzwerks. Er verbindet alle Server, das NAS und Endgeräte für eine schnelle und stabile Kommunikation." data-en="A Cisco Business 220 switch forms the core of the network. It connects all servers, the NAS, and end-user devices for fast and stable communication." data-fr="Un commutateur Cisco Business 220 constitue le cœur du réseau. Il connecte tous les serveurs, le NAS et les appareils des utilisateurs pour une communication rapide et stable.">Ein Cisco Business 220 Switch bildet den Kern des Netzwerks. Er verbindet alle Server, das NAS und Endgeräte für eine schnelle und stabile Kommunikation.</p>
 
-                    <h4 class="lang" data-de="Backup-Server (Die „Reserve“)" data-en="Ready-to-Go Backup Server (The 'Spare')" data-fr="Serveur de Secours Prêt à l'Emploi (Le « Rechange »)">Backup-Server (Die „Reserve“)</h4>
-                    <p class="lang" data-de="Ein zweiter, identisch konfigurierter Lenovo Mini-PC. Im Falle eines Hardwareausfalls des Primärservers kann dieser durch einfaches Umstecken der Kabel sofort einspringen, was die Ausfallzeit auf ein Minimum reduziert." data-en="A second, identically configured Lenovo mini PC. In the event of a hardware failure on the primary server, this can be swapped in immediately by simply moving the cables, minimizing downtime." data-fr="Un second mini PC Lenovo configuré à l'identique. En cas de défaillance matérielle du serveur principal, celui-ci peut être échangé immédiatement en déplaçant simplement les câbles, minimisant ainsi les temps d'arrêt.">Ein zweiter, identisch konfigurierter Lenovo Mini-PC. Im Falle eines Hardwareausfalls des Primärservers kann dieser durch einfaches Umstecken der Kabel sofort einspringen, was die Ausfallzeit auf ein Minimum reduziert.</p>
+                    <h4 class="lang" data-de="Backup-Server" data-en="Backup Server" data-fr="Serveur de Sauvegarde">Backup-Server</h4>
+                    <p class="lang" data-de="Ein zweiter, identischer Lenovo Mini-PC steht als sofortiges Backup bereit. Bei einem Ausfall des Primärservers wird er einfach umgesteckt, um die Ausfallzeit zu minimieren." data-en="A second, identical Lenovo Mini-PC is ready as an immediate backup. In case of a primary server failure, it can be swapped in instantly, minimizing downtime." data-fr="Un second mini-PC Lenovo, configuré à l'identique, est prêt en tant que sauvegarde immédiate. En cas de défaillance du serveur principal, il peut être échangé instantanément, minimisant les temps d'arrêt.">Ein zweiter, identischer Lenovo Mini-PC steht als sofortiges Backup bereit. Bei einem Ausfall des Primärservers wird er einfach umgesteckt, um die Ausfallzeit zu minimieren.</p>
                 </div>
             </div>
         </section>
-
+        <!-- ========== END: UPDATED PROJECT SECTION ========== -->
 
         <section class="container" id="faq">
             <h2 class="lang" data-de="Häufig Gestellte Fragen" data-en="Frequently Asked Questions" data-fr="Questions Fréquemment Posées">Häufig Gestellte Fragen</h2>
@@ -731,41 +798,21 @@
                     </svg>
                     <h4 class="lang" data-de="LinkedIn" data-en="LinkedIn" data-fr="LinkedIn">LinkedIn</h4></div><div class="flip-card-back"><a href="https://www.linkedin.com/in/walidgourideche/" target="_blank"><span class="lang" data-de="Mein LinkedIn" data-en="My LinkedIn" data-fr="Mon LinkedIn">Mein LinkedIn</span></a></div></div></div>
                 
+                <!-- NEW FLIP-CARD FOR DOCUMENTS -->
                 <div class="flip-card" data-aos="fade-up" data-aos-delay="500">
                     <div class="flip-card-inner">
                         <div class="flip-card-front">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14,2H6A2,2,0,0,0,4,4V20a2,2,0,0,0,2,2H18a2,2,0,0,0,2-2V8L14,2M18,20H6V4h7V9h5v11Z"/></svg>
-                            <h4 class="lang" data-de="Lebenslauf" data-en="CV" data-fr="CV">Lebenslauf</h4>
+                            <h4 class="lang" data-de="Dokumente" data-en="Documents" data-fr="Documents">Documents</h4>
                         </div>
-                        <div class="flip-card-back">
-                            <a href="resume/lebenslauf.pdf" download="Walid_Gourideche_Lebenslauf.pdf" class="lang" data-de="Lebenslauf<br>herunterladen" data-en="Download<br>CV" data-fr="Télécharger<br>CV">Lebenslauf<br>herunterladen</a>
+                        <div class="flip-card-back document-links">
+                            <a href="resume/lebenslauf.pdf" download="Walid_Gourideche_Lebenslauf.pdf" class="lang" data-de="Lebenslauf" data-en="CV / Resume" data-fr="CV">CV / Resume</a>
+                            <a href="resume/anschreiben.pdf" download="Walid_Gourideche_Anschreiben.pdf" class="lang" data-de="Anschreiben" data-en="Cover Letter" data-fr="Lettre de Motivation">Cover Letter</a>
+                            <a href="resume/zeugnisse.pdf" download="Walid_Gourideche_Zeugnisse.pdf" class="lang" data-de="Zeugnisse" data-en="Certificates" data-fr="Certificats">Certificates</a>
                         </div>
                     </div>
                 </div>
 
-                <div class="flip-card" data-aos="fade-up" data-aos-delay="600">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.13,5.12L18.88,8.87M3,17.25V21H6.75L17.81,9.94L14.06,6.19L3,17.25Z" /></svg>
-                            <h4 class="lang" data-de="Anschreiben" data-en="Cover Letter" data-fr="Lettre de Motivation">Anschreiben</h4>
-                        </div>
-                        <div class="flip-card-back">
-                            <a href="resume/anschreiben.pdf" download="Walid_Gourideche_Anschreiben.pdf" class="lang" data-de="Anschreiben<br>herunterladen" data-en="Download<br>Cover Letter" data-fr="Télécharger<br>Lettre de Motivation">Anschreiben<br>herunterladen</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="flip-card" data-aos="fade-up" data-aos-delay="700">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12,2A7,7 0 0,0 5,9C5,14.25 12,22 12,22C12,22 19,14.25 19,9A7,7 0 0,0 12,2M12,4A5,5 0 0,1 17,9C17,10.74 15.93,12.82 14.65,14.83C13.62,16.43 12.64,17.9 12,19.23C11.36,17.89 10.38,16.42 9.35,14.82C8.07,12.81 7,10.73 7,9A5,5 0 0,1 12,4M12,7A2,2 0 0,0 10,9A2,2 0 0,0 12,11A2,2 0 0,0 14,9A2,2 0 0,0 12,7Z" /></svg>
-                            <h4 class="lang" data-de="Zeugnisse" data-en="Certificates" data-fr="Certificats">Zeugnisse</h4>
-                        </div>
-                        <div class="flip-card-back">
-                            <a href="resume/zeugnisse.pdf" download="Walid_Gourideche_Zeugnisse.pdf" class="lang" data-de="Zeugnisse<br>herunterladen" data-en="Download<br>Certificates" data-fr="Télécharger<br>Certificats">Zeugnisse<br>herunterladen</a>
-                        </div>
-                    </div>
-                </div>
             </div>
 
             <div class="contact-form-section" data-aos="fade-up">
@@ -826,7 +873,7 @@
           };
           
           function updateLanguageSelectorUI(selectedLang) {
-              languageItems.forEach(item => {
+              document.querySelectorAll('.language-item').forEach(item => {
                   item.classList.toggle('active', item.getAttribute('data-lang') === selectedLang);
               });
           }
@@ -859,13 +906,13 @@
           }
 
           languageItems.forEach(item => {
-              item.addEventListener('click', () => {
+              item.addEventListener('click', (e) => {
                   const newLang = item.getAttribute('data-lang');
                   switchLanguage(newLang);
-                  const langToggle = document.querySelector('.lang-toggle');
-                  if (langToggle && langToggle.classList.contains('active')) {
-                      langToggle.click(); // Close the dropdown after selection
-                  }
+
+                  // Close any open dropdowns after selection
+                  const activeToggles = document.querySelectorAll('.lang-toggle.active, .language-selector.active');
+                  activeToggles.forEach(toggle => toggle.classList.remove('active'));
               });
           });
           
@@ -890,11 +937,12 @@
               });
           });
 
-          const langToggle = document.querySelector('.lang-toggle');
-          if (langToggle) {
-              const langList = langToggle.nextElementSibling;
-              langToggle.addEventListener('click', () => {
-                  langToggle.classList.toggle('active');
+          // Mobile Language Toggle
+          const mobileLangToggle = document.querySelector('.lang-toggle');
+          if (mobileLangToggle) {
+              const langList = mobileLangToggle.nextElementSibling;
+              mobileLangToggle.addEventListener('click', () => {
+                  mobileLangToggle.classList.toggle('active');
                   if (langList.style.maxHeight) {
                       langList.style.maxHeight = null;
                   } else {
@@ -902,6 +950,17 @@
                   }
               });
           }
+          
+          // Desktop Language Toggle
+          const desktopLangSelector = document.getElementById('lang-selector-desktop');
+          if (desktopLangSelector) {
+              const desktopLangToggleBtn = desktopLangSelector.querySelector('.lang-toggle-desktop');
+              desktopLangToggleBtn.addEventListener('click', (event) => {
+                  event.stopPropagation();
+                  desktopLangSelector.classList.toggle('active');
+              });
+          }
+
 
           const videoModal = document.getElementById('video-modal');
           const openModalBtn = document.getElementById('open-video-modal');
@@ -1022,6 +1081,38 @@
                   submitBtn.disabled = false;
                   submitBtn.innerHTML = `<span>${originalBtnText}</span>`;
               });
+          });
+          
+          // SCRIPT FOR ALL FLIP-CARDS (TOUCH & CLICK FRIENDLY)
+          const flipCards = document.querySelectorAll('.flip-card');
+          flipCards.forEach(card => {
+              card.addEventListener('click', function(event) {
+                  const inner = this.querySelector('.flip-card-inner');
+                  if (inner) {
+                      inner.classList.toggle('is-flipped');
+                  }
+              });
+              const backLinks = card.querySelectorAll('.flip-card-back a');
+              backLinks.forEach(link => {
+                  link.addEventListener('click', function(event) {
+                      event.stopPropagation();
+                  });
+              });
+          });
+
+          // Global click listener to close popups (flip-cards, lang menus)
+          document.addEventListener('click', function (event) {
+              // Close flipped cards if click is outside
+              if (!event.target.closest('.flip-card')) {
+                  document.querySelectorAll('.flip-card-inner.is-flipped').forEach(function (inner) {
+                      inner.classList.remove('is-flipped');
+                  });
+              }
+              // Close desktop language selector if click is outside
+              const desktopLangSelector = document.getElementById('lang-selector-desktop');
+              if (desktopLangSelector && !desktopLangSelector.contains(event.target)) {
+                  desktopLangSelector.classList.remove('active');
+              }
           });
       });
     </script>
