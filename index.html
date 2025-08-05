@@ -67,7 +67,8 @@
         }
         .video-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
-            background-color: rgba(13, 13, 13, 0.85); backdrop-filter: blur(5px);
+            background-color: rgba(13, 13, 13, 0.8);
+            backdrop-filter: blur(5px);
         }
         main {
             position: relative;
@@ -166,8 +167,19 @@
         }
         @keyframes typing { from { width: 0 } to { width: 100% } }
         @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: var(--primary-blue); } }
-        .hero-text p { font-size: 1.1rem; line-height: 1.6; }
-        .hero-text .location { color: var(--primary-blue); font-weight: bold; }
+        
+        .hero-job-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin: 1.2rem 0;
+        }
+        .hero-description {
+            font-size: 1.1rem;
+            font-weight: 300;
+            line-height: 1.7;
+            opacity: 0.9;
+        }
         h2 {
             text-align: center; font-size: 2rem; color: var(--primary-blue);
             margin-bottom: 50px; text-transform: uppercase;
@@ -254,7 +266,7 @@
         .timeline-content .date { font-weight: bold; color: var(--text-color); margin-bottom: 10px; display: block; }
         .timeline-content ul { padding-left: 20px; margin: 0; }
         .timeline-content ul li {
-            font-weight: 300; /* Lighter font weight */
+            font-weight: 300;
             opacity: 0.9;
             line-height: 1.6;
         }
@@ -296,7 +308,7 @@
             margin: 0;
             line-height: 1.7;
             color: var(--text-color);
-            font-weight: 300; /* Lighter font weight */
+            font-weight: 300;
         }
         .faq-video-link { color: var(--primary-blue); font-weight: bold; text-decoration: underline; }
 
@@ -520,11 +532,10 @@
             <div class="hero-text" data-aos="fade-up" data-aos-delay="200">
                 <h1>> Walid Gourideche</h1>
                 
-                <p class="lang" data-de="Fachinformatiker für Systemintegration" data-en="IT Specialist for System Integration" data-fr="Spécialiste Informatique en Intégration de Systèmes">Fachinformatiker für Systemintegration</p>
-                <p class="lang" data-de="Mehrsprachiger IT-Auszubildender mit Leidenschaft für Netzwerke und Cybersicherheit, der praktische Erfahrung mit globaler Denkweise verbindet, um effektive Technologielösungen zu liefern. Motiviert, sich weiterzuentwickeln und von Marokko bis Deutschland Wirkung zu zeigen." data-en="Multilingual IT trainee with a passion for networks and cybersecurity, combining hands-on experience with a global mindset to deliver effective technology solutions. Motivated to grow and make an impact from Morocco to Germany." data-fr="Apprenti informaticien multilingue passionné par les réseaux et la cybersécurité, alliant expérience pratique et esprit international pour fournir des solutions technologiques efficaces. Motivé à évoluer et à avoir un impact du Maroc à l'Allemagne.">
-                    Mehrsprachiger IT-Auszubildender mit Leidenschaft für Netzwerke und Cybersicherheit, der praktische Erfahrung mit globaler Denkweise verbindet, um effektive Technologielösungen zu liefern. Motiviert, sich weiterzuentwickeln und von Marokko bis Deutschland Wirkung zu zeigen.
+                <p class="hero-job-title lang" data-de="IT-Fachkraft für Systemintegration und Netzwerke" data-en="IT Specialist for System Integration and Networks" data-fr="Spécialiste IT en Intégration de Systèmes et Réseaux">IT-Fachkraft für Systemintegration und Netzwerke</p>
+                <p class="hero-description lang" data-de="Engagierter IT-Fachmann mit Fokus auf Netzwerktechnik und Systemadministration. Ich bringe praktische Erfahrung, eine strukturierte Arbeitsweise und eine internationale Perspektive mit. Mein Ziel ist es, effiziente IT-Lösungen zu gestalten – von Marokko bis Deutschland." data-en="Dedicated IT professional with a focus on network technology and system administration. I bring practical experience, a structured work approach, and an international perspective. My goal is to design efficient IT solutions—from Morocco to Germany." data-fr="Professionnel de l'informatique dévoué, axé sur la technologie des réseaux et l'administration de systèmes. J'apporte une expérience pratique, une méthode de travail structurée et une perspective internationale. Mon objectif est de concevoir des solutions informatiques efficaces, du Maroc à l'Allemagne.">
+                    Engagierter IT-Fachmann mit Fokus auf Netzwerktechnik und Systemadministration. Ich bringe praktische Erfahrung, eine strukturierte Arbeitsweise und eine internationale Perspektive mit. Mein Ziel ist es, effiziente IT-Lösungen zu gestalten – von Marokko bis Deutschland.
                 </p>
-                <p class="location lang" data-de="Wohnort: Taza, Marokko" data-en="Based in: Taza, Morocco" data-fr="Basé à : Taza, Maroc">Wohnort: Taza, Marokko</p>
             </div>
         </section>
 
@@ -554,7 +565,7 @@
                 <div class="timeline-item" data-aos="fade-up"><div class="timeline-content"><span class="date">2024 - 2026</span><h3 class="lang" data-de="Fachinstitut für Angewandte Technologie" data-en="Specialized Institute Of Applied Technology" data-fr="Institut Spécialisé de Technologie Appliquée">Fachinstitut für Angewandte Technologie</h3><p class="timeline-location lang" data-de="Taza, Marokko" data-en="Taza, Morocco" data-fr="Taza, Maroc">Taza, Marokko</p><p class="degree lang" data-de="Abgeschlossene Ausbildung in IT Netzwerken und Systemen" data-en="Completed apprenticeship in IT Networks and Systems" data-fr="Technicien Specialisé en réseaux et systèmes informatiques">Abgeschlossene Ausbildung in IT-Netzwerken und -Systemen</p><ul><li class="lang" data-de="Mitwirkung an von Studenten geleiteten Sitzungen zu Linux, Virtualisierung und Windows Server." data-en="Contributed to student-led sessions on Linux, Virtualization, and Windows Server administration." data-fr="Contribution à des sessions dirigées par des étudiants sur Linux, la virtualisation et l'administration de Windows Server.">Mitwirkung an von Studenten geleiteten Sitzungen zu Linux, Virtualisierung und Windows Server.</li><li class="lang" data-de="Aktiv in Lerngruppen zur CCNA-Vorbereitung, GNS3 und technischer Fehlerbehebung." data-en="Active in peer study groups for GNS3, CCNA preparation, and technical troubleshooting." data-fr="Actif dans des groupes d'étude pour la préparation CCNA, GNS3 et le dépannage technique.">Aktiv in Lerngruppen zur CCNA-Vorbereitung, GNS3 und technischer Fehlerbehebung.</li></ul></div></div>
                 <div class="timeline-item" data-aos="fade-up"><div class="timeline-content"><span class="date">2023 - 2024</span><h3 class="lang" data-de="Klinikum Hann. Münden" data-en="Hann. Münden Clinic" data-fr="Clinique de Hann. Münden">Klinikum Hann. Münden</h3><p class="timeline-location lang" data-de="Hann. Münden, Deutschland" data-en="Hann. Münden, Germany" data-fr="Hann. Münden, Allemagne">Hann. Münden, Deutschland</p><p class="degree lang" data-de="Sechsmonatige Ausbildung zum Pflegefachmann" data-en="Six months of vocational training as a nursing specialist" data-fr="Six mois de formation professionnelle en tant qu'infirmier spécialisé">Sechsmonatige Ausbildung zum Pflegefachmann</p><ul><li class="lang" data-de="Einhaltung strenger regulatorischer Standards, einschließlich Datenschutz- und Sicherheitsprotokollen." data-en="Adhered to strict regulatory standards, including data protection and safety protocols." data-fr="Respect des normes réglementaires strictes, y compris les protocoles de protection des données et de sécurité.">Einhaltung strenger regulatorischer Standards, einschließlich Datenschutz- und Sicherheitsprotokollen.</li><li class="lang" data-de="Verbesserung der Sprachkenntnisse durch tägliche Praxis und kulturelle Nuancen." data-en="Improved language skills through daily real-world interactions, mastering local expressions and cultural nuances." data-fr="Amélioration des compétences linguistiques grâce à des interactions quotidiennes, maîtrisant les expressions locales et les nuances culturelles.">Verbesserung der Sprachkenntnisse durch tägliche Praxis und kulturelle Nuancen.</li></ul></div></div>
                 <div class="timeline-item" data-aos="fade-up"><div class="timeline-content"><span class="date">2021 - 2022</span><h3 class="lang" data-de="Interdisziplinäre Fakultät von Taza" data-en="Faculté Polydisciplinaire de Taza" data-fr="Faculté Polydisciplinaire de Taza">Interdisziplinäre Fakultät von Taza</h3><p class="timeline-location lang" data-de="Taza, Marokko" data-en="Taza, Morocco" data-fr="Taza, Maroc">Taza, Marokko</p><p class="degree lang" data-de="Einjähriges Grundstudium in Mathematik und Informatik" data-en="One year of foundational studies in Mathematics and Computer Science" data-fr="Une année d'études fondamentales en mathématiques et informatique">Einjähriges Grundstudium in Mathematik und Informatik</p><ul><li class="lang" data-de="Studium mathematischer Kernkonzepte wie Analysis, lineare Algebra und diskrete Mathematik." data-en="Studied key mathematical concepts such as calculus, linear algebra, and discrete mathematics." data-fr="Étude des concepts mathématiques clés tels que le calcul, l'algèbre linéaire et les mathématiques discrètes.">Studium mathematischer Kernkonzepte wie Analysis, lineare Algebra und diskrete Mathematik.</li><li class="lang" data-de="Anwendung mathematischer Logik zur Lösung von Problemen in Algorithmen und Informatik." data-en="Applied mathematical reasoning to solve problems related to algorithms and computer science." data-fr="Application du raisonnement mathématique pour résoudre des problèmes liés aux algorithmes et à l'informatique.">Anwendung mathematischer Logik zur Lösung von Problemen in Algorithmen und Informatik.</li></ul></div></div>
-                <div class="timeline-item" data-aos="fade-up"><div class="timeline-content"><span class="date">2020 - 2021</span><h3 class="lang" data-de="Weiterführende Schule Al Falah 2" data-en="High School AL Falah 2" data-fr="Lycée AL Falah 2">Weiterführende Schule Al Falah 2</h3><p class="timeline-location lang" data-de="Taza, Marokko" data-en="Taza, Morocco" data-fr="Taza, Maroc">Taza, Marokko</p><p class="degree lang" data-de="Internationales Abitur, Schwerpunkt Physik" data-en="International Baccalaureate, major in Physics" data-fr="Baccalauréat International, spécialité Physique">Internationales Abitur, Schwerpunkt Physik</p></div></div>
+                <div class="timeline-item" data-aos="fade-up"><div class="timeline-content"><span class="date">2020 - 2021</span><h3 class="lang" data-de="Weiterführende Schule Al Falah 2" data-en="High School AL Falah 2" data-fr="Lycée AL Falah 2">Weiterführende Schule Al Falah 2</h3><p class="timeline-location lang" data-de="Taza, Marokko" data-en="Taza, Morocco" data-fr="Taza, Maroc">Taza, Marokko</p><p class="degree lang" data-de="Internationales Abitur, Schwerpunkt Physik" data-en="International Baccalaureate, major in Physics" data-fr="Baccalauréat International, spécialité Physique">Internationales Abitur, Schwerpunkt Physik</p><ul><li class="lang" data-de="Grundlagen in Mathematik und Physik, wichtige Kompetenzen für IT- und Netzwerktechnik." data-en="Foundations in mathematics and physics, crucial skills for IT and network technology." data-fr="Fondamentaux en mathématiques et physique, compétences essentielles pour l'informatique et la technologie des réseaux.">Grundlagen in Mathematik und Physik, wichtige Kompetenzen für IT- und Netzwerktechnik.</li><li class="lang" data-de="Entwicklung von technischem Verständnis und systematischem Denken." data-en="Development of technical understanding and systematic thinking." data-fr="Développement de la compréhension technique et de la pensée systématique.">Entwicklung von technischem Verständnis und systematischem Denken.</li></ul></div></div>
             </div>
         </section>
 
@@ -708,8 +719,6 @@
           
           updateLanguageSelectorUI(currentLang);
 
-          // --- FAQ Accordion Logic ---
-          // This code is verified and functional.
           const faqItems = document.querySelectorAll('.faq-item');
           faqItems.forEach(item => {
               const questionButton = item.querySelector('.faq-question');
