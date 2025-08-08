@@ -240,9 +240,6 @@
             width: 25px; height: 3px; background-color: var(--primary-blue);
             margin: 4px 0; transition: 0.4s;
         }
-        .change .bar1 { transform: translate(0, 8px) rotate(-45deg); }
-        .change .bar2 { opacity: 0; }
-        .change .bar3 { transform: translate(0, -8px) rotate(45deg); }
         .mobile-nav-overlay {
             height: 100%; width: 0; position: fixed; z-index: 1001; top: 0; left: 0;
             background: var(--card-bg);
@@ -738,7 +735,7 @@
         }
 
         /* =================================================================== */
-        /* CREATIVE MOBILE ENHANCEMENTS - ADD THIS TO THE END OF YOUR CSS      */
+        /* CREATIVE MOBILE ENHANCEMENTS                                        */
         /* =================================================================== */
 
         @media screen and (max-width: 1023px) {
@@ -746,32 +743,12 @@
             /* --- 1. ENHANCED MOBILE NAVIGATION OVERLAY --- */
             .mobile-nav-overlay-content {
                 top: 0;
-                padding-top: 60px; /* Make space for the close button */
+                padding: 60px 0;
                 display: flex;
                 flex-direction: column;
+                justify-content: center; /* Center the items vertically */
                 height: 100%;
                 box-sizing: border-box;
-            }
-
-            /* Add a user profile section to the top of the nav */
-            .mobile-nav-overlay-content::before {
-                content: '';
-                display: block;
-                width: 80px;
-                height: 80px;
-                background-image: url('images/aura.webp'); /* Or aura.jpg */
-                background-size: cover;
-                background-position: center;
-                border-radius: 50%;
-                border: 2px solid var(--primary-blue);
-                margin: 20px auto 10px;
-            }
-            .mobile-nav-overlay-content::after {
-                content: 'Walid Gourideche';
-                font-family: var(--font-heading);
-                color: var(--text-color);
-                font-size: 1.2rem;
-                margin-bottom: 30px;
             }
             
             /* Staggered link animation for a modern feel */
@@ -813,38 +790,7 @@
                 border-radius: 8px;
             }
 
-            /* --- 2. HERO SECTION SCROLL INDICATOR --- */
-            .hero::after {
-                content: '';
-                position: absolute;
-                bottom: 30px;
-                left: 50%;
-                transform: translateX(-50%);
-                width: 20px;
-                height: 30px;
-                border: 2px solid var(--primary-blue);
-                border-radius: 10px;
-                opacity: 0.7;
-            }
-            .hero::before {
-                content: '';
-                position: absolute;
-                bottom: 50px;
-                left: 50%;
-                width: 4px;
-                height: 8px;
-                background: var(--primary-blue);
-                border-radius: 2px;
-                animation: scroll-indicator 2s infinite;
-            }
-            @keyframes scroll-indicator {
-                0% { transform: translate(-50%, -10px); opacity: 0; }
-                50% { opacity: 1; }
-                100% { transform: translate(-50%, 10px); opacity: 0; }
-            }
-
-
-            /* --- 3. OPTIMIZED TIMELINE FOR MOBILE --- */
+            /* --- 2. OPTIMIZED TIMELINE FOR MOBILE --- */
             .timeline-wrapper::before {
                 left: 10px; /* Move the line closer to the edge */
             }
@@ -861,8 +807,7 @@
                 padding: 1.5rem;
             }
 
-
-            /* --- 4. INTEGRATED PROJECT CARD --- */
+            /* --- 3. INTEGRATED PROJECT CARD --- */
             @media screen and (max-width: 900px) {
                 .project-item {
                     padding: 0; /* Remove parent padding, card will handle it */
@@ -888,8 +833,7 @@
                 }
             }
 
-
-            /* --- 5. CLEARER STATIC CONTACT CARDS ON MOBILE --- */
+            /* --- 4. CLEARER STATIC CONTACT CARDS ON MOBILE --- */
             .contact-grid {
                 grid-template-columns: 1fr; /* Stack to 1 column on small mobile */
             }
