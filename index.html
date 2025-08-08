@@ -89,9 +89,9 @@
         }
         .main-nav {
             position: fixed; top: 0; left: 0; width: 100%;
-            background: var(--card-bg);
-            -webkit-backdrop-filter: var(--blur);
-            backdrop-filter: var(--blur);
+            background: rgba(13, 13, 13, 0.7); /* UPDATED */
+            -webkit-backdrop-filter: blur(20px); /* UPDATED */
+            backdrop-filter: blur(20px); /* UPDATED */
             box-shadow: 0 4px 20px rgba(0,0,0,0.2);
             z-index: 1001; padding: 0.5rem 2rem; box-sizing: border-box;
         }
@@ -245,9 +245,9 @@
         .change .bar3 { transform: translate(0, -8px) rotate(45deg); }
         .mobile-nav-overlay {
             height: 100%; width: 0; position: fixed; z-index: 1001; top: 0; left: 0;
-            background: var(--card-bg);
-            -webkit-backdrop-filter: var(--blur);
-            backdrop-filter: var(--blur);
+            background: rgba(13, 13, 13, 0.7); /* UPDATED */
+            -webkit-backdrop-filter: blur(20px); /* UPDATED */
+            backdrop-filter: blur(20px); /* UPDATED */
             overflow: auto; transition: 0.5s;
         }
         .mobile-nav-overlay-content {
@@ -1293,6 +1293,8 @@
           const mobileNavLinks = mobileNavOverlay.querySelectorAll('a, .language-item');
 
           function toggleNav() {
+              // We removed the 'change' class toggle to prevent the X animation
+              // mobileMenuIcon.classList.toggle("change"); 
               const isNavOpen = mobileNavOverlay.style.width === "100%";
               mobileNavOverlay.style.width = isNavOpen ? "0%" : "100%";
           }
