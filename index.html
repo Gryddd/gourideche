@@ -152,58 +152,32 @@
         }
         
         .nav-dropdown-menu {
-    background: linear-gradient(145deg, rgba(20,20,20,0.95), rgba(35,35,35,0.95));
-    border: 1px solid rgba(255,255,255,0.08);
-    box-shadow: 0 4px 20px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05);
-    color: white;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    position: absolute;
-    top: calc(100% + 10px);
-    left: 50%;
-    transform: translateX(-50%);
-    border-radius: 8px;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.2s ease, visibility 0.2s ease;
-    z-index: 2000;
-    text-align: center;
-}
-.nav-dropdown-menu li:hover {
-    background-color: rgba(255, 137, 6, 0.15);
-}
-.nav-dropdown.active .nav-dropdown-menu {
-    opacity: 1;
-    visibility: visible;
-}
-.nav-dropdown.active .nav-dropdown-menu {
-    opacity: 1;
-    visibility: visible;
-}
+            background: linear-gradient(145deg, rgba(20,20,20,0.95), rgba(35,35,35,0.95));
+            border: 1px solid rgba(255,255,255,0.08);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05);
+            color: white;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 8px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.2s ease, visibility 0.2s ease;
+            z-index: 2000;
+            text-align: center;
+        }
+        .nav-dropdown-menu li:hover {
+            background-color: rgba(255, 137, 6, 0.15);
+        }
         .nav-dropdown.active .nav-dropdown-menu {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    position: absolute; /* aligns with parent dropdown button */
-    top: calc(100% + 10px);
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: rgba(0, 0, 0, 0.6); /* semi-transparent black */
-    -webkit-backdrop-filter: blur(10px); /* slight blur */
-    backdrop-filter: blur(10px);
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.2s ease, visibility 0.2s ease;
-    z-index: 2000;
-    text-align: center; /* center the text */
-}
-.nav-dropdown.active .nav-dropdown-menu {
-    opacity: 1;
-    visibility: visible;
-}
+            opacity: 1;
+            visibility: visible;
+        }
+
         .nav-dropdown-menu li {
             padding: 0;
             margin: 0;
@@ -763,8 +737,204 @@
             }
         }
 
+        /* =================================================================== */
+        /* CREATIVE MOBILE ENHANCEMENTS - ADD THIS TO THE END OF YOUR CSS      */
+        /* =================================================================== */
+
+        @media screen and (max-width: 1023px) {
+
+            /* --- 1. ENHANCED MOBILE NAVIGATION OVERLAY --- */
+            .mobile-nav-overlay-content {
+                top: 0;
+                padding-top: 60px; /* Make space for the close button */
+                display: flex;
+                flex-direction: column;
+                height: 100%;
+                box-sizing: border-box;
+            }
+
+            /* Add a user profile section to the top of the nav */
+            .mobile-nav-overlay-content::before {
+                content: '';
+                display: block;
+                width: 80px;
+                height: 80px;
+                background-image: url('images/aura.webp'); /* Or aura.jpg */
+                background-size: cover;
+                background-position: center;
+                border-radius: 50%;
+                border: 2px solid var(--primary-blue);
+                margin: 20px auto 10px;
+            }
+            .mobile-nav-overlay-content::after {
+                content: 'Walid Gourideche';
+                font-family: var(--font-heading);
+                color: var(--text-color);
+                font-size: 1.2rem;
+                margin-bottom: 30px;
+            }
+            
+            /* Staggered link animation for a modern feel */
+            .mobile-nav-overlay a {
+                font-size: 1.3rem; /* Larger, more tappable links */
+                padding: 12px;
+                opacity: 0;
+                animation: fadeInLink 0.5s ease-out forwards;
+            }
+            
+            /* Add animation delays for the staggered effect */
+            .mobile-nav-overlay-content > a:nth-of-type(1) { animation-delay: 0.2s; }
+            .mobile-nav-overlay-content > a:nth-of-type(2) { animation-delay: 0.3s; }
+            .mobile-nav-overlay-content > a:nth-of-type(3) { animation-delay: 0.4s; }
+            .mobile-nav-overlay-content > a:nth-of-type(4) { animation-delay: 0.5s; }
+            .mobile-nav-overlay-content > a:nth-of-type(5) { animation-delay: 0.6s; }
+            .mobile-nav-overlay-content > a:nth-of-type(6) { animation-delay: 0.7s; }
+
+            @keyframes fadeInLink {
+                from {
+                    opacity: 0;
+                    transform: translateY(10px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            /* Improve the look of the mobile dropdowns */
+            .mobile-documents-selector, .mobile-language-selector {
+                margin-top: auto; /* Push them to the bottom */
+                padding-bottom: 30px;
+            }
+            
+            .mobile-toggle {
+                background: rgba(255, 255, 255, 0.05);
+                border: 1px solid var(--border-color);
+                border-radius: 8px;
+            }
+
+            /* --- 2. HERO SECTION SCROLL INDICATOR --- */
+            .hero::after {
+                content: '';
+                position: absolute;
+                bottom: 30px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 20px;
+                height: 30px;
+                border: 2px solid var(--primary-blue);
+                border-radius: 10px;
+                opacity: 0.7;
+            }
+            .hero::before {
+                content: '';
+                position: absolute;
+                bottom: 50px;
+                left: 50%;
+                width: 4px;
+                height: 8px;
+                background: var(--primary-blue);
+                border-radius: 2px;
+                animation: scroll-indicator 2s infinite;
+            }
+            @keyframes scroll-indicator {
+                0% { transform: translate(-50%, -10px); opacity: 0; }
+                50% { opacity: 1; }
+                100% { transform: translate(-50%, 10px); opacity: 0; }
+            }
+
+
+            /* --- 3. OPTIMIZED TIMELINE FOR MOBILE --- */
+            .timeline-wrapper::before {
+                left: 10px; /* Move the line closer to the edge */
+            }
+            .timeline-item {
+                padding-left: 40px; /* Reduce indentation */
+                margin-bottom: 30px;
+            }
+            .timeline-item::before {
+                left: 4px; /* Align the dot with the line */
+                width: 13px;
+                height: 13px;
+            }
+            .timeline-content {
+                padding: 1.5rem;
+            }
+
+
+            /* --- 4. INTEGRATED PROJECT CARD --- */
+            @media screen and (max-width: 900px) {
+                .project-item {
+                    padding: 0; /* Remove parent padding, card will handle it */
+                    background: var(--card-bg); /* Ensure card has background */
+                    overflow: hidden; /* Important for border-radius on image */
+                }
+                .project-image {
+                    padding: 0;
+                    margin: 0;
+                }
+                .project-image img {
+                    border-radius: 12px 12px 0 0; /* Round top corners */
+                    border: none;
+                    width: 100%;
+                    height: auto;
+                    display: block;
+                }
+                .project-description {
+                    padding: 1.5rem;
+                }
+                .project-description h3 {
+                    font-size: 1.3rem;
+                }
+            }
+
+
+            /* --- 5. CLEARER STATIC CONTACT CARDS ON MOBILE --- */
+            .contact-grid {
+                grid-template-columns: 1fr; /* Stack to 1 column on small mobile */
+            }
+            @media (min-width: 500px) {
+                .contact-grid {
+                    grid-template-columns: repeat(2, 1fr); /* 2 columns on larger mobile */
+                }
+            }
+            
+            .flip-card {
+                height: auto; /* Let the content define the height */
+                min-height: 10rem;
+                perspective: none; /* Disable 3D effect on mobile */
+            }
+            .flip-card-inner {
+                position: static;
+                transform-style: flat;
+                transform: none !important; /* Override JS and hover states */
+                transition: none;
+            }
+            .flip-card-front, .flip-card-back {
+                position: static; /* No longer absolute */
+                transform: none; /* No rotation */
+                backface-visibility: visible; /* Make both visible */
+                width: 100%;
+                height: auto;
+                display: flex; /* Using flex to align content */
+            }
+            .flip-card-front {
+                /* Merge front and back into one card visually */
+                border-bottom-left-radius: 0;
+                border-bottom-right-radius: 0;
+                border-bottom: 1px dashed rgba(0, 191, 255, 0.2);
+                padding: 1.5rem 1rem;
+            }
+            .flip-card-back {
+                border-top-left-radius: 0;
+                border-top-right-radius: 0;
+                min-height: 4rem;
+                padding: 1rem;
+                font-size: 1rem;
+            }
+        }
 </style>
-</link></head>
+</head>
 <body>
 <video autoplay="" id="background-video" loop="" muted="" playsinline="">
 <source src="videos/background.webm" type="video/webm"/>
