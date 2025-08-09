@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 
 <html lang="de">
@@ -63,6 +64,10 @@
             font-weight: 400; /* Default body weight */
             line-height: 1.6;
         }
+        /* Style for when a modal is open */
+        body.modal-open {
+            overflow: hidden;
+        }
         h1, h2, h3, .nav-links a, .nav-dropdown button { font-family: var(--font-heading); }
 
         h1, h2, h3, h4 {
@@ -89,9 +94,9 @@
         }
         .main-nav {
             position: fixed; top: 0; left: 0; width: 100%;
-            background: rgba(13, 13, 13, 0.7); /* UPDATED */
-            -webkit-backdrop-filter: blur(20px); /* UPDATED */
-            backdrop-filter: blur(20px); /* UPDATED */
+            background: rgba(13, 13, 13, 0.7);
+            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(20px);
             box-shadow: 0 4px 20px rgba(0,0,0,0.2);
             z-index: 1001; padding: 0.5rem 2rem; box-sizing: border-box;
         }
@@ -245,9 +250,9 @@
         .change .bar3 { transform: translate(0, -8px) rotate(45deg); }
         .mobile-nav-overlay {
             height: 100%; width: 0; position: fixed; z-index: 1001; top: 0; left: 0;
-            background: rgba(13, 13, 13, 0.7); /* UPDATED */
-            -webkit-backdrop-filter: blur(20px); /* UPDATED */
-            backdrop-filter: blur(20px); /* UPDATED */
+            background: rgba(13, 13, 13, 0.7);
+            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(20px);
             overflow: auto; transition: 0.5s;
         }
         .mobile-nav-overlay-content {
@@ -263,7 +268,7 @@
         
         .container {
             width: 90%; 
-            max-width: 59rem; /* 944px */
+            max-width: 59rem;
             margin: 0 auto;
             padding-top: 80px; 
             padding-bottom: 100px;
@@ -275,8 +280,8 @@
             box-sizing: border-box;
         }
         .hero-image { 
-            width: 17rem; /* 272px */
-            height: 17rem; /* 272px */
+            width: 17rem;
+            height: 17rem;
             flex-shrink: 0; 
         }
         .hero-image picture, .hero-image img {
@@ -288,7 +293,7 @@
              box-shadow: 0 0 25px rgba(0, 191, 255, 0.4);
         }
         .hero-text { 
-            flex-basis: 29.5rem; /* 472px */
+            flex-basis: 29.5rem;
             text-align: left; 
         }
         h1 {
@@ -301,15 +306,8 @@
             animation: typing 2s steps(18, end), blink-caret .75s step-end infinite;
         }
 
-        @keyframes typing {
-            from { width: 0 }
-            to { width: 100% }
-        }
-
-        @keyframes blink-caret {
-            from, to { border-color: transparent }
-            50% { border-color: var(--primary-blue); }
-        }
+        @keyframes typing { from { width: 0 } to { width: 100% } }
+        @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: var(--primary-blue); } }
         
         .hero-job-title {
             font-size: 1.5rem;
@@ -343,7 +341,7 @@
         
         .video-thumbnail {
             position: relative; cursor: pointer; 
-            max-width: 47rem; /* 752px */
+            max-width: 47rem;
             margin: 0 auto; border: 1px solid var(--border-color);
         }
         .video-thumbnail picture, .video-thumbnail img { width: 100%; display: block; }
@@ -363,15 +361,18 @@
             margin-left: 5px;
         }
         .video-thumbnail:hover .play-button { transform: translate(-50%, -50%) scale(1.1); }
+        
         .modal {
             display: none; position: fixed; z-index: 1003;
             left: 0; top: 0; width: 100%; height: 100%;
-            overflow: auto; background-color: rgba(0,0,0,0.9);
+            background-color: rgba(0,0,0,0.7);
+            -webkit-backdrop-filter: blur(8px);
+            backdrop-filter: blur(8px);
         }
         .modal-content {
             position: relative; margin: auto; padding: 0;
             width: 90%; 
-            max-width: 56rem; /* 896px */
+            max-width: 56rem;
             top: 50%;
             transform: translateY(-50%);
         }
@@ -388,9 +389,21 @@
             cursor: pointer; background: none; border: none; padding: 0;
         }
 
+        #diagram-modal .modal-content, #image-modal .modal-content {
+            max-width: 70rem;
+        }
+        #diagram-modal img, #image-modal img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 8px;
+            max-height: 90vh;
+            object-fit: contain;
+        }
+
         .timeline-wrapper { 
             position: relative; 
-            max-width: 44rem; /* 704px */
+            max-width: 44rem;
             margin: 0 auto; 
         }
         .timeline-wrapper::before {
@@ -419,9 +432,7 @@
             transform: translateY(-5px);
             box-shadow: 0 8px 30px rgba(0,0,0,0.25);
         }
-        .timeline-content h3 {
-            margin-bottom: 4px;
-        }
+        .timeline-content h3 { margin-bottom: 4px; }
         .timeline-location {
             font-style: italic;
             font-size: 0.9em;
@@ -446,7 +457,7 @@
 
         .skills-grid {
             display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(16.5rem, 1fr)); /* 264px */
+            grid-template-columns: repeat(auto-fit, minmax(16.5rem, 1fr));
             gap: 1.5rem;
         }
         .skill-card {
@@ -465,57 +476,153 @@
         .skill-card h3 { margin-top: 0; }
         .skill-card p { margin-bottom: 0; }
         
-        .project-item {
-            display: grid;
-            grid-template-columns: 1fr 1.5fr;
-            gap: 2rem;
-            align-items: start;
+        /* === START: FINAL FIXED PROJECT CAROUSEL STYLES === */
+        .project-carousel {
             background: var(--card-bg);
             -webkit-backdrop-filter: var(--blur);
             backdrop-filter: var(--blur);
             border-radius: 12px;
             padding: 2rem;
-            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
             box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-            text-align: left;
         }
-        .project-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1.5rem;
+            margin-bottom: 1.5rem;
         }
-        .project-image img {
-            width: 100%;
-            height: auto;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-        }
-        .project-description h3 {
-            margin-top: 0;
+        .project-header h3 {
+            margin: 0;
             font-size: 1.5rem;
         }
-        .project-description h4 {
-            margin-top: 2rem;
-            margin-bottom: 0.75rem;
-            font-family: var(--font-heading);
-            font-weight: 700;
-            font-size: 1.2rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border-left: 3px solid var(--primary-blue);
-            padding-left: 10px;
+        .carousel-content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
         }
-        .project-description p, .project-description li {
+        .carousel-viewport {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: #111;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            cursor: pointer;
+        }
+        .carousel-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.4s ease-in-out;
+            z-index: 1;
+        }
+        .carousel-slide.active {
+            opacity: 1;
+            z-index: 2;
+        }
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+        .carousel-details {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        .carousel-descriptions {
+            position: relative;
+            text-align: left;
+            flex-grow: 1;
+            min-height: 180px; /* Increased to prevent layout shift */
+            overflow: hidden;
+        }
+        .slide-description {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0; /* Use right: 0 instead of width: 100% */
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+        }
+        .slide-description.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .slide-description h4 {
+            font-size: 1.3rem;
+            margin-top: 0;
+            margin-bottom: 0.75rem;
+        }
+        .slide-description p {
             font-weight: 300;
             line-height: 1.7;
             opacity: 0.9;
+            margin: 0;
         }
-        .project-description ul {
-            padding-left: 20px;
-            margin-top: 0;
+        .carousel-controls {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-top: auto;
+            padding-top: 1rem;
         }
-        
+        .carousel-arrow {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid transparent;
+            border-radius: 50%;
+            padding: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            user-select: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+        .carousel-arrow:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: var(--primary-blue);
+            transform: scale(1.1);
+        }
+        .carousel-arrow:active {
+            transform: scale(0.95);
+        }
+        .carousel-arrow svg {
+            width: 24px;
+            height: 24px;
+            display: block;
+            pointer-events: none;
+        }
+        .carousel-arrow path {
+            fill: var(--primary-blue);
+        }
+        .slide-counter {
+            font-family: var(--font-heading);
+            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            border: 1px solid var(--border-color);
+        }
+        @media screen and (max-width: 768px) {
+            .project-header { flex-direction: column; gap: 1rem; }
+            .carousel-content-grid { grid-template-columns: 1fr; }
+            .carousel-controls { justify-content: center; }
+        }
+        /* === END: PROJECT CAROUSEL STYLES === */
+
         .faq-accordion { 
-            max-width: 47rem; /* 752px */
+            max-width: 47rem;
             margin: 0 auto; 
         }
         .faq-item { border-bottom: 1px solid var(--border-color); }
@@ -536,9 +643,7 @@
             height: 20px;
             fill: var(--primary-blue);
         }
-        .faq-question.active .faq-icon {
-            transform: rotate(45deg);
-        }
+        .faq-question.active .faq-icon { transform: rotate(45deg); }
         .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
         .faq-answer p {
             padding: 0 20px 20px 20px;
@@ -560,7 +665,7 @@
         }
         .flip-card {
             background-color: transparent;
-            height: 10.5rem; /* 168px */
+            height: 10.5rem;
             perspective: 1000px;
         }
         .flip-card-inner {
@@ -613,11 +718,9 @@
             margin: 0;
         }
         
-        .contact-form-section {
-            padding-top: 80px;
-        }
+        .contact-form-section { padding-top: 80px; }
         #contact-form {
-            max-width: 47rem; /* 752px */
+            max-width: 47rem;
             margin: 0 auto;
             display: flex;
             flex-direction: column;
@@ -679,206 +782,63 @@
             height: 20px;
         }
 
-
         .main-footer { text-align: center; padding: 2rem; border-top: 1px solid var(--border-color); }
         .main-footer p { margin: 0; }
         
-        /* SCALING LOGIC FOR LARGE SCREENS */
         @media screen and (min-width: 1100px) {
-            html {
-                /* This formula smoothly scales the font size from 16px at 1100px wide to 20px at 1920px wide */
-                font-size: calc(16px + 4 * ((100vw - 1100px) / (1920 - 1100)));
-            }
+            html { font-size: calc(16px + 4 * ((100vw - 1100px) / (1920 - 1100))); }
         }
-        /* Capping the font size at 24px for very large (4k+) screens to prevent it from getting too big */
         @media screen and (min-width: 2800px) {
-            html {
-                font-size: 21px;
-            }
+            html { font-size: 21px; }
         }
-
         @media (max-width: 768px) {
-          section {
-            padding: 4rem 1rem;
-          }
+          section { padding: 4rem 1rem; }
         }
-
         @media screen and (min-width: 480px) {
-            .contact-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
+            .contact-grid { grid-template-columns: repeat(2, 1fr); }
         }
-
         @media screen and (min-width: 768px) {
-            .contact-grid {
-                grid-template-columns: repeat(4, 1fr);
-            }
+            .contact-grid { grid-template-columns: repeat(4, 1fr); }
         }
         
-        @media screen and (max-width: 1023px) { /* Adjusted breakpoint for mobile/tablet */
-            .main-nav {
-                background-color: transparent;
-                border-bottom: none;
-            }
-            .nav-content {
-                display: none; 
-            }
-            .mobile-menu-icon {
-                display: block;
-            }
+        @media screen and (max-width: 1023px) {
+            .main-nav { background-color: transparent; border-bottom: none; }
+            .nav-content { display: none; }
+            .mobile-menu-icon { display: block; }
             h1 { font-size: 2rem; }
             h2 { font-size: 1.8rem; }
             .hero-text { text-align: center; }
         }
         
-        @media screen and (max-width: 900px) {
-            .project-item {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* =================================================================== */
-        /* CREATIVE MOBILE ENHANCEMENTS                                        */
-        /* =================================================================== */
-
         @media screen and (max-width: 1023px) {
-
-            /* --- 1. ENHANCED MOBILE NAVIGATION OVERLAY --- */
             .mobile-nav-overlay-content {
-                top: 0;
-                padding: 60px 0;
-                display: flex;
-                flex-direction: column;
-                justify-content: center; /* Center the items vertically */
-                height: 100%;
-                box-sizing: border-box;
+                top: 0; padding: 60px 0; display: flex; flex-direction: column;
+                justify-content: center; height: 100%; box-sizing: border-box;
             }
-            
-            /* Staggered link animation for a modern feel */
             .mobile-nav-overlay a {
-                font-size: 1.3rem; /* Larger, more tappable links */
-                padding: 12px;
-                opacity: 0;
-                animation: fadeInLink 0.5s ease-out forwards;
+                font-size: 1.3rem; padding: 12px;
+                opacity: 0; animation: fadeInLink 0.5s ease-out forwards;
             }
-            
-            /* Add animation delays for the staggered effect */
             .mobile-nav-overlay-content > a:nth-of-type(1) { animation-delay: 0.2s; }
             .mobile-nav-overlay-content > a:nth-of-type(2) { animation-delay: 0.3s; }
             .mobile-nav-overlay-content > a:nth-of-type(3) { animation-delay: 0.4s; }
             .mobile-nav-overlay-content > a:nth-of-type(4) { animation-delay: 0.5s; }
             .mobile-nav-overlay-content > a:nth-of-type(5) { animation-delay: 0.6s; }
             .mobile-nav-overlay-content > a:nth-of-type(6) { animation-delay: 0.7s; }
-
-            @keyframes fadeInLink {
-                from {
-                    opacity: 0;
-                    transform: translateY(10px);
-                }
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-            }
-
-            /* Improve the look of the mobile dropdowns */
-            .mobile-documents-selector, .mobile-language-selector {
-                margin-top: auto; /* Push them to the bottom */
-                padding-bottom: 30px;
-            }
-            
-            .mobile-toggle {
-                background: rgba(255, 255, 255, 0.05);
-                border: 1px solid var(--border-color);
-                border-radius: 8px;
-            }
-
-            /* --- 2. OPTIMIZED TIMELINE FOR MOBILE --- */
-            .timeline-wrapper::before {
-                left: 10px; /* Move the line closer to the edge */
-            }
-            .timeline-item {
-                padding-left: 40px; /* Reduce indentation */
-                margin-bottom: 30px;
-            }
-            .timeline-item::before {
-                left: 4px; /* Align the dot with the line */
-                width: 13px;
-                height: 13px;
-            }
-            .timeline-content {
-                padding: 1.5rem;
-            }
-
-            /* --- 3. INTEGRATED PROJECT CARD --- */
-            @media screen and (max-width: 900px) {
-                .project-item {
-                    padding: 0; /* Remove parent padding, card will handle it */
-                    background: var(--card-bg); /* Ensure card has background */
-                    overflow: hidden; /* Important for border-radius on image */
-                }
-                .project-image {
-                    padding: 0;
-                    margin: 0;
-                }
-                .project-image img {
-                    border-radius: 12px 12px 0 0; /* Round top corners */
-                    border: none;
-                    width: 100%;
-                    height: auto;
-                    display: block;
-                }
-                .project-description {
-                    padding: 1.5rem;
-                }
-                .project-description h3 {
-                    font-size: 1.3rem;
-                }
-            }
-
-            /* --- 4. CLEARER STATIC CONTACT CARDS ON MOBILE --- */
-            .contact-grid {
-                grid-template-columns: 1fr; /* Stack to 1 column on small mobile */
-            }
-            @media (min-width: 500px) {
-                .contact-grid {
-                    grid-template-columns: repeat(2, 1fr); /* 2 columns on larger mobile */
-                }
-            }
-            
-            .flip-card {
-                height: auto; /* Let the content define the height */
-                min-height: 10rem;
-                perspective: none; /* Disable 3D effect on mobile */
-            }
-            .flip-card-inner {
-                position: static;
-                transform-style: flat;
-                transform: none !important; /* Override JS and hover states */
-                transition: none;
-            }
-            .flip-card-front, .flip-card-back {
-                position: static; /* No longer absolute */
-                transform: none; /* No rotation */
-                backface-visibility: visible; /* Make both visible */
-                width: 100%;
-                height: auto;
-                display: flex; /* Using flex to align content */
-            }
-            .flip-card-front {
-                /* Merge front and back into one card visually */
-                border-bottom-left-radius: 0;
-                border-bottom-right-radius: 0;
-                border-bottom: 1px dashed rgba(0, 191, 255, 0.2);
-                padding: 1.5rem 1rem;
-            }
-            .flip-card-back {
-                border-top-left-radius: 0;
-                border-top-right-radius: 0;
-                min-height: 4rem;
-                padding: 1rem;
-                font-size: 1rem;
-            }
+            @keyframes fadeInLink { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+            .mobile-documents-selector, .mobile-language-selector { margin-top: auto; padding-bottom: 30px; }
+            .mobile-toggle { background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-color); border-radius: 8px; }
+            .timeline-wrapper::before { left: 10px; }
+            .timeline-item { padding-left: 40px; margin-bottom: 30px; }
+            .timeline-item::before { left: 4px; width: 13px; height: 13px; }
+            .timeline-content { padding: 1.5rem; }
+            .contact-grid { grid-template-columns: 1fr; }
+            @media (min-width: 500px) { .contact-grid { grid-template-columns: repeat(2, 1fr); } }
+            .flip-card { height: auto; min-height: 10rem; perspective: none; }
+            .flip-card-inner { position: static; transform-style: flat; transform: none !important; transition: none; }
+            .flip-card-front, .flip-card-back { position: static; transform: none; backface-visibility: visible; width: 100%; height: auto; display: flex; }
+            .flip-card-front { border-bottom-left-radius: 0; border-bottom-right-radius: 0; border-bottom: 1px dashed rgba(0, 191, 255, 0.2); padding: 1.5rem 1rem; }
+            .flip-card-back { border-top-left-radius: 0; border-top-right-radius: 0; min-height: 4rem; padding: 1rem; font-size: 1rem; }
         }
 </style>
 </head>
@@ -1037,28 +997,97 @@
 </section>
 <!-- ========== PROJECT SECTION ========== -->
 <section class="container" id="projekte">
-<h2 class="lang" data-de="Projekt: Home-Lab" data-en="Project: Home Lab" data-fr="Projet : Labo Maison">Projekt: Home-Lab</h2>
-<div class="project-item" data-aos="fade-up">
-<div class="project-image">
-<picture>
-<source srcset="images/homelab.webp" type="image/webp"/>
-<img alt="Ein Foto meines Home-Lab-Setups mit Servern, NAS und Switch." class="lang-alt" data-de="Ein Foto meines Home-Lab-Setups mit Servern, NAS und Switch." data-en="A photo of my home lab setup, showing servers, a NAS, and a switch." data-fr="Une photo de mon installation de laboratoire à domicile, montrant des serveurs, un NAS et un commutateur." loading="lazy" src="images/homelab.jpg"/>
-</picture>
-</div>
-<div class="project-description">
-<h3 class="lang" data-de="Zuverlässiges und redundantes Heimnetzwerk" data-en="Reliable and Redundant Home Network" data-fr="Réseau Domestique Fiable et Redondant">Zuverlässiges und redundantes Heimnetzwerk</h3>
-<p class="lang" data-de="Dieses Projekt zeigt den Aufbau einer stabilen und ausfallsicheren IT-Infrastruktur. Jede Komponente hat eine spezifische Rolle, um hohe Effizienz und Redundanz zu gewährleisten." data-en="This project showcases a stable and resilient IT infrastructure. Each component has a specific role to ensure high efficiency and redundancy." data-fr="Ce projet présente une infrastructure informatique stable et résiliente. Chaque composant a un rôle spécifique pour assurer une efficacité et une redondance élevées.">Dieses Projekt zeigt den Aufbau einer stabilen und ausfallsicheren IT-Infrastruktur. Jede Komponente hat eine spezifische Rolle, um hohe Effizienz und Redundanz zu gewährleisten.</p>
-<h4 class="lang" data-de="Primärserver" data-en="Primary Server" data-fr="Serveur Principal">Primärserver</h4>
-<p class="lang" data-de="Ein Lenovo ThinkCentre Mini-PC mit Ubuntu Server. Er hostet Dienste wie Plex und Samba für die Dateifreigabe und greift auf den zentralen NAS-Speicher zu." data-en="A Lenovo ThinkCentre Mini-PC with Ubuntu Server. It hosts services like Plex and Samba for file sharing, accessing the central NAS storage." data-fr="Un mini-PC Lenovo ThinkCentre avec Ubuntu Server. Il héberge des services comme Plex et Samba pour le partage de fichiers, accédant au stockage NAS central.">Ein Lenovo ThinkCentre Mini-PC mit Ubuntu Server. Er hostet Dienste wie Plex und Samba für die Dateifreigabe und greift auf den zentralen NAS-Speicher zu.</p>
-<h4 class="lang" data-de="Zentraler Datenspeicher (NAS)" data-en="Central Storage (NAS)" data-fr="Stockage Central (NAS)">Zentraler Datenspeicher (NAS)</h4>
-<p class="lang" data-de="Ein Network Attached Storage (NAS) dient als zentraler und ausfallsicherer Speicher für alle wichtigen Dateien, optimiert für den Dauerbetrieb." data-en="A Network Attached Storage (NAS) serves as the central and fail-safe repository for all important files, optimized for 24/7 operation." data-fr="Un stockage en réseau (NAS) sert de référentiel central et sécurisé pour tous les fichiers importants, optimisé pour un fonctionnement 24/7.">Ein Network Attached Storage (NAS) dient als zentraler und ausfallsicherer Speicher für alle wichtigen Dateien, optimiert für den Dauerbetrieb.</p>
-<h4 class="lang" data-de="Netzwerk-Infrastruktur" data-en="Network Infrastructure" data-fr="Infrastructure Réseau">Netzwerk-Infrastruktur</h4>
-<p class="lang" data-de="Ein Cisco Business 220 Switch bildet den Kern des Netzwerks. Er verbindet alle Server, das NAS und Endgeräte für eine schnelle und stabile Kommunikation." data-en="A Cisco Business 220 switch forms the core of the network. It connects all servers, the NAS, and end-user devices for fast and stable communication." data-fr="Un commutateur Cisco Business 220 constitue le cœur du réseau. Il connecte tous les serveurs, le NAS et les appareils des utilisateurs pour une communication rapide et stable.">Ein Cisco Business 220 Switch bildet den Kern des Netzwerks. Er verbindet alle Server, das NAS und Endgeräte für eine schnelle und stabile Kommunikation.</p>
-<h4 class="lang" data-de="Backup-Server" data-en="Backup Server" data-fr="Serveur de Sauvegarde">Backup-Server</h4>
-<p class="lang" data-de="Ein zweiter, identischer Lenovo Mini-PC steht als sofortiges Backup bereit. Bei einem Ausfall des Primärservers wird er einfach umgesteckt, um die Ausfallzeit zu minimieren." data-en="A second, identical Lenovo Mini-PC is ready as an immediate backup. In case of a primary server failure, it can be swapped in instantly, minimizing downtime." data-fr="Un second mini-PC Lenovo, configuré à l'identique, est prêt en tant que sauvegarde immédiate. En cas de défaillance du serveur principal, il peut être échangé instantanément, minimisant les temps d'arrêt.">Ein zweiter, identischer Lenovo Mini-PC steht als sofortiges Backup bereit. Bei einem Ausfall des Primärservers wird er einfach umgesteckt, um die Ausfallzeit zu minimieren.</p>
-</div>
-</div>
+    <h2 class="lang" data-de="Projekt: Virtualisiertes Home-Lab" data-en="Project: Virtualized Home Lab" data-fr="Projet : Labo Maison Virtualisé">Projekt: Virtualisiertes Home-Lab</h2>
+    
+    <div class="project-carousel" data-aos="fade-up">
+        <div class="project-header">
+            <h3 class="lang" data-de="Eine End-to-End-Infrastruktur" data-en="An End-to-End Infrastructure" data-fr="Une Infrastructure de Bout en Bout">Eine End-to-End-Infrastruktur</h3>
+            <button id="open-diagram-modal" class="submit-btn lang" data-de="Topologie ansehen" data-en="View Topology" data-fr="Voir la Topologie">Topologie ansehen</button>
+        </div>
+
+        <div class="carousel-content-grid">
+            <div class="carousel-viewport">
+                <!-- All Slide Images -->
+                <div class="carousel-slide active"><img src="images/virtual_machines_overview.png" alt="Overview of all virtual machines in the lab environment."/></div>
+                <div class="carousel-slide"><img src="images/pfsense_dashboard.png" alt="pfSense Dashboard showing system information and network interfaces."/></div>
+                <div class="carousel-slide"><img src="images/pfsense_leases.png" alt="DHCP leases table in pfSense, showing assigned IP addresses."/></div>
+                <div class="carousel-slide"><img src="images/windows_server_roles.png" alt="Windows Server Manager showing AD DS, DNS, and File Services roles installed."/></div>
+                <div class="carousel-slide"><img src="images/windows_10_joined.png" alt="Windows 10 system properties showing it is joined to the homelab.local domain."/></div>
+                <div class="carousel-slide"><img src="images/pfsense_snmp.png" alt="SNMP service configuration page in pfSense."/></div>
+                <div class="carousel-slide"><img src="images/ubuntu_server_netdata.png" alt="Netdata dashboard running on the Ubuntu Server."/></div>
+                <div class="carousel-slide"><img src="images/netdata_snmp_devices.png" alt="Netdata monitoring dashboard showing SNMP devices pfSense and Windows Server."/></div>
+            </div>
+
+            <div class="carousel-details">
+                <div class="carousel-descriptions">
+                    <!-- All Slide Descriptions -->
+                    <div class="slide-description active">
+                        <h4 class="lang" data-de="Projektübersicht" data-en="Project Overview" data-fr="Vue d'ensemble du projet">Projektübersicht</h4>
+                        <p class="lang" data-de="Dieses Projekt demonstriert den Aufbau einer kompletten, virtualisierten IT-Umgebung in VMware. Es umfasst eine pfSense-Firewall, einen Windows Server als Domain Controller und einen Ubuntu Server für das Monitoring, um eine realistische Unternehmens-IT nachzubilden." data-en="This project demonstrates the setup of a complete, virtualized IT environment in VMware. It includes a pfSense firewall, a Windows Server as a Domain Controller, and an Ubuntu Server for monitoring, replicating a realistic corporate IT setup." data-fr="Ce projet démontre la mise en place d'un environnement informatique complet et virtualisé sous VMware. Il comprend un pare-feu pfSense, un Windows Server en tant que contrôleur de domaine et un serveur Ubuntu pour la surveillance, répliquant une configuration informatique d'entreprise réaliste.">Dieses Projekt demonstriert den Aufbau einer kompletten, virtualisierten IT-Umgebung in VMware. Es umfasst eine pfSense-Firewall, einen Windows Server als Domain Controller und einen Ubuntu Server für das Monitoring, um eine realistische Unternehmens-IT nachzubilden.</p>
+                    </div>
+                    <div class="slide-description">
+                        <h4 class="lang" data-de="pfSense-Firewall als Gateway" data-en="pfSense Firewall as Gateway" data-fr="Pare-feu pfSense comme passerelle">pfSense-Firewall als Gateway</h4>
+                        <p class="lang" data-de="Eine pfSense-VM agiert als zentraler Router und Firewall. Sie wurde mit einer statischen LAN-IP (192.168.10.2) konfiguriert und trennt das interne Netzwerk (LAN) sicher vom externen Netzwerk (WAN)." data-en="A pfSense VM acts as the central router and firewall. It was configured with a static LAN IP (192.168.10.2) and securely separates the internal network (LAN) from the external network (WAN)." data-fr="Une VM pfSense sert de routeur et de pare-feu central. Elle a été configurée avec une IP LAN statique (192.168.10.2) et sépare de manière sécurisée le réseau interne (LAN) du réseau externe (WAN).">Eine pfSense-VM agiert als zentraler Router und Firewall. Sie wurde mit einer statischen LAN-IP (192.168.10.2) konfiguriert und trennt das interne Netzwerk (LAN) sicher vom externen Netzwerk (WAN).</p>
+                    </div>
+                    <div class="slide-description">
+                        <h4 class="lang" data-de="DHCP-Server-Konfiguration" data-en="DHCP Server Configuration" data-fr="Configuration du serveur DHCP">DHCP-Server-Konfiguration</h4>
+                        <p class="lang" data-de="Der DHCP-Dienst auf pfSense wurde aktiviert, um automatisch IP-Adressen (192.168.10.100 - 192.168.10.150) an Clients wie die Windows 10 VM zu vergeben. Dies vereinfacht die Netzwerkverwaltung erheblich." data-en="The DHCP service on pfSense was enabled to automatically assign IP addresses (192.168.10.100 - 192.168.10.150) to clients like the Windows 10 VM. This significantly simplifies network administration." data-fr="Le service DHCP sur pfSense a été activé pour attribuer automatiquement des adresses IP (192.168.10.100 - 192.168.10.150) aux clients tels que la VM Windows 10. Cela simplifie considérablement l'administration du réseau.">Der DHCP-Dienst auf pfSense wurde aktiviert, um automatisch IP-Adressen (192.168.10.100 - 192.168.10.150) an Clients wie die Windows 10 VM zu vergeben. Dies vereinfacht die Netzwerkverwaltung erheblich.</p>
+                    </div>
+                    <div class="slide-description">
+                        <h4 class="lang" data-de="Windows Server als Domain Controller" data-en="Windows Server as Domain Controller" data-fr="Windows Server comme contrôleur de domaine">Windows Server als Domain Controller</h4>
+                        <p class="lang" data-de="Ein Windows Server 2022 wurde mit der statischen IP 192.168.10.10 installiert. Anschließend wurden die Rollen Active Directory Domain Services (AD DS) und DNS installiert, um ihn zum Domain Controller für die Domäne 'homelab.local' zu machen." data-en="A Windows Server 2022 was installed with the static IP 192.168.10.10. The Active Directory Domain Services (AD DS) and DNS roles were then installed to make it the Domain Controller for the 'homelab.local' domain." data-fr="Un Windows Server 2022 a été installé avec l'adresse IP statique 192.168.10.10. Les rôles Active Directory Domain Services (AD DS) et DNS ont ensuite été installés pour en faire le contrôleur de domaine pour le domaine 'homelab.local'.">Ein Windows Server 2022 wurde mit der statischen IP 192.168.10.10 installiert. Anschließend wurden die Rollen Active Directory Domain Services (AD DS) und DNS installiert, um ihn zum Domain Controller für die Domäne 'homelab.local' zu machen.</p>
+                    </div>
+                    <div class="slide-description">
+                        <h4 class="lang" data-de="Windows 10 Client in der Domäne" data-en="Windows 10 Client in the Domain" data-fr="Client Windows 10 dans le domaine">Windows 10 Client in der Domäne</h4>
+                        <p class="lang" data-de="Eine Windows 10 VM wurde installiert, erhielt eine IP-Adresse von pfSense und wurde erfolgreich der 'homelab.local'-Domäne hinzugefügt. Dies ermöglicht die zentrale Benutzerverwaltung und die Anmeldung mit Domänenkonten." data-en="A Windows 10 VM was installed, received an IP address from pfSense, and was successfully joined to the 'homelab.local' domain. This allows for centralized user management and logging in with domain accounts." data-fr="Une VM Windows 10 a été installée, a reçu une adresse IP de pfSense et a été jointe avec succès au domaine 'homelab.local'. Cela permet une gestion centralisée des utilisateurs et la connexion avec des comptes de domaine.">Eine Windows 10 VM wurde installiert, erhielt eine IP-Adresse von pfSense und wurde erfolgreich der 'homelab.local'-Domäne hinzugefügt. Dies ermöglicht die zentrale Benutzerverwaltung und die Anmeldung mit Domänenkonten.</p>
+                    </div>
+                    <div class="slide-description">
+                        <h4 class="lang" data-de="Aktivierung von SNMP für das Monitoring" data-en="Enabling SNMP for Monitoring" data-fr="Activation de SNMP pour la surveillance">Aktivierung von SNMP für das Monitoring</h4>
+                        <p class="lang" data-de="Um die Netzwerkgeräte überwachen zu können, wurde der SNMP-Dienst auf der pfSense-Firewall und dem Windows Server aktiviert. Es wurde eine sichere Community-String 'homelab-snmp' konfiguriert und der Zugriff auf den Monitoring-Server beschränkt." data-en="To monitor the network devices, the SNMP service was enabled on the pfSense firewall and the Windows Server. A secure community string 'homelab-snmp' was configured, and access was restricted to the monitoring server." data-fr="Pour surveiller les périphériques réseau, le service SNMP a été activé sur le pare-feu pfSense et le serveur Windows. Une chaîne de communauté sécurisée 'homelab-snmp' a été configurée et l'accès a été restreint au serveur de surveillance.">Um die Netzwerkgeräte überwachen zu können, wurde der SNMP-Dienst auf der pfSense-Firewall und dem Windows Server aktiviert. Es wurde eine sichere Community-String 'homelab-snmp' konfiguriert und der Zugriff auf den Monitoring-Server beschränkt.</p>
+                    </div>
+                    <div class="slide-description">
+                        <h4 class="lang" data-de="Einrichtung des Netdata Monitoring-Servers" data-en="Setting up the Netdata Monitoring Server" data-fr="Mise en place du serveur de surveillance Netdata">Einrichtung des Netdata Monitoring-Servers</h4>
+                        <p class="lang" data-de="Auf einer Ubuntu Server VM (IP 192.168.10.20) wurde Netdata installiert, eine leistungsstarke Echtzeit-Monitoring-Lösung. Diese Plattform sammelt und visualisiert Leistungsdaten aller Systeme im Netzwerk." data-en="Netdata, a powerful real-time monitoring solution, was installed on an Ubuntu Server VM (IP 192.168.10.20). This platform collects and visualizes performance data from all systems in the network." data-fr="Netdata, une solution de surveillance en temps réel puissante, a été installée sur une VM Ubuntu Server (IP 192.168.10.20). Cette plateforme collecte et visualise les données de performance de tous les systèmes du réseau.">Auf einer Ubuntu Server VM (IP 192.168.10.20) wurde Netdata installiert, eine leistungsstarke Echtzeit-Monitoring-Lösung. Diese Plattform sammelt und visualisiert Leistungsdaten aller Systeme im Netzwerk.</p>
+                    </div>
+                    <div class="slide-description">
+                        <h4 class="lang" data-de="Zentrales Monitoring-Dashboard" data-en="Centralized Monitoring Dashboard" data-fr="Tableau de bord de surveillance centralisé">Zentrales Monitoring-Dashboard</h4>
+                        <p class="lang" data-de="Erfolgreiche Integration: Netdata sammelt nun via SNMP Leistungsdaten (CPU, RAM, Netzwerkverkehr) von der pfSense-Firewall und dem Windows Server. Das Dashboard bietet eine zentrale Übersicht über den Zustand der gesamten Infrastruktur in Echtzeit." data-en="Successful Integration: Netdata now collects performance data (CPU, RAM, network traffic) from the pfSense firewall and Windows Server via SNMP. The dashboard provides a central, real-time overview of the entire infrastructure's health." data-fr="Intégration réussie : Netdata collecte désormais les données de performance (CPU, RAM, trafic réseau) du pare-feu pfSense et du serveur Windows via SNMP. Le tableau de bord offre une vue d'ensemble centralisée et en temps réel de l'état de toute l'infrastructure.">Erfolgreiche Integration: Netdata sammelt nun via SNMP Leistungsdaten (CPU, RAM, Netzwerkverkehr) von der pfSense-Firewall und dem Windows Server. Das Dashboard bietet eine zentrale Übersicht über den Zustand der gesamten Infrastruktur in Echtzeit.</p>
+                    </div>
+                </div>
+                <div class="carousel-controls">
+                    <button class="carousel-arrow prev" aria-label="Previous Slide">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"/>
+                        </svg>
+                    </button>
+                    <div class="slide-counter">1 / 8</div>
+                    <button class="carousel-arrow next" aria-label="Next Slide">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
+
+<!-- Diagram Modal -->
+<div class="modal" id="diagram-modal">
+    <div class="modal-content">
+        <button aria-label="Close diagram modal" class="close-button" id="close-diagram-modal">×</button>
+        <img src="images/diagram.png" alt="Home Lab Network Topology Diagram">
+    </div>
+</div>
+
+<!-- Image View Modal -->
+<div class="modal" id="image-modal">
+    <div class="modal-content">
+        <button aria-label="Close image modal" class="close-button" id="close-image-modal">×</button>
+        <img id="modal-image-content" src="" alt="Enlarged project view">
+    </div>
+</div>
+
 <section class="container" id="faq">
 <h2 class="lang" data-de="Häufig Gestellte Fragen" data-en="Frequently Asked Questions" data-fr="Questions Fréquemment Posées">Häufig Gestellte Fragen</h2>
 <div class="faq-accordion" data-aos="fade-up">
@@ -1230,71 +1259,11 @@
               });
           });
 
-
-          const videoModal = document.getElementById('video-modal');
-          const openModalBtn = document.getElementById('open-video-modal');
-          const closeModalBtn = document.getElementById('close-video-modal');
-          const youtubeVideoId = 'R_rKRfh7ceU';
-          let player;
-
-          function createPlayer() {
-            if (typeof YT === 'undefined' || typeof YT.Player === 'undefined') {
-                const tag = document.createElement('script');
-                tag.src = "https://www.youtube.com/iframe_api";
-                const firstScriptTag = document.getElementsByTagName('script')[0];
-                firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-                
-                window.onYouTubeIframeAPIReady = function() {
-                    player = new YT.Player('youtube-player-container', {
-                        height: '100%', width: '100%', videoId: youtubeVideoId,
-                        playerVars: { 'autoplay': 1, 'controls': 1, 'rel': 0 }
-                    });
-                };
-            } else {
-                if (!player) {
-                    player = new YT.Player('youtube-player-container', {
-                        height: '100%', width: '100%', videoId: youtubeVideoId,
-                        playerVars: { 'autoplay': 1, 'controls': 1, 'rel': 0 }
-                    });
-                } else {
-                    player.playVideo();
-                }
-            }
-          }
-
-          function openModal() {
-              videoModal.style.display = 'block';
-              createPlayer();
-          }
-
-          function closeModal() {
-              if (player && typeof player.stopVideo === 'function') {
-                  player.stopVideo();
-              }
-              videoModal.style.display = 'none';
-          }
-
-          openModalBtn.addEventListener('click', openModal);
-          closeModalBtn.addEventListener('click', closeModal);
-          window.addEventListener('click', (event) => {
-              if (event.target === videoModal) {
-                  closeModal();
-              }
-          });
-
-          window.addEventListener('keydown', (event) => {
-              if (event.key === 'Escape' && videoModal.style.display === 'block') {
-                  closeModal();
-              }
-          });
-
           const mobileMenuIcon = document.querySelector('.mobile-menu-icon');
           const mobileNavOverlay = document.getElementById("mobile-nav");
           const mobileNavLinks = mobileNavOverlay.querySelectorAll('a, .language-item');
 
           function toggleNav() {
-              // We removed the 'change' class toggle to prevent the X animation
-              // mobileMenuIcon.classList.toggle("change"); 
               const isNavOpen = mobileNavOverlay.style.width === "100%";
               mobileNavOverlay.style.width = isNavOpen ? "0%" : "100%";
           }
@@ -1305,7 +1274,7 @@
                 if (link.getAttribute('href')?.startsWith('#') || link.hasAttribute('download') || link.classList.contains('language-item')) {
                     setTimeout(() => {
                         toggleNav();
-                    }, 150); // Small delay to allow language to switch
+                    }, 150);
                 }
             });
           });
@@ -1328,9 +1297,7 @@
               fetch(contactForm.action, {
                   method: 'POST',
                   body: formData,
-                  headers: {
-                      'Accept': 'application/json'
-                  }
+                  headers: { 'Accept': 'application/json' }
               }).then(response => {
                   if (response.ok) {
                       const successTextKey = 'sent' + currentLang.charAt(0).toUpperCase() + currentLang.slice(1);
@@ -1359,30 +1326,174 @@
           flipCards.forEach(card => {
               card.addEventListener('click', function(event) {
                   const inner = this.querySelector('.flip-card-inner');
-                  if (inner) {
-                      inner.classList.toggle('is-flipped');
-                  }
+                  if (inner) inner.classList.toggle('is-flipped');
               });
-              const backLinks = card.querySelectorAll('.flip-card-back a');
-              backLinks.forEach(link => {
-                  link.addEventListener('click', function(event) {
-                      event.stopPropagation();
-                  });
+              card.querySelectorAll('.flip-card-back a').forEach(link => {
+                  link.addEventListener('click', event => event.stopPropagation());
               });
           });
 
-          document.addEventListener('click', function (event) {
+          // === START: PROJECT CAROUSEL SCRIPT (WITH FIX) ===
+          const carousel = document.querySelector('.project-carousel');
+          if (carousel) {
+              const imageSlides = carousel.querySelectorAll('.carousel-slide');
+              const descriptionSlides = carousel.querySelectorAll('.slide-description');
+              const prevButton = carousel.querySelector('.carousel-arrow.prev');
+              const nextButton = carousel.querySelector('.carousel-arrow.next');
+              const slideCounter = carousel.querySelector('.slide-counter');
+              const carouselViewport = carousel.querySelector('.carousel-viewport');
+              let currentSlideIndex = 0;
+              const totalSlides = imageSlides.length;
+              let isTransitioning = false;
+
+              function showSlide(index) {
+                  if (isTransitioning) return;
+                  isTransitioning = true;
+                  
+                  const currentActiveDesc = carousel.querySelector('.slide-description.active');
+                  if (currentActiveDesc) {
+                      currentActiveDesc.classList.remove('active');
+                  }
+                  
+                  const currentActiveImg = carousel.querySelector('.carousel-slide.active');
+                  if (currentActiveImg) {
+                      currentActiveImg.classList.remove('active');
+                  }
+                  
+                  setTimeout(() => {
+                      imageSlides[index].classList.add('active');
+                      descriptionSlides[index].classList.add('active');
+                      if(slideCounter) {
+                          slideCounter.textContent = `${index + 1} / ${totalSlides}`;
+                      }
+                      // Allow new transition after animation completes
+                      setTimeout(() => {
+                          isTransitioning = false;
+                      }, 500); // Match CSS transition duration
+                  }, 50); 
+              }
+
+              nextButton.addEventListener('click', (e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  if (!isTransitioning) {
+                      currentSlideIndex = (currentSlideIndex + 1) % totalSlides;
+                      showSlide(currentSlideIndex);
+                  }
+              });
+
+              prevButton.addEventListener('click', (e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  if (!isTransitioning) {
+                      currentSlideIndex = (currentSlideIndex - 1 + totalSlides) % totalSlides;
+                      showSlide(currentSlideIndex);
+                  }
+              });
+              
+              carouselViewport.addEventListener('click', () => {
+                  const activeImage = imageSlides[currentSlideIndex].querySelector('img');
+                  if(activeImage) {
+                      const imageModal = document.getElementById('image-modal');
+                      const modalImageContent = document.getElementById('modal-image-content');
+                      modalImageContent.src = activeImage.src;
+                      openModal(imageModal);
+                  }
+              });
+              
+              showSlide(currentSlideIndex);
+          }
+          // === END: PROJECT CAROUSEL SCRIPT ===
+          
+          // === START: MODAL HANDLING SCRIPT ===
+          const allModals = document.querySelectorAll('.modal');
+          const videoModal = document.getElementById('video-modal');
+          const diagramModal = document.getElementById('diagram-modal');
+          const imageModal = document.getElementById('image-modal');
+          let player;
+          const youtubeVideoId = 'R_rKRfh7ceU';
+
+          function openModal(modal) {
+              if (modal) {
+                  modal.style.display = 'block';
+                  document.body.classList.add('modal-open');
+              }
+          }
+
+          function closeModal(modal) {
+              if (modal) {
+                  modal.style.display = 'none';
+                  const isAnyModalOpen = Array.from(allModals).some(m => m.style.display === 'block');
+                  if (!isAnyModalOpen) {
+                      document.body.classList.remove('modal-open');
+                  }
+              }
+          }
+          
+          function createPlayer() {
+              if (typeof YT === 'undefined' || typeof YT.Player === 'undefined') {
+                  const tag = document.createElement('script');
+                  tag.src = "https://www.youtube.com/iframe_api";
+                  const firstScriptTag = document.getElementsByTagName('script')[0];
+                  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+                  window.onYouTubeIframeAPIReady = function() {
+                      player = new YT.Player('youtube-player-container', {
+                          height: '100%', width: '100%', videoId: youtubeVideoId,
+                          playerVars: { 'autoplay': 1, 'controls': 1, 'rel': 0 }
+                      });
+                  };
+              } else {
+                  if (!player) {
+                      player = new YT.Player('youtube-player-container', {
+                          height: '100%', width: '100%', videoId: youtubeVideoId,
+                          playerVars: { 'autoplay': 1, 'controls': 1, 'rel': 0 }
+                      });
+                  } else {
+                      player.playVideo();
+                  }
+              }
+          }
+          
+          document.getElementById('open-video-modal')?.addEventListener('click', () => {
+              openModal(videoModal);
+              createPlayer();
+          });
+          document.getElementById('close-video-modal')?.addEventListener('click', () => {
+              if (player && typeof player.stopVideo === 'function') player.stopVideo();
+              closeModal(videoModal);
+          });
+          
+          document.getElementById('open-diagram-modal')?.addEventListener('click', () => openModal(diagramModal));
+          document.getElementById('close-diagram-modal')?.addEventListener('click', () => closeModal(diagramModal));
+
+          document.getElementById('close-image-modal')?.addEventListener('click', () => closeModal(imageModal));
+
+          window.addEventListener('click', (event) => {
+              if (event.target === videoModal) {
+                  if (player && typeof player.stopVideo === 'function') player.stopVideo();
+                  closeModal(videoModal);
+              }
+              if (event.target === diagramModal) closeModal(diagramModal);
+              if (event.target === imageModal) closeModal(imageModal);
+              
               if (!event.target.closest('.flip-card')) {
-                  document.querySelectorAll('.flip-card-inner.is-flipped').forEach(function (inner) {
-                      inner.classList.remove('is-flipped');
-                  });
+                  document.querySelectorAll('.flip-card-inner.is-flipped').forEach(inner => inner.classList.remove('is-flipped'));
               }
               if (!event.target.closest('.nav-dropdown')) {
-                  document.querySelectorAll('.nav-dropdown').forEach(function (dropdown) {
-                      dropdown.classList.remove('active');
-                  });
+                  document.querySelectorAll('.nav-dropdown.active').forEach(dropdown => dropdown.classList.remove('active'));
               }
           });
+          window.addEventListener('keydown', (event) => {
+              if (event.key === 'Escape') {
+                  if (videoModal && videoModal.style.display === 'block') {
+                      if (player && typeof player.stopVideo === 'function') player.stopVideo();
+                      closeModal(videoModal);
+                  }
+                  if (diagramModal && diagramModal.style.display === 'block') closeModal(diagramModal);
+                  if (imageModal && imageModal.style.display === 'block') closeModal(imageModal);
+              }
+          });
+          // === END: MODAL HANDLING SCRIPT ===
       });
     </script>
 </body>
