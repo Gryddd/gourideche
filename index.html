@@ -406,6 +406,11 @@
             width: 100%; height: auto; display: block; border-radius: 8px;
             max-height: 90vh; object-fit: contain;
         }
+        
+        /* === FIX: Give image viewers a higher stacking order === */
+        #image-modal, #diagram-modal {
+            z-index: 1004;
+        }
 
         .timeline-wrapper { 
             position: relative; 
@@ -552,12 +557,6 @@
             display: block;
         }
         
-        /* === FIX: DISABLE CURSOR ON UNDERLYING MODAL === */
-        .modal.is-covered .project-modal-slide {
-            cursor: default;
-            pointer-events: none;
-        }
-
         .project-modal-description {
             min-height: 120px; text-align: left; position: relative;
         }
@@ -1391,13 +1390,8 @@
               }
           }
 
-          // === FIX: UPDATED closeModal FUNCTION ===
           function closeModal(modal) {
               if (modal) {
-                  // If the image viewer is closing, uncover the project modal.
-                  if (modal.id === 'image-modal' && projectModal) {
-                      projectModal.classList.remove('is-covered');
-                  }
                   modal.classList.remove('active');
                   const isAnyModalOpen = Array.from(allModals).some(m => m.classList.contains('active'));
                   if (!isAnyModalOpen) {
@@ -1453,14 +1447,10 @@
                   slideContainer.appendChild(imgEl);
                   modalImageContainer.appendChild(slideContainer);
 
-                  // === FIX: UPDATED CLICK LISTENER ===
                   slideContainer.addEventListener('click', () => {
                       const imageModalImg = imageModal.querySelector('img');
                       imageModalImg.src = imgEl.src;
                       imageModalImg.alt = `Enlarged view of ${slideData.title[currentLang] || slideData.title.en}`;
-                      if (projectModal) {
-                          projectModal.classList.add('is-covered');
-                      }
                       openModal(imageModal);
                   });
 
@@ -1530,12 +1520,10 @@
 
           // Universal closing logic
           window.addEventListener('click', (event) => {
-              // === FIX: UPDATED CLICK OUTSIDE BEHAVIOR ===
               if (event.target.classList.contains('modal')) {
                   if (player && typeof player.stopVideo === 'function' && event.target.id === 'video-modal') {
                       player.stopVideo();
                   }
-                  // This is safer: only close the specific modal background that was clicked.
                   closeModal(event.target);
               }
               
