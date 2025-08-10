@@ -1351,10 +1351,20 @@
               modalDescriptionContainer.innerHTML = '';
 
               slidesData.forEach((slideData, index) => {
+                  // Create a container DIV for the slide, which will be centered
+                  const slideContainer = document.createElement('div');
+                  slideContainer.className = 'project-modal-slide';
+                  
+                  // Create the IMG element
                   const imgEl = document.createElement('img');
                   imgEl.src = slideData.img;
-                  imgEl.className = 'project-modal-slide';
-                  modalImageContainer.appendChild(imgEl);
+                  imgEl.alt = slideData.title.en; // Add alt text for accessibility
+
+                  // Append the image to the slide container
+                  slideContainer.appendChild(imgEl);
+                  
+                  // Append the slide container to the main image wrapper
+                  modalImageContainer.appendChild(slideContainer);
 
                   const descEl = document.createElement('div');
                   descEl.className = 'project-modal-description-item';
