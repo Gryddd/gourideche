@@ -399,17 +399,6 @@
             color: #fff; font-size: 31px; font-weight: bold;
             cursor: pointer; background: none; border: none; padding: 0;
         }
-        #diagram-modal .modal-content, #image-modal .modal-content {
-            max-width: 70rem;
-        }
-        #diagram-modal img, #image-modal img {
-            width: 100%; height: auto; display: block; border-radius: 8px;
-            max-height: 90vh; object-fit: contain;
-        }
-        
-        #image-modal, #diagram-modal {
-            z-index: 1004;
-        }
 
         .timeline-wrapper { 
             position: relative; 
@@ -531,7 +520,6 @@
             height: 45vh; /* This creates a stable container size */
         }
         
-        /* === CHANGE: Reconstructed Slide and Icon Styles === */
         .project-modal-slide {
             opacity: 0; 
             visibility: hidden; 
@@ -544,7 +532,6 @@
             display: flex;              
             align-items: center;        
             justify-content: center;
-            /* REMOVED 'cursor: zoom-in' to fix the bug */
         }
         
         .project-modal-slide.active { 
@@ -559,41 +546,6 @@
             height: auto; 
             display: block;
         }
-
-        /* ADDED: Styles for the new zoom icon */
-        .zoom-icon {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            width: 32px;
-            height: 32px;
-            background-color: rgba(13, 13, 13, 0.7);
-            border: 1px solid var(--border-color);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            z-index: 5; /* Ensure it's on top of the image */
-            opacity: 0; /* Hidden by default */
-            transition: opacity 0.3s ease, transform 0.3s ease;
-        }
-        
-        .project-modal-slide:hover .zoom-icon {
-            opacity: 1; /* Show on hover */
-        }
-        
-        .zoom-icon:hover {
-            transform: scale(1.1);
-            background-color: rgba(0, 191, 255, 0.3);
-        }
-
-        .zoom-icon svg {
-            width: 18px;
-            height: 18px;
-            fill: #fff;
-        }
-        /* === END OF CHANGE === */
         
         .project-modal-description {
             min-height: 120px; text-align: left; position: relative;
@@ -651,7 +603,7 @@
             width: 100%;
             height: auto;
             display: block;
-            cursor: zoom-in;
+            /* REMOVED: cursor: zoom-in; */
         }
         .mobile-project-text { padding: 1.5rem; }
         .mobile-project-text h4 { margin-top: 0; font-size: 1.3rem; }
@@ -1087,21 +1039,7 @@
     </div>
 </div>
 
-<!-- Diagram Modal -->
-<div class="modal" id="diagram-modal">
-    <div class="modal-content">
-        <button aria-label="Close diagram modal" class="close-button" id="close-diagram-modal">×</button>
-        <img src="images/diagram.png" alt="Home Lab Network Topology Diagram">
-    </div>
-</div>
-
-<!-- Image Viewer Modal (for project images) -->
-<div class="modal" id="image-modal">
-    <div class="modal-content">
-        <button aria-label="Close image modal" class="close-button" id="close-image-modal">×</button>
-        <img src="" alt="Enlarged project image">
-    </div>
-</div>
+<!-- REMOVED: Diagram and Image Modals have been deleted to simplify the code -->
 
 <section class="container" id="faq">
 <h2 class="lang" data-de="Häufig Gestellte Fragen" data-en="Frequently Asked Questions" data-fr="Questions Fréquemment Posées">Häufig Gestellte Fragen</h2>
@@ -1190,9 +1128,8 @@
 
           const allModals = document.querySelectorAll('.modal');
           const videoModal = document.getElementById('video-modal');
-          const diagramModal = document.getElementById('diagram-modal');
           const projectModal = document.getElementById('project-modal');
-          const imageModal = document.getElementById('image-modal');
+          // REMOVED: No longer need imageModal and diagramModal
           let player;
           const youtubeVideoId = 'R_rKRfh7ceU';
           
@@ -1211,7 +1148,7 @@
           function populateMobileShowcase() {
               const container = document.getElementById('mobile-project-showcase');
               if (!container) return;
-              container.innerHTML = ''; // Clear previous content
+              container.innerHTML = ''; 
 
               slidesData.forEach(slideData => {
                   const item = document.createElement('div');
@@ -1221,13 +1158,8 @@
                   const img = document.createElement('img');
                   img.src = slideData.img;
                   img.alt = slideData.title.en;
-                  img.addEventListener('click', () => {
-                      const imageModalImg = imageModal.querySelector('img');
-                      imageModalImg.src = img.src;
-                      imageModalImg.alt = `Enlarged view of ${slideData.title[currentLang] || slideData.title.en}`;
-                      openModal(imageModal);
-                  });
-
+                  // REMOVED: Click listener for zooming on mobile images
+                  
                   const textDiv = document.createElement('div');
                   textDiv.className = 'mobile-project-text';
                   
@@ -1277,7 +1209,7 @@
               
               updateLanguageSelectorUI(currentLang);
               updateModalTextOnly(currentProjectSlide);
-              populateMobileShowcase(); // Re-populate mobile view with new language
+              populateMobileShowcase(); 
           }
 
           languageItems.forEach(item => {
@@ -1420,7 +1352,7 @@
               });
           });
 
-          // === START: MODAL HANDLING AND PROJECT SHOWCASE SCRIPT ===
+          // === START: MODAL HANDLING AND PROJECT SHOWCASE SCRIPT (SIMPLIFIED) ===
           function openModal(modal) {
               if (modal) {
                   modal.classList.add('active');
@@ -1428,14 +1360,19 @@
               }
           }
 
+          // === FIX: New robust closeModal function ===
           function closeModal(modal) {
-              if (modal) {
-                  modal.classList.remove('active');
+              if (!modal || !modal.classList.contains('active')) return;
+
+              modal.classList.remove('active');
+              
+              // Wait for the CSS transition to finish before altering the body
+              setTimeout(() => {
                   const isAnyModalOpen = Array.from(allModals).some(m => m.classList.contains('active'));
                   if (!isAnyModalOpen) {
                       document.body.classList.remove('modal-open');
                   }
-              }
+              }, 300); // This duration must match your CSS transition time for .modal
           }
           
           function createPlayer() {
@@ -1467,7 +1404,7 @@
               createPlayer();
           });
           
-          // Desktop Project Modal Setup
+          // Desktop Project Modal Setup (Simplified)
           if (projectModal) {
               const modalImageContainer = projectModal.querySelector('.project-modal-image-wrapper');
               const modalDescriptionContainer = projectModal.querySelector('.project-modal-description');
@@ -1475,44 +1412,24 @@
               modalImageContainer.innerHTML = '';
               modalDescriptionContainer.innerHTML = '';
 
-              // === CHANGE: Reconstructed Slide Generation Logic ===
               slidesData.forEach((slideData) => {
-                  // 1. Create the main slide container
                   const slideContainer = document.createElement('div');
                   slideContainer.className = 'project-modal-slide';
                   
-                  // 2. Create the image element
                   const imgEl = document.createElement('img');
                   imgEl.src = slideData.img;
                   imgEl.alt = slideData.title.en;
                   slideContainer.appendChild(imgEl);
-
-                  // 3. Create the new zoom icon
-                  const zoomIcon = document.createElement('div');
-                  zoomIcon.className = 'zoom-icon';
-                  zoomIcon.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/><path d="M12 10h-2v2H9v-2H7v-1h2V7h1v2h2v1z"/></svg>`;
                   
-                  // 4. Add the click event listener ONLY to the icon
-                  zoomIcon.addEventListener('click', () => {
-                      const imageModalImg = imageModal.querySelector('img');
-                      imageModalImg.src = imgEl.src;
-                      imageModalImg.alt = `Enlarged view of ${slideData.title[currentLang] || slideData.title.en}`;
-                      openModal(imageModal);
-                  });
+                  // REMOVED: No more zoom icon or click listener on the slide.
                   
-                  // 5. Append the icon to the slide container
-                  slideContainer.appendChild(zoomIcon);
-                  
-                  // 6. Append the whole slide to the image wrapper
                   modalImageContainer.appendChild(slideContainer);
                   
-                  // Create the corresponding description element (no change here)
                   const descEl = document.createElement('div');
                   descEl.className = 'project-modal-description-item';
                   descEl.innerHTML = `<h4></h4><p></p>`;
                   modalDescriptionContainer.appendChild(descEl);
               });
-              // === END OF CHANGE ===
               
               const modalImageSlides = projectModal.querySelectorAll('.project-modal-slide');
               const modalDescriptionSlides = projectModal.querySelectorAll('.project-modal-description-item');
@@ -1593,6 +1510,7 @@
               if (event.key === 'Escape') {
                   const activeModals = Array.from(document.querySelectorAll('.modal.active'));
                   if (activeModals.length > 0) {
+                      // Close the top-most modal
                       const topModal = activeModals[activeModals.length - 1];
                       if (topModal.id === 'video-modal' && player && typeof player.stopVideo === 'function') {
                           player.stopVideo();
