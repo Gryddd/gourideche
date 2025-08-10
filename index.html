@@ -98,10 +98,12 @@
             box-shadow: 0 4px 20px rgba(0,0,0,0.2);
             z-index: 1001; padding: 0.5rem 2rem; box-sizing: border-box;
         }
+        /* MODIFIED: This change pushes nav items to the edges */
         .nav-content {
-            display: flex; justify-content: space-between; align-items: center;
-            max-width: 1080px; /* MODIFIED: Reduced from 1140px */
-            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
         }
         .nav-links { display: flex; gap: 1.2rem; align-items: center; }
         .nav-links a {
@@ -111,7 +113,7 @@
             color: transparent;
             font-weight: 600;
             text-decoration: none;
-            font-size: 0.95rem; /* MODIFIED: Reduced from 1rem */
+            font-size: 0.95rem;
             padding: 0.5rem;
             position: relative;
         }
@@ -144,7 +146,7 @@
             align-items: center;
             gap: 0.5rem;
             font-family: var(--font-heading);
-            font-size: 0.95rem; /* MODIFIED: Reduced from 1rem */
+            font-size: 0.95rem;
             padding: 0.5rem;
         }
         .nav-dropdown-toggle .arrow-icon {
@@ -267,7 +269,7 @@
         
         .container {
             width: 90%; 
-            max-width: 56rem; /* MODIFIED: Reduced from 59rem */
+            max-width: 56rem;
             margin: 0 auto;
             padding-top: 80px; 
             padding-bottom: 100px;
@@ -361,7 +363,6 @@
         }
         .video-thumbnail:hover .play-button { transform: translate(-50%, -50%) scale(1.1); }
         
-        /* The robust modal base style */
         .modal {
             display: flex;
             align-items: center;
@@ -372,17 +373,17 @@
             -webkit-backdrop-filter: blur(8px);
             backdrop-filter: blur(8px);
             opacity: 0;
-            pointer-events: none; /* Inactive by default */
+            pointer-events: none;
             transition: opacity 0.3s ease;
         }
 
         .modal.active {
             opacity: 1;
-            pointer-events: auto; /* Becomes active and clickable */
+            pointer-events: auto;
         }
         
         .modal.is-covered {
-            pointer-events: none; /* Disables clicks on underlying modal */
+            pointer-events: none;
         }
         
         .modal-content {
@@ -870,7 +871,7 @@
 <div class="nav-content">
 <!-- Main navigation links -->
 <div class="nav-links">
-<a class="lang" data-de="Intro-Video" data-en="Intro Video" data-fr="Vidéo d'introduction" href="#intro-video">Intro-Video</a>
+<a class="lang" data-de="Intro-Video" data-en="Intro Video" data-fr="Intro-Vidéo" href="#intro-video">Intro-Video</a>
 <a class="lang" data-de="Bildung" data-en="Education" data-fr="Éducation" href="#bildung">Bildung</a>
 <a class="lang" data-de="Erfahrung" data-en="Experience" data-fr="Expérience" href="#erfahrung">Erfahrung</a>
 <a class="lang" data-de="Projekte" data-en="Projects" data-fr="Projets" href="#projekte">Projekte</a>
@@ -908,7 +909,7 @@
 </button>
 <div class="mobile-nav-overlay" id="mobile-nav">
 <div class="mobile-nav-overlay-content">
-<a class="lang" data-de="Intro-Video" data-en="Intro Video" data-fr="Vidéo d'introduction" href="#intro-video">Intro-Video</a>
+<a class="lang" data-de="Intro-Video" data-en="Intro Video" data-fr="Intro-Vidéo" href="#intro-video">Intro-Video</a>
 <a class="lang" data-de="Bildungsweg" data-en="Education" data-fr="Parcours Éducatif" href="#bildung">Bildungsweg</a>
 <a class="lang" data-de="Erfahrung" data-en="Experience" data-fr="Expérience" href="#erfahrung">Erfahrung</a>
 <a class="lang" data-de="Projekte" data-en="Projects" data-fr="Projets" href="#projekte">Projekte</a>
@@ -1150,7 +1151,7 @@
           };
           
           const slidesData = [
-              { img: 'images/virtual_machines_overview.png', title: { de: 'Projektübersicht', en: 'Project Overview', fr: "Vue d'ensemble du projet" }, text: { de: 'Dieses Projekt demonstriert den Aufbau einer kompletten, virtualisierten IT-Umgebung in VMware. Es umfasst eine pfSense-Firewall, einen Windows Server als Domain Controller und einen Ubuntu Server für das Monitoring, um eine realistische Unternehmens-IT nachzubilden.', en: 'This project demonstrates the setup of a complete, virtualized IT environment in VMware. It includes a pfSense firewall, a Windows Server as a Domain Controller, and an Ubuntu Server for monitoring, replicating a realistic corporate IT setup.', fr: "Ce projet virtualise un réseau d'entreprise complet sous VMware, avec un pare-feu pfSense, un contrôleur de domaine Windows Server, et un serveur Ubuntu pour la surveillance en temps réel." } }, // MODIFIED: Shortened French text
+              { img: 'images/virtual_machines_overview.png', title: { de: 'Projektübersicht', en: 'Project Overview', fr: "Vue d'ensemble du projet" }, text: { de: 'Dieses Projekt demonstriert den Aufbau einer kompletten, virtualisierten IT-Umgebung in VMware. Es umfasst eine pfSense-Firewall, einen Windows Server als Domain Controller und einen Ubuntu Server für das Monitoring, um eine realistische Unternehmens-IT nachzubilden.', en: 'This project demonstrates the setup of a complete, virtualized IT environment in VMware. It includes a pfSense firewall, a Windows Server as a Domain Controller, and an Ubuntu Server for monitoring, replicating a realistic corporate IT setup.', fr: "Ce projet virtualise un réseau d'entreprise complet sous VMware, avec un pare-feu pfSense, un contrôleur de domaine Windows Server, et un serveur Ubuntu pour la surveillance en temps réel." } },
               { img: 'images/pfsense_dashboard.png', title: { de: 'pfSense-Firewall als Gateway', en: 'pfSense Firewall as Gateway', fr: 'Pare-feu pfSense comme passerelle' }, text: { de: 'Eine pfSense-VM agiert als zentraler Router und Firewall. Sie wurde mit einer statischen LAN-IP (192.168.10.2) konfiguriert und trennt das interne Netzwerk (LAN) sicher vom externen Netzwerk (WAN).', en: 'A pfSense VM acts as the central router and firewall. It was configured with a static LAN IP (192.168.10.2) and securely separates the internal network (LAN) from the external network (WAN).', fr: "Une VM pfSense sert de routeur et de pare-feu central. Elle a été configurée avec une IP LAN statique (192.168.10.2) et sépare de manière sécurisée le réseau interne (LAN) du réseau externe (WAN)." } },
               { img: 'images/pfsense_leases.png', title: { de: 'DHCP-Server-Konfiguration', en: 'DHCP Server Configuration', fr: 'Configuration du serveur DHCP' }, text: { de: "Der DHCP-Dienst auf pfSense wurde aktiviert, um automatisch IP-Adressen (192.168.10.100 - 192.168.10.150) an Clients wie die Windows 10 VM zu vergeben. Dies vereinfacht die Netzwerkverwaltung erheblich.", en: "The DHCP service on pfSense was enabled to automatically assign IP addresses (192.168.10.100 - 192.168.10.150) to clients like the Windows 10 VM. This significantly simplifies network administration.", fr: "Le service DHCP sur pfSense a été activé pour attribuer automatiquement des adresses IP (192.168.10.100 - 192.168.10.150) aux clients tels que la VM Windows 10. Cela simplifie considérablement l'administration du réseau." } },
               { img: 'images/windows_server_roles.png', title: { de: 'Windows Server als Domain Controller', en: 'Windows Server as Domain Controller', fr: 'Windows Server comme contrôleur de domaine' }, text: { de: "Ein Windows Server 2022 wurde mit der statischen IP 192.168.10.10 installiert. Anschließend wurden die Rollen Active Directory Domain Services (AD DS) und DNS installiert, um ihn zum Domain Controller für die Domäne 'homelab.local' zu machen.", en: "A Windows Server 2022 was installed with the static IP 192.168.10.10. The Active Directory Domain Services (AD DS) and DNS roles were then installed to make it the Domain Controller for the 'homelab.local' domain.", fr: "Un Windows Server 2022 a été installé avec l'adresse IP statique 192.168.10.10. Les rôles Active Directory Domain Services (AD DS) et DNS ont ensuite été installés pour en faire le contrôleur de domaine pour le domaine 'homelab.local'." } },
@@ -1404,7 +1405,6 @@
               if (!modal) return;
               modal.classList.remove('active');
 
-              // If we are closing a viewer, make sure the project modal is interactive again.
               if (modal.id === 'image-modal' || modal.id === 'diagram-modal') {
                   if (projectModal) {
                       projectModal.classList.remove('is-covered');
