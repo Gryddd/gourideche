@@ -480,7 +480,11 @@
             transform: translateY(-5px);
             box-shadow: 0 8px 30px rgba(0,0,0,0.25);
         }
-        .skill-card h3 { margin-top: 0; }
+        .skill-card h3 { 
+            margin-top: 0;
+            overflow-wrap: break-word;
+            word-break: break-word;
+        }
         .skill-card p { margin-bottom: 0; }
         
         /* === PROJECT INTRO STYLES === */
@@ -532,7 +536,8 @@
             bottom: 0;
             display: flex;              
             align-items: center;        
-            justify-content: center;    
+            justify-content: center;
+            cursor: zoom-in;
         }
         .project-modal-slide.active { 
             opacity: 1; 
@@ -1015,6 +1020,14 @@
     </div>
 </div>
 
+<!-- Image Viewer Modal (for project images) -->
+<div class="modal" id="image-modal">
+    <div class="modal-content">
+        <button aria-label="Close image modal" class="close-button" id="close-image-modal">×</button>
+        <img src="" alt="Enlarged project image">
+    </div>
+</div>
+
 <section class="container" id="faq">
 <h2 class="lang" data-de="Häufig Gestellte Fragen" data-en="Frequently Asked Questions" data-fr="Questions Fréquemment Posées">Häufig Gestellte Fragen</h2>
 <div class="faq-accordion" data-aos="fade-up">
@@ -1289,6 +1302,7 @@
           const videoModal = document.getElementById('video-modal');
           const diagramModal = document.getElementById('diagram-modal');
           const projectModal = document.getElementById('project-modal');
+          const imageModal = document.getElementById('image-modal');
           let player;
           const youtubeVideoId = 'R_rKRfh7ceU';
 
@@ -1351,20 +1365,22 @@
               modalDescriptionContainer.innerHTML = '';
 
               slidesData.forEach((slideData, index) => {
-                  // Create a container DIV for the slide, which will be centered
                   const slideContainer = document.createElement('div');
                   slideContainer.className = 'project-modal-slide';
                   
-                  // Create the IMG element
                   const imgEl = document.createElement('img');
                   imgEl.src = slideData.img;
-                  imgEl.alt = slideData.title.en; // Add alt text for accessibility
-
-                  // Append the image to the slide container
+                  imgEl.alt = slideData.title.en; 
                   slideContainer.appendChild(imgEl);
-                  
-                  // Append the slide container to the main image wrapper
                   modalImageContainer.appendChild(slideContainer);
+
+                  // Add click listener to open the image viewer modal
+                  slideContainer.addEventListener('click', () => {
+                      const imageModalImg = imageModal.querySelector('img');
+                      imageModalImg.src = imgEl.src;
+                      imageModalImg.alt = `Enlarged view of ${slideData.title[currentLang] || slideData.title.en}`;
+                      openModal(imageModal);
+                  });
 
                   const descEl = document.createElement('div');
                   descEl.className = 'project-modal-description-item';
@@ -1422,6 +1438,8 @@
           document.getElementById('close-project-modal')?.addEventListener('click', () => closeModal(projectModal));
           document.getElementById('open-diagram-modal')?.addEventListener('click', () => openModal(diagramModal));
           document.getElementById('close-diagram-modal')?.addEventListener('click', () => closeModal(diagramModal));
+          document.getElementById('close-image-modal')?.addEventListener('click', () => closeModal(imageModal));
+
 
           window.addEventListener('click', (event) => {
               if (event.target === videoModal) {
@@ -1430,7 +1448,8 @@
               }
               if (event.target === diagramModal) closeModal(diagramModal);
               if (event.target === projectModal) closeModal(projectModal);
-              
+              if (event.target === imageModal) closeModal(imageModal);
+
               if (!event.target.closest('.flip-card')) {
                   document.querySelectorAll('.flip-card-inner.is-flipped').forEach(inner => inner.classList.remove('is-flipped'));
               }
