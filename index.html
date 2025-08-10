@@ -1451,6 +1451,14 @@
               createPlayer();
           });
           
+          const projectIntroImageContainer = document.querySelector('.project-intro-image');
+          if (projectIntroImageContainer && diagramModal) {
+              projectIntroImageContainer.style.cursor = 'zoom-in';
+              projectIntroImageContainer.addEventListener('click', () => {
+                  openModal(diagramModal);
+              });
+          }
+          
           // Desktop Project Modal Setup
           if (projectModal) {
               const modalImageContainer = projectModal.querySelector('.project-modal-image-wrapper');
