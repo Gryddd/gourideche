@@ -400,10 +400,8 @@
             color: #fff; font-size: 31px; font-weight: bold;
             cursor: pointer; background: none; border: none; padding: 0;
         }
-        #diagram-modal .modal-content, #image-modal .modal-content {
-            max-width: 70rem;
-        }
-        #diagram-modal img, #image-modal img {
+        #diagram-modal .modal-content { max-width: 70rem; }
+        #diagram-modal img {
             width: 100%; height: auto; display: block; border-radius: 8px;
             max-height: 90vh; object-fit: contain;
         }
@@ -516,29 +514,18 @@
         .project-modal-image-wrapper {
             background: #111; border-radius: 8px; margin-bottom: 1.5rem;
             overflow: hidden; position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 45vh; /* This creates a stable container size */
+            height: 45vh; /* Enforce a consistent container height */
         }
         .project-modal-slide {
-            opacity: 0; 
-            visibility: hidden; 
-            transition: opacity 0.3s ease;
-            position: absolute; 
-            top: 0; 
-            left: 0; 
-            right: 0; 
-            bottom: 0;
-            display: flex;              /* Added */
-            align-items: center;        /* Added for vertical centering */
-            justify-content: center;    /* Added for horizontal centering */
-            height: 100%;               /* Ensure it takes full height of wrapper */
+            opacity: 0; visibility: hidden; transition: opacity 0.3s ease;
+            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            display: flex; align-items: center; justify-content: center; /* This centers the image */
         }
         .project-modal-slide.active { opacity: 1; visibility: visible; }
         .project-modal-slide img {
             max-width: 100%; max-height: 100%;
             width: auto; height: auto; display: block;
+            object-fit: contain;
         }
         
         .project-modal-description {
