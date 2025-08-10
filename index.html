@@ -512,12 +512,12 @@
         .project-intro-text h3 { margin-top: 0; font-size: 1.5rem; }
         .project-intro-text p { opacity: 0.9; margin-bottom: 1.5rem; }
         
-        /* === PROJECT MODAL STYLES === */
+        /* === PROJECT MODAL STYLES (DESKTOP) === */
         #project-modal .modal-content {
             max-width: 50rem; background: var(--background);
             border-radius: 12px; padding: 1rem; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
-        #project-modal .close-button { top: 10px; right: 15px; font-size: 24px; z-index: 10; }
+        #project-modal .close-button { top: 10px; right: 15px; font-size: 24px; }
         .project-modal-body { padding: 1.5rem; }
         .project-modal-image-wrapper {
             background: #111; border-radius: 8px; margin-bottom: 1.5rem;
@@ -595,6 +595,25 @@
             background: rgba(255, 255, 255, 0.05); padding: 0.25rem 0.75rem;
             border-radius: 15px; border: 1px solid var(--border-color);
         }
+        
+        /* === MOBILE PROJECT SHOWCASE === */
+        #mobile-project-showcase { display: none; margin-top: 3rem; }
+        .mobile-project-item {
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+        .mobile-project-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            cursor: zoom-in;
+        }
+        .mobile-project-text { padding: 1.5rem; }
+        .mobile-project-text h4 { margin-top: 0; font-size: 1.3rem; }
+        .mobile-project-text p { margin-bottom: 0; opacity: 0.9; }
 
         .faq-accordion { 
             max-width: 47rem;
@@ -814,56 +833,15 @@
             .flip-card-front, .flip-card-back { position: static; transform: none; backface-visibility: visible; width: 100%; height: auto; display: flex; }
             .flip-card-front { border-bottom-left-radius: 0; border-bottom-right-radius: 0; border-bottom: 1px dashed rgba(0, 191, 255, 0.2); padding: 1.5rem 1rem; }
             .flip-card-back { border-top-left-radius: 0; border-top-right-radius: 0; min-height: 4rem; padding: 1rem; font-size: 1rem; }
-        
-            /* === MOBILE PROJECT MODAL OVERRIDE === */
-            #project-modal.active {
-                background: var(--background);
-                -webkit-backdrop-filter: none;
-                backdrop-filter: none;
-            }
-            #project-modal .modal-content {
-                height: 100%; width: 100%; max-width: 100%;
-                border-radius: 0; padding: 0;
-                box-shadow: none;
-            }
-            #project-modal .project-modal-body {
-                display: flex; flex-direction: column;
-                height: 100%; padding: 0; box-sizing: border-box;
-            }
-            #project-modal .project-modal-image-wrapper {
-                flex-grow: 1;
-                height: 60%; /* Assign a relative height */
-                border-radius: 0;
-                margin-bottom: 0;
-                border-bottom: 1px solid var(--border-color);
-            }
-            #project-modal .project-modal-description {
-                flex-shrink: 0;
-                height: 40%; /* The rest of the height */
-                padding: 1.5rem 1rem 1rem 1rem;
-                display: flex; flex-direction: column;
-                box-sizing: border-box;
-                overflow-y: auto;
-            }
-            #project-modal .project-modal-description-item {
-                position: relative;
-                opacity: 1; visibility: visible;
-                transform: none; transition: none;
-                display: none;
-            }
-            #project-modal .project-modal-description-item.active {
-                display: block;
-            }
-            #project-modal .project-modal-controls {
-                margin-top: auto; /* Pushes controls to the bottom */
-                padding-top: 1rem;
-            }
-            #project-modal .close-button {
-                top: 1rem; right: 1rem;
-                font-size: 2rem;
-                color: #fff;
-                text-shadow: 0 0 5px rgba(0,0,0,0.7);
-            }
+        }
+
+        /* HIDE/SHOW ELEMENTS BASED ON SCREEN SIZE */
+        @media (max-width: 768px) {
+            #open-project-modal { display: none; }
+            #mobile-project-showcase { display: block; }
+        }
+        @media (min-width: 769px) {
+            #mobile-project-showcase { display: none; }
         }
 </style>
 </head>
@@ -1034,9 +1012,12 @@
             <button id="open-project-modal" class="submit-btn lang" data-de="Projekt-Showcase ansehen" data-en="View Project Showcase" data-fr="Voir la présentation du projet">Projekt-Showcase ansehen</button>
         </div>
     </div>
+    
+    <!-- This container will be populated by JS and is only visible on mobile -->
+    <div id="mobile-project-showcase"></div>
 </section>
 
-<!-- Project Modal -->
+<!-- Project Modal (Desktop Only) -->
 <div class="modal" id="project-modal">
     <div class="modal-content">
         <button aria-label="Close project modal" class="close-button" id="close-project-modal">×</button>
@@ -1164,9 +1145,16 @@
               { img: 'images/ubuntu_server_netdata.png', title: { de: 'Einrichtung des Netdata Monitoring-Servers', en: 'Setting up the Netdata Monitoring Server', fr: 'Mise en place du serveur de surveillance Netdata' }, text: { de: 'Auf einer Ubuntu Server VM (IP 192.168.10.20) wurde Netdata installiert, eine leistungsstarke Echtzeit-Monitoring-Lösung. Diese Plattform sammelt und visualisiert Leistungsdaten aller Systeme im Netzwerk.', en: 'Netdata, a powerful real-time monitoring solution, was installed on an Ubuntu Server VM (IP 192.168.10.20). This platform collects and visualizes performance data from all systems in the network.', fr: "Netdata, une solution de surveillance en temps réel puissante, a été installée sur une VM Ubuntu Server (IP 192.168.10.20). Cette plateforme collecte et visualise les données de performance de tous les systèmes du réseau." } },
               { img: 'images/netdata_snmp_devices.png', title: { de: 'Zentrales Monitoring-Dashboard', en: 'Centralized Monitoring Dashboard', fr: 'Tableau de bord de surveillance centralisé' }, text: { de: 'Erfolgreiche Integration: Netdata sammelt nun via SNMP Leistungsdaten (CPU, RAM, Netzwerkverkehr) von der pfSense-Firewall und dem Windows Server. Das Dashboard bietet eine zentrale Übersicht über den Zustand der gesamten Infrastruktur in Echtzeit.', en: "Successful Integration: Netdata now collects performance data (CPU, RAM, network traffic) from the pfSense firewall and Windows Server via SNMP. The dashboard provides a central, real-time overview of the entire infrastructure's health.", fr: "Intégration réussie : Netdata collecte désormais les données de performance (CPU, RAM, trafic réseau) du pare-feu pfSense et du serveur Windows via SNMP. Le tableau de bord offre une vue d'ensemble centralisée et en temps réel de l'état de toute l'infrastructure." } }
           ];
+
+          const allModals = document.querySelectorAll('.modal');
+          const videoModal = document.getElementById('video-modal');
+          const diagramModal = document.getElementById('diagram-modal');
+          const projectModal = document.getElementById('project-modal');
+          const imageModal = document.getElementById('image-modal');
+          let player;
+          const youtubeVideoId = 'R_rKRfh7ceU';
           
           function updateModalTextOnly(index) {
-              const projectModal = document.getElementById('project-modal');
               if (!projectModal) return;
               const descriptionItems = projectModal.querySelectorAll('.project-modal-description-item');
               if (descriptionItems && descriptionItems[index]) {
@@ -1176,6 +1164,43 @@
                   if (titleEl) titleEl.textContent = slideData.title[currentLang];
                   if (textEl) textEl.textContent = slideData.text[currentLang];
               }
+          }
+
+          function populateMobileShowcase() {
+              const container = document.getElementById('mobile-project-showcase');
+              if (!container) return;
+              container.innerHTML = ''; // Clear previous content
+
+              slidesData.forEach(slideData => {
+                  const item = document.createElement('div');
+                  item.className = 'mobile-project-item';
+                  item.setAttribute('data-aos', 'fade-up');
+
+                  const img = document.createElement('img');
+                  img.src = slideData.img;
+                  img.alt = slideData.title.en;
+                  img.addEventListener('click', () => {
+                      const imageModalImg = imageModal.querySelector('img');
+                      imageModalImg.src = img.src;
+                      imageModalImg.alt = `Enlarged view of ${slideData.title[currentLang] || slideData.title.en}`;
+                      openModal(imageModal);
+                  });
+
+                  const textDiv = document.createElement('div');
+                  textDiv.className = 'mobile-project-text';
+                  
+                  const title = document.createElement('h4');
+                  title.textContent = slideData.title[currentLang];
+                  
+                  const text = document.createElement('p');
+                  text.textContent = slideData.text[currentLang];
+                  
+                  textDiv.appendChild(title);
+                  textDiv.appendChild(text);
+                  item.appendChild(img);
+                  item.appendChild(textDiv);
+                  container.appendChild(item);
+              });
           }
           
           function updateLanguageSelectorUI(selectedLang) {
@@ -1210,6 +1235,7 @@
               
               updateLanguageSelectorUI(currentLang);
               updateModalTextOnly(currentProjectSlide);
+              populateMobileShowcase(); // Re-populate mobile view with new language
           }
 
           languageItems.forEach(item => {
@@ -1229,6 +1255,7 @@
               });
           });
           
+          // Initial population
           updateLanguageSelectorUI(currentLang);
           switchLanguage(currentLang);
 
@@ -1352,14 +1379,6 @@
           });
 
           // === START: MODAL HANDLING AND PROJECT SHOWCASE SCRIPT ===
-          const allModals = document.querySelectorAll('.modal');
-          const videoModal = document.getElementById('video-modal');
-          const diagramModal = document.getElementById('diagram-modal');
-          const projectModal = document.getElementById('project-modal');
-          const imageModal = document.getElementById('image-modal');
-          let player;
-          const youtubeVideoId = 'R_rKRfh7ceU';
-
           function openModal(modal) {
               if (modal) {
                   modal.classList.add('active');
@@ -1405,12 +1424,8 @@
               openModal(videoModal);
               createPlayer();
           });
-          document.getElementById('close-video-modal')?.addEventListener('click', () => {
-              if (player && typeof player.stopVideo === 'function') player.stopVideo();
-              closeModal(videoModal);
-          });
           
-          // Project Modal Setup
+          // Desktop Project Modal Setup
           if (projectModal) {
               const modalImageContainer = projectModal.querySelector('.project-modal-image-wrapper');
               const modalDescriptionContainer = projectModal.querySelector('.project-modal-description');
@@ -1418,7 +1433,7 @@
               modalImageContainer.innerHTML = '';
               modalDescriptionContainer.innerHTML = '';
 
-              slidesData.forEach((slideData, index) => {
+              slidesData.forEach((slideData) => {
                   const slideContainer = document.createElement('div');
                   slideContainer.className = 'project-modal-slide';
                   
@@ -1449,7 +1464,7 @@
               let isTransitioning = false;
 
               function showProjectSlide(nextIndex) {
-                  if (isTransitioning && window.innerWidth > 1023) return;
+                  if (isTransitioning) return;
                   isTransitioning = true;
                   
                   const currentIndex = currentProjectSlide;
@@ -1465,7 +1480,7 @@
                       currentProjectSlide = nextIndex;
                       modalCounter.textContent = `${nextIndex + 1} / ${slidesData.length}`;
                       isTransitioning = false;
-                  }, window.innerWidth <= 1023 ? 50 : 300); 
+                  }, 300); 
               }
 
               document.getElementById('open-project-modal')?.addEventListener('click', () => {
@@ -1487,18 +1502,23 @@
                   showProjectSlide(nextIndex);
               });
           }
+          
+          // Add close listeners for all modals
+          allModals.forEach(modal => {
+             const closeBtn = modal.querySelector('.close-button');
+             if(closeBtn) {
+                 closeBtn.addEventListener('click', () => {
+                    if (modal.id === 'video-modal' && player && typeof player.stopVideo === 'function') player.stopVideo();
+                    closeModal(modal);
+                 });
+             }
+          });
 
-          document.getElementById('close-project-modal')?.addEventListener('click', () => closeModal(projectModal));
-          document.getElementById('open-diagram-modal')?.addEventListener('click', () => openModal(diagramModal));
-          document.getElementById('close-diagram-modal')?.addEventListener('click', () => closeModal(diagramModal));
-          document.getElementById('close-image-modal')?.addEventListener('click', () => closeModal(imageModal));
-
+          // Universal closing logic
           window.addEventListener('click', (event) => {
               if (event.target.classList.contains('modal')) {
-                  if (event.target.id === 'video-modal' && player && typeof player.stopVideo === 'function') {
-                      player.stopVideo();
-                  }
-                  closeModal(event.target);
+                  if (player && typeof player.stopVideo === 'function') player.stopVideo();
+                  document.querySelectorAll('.modal.active').forEach(closeModal);
               }
               
               if (!event.target.closest('.flip-card')) {
@@ -1511,9 +1531,8 @@
           
           window.addEventListener('keydown', (event) => {
               if (event.key === 'Escape') {
-                  const activeModals = document.querySelectorAll('.modal.active');
+                  const activeModals = Array.from(document.querySelectorAll('.modal.active'));
                   if (activeModals.length > 0) {
-                      // Close the topmost modal
                       const topModal = activeModals[activeModals.length - 1];
                       if (topModal.id === 'video-modal' && player && typeof player.stopVideo === 'function') {
                           player.stopVideo();
