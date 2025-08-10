@@ -518,7 +518,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 45vh; /* Enforce a consistent container height */
+            height: 45vh; /* This creates a stable container size */
         }
         .project-modal-slide {
             opacity: 0; visibility: hidden; transition: opacity 0.3s ease;
@@ -529,6 +529,7 @@
         .project-modal-image-wrapper img {
             max-width: 100%; max-height: 100%; /* Image will scale down to fit */
             width: auto; height: auto; display: block;
+            object-fit: contain; /* Ensures the whole image is visible */
         }
         
         .project-modal-description {
@@ -1339,12 +1340,10 @@
                   const imgEl = document.createElement('img');
                   imgEl.src = slideData.img;
                   imgEl.className = 'project-modal-slide';
-                  if (index === 0) imgEl.classList.add('active');
                   modalImageContainer.appendChild(imgEl);
 
                   const descEl = document.createElement('div');
                   descEl.className = 'project-modal-description-item';
-                  if (index === 0) descEl.classList.add('active');
                   descEl.innerHTML = `<h4></h4><p></p>`;
                   modalDescriptionContainer.appendChild(descEl);
               });
@@ -1363,19 +1362,20 @@
                   const currentIndex = currentProjectSlide;
                   
                   modalDescriptionSlides[currentIndex].classList.add('exiting');
+                  modalImageSlides[currentIndex].classList.remove('active');
                   
                   setTimeout(() => {
-                      modalImageSlides[currentIndex].classList.remove('active');
                       modalDescriptionSlides[currentIndex].classList.remove('active', 'exiting');
-
+                      
                       updateModalTextOnly(nextIndex);
+                      
                       modalImageSlides[nextIndex].classList.add('active');
                       modalDescriptionSlides[nextIndex].classList.add('active');
                       
                       currentProjectSlide = nextIndex;
                       modalCounter.textContent = `${nextIndex + 1} / ${slidesData.length}`;
                       isTransitioning = false;
-                  }, 300);
+                  }, 300); 
               }
 
               document.getElementById('open-project-modal')?.addEventListener('click', () => {
