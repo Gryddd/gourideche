@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="de">
 <head>
 <meta charset="utf-8"/>
@@ -553,6 +552,12 @@
             display: block;
         }
         
+        /* === FIX: DISABLE CURSOR ON UNDERLYING MODAL === */
+        .modal.is-covered .project-modal-slide {
+            cursor: default;
+            pointer-events: none;
+        }
+
         .project-modal-description {
             min-height: 120px; text-align: left; position: relative;
         }
@@ -1386,8 +1391,13 @@
               }
           }
 
+          // === FIX: UPDATED closeModal FUNCTION ===
           function closeModal(modal) {
               if (modal) {
+                  // If the image viewer is closing, uncover the project modal.
+                  if (modal.id === 'image-modal' && projectModal) {
+                      projectModal.classList.remove('is-covered');
+                  }
                   modal.classList.remove('active');
                   const isAnyModalOpen = Array.from(allModals).some(m => m.classList.contains('active'));
                   if (!isAnyModalOpen) {
@@ -1443,10 +1453,14 @@
                   slideContainer.appendChild(imgEl);
                   modalImageContainer.appendChild(slideContainer);
 
+                  // === FIX: UPDATED CLICK LISTENER ===
                   slideContainer.addEventListener('click', () => {
                       const imageModalImg = imageModal.querySelector('img');
                       imageModalImg.src = imgEl.src;
                       imageModalImg.alt = `Enlarged view of ${slideData.title[currentLang] || slideData.title.en}`;
+                      if (projectModal) {
+                          projectModal.classList.add('is-covered');
+                      }
                       openModal(imageModal);
                   });
 
@@ -1516,9 +1530,13 @@
 
           // Universal closing logic
           window.addEventListener('click', (event) => {
+              // === FIX: UPDATED CLICK OUTSIDE BEHAVIOR ===
               if (event.target.classList.contains('modal')) {
-                  if (player && typeof player.stopVideo === 'function') player.stopVideo();
-                  document.querySelectorAll('.modal.active').forEach(closeModal);
+                  if (player && typeof player.stopVideo === 'function' && event.target.id === 'video-modal') {
+                      player.stopVideo();
+                  }
+                  // This is safer: only close the specific modal background that was clicked.
+                  closeModal(event.target);
               }
               
               if (!event.target.closest('.flip-card')) {
