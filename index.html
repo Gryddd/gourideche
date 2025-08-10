@@ -362,18 +362,31 @@
         .video-thumbnail:hover .play-button { transform: translate(-50%, -50%) scale(1.1); }
         
         .modal {
-            display: none; position: fixed; z-index: 1003;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: fixed; z-index: 1003;
             left: 0; top: 0; width: 100%; height: 100%;
             background-color: rgba(0,0,0,0.7);
             -webkit-backdrop-filter: blur(8px);
             backdrop-filter: blur(8px);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
         }
         .modal-content {
-            position: relative; margin: auto; padding: 0;
+            position: relative; 
             width: 90%; 
             max-width: 56rem;
-            top: 50%;
-            transform: translateY(-50%);
+            transition: transform 0.3s ease;
+            transform: scale(0.95);
+        }
+        .modal.active .modal-content {
+            transform: scale(1);
         }
         .video-responsive-wrapper {
             position: relative; padding-bottom: 56.25%; height: 0;
@@ -387,17 +400,10 @@
             color: #fff; font-size: 31px; font-weight: bold;
             cursor: pointer; background: none; border: none; padding: 0;
         }
-
-        #diagram-modal .modal-content, #image-modal .modal-content {
-            max-width: 70rem;
-        }
-        #diagram-modal img, #image-modal img {
-            width: 100%;
-            height: auto;
-            display: block;
-            border-radius: 8px;
-            max-height: 90vh;
-            object-fit: contain;
+        #diagram-modal .modal-content { max-width: 70rem; }
+        #diagram-modal img {
+            width: 100%; height: auto; display: block; border-radius: 8px;
+            max-height: 90vh; object-fit: contain;
         }
 
         .timeline-wrapper { 
@@ -475,141 +481,86 @@
         .skill-card h3 { margin-top: 0; }
         .skill-card p { margin-bottom: 0; }
         
-        /* === START: FINAL FIXED PROJECT CAROUSEL STYLES === */
-        .project-carousel {
+        /* === PROJECT INTRO STYLES === */
+        .project-intro {
             background: var(--card-bg);
             -webkit-backdrop-filter: var(--blur);
             backdrop-filter: var(--blur);
             border-radius: 12px;
             padding: 2rem;
             box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-        }
-        .project-header {
-            display: flex;
-            justify-content: space-between;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
             align-items: center;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 1.5rem;
-            margin-bottom: 1.5rem;
         }
-        .project-header h3 {
-            margin: 0;
-            font-size: 1.5rem;
+        @media (min-width: 768px) {
+            .project-intro { grid-template-columns: 2fr 3fr; }
         }
-        .carousel-viewport {
-            position: relative;
-            width: 100%;
-            border-radius: 8px;
-            overflow: hidden;
-            background-color: #111;
+        .project-intro-image img {
+            width: 100%; height: auto; border-radius: 8px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            cursor: pointer;
-            margin-bottom: 1.5rem;
         }
-        .carousel-slide {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            transition: opacity 0.4s ease-in-out;
-            z-index: 1;
+        .project-intro-text h3 { margin-top: 0; font-size: 1.5rem; }
+        .project-intro-text p { opacity: 0.9; margin-bottom: 1.5rem; }
+        
+        /* === PROJECT MODAL STYLES === */
+        #project-modal .modal-content {
+            max-width: 50rem; background: var(--background);
+            border-radius: 12px; padding: 1rem; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
-        .carousel-slide.active {
-            position: relative; /* Let it define the height */
-            opacity: 1;
-            z-index: 2;
+        #project-modal .close-button { top: 10px; right: 15px; font-size: 24px; }
+        .project-modal-body { padding: 1.5rem; }
+        .project-modal-image-wrapper {
+            background: #111; border-radius: 8px; margin-bottom: 1.5rem;
+            overflow: hidden; position: relative;
         }
-        .carousel-slide img {
-            width: 100%;
-            height: auto; /* Let height adapt to keep ratio */
-            object-fit: contain;
-            display: block;
+        .project-modal-slide {
+            opacity: 0; visibility: hidden; transition: opacity 0.3s ease;
         }
-        .carousel-details {
-            display: flex;
-            flex-direction: column;
+        .project-modal-slide.active { opacity: 1; visibility: visible; }
+        .project-modal-image-wrapper img { width: 100%; height: auto; display: block; }
+        
+        .project-modal-description {
+            min-height: 120px; text-align: left; position: relative;
         }
-        .carousel-descriptions {
-            position: relative;
-            text-align: left;
-            min-height: 140px; /* Adjust as needed for your longest text */
-            overflow: hidden;
+        .project-modal-description-item {
+            position: absolute; top: 0; left: 0; right: 0;
+            opacity: 0; visibility: hidden;
+            transform: translateY(15px);
+            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
         }
-        .slide-description {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+        .project-modal-description-item.active {
+            opacity: 1; visibility: visible; transform: translateY(0);
         }
-        .slide-description.active {
-            opacity: 1;
-            visibility: visible;
+        .project-modal-description-item.exiting {
+            opacity: 0; transform: translateY(-15px);
         }
-        .slide-description h4 {
-            font-size: 1.3rem;
-            margin-top: 0;
-            margin-bottom: 0.75rem;
+        .project-modal-description h4 { font-size: 1.3rem; margin: 0 0 0.5rem 0; }
+        .project-modal-description p { opacity: 0.9; margin: 0; }
+        
+        .project-modal-controls {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border-color);
         }
-        .slide-description p {
-            font-weight: 300;
-            line-height: 1.7;
-            opacity: 0.9;
-            margin: 0;
+        .project-modal-arrow {
+            background: rgba(255, 255, 255, 0.1); border: 2px solid transparent;
+            border-radius: 50%; padding: 8px; cursor: pointer; transition: all 0.3s ease;
+            display: flex; align-items: center; justify-content: center;
         }
-        .carousel-controls {
-            display: flex;
-            align-items: center;
-            justify-content: space-between; /* Pushes arrows to the sides */
-            margin-top: 1.5rem;
-        }
-        .carousel-arrow {
-            background: rgba(255, 255, 255, 0.1);
-            border: 2px solid transparent;
-            border-radius: 50%;
-            padding: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            user-select: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 10;
-        }
-        .carousel-arrow:hover {
+        .project-modal-arrow:hover {
             background: rgba(255, 255, 255, 0.2);
             border-color: var(--primary-blue);
             transform: scale(1.1);
         }
-        .carousel-arrow:active {
-            transform: scale(0.95);
+        .project-modal-arrow svg { width: 24px; height: 24px; pointer-events: none; }
+        .project-modal-arrow path { fill: var(--primary-blue); }
+        
+        .project-modal-counter {
+            font-family: var(--font-heading); font-size: 1rem;
+            background: rgba(255, 255, 255, 0.05); padding: 0.25rem 0.75rem;
+            border-radius: 15px; border: 1px solid var(--border-color);
         }
-        .carousel-arrow svg {
-            width: 24px;
-            height: 24px;
-            display: block;
-            pointer-events: none;
-        }
-        .carousel-arrow path {
-            fill: var(--primary-blue);
-        }
-        .slide-counter {
-            font-family: var(--font-heading);
-            font-size: 1rem;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 0.25rem 0.75rem;
-            border-radius: 15px;
-            border: 1px solid var(--border-color);
-        }
-        @media screen and (max-width: 768px) {
-            .project-header { flex-direction: column; gap: 1rem; }
-            .carousel-controls { justify-content: space-between; } /* Keeps arrows apart on mobile too */
-        }
-        /* === END: PROJECT CAROUSEL STYLES === */
 
         .faq-accordion { 
             max-width: 47rem;
@@ -989,92 +940,51 @@
 <section class="container" id="projekte">
     <h2 class="lang" data-de="Projekt: Virtualisiertes Home-Lab" data-en="Project: Virtualized Home Lab" data-fr="Projet : Labo Maison Virtualisé">Projekt: Virtualisiertes Home-Lab</h2>
     
-    <div class="project-carousel" data-aos="fade-up">
-        <div class="project-header">
-            <h3 class="lang" data-de="Eine End-to-End-Infrastruktur" data-en="An End-to-End Infrastructure" data-fr="Une Infrastructure de Bout en Bout">Eine End-to-End-Infrastruktur</h3>
-            <button id="open-diagram-modal" class="submit-btn lang" data-de="Topologie ansehen" data-en="View Topology" data-fr="Voir la Topologie">Topologie ansehen</button>
+    <div class="project-intro" data-aos="fade-up">
+        <div class="project-intro-image">
+            <img src="images/virtual_machines_overview.png" alt="Overview of the virtualized home lab environment."/>
         </div>
-
-        <div class="carousel-content-grid">
-            <div class="carousel-viewport">
-                <!-- All Slide Images -->
-                <div class="carousel-slide active"><img src="images/virtual_machines_overview.png" alt="Overview of all virtual machines in the lab environment."/></div>
-                <div class="carousel-slide"><img src="images/pfsense_dashboard.png" alt="pfSense Dashboard showing system information and network interfaces."/></div>
-                <div class="carousel-slide"><img src="images/pfsense_leases.png" alt="DHCP leases table in pfSense, showing assigned IP addresses."/></div>
-                <div class="carousel-slide"><img src="images/windows_server_roles.png" alt="Windows Server Manager showing AD DS, DNS, and File Services roles installed."/></div>
-                <div class="carousel-slide"><img src="images/windows_10_joined.png" alt="Windows 10 system properties showing it is joined to the homelab.local domain."/></div>
-                <div class="carousel-slide"><img src="images/pfsense_snmp.png" alt="SNMP service configuration page in pfSense."/></div>
-                <div class="carousel-slide"><img src="images/ubuntu_server_netdata.png" alt="Netdata dashboard running on the Ubuntu Server."/></div>
-                <div class="carousel-slide"><img src="images/netdata_snmp_devices.png" alt="Netdata monitoring dashboard showing SNMP devices pfSense and Windows Server."/></div>
-            </div>
-
-            <div class="carousel-details">
-                <div class="carousel-descriptions">
-                    <!-- All Slide Descriptions -->
-                    <div class="slide-description active">
-                        <h4 class="lang" data-de="Projektübersicht" data-en="Project Overview" data-fr="Vue d'ensemble du projet">Projektübersicht</h4>
-                        <p class="lang" data-de="Dieses Projekt demonstriert den Aufbau einer kompletten, virtualisierten IT-Umgebung in VMware. Es umfasst eine pfSense-Firewall, einen Windows Server als Domain Controller und einen Ubuntu Server für das Monitoring, um eine realistische Unternehmens-IT nachzubilden." data-en="This project demonstrates the setup of a complete, virtualized IT environment in VMware. It includes a pfSense firewall, a Windows Server as a Domain Controller, and an Ubuntu Server for monitoring, replicating a realistic corporate IT setup." data-fr="Ce projet démontre la mise en place d'un environnement informatique complet et virtualisé sous VMware. Il comprend un pare-feu pfSense, un Windows Server en tant que contrôleur de domaine et un serveur Ubuntu pour la surveillance, répliquant une configuration informatique d'entreprise réaliste.">Dieses Projekt demonstriert den Aufbau einer kompletten, virtualisierten IT-Umgebung in VMware. Es umfasst eine pfSense-Firewall, einen Windows Server als Domain Controller und einen Ubuntu Server für das Monitoring, um eine realistische Unternehmens-IT nachzubilden.</p>
-                    </div>
-                    <div class="slide-description">
-                        <h4 class="lang" data-de="pfSense-Firewall als Gateway" data-en="pfSense Firewall as Gateway" data-fr="Pare-feu pfSense comme passerelle">pfSense-Firewall als Gateway</h4>
-                        <p class="lang" data-de="Eine pfSense-VM agiert als zentraler Router und Firewall. Sie wurde mit einer statischen LAN-IP (192.168.10.2) konfiguriert und trennt das interne Netzwerk (LAN) sicher vom externen Netzwerk (WAN)." data-en="A pfSense VM acts as the central router and firewall. It was configured with a static LAN IP (192.168.10.2) and securely separates the internal network (LAN) from the external network (WAN)." data-fr="Une VM pfSense sert de routeur et de pare-feu central. Elle a été configurée avec une IP LAN statique (192.168.10.2) et sépare de manière sécurisée le réseau interne (LAN) du réseau externe (WAN).">Eine pfSense-VM agiert als zentraler Router und Firewall. Sie wurde mit einer statischen LAN-IP (192.168.10.2) konfiguriert und trennt das interne Netzwerk (LAN) sicher vom externen Netzwerk (WAN).</p>
-                    </div>
-                    <div class="slide-description">
-                        <h4 class="lang" data-de="DHCP-Server-Konfiguration" data-en="DHCP Server Configuration" data-fr="Configuration du serveur DHCP">DHCP-Server-Konfiguration</h4>
-                        <p class="lang" data-de="Der DHCP-Dienst auf pfSense wurde aktiviert, um automatisch IP-Adressen (192.168.10.100 - 192.168.10.150) an Clients wie die Windows 10 VM zu vergeben. Dies vereinfacht die Netzwerkverwaltung erheblich." data-en="The DHCP service on pfSense was enabled to automatically assign IP addresses (192.168.10.100 - 192.168.10.150) to clients like the Windows 10 VM. This significantly simplifies network administration." data-fr="Le service DHCP sur pfSense a été activé pour attribuer automatiquement des adresses IP (192.168.10.100 - 192.168.10.150) aux clients tels que la VM Windows 10. Cela simplifie considérablement l'administration du réseau.">Der DHCP-Dienst auf pfSense wurde aktiviert, um automatisch IP-Adressen (192.168.10.100 - 192.168.10.150) an Clients wie die Windows 10 VM zu vergeben. Dies vereinfacht die Netzwerkverwaltung erheblich.</p>
-                    </div>
-                    <div class="slide-description">
-                        <h4 class="lang" data-de="Windows Server als Domain Controller" data-en="Windows Server as Domain Controller" data-fr="Windows Server comme contrôleur de domaine">Windows Server als Domain Controller</h4>
-                        <p class="lang" data-de="Ein Windows Server 2022 wurde mit der statischen IP 192.168.10.10 installiert. Anschließend wurden die Rollen Active Directory Domain Services (AD DS) und DNS installiert, um ihn zum Domain Controller für die Domäne 'homelab.local' zu machen." data-en="A Windows Server 2022 was installed with the static IP 192.168.10.10. The Active Directory Domain Services (AD DS) and DNS roles were then installed to make it the Domain Controller for the 'homelab.local' domain." data-fr="Un Windows Server 2022 a été installé avec l'adresse IP statique 192.168.10.10. Les rôles Active Directory Domain Services (AD DS) et DNS ont ensuite été installés pour en faire le contrôleur de domaine pour le domaine 'homelab.local'.">Ein Windows Server 2022 wurde mit der statischen IP 192.168.10.10 installiert. Anschließend wurden die Rollen Active Directory Domain Services (AD DS) und DNS installiert, um ihn zum Domain Controller für die Domäne 'homelab.local' zu machen.</p>
-                    </div>
-                    <div class="slide-description">
-                        <h4 class="lang" data-de="Windows 10 Client in der Domäne" data-en="Windows 10 Client in the Domain" data-fr="Client Windows 10 dans le domaine">Windows 10 Client in der Domäne</h4>
-                        <p class="lang" data-de="Eine Windows 10 VM wurde installiert, erhielt eine IP-Adresse von pfSense und wurde erfolgreich der 'homelab.local'-Domäne hinzugefügt. Dies ermöglicht die zentrale Benutzerverwaltung und die Anmeldung mit Domänenkonten." data-en="A Windows 10 VM was installed, received an IP address from pfSense, and was successfully joined to the 'homelab.local' domain. This allows for centralized user management and logging in with domain accounts." data-fr="Une VM Windows 10 a été installée, a reçu une adresse IP de pfSense et a été jointe avec succès au domaine 'homelab.local'. Cela permet une gestion centralisée des utilisateurs et la connexion avec des comptes de domaine.">Eine Windows 10 VM wurde installiert, erhielt eine IP-Adresse von pfSense und wurde erfolgreich der 'homelab.local'-Domäne hinzugefügt. Dies ermöglicht die zentrale Benutzerverwaltung und die Anmeldung mit Domänenkonten.</p>
-                    </div>
-                    <div class="slide-description">
-                        <h4 class="lang" data-de="Aktivierung von SNMP für das Monitoring" data-en="Enabling SNMP for Monitoring" data-fr="Activation de SNMP pour la surveillance">Aktivierung von SNMP für das Monitoring</h4>
-                        <p class="lang" data-de="Um die Netzwerkgeräte überwachen zu können, wurde der SNMP-Dienst auf der pfSense-Firewall und dem Windows Server aktiviert. Es wurde eine sichere Community-String 'homelab-snmp' konfiguriert und der Zugriff auf den Monitoring-Server beschränkt." data-en="To monitor the network devices, the SNMP service was enabled on the pfSense firewall and the Windows Server. A secure community string 'homelab-snmp' was configured, and access was restricted to the monitoring server." data-fr="Pour surveiller les périphériques réseau, le service SNMP a été activé sur le pare-feu pfSense et le serveur Windows. Une chaîne de communauté sécurisée 'homelab-snmp' a été configurée et l'accès a été restreint au serveur de surveillance.">Um die Netzwerkgeräte überwachen zu können, wurde der SNMP-Dienst auf der pfSense-Firewall und dem Windows Server aktiviert. Es wurde eine sichere Community-String 'homelab-snmp' konfiguriert und der Zugriff auf den Monitoring-Server beschränkt.</p>
-                    </div>
-                    <div class="slide-description">
-                        <h4 class="lang" data-de="Einrichtung des Netdata Monitoring-Servers" data-en="Setting up the Netdata Monitoring Server" data-fr="Mise en place du serveur de surveillance Netdata">Einrichtung des Netdata Monitoring-Servers</h4>
-                        <p class="lang" data-de="Auf einer Ubuntu Server VM (IP 192.168.10.20) wurde Netdata installiert, eine leistungsstarke Echtzeit-Monitoring-Lösung. Diese Plattform sammelt und visualisiert Leistungsdaten aller Systeme im Netzwerk." data-en="Netdata, a powerful real-time monitoring solution, was installed on an Ubuntu Server VM (IP 192.168.10.20). This platform collects and visualizes performance data from all systems in the network." data-fr="Netdata, une solution de surveillance en temps réel puissante, a été installée sur une VM Ubuntu Server (IP 192.168.10.20). Cette plateforme collecte et visualise les données de performance de tous les systèmes du réseau.">Auf einer Ubuntu Server VM (IP 192.168.10.20) wurde Netdata installiert, eine leistungsstarke Echtzeit-Monitoring-Lösung. Diese Plattform sammelt und visualisiert Leistungsdaten aller Systeme im Netzwerk.</p>
-                    </div>
-                    <div class="slide-description">
-                        <h4 class="lang" data-de="Zentrales Monitoring-Dashboard" data-en="Centralized Monitoring Dashboard" data-fr="Tableau de bord de surveillance centralisé">Zentrales Monitoring-Dashboard</h4>
-                        <p class="lang" data-de="Erfolgreiche Integration: Netdata sammelt nun via SNMP Leistungsdaten (CPU, RAM, Netzwerkverkehr) von der pfSense-Firewall und dem Windows Server. Das Dashboard bietet eine zentrale Übersicht über den Zustand der gesamten Infrastruktur in Echtzeit." data-en="Successful Integration: Netdata now collects performance data (CPU, RAM, network traffic) from the pfSense firewall and Windows Server via SNMP. The dashboard provides a central, real-time overview of the entire infrastructure's health." data-fr="Intégration réussie : Netdata collecte désormais les données de performance (CPU, RAM, trafic réseau) du pare-feu pfSense et du serveur Windows via SNMP. Le tableau de bord offre une vue d'ensemble centralisée et en temps réel de l'état de toute l'infrastructure.">Erfolgreiche Integration: Netdata sammelt nun via SNMP Leistungsdaten (CPU, RAM, Netzwerkverkehr) von der pfSense-Firewall und dem Windows Server. Das Dashboard bietet eine zentrale Übersicht über den Zustand der gesamten Infrastruktur in Echtzeit.</p>
-                    </div>
-                </div>
-                <div class="carousel-controls">
-                    <button class="carousel-arrow prev" aria-label="Previous Slide">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                            <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"/>
-                        </svg>
-                    </button>
-                    <div class="slide-counter">1 / 8</div>
-                    <button class="carousel-arrow next" aria-label="Next Slide">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                            <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
-                        </svg>
-                    </button>
-                </div>
-            </div>
+        <div class="project-intro-text">
+            <h3 class="lang" data-de="Eine End-to-End-Infrastruktur" data-en="An End-to-End Infrastructure" data-fr="Une Infrastructure de Bout en Bout">Eine End-to-End-Infrastruktur</h3>
+            <p class="lang" data-de="Dieses Projekt demonstriert den Aufbau einer kompletten, virtualisierten IT-Umgebung in VMware, um eine realistische Unternehmens-IT nachzubilden. Die Ziele waren die Einrichtung einer sicheren Netzwerksegmentierung mit einer pfSense-Firewall, die Implementierung einer zentralen Benutzerverwaltung mit Windows Server Active Directory und die Integration einer Echtzeit-Monitoring-Lösung mit Netdata zur Überwachung der gesamten Infrastruktur." data-en="This project demonstrates the setup of a complete, virtualized IT environment in VMware to replicate a realistic corporate IT setup. The goals were to establish secure network segmentation with a pfSense firewall, implement centralized user management with Windows Server Active Directory, and integrate a real-time monitoring solution with Netdata to oversee the entire infrastructure's health." data-fr="Ce projet démontre la mise en place d'un environnement informatique complet et virtualisé sous VMware pour répliquer une configuration informatique d'entreprise réaliste. Les objectifs étaient d'établir une segmentation réseau sécurisée avec un pare-feu pfSense, d'implémenter une gestion centralisée des utilisateurs avec Active Directory sur Windows Server, et d'intégrer une solution de surveillance en temps réel avec Netdata pour superviser l'état de toute l'infrastructure.">Dieses Projekt demonstriert den Aufbau einer kompletten, virtualisierten IT-Umgebung in VMware, um eine realistische Unternehmens-IT nachzubilden. Die Ziele waren die Einrichtung einer sicheren Netzwerksegmentierung mit einer pfSense-Firewall, die Implementierung einer zentralen Benutzerverwaltung mit Windows Server Active Directory und die Integration einer Echtzeit-Monitoring-Lösung mit Netdata zur Überwachung der gesamten Infrastruktur.</p>
+            <button id="open-project-modal" class="submit-btn lang" data-de="Projekt-Showcase ansehen" data-en="View Project Showcase" data-fr="Voir la présentation du projet">Projekt-Showcase ansehen</button>
         </div>
     </div>
 </section>
 
-<!-- Diagram Modal -->
+<!-- Project Modal -->
+<div class="modal" id="project-modal">
+    <div class="modal-content">
+        <button aria-label="Close project modal" class="close-button" id="close-project-modal">×</button>
+        <div class="project-modal-body">
+            <div class="project-modal-image-wrapper">
+                <!-- The images will be populated here by JavaScript -->
+            </div>
+            <div class="project-modal-description">
+                 <!-- The description will be populated here by JavaScript -->
+            </div>
+            <div class="project-modal-controls">
+                <button class="project-modal-arrow prev" aria-label="Previous Slide">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"/>
+                    </svg>
+                </button>
+                <div id="project-modal-counter" class="project-modal-counter"></div>
+                <button class="project-modal-arrow next" aria-label="Next Slide">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Other Modals -->
 <div class="modal" id="diagram-modal">
     <div class="modal-content">
         <button aria-label="Close diagram modal" class="close-button" id="close-diagram-modal">×</button>
         <img src="images/diagram.png" alt="Home Lab Network Topology Diagram">
-    </div>
-</div>
-
-<!-- Image View Modal -->
-<div class="modal" id="image-modal">
-    <div class="modal-content">
-        <button aria-label="Close image modal" class="close-button" id="close-image-modal">×</button>
-        <img id="modal-image-content" src="" alt="Enlarged project view">
     </div>
 </div>
 
@@ -1144,12 +1054,35 @@
           const translatableAlt = document.querySelectorAll('.lang-alt');
           const profilePicture = document.getElementById('profile-picture');
           let currentLang = 'de';
+          let currentProjectSlide = 0;
 
           const altTexts = {
               de: "Ein professionelles Portraitfoto von Walid Gourideche",
               en: "A professional portrait of Walid Gourideche",
               fr: "Un portrait professionnel de Walid Gourideche"
           };
+          
+          const slidesData = [
+              { img: 'images/virtual_machines_overview.png', title: { de: 'Projektübersicht', en: 'Project Overview', fr: "Vue d'ensemble du projet" }, text: { de: 'Dieses Projekt demonstriert den Aufbau einer kompletten, virtualisierten IT-Umgebung in VMware. Es umfasst eine pfSense-Firewall, einen Windows Server als Domain Controller und einen Ubuntu Server für das Monitoring, um eine realistische Unternehmens-IT nachzubilden.', en: 'This project demonstrates the setup of a complete, virtualized IT environment in VMware. It includes a pfSense firewall, a Windows Server as a Domain Controller, and an Ubuntu Server for monitoring, replicating a realistic corporate IT setup.', fr: "Ce projet démontre la mise en place d'un environnement informatique complet et virtualisé sous VMware. Il comprend un pare-feu pfSense, un Windows Server en tant que contrôleur de domaine et un serveur Ubuntu pour la surveillance, répliquant une configuration informatique d'entreprise réaliste." } },
+              { img: 'images/pfsense_dashboard.png', title: { de: 'pfSense-Firewall als Gateway', en: 'pfSense Firewall as Gateway', fr: 'Pare-feu pfSense comme passerelle' }, text: { de: 'Eine pfSense-VM agiert als zentraler Router und Firewall. Sie wurde mit einer statischen LAN-IP (192.168.10.2) konfiguriert und trennt das interne Netzwerk (LAN) sicher vom externen Netzwerk (WAN).', en: 'A pfSense VM acts as the central router and firewall. It was configured with a static LAN IP (192.168.10.2) and securely separates the internal network (LAN) from the external network (WAN).', fr: "Une VM pfSense sert de routeur et de pare-feu central. Elle a été configurée avec une IP LAN statique (192.168.10.2) et sépare de manière sécurisée le réseau interne (LAN) du réseau externe (WAN)." } },
+              { img: 'images/pfsense_leases.png', title: { de: 'DHCP-Server-Konfiguration', en: 'DHCP Server Configuration', fr: 'Configuration du serveur DHCP' }, text: { de: "Der DHCP-Dienst auf pfSense wurde aktiviert, um automatisch IP-Adressen (192.168.10.100 - 192.168.10.150) an Clients wie die Windows 10 VM zu vergeben. Dies vereinfacht die Netzwerkverwaltung erheblich.", en: "The DHCP service on pfSense was enabled to automatically assign IP addresses (192.168.10.100 - 192.168.10.150) to clients like the Windows 10 VM. This significantly simplifies network administration.", fr: "Le service DHCP sur pfSense a été activé pour attribuer automatiquement des adresses IP (192.168.10.100 - 192.168.10.150) aux clients tels que la VM Windows 10. Cela simplifie considérablement l'administration du réseau." } },
+              { img: 'images/windows_server_roles.png', title: { de: 'Windows Server als Domain Controller', en: 'Windows Server as Domain Controller', fr: 'Windows Server comme contrôleur de domaine' }, text: { de: "Ein Windows Server 2022 wurde mit der statischen IP 192.168.10.10 installiert. Anschließend wurden die Rollen Active Directory Domain Services (AD DS) und DNS installiert, um ihn zum Domain Controller für die Domäne 'homelab.local' zu machen.", en: "A Windows Server 2022 was installed with the static IP 192.168.10.10. The Active Directory Domain Services (AD DS) and DNS roles were then installed to make it the Domain Controller for the 'homelab.local' domain.", fr: "Un Windows Server 2022 a été installé avec l'adresse IP statique 192.168.10.10. Les rôles Active Directory Domain Services (AD DS) et DNS ont ensuite été installés pour en faire le contrôleur de domaine pour le domaine 'homelab.local'." } },
+              { img: 'images/windows_10_joined.png', title: { de: 'Windows 10 Client in der Domäne', en: 'Windows 10 Client in the Domain', fr: 'Client Windows 10 dans le domaine' }, text: { de: "Eine Windows 10 VM wurde installiert, erhielt eine IP-Adresse von pfSense und wurde erfolgreich der 'homelab.local'-Domäne hinzugefügt. Dies ermöglicht die zentrale Benutzerverwaltung und die Anmeldung mit Domänenkonten.", en: "A Windows 10 VM was installed, received an IP address from pfSense, and was successfully joined to the 'homelab.local' domain. This allows for centralized user management and logging in with domain accounts.", fr: "Une VM Windows 10 a été installée, a reçu une adresse IP de pfSense et a été jointe avec succès au domaine 'homelab.local'. Cela permet une gestion centralisée des utilisateurs et la connexion avec des comptes de domaine." } },
+              { img: 'images/pfsense_snmp.png', title: { de: 'Aktivierung von SNMP für das Monitoring', en: 'Enabling SNMP for Monitoring', fr: 'Activation de SNMP pour la surveillance' }, text: { de: "Um die Netzwerkgeräte überwachen zu können, wurde der SNMP-Dienst auf der pfSense-Firewall und dem Windows Server aktiviert. Es wurde eine sichere Community-String 'homelab-snmp' konfiguriert und der Zugriff auf den Monitoring-Server beschränkt.", en: "To monitor the network devices, the SNMP service was enabled on the pfSense firewall and the Windows Server. A secure community string 'homelab-snmp' was configured, and access was restricted to the monitoring server.", fr: "Pour surveiller les périphériques réseau, le service SNMP a été activé sur le pare-feu pfSense et le serveur Windows. Une chaîne de communauté sécurisée 'homelab-snmp' a été configurée et l'accès a été restreint au serveur de surveillance." } },
+              { img: 'images/ubuntu_server_netdata.png', title: { de: 'Einrichtung des Netdata Monitoring-Servers', en: 'Setting up the Netdata Monitoring Server', fr: 'Mise en place du serveur de surveillance Netdata' }, text: { de: 'Auf einer Ubuntu Server VM (IP 192.168.10.20) wurde Netdata installiert, eine leistungsstarke Echtzeit-Monitoring-Lösung. Diese Plattform sammelt und visualisiert Leistungsdaten aller Systeme im Netzwerk.', en: 'Netdata, a powerful real-time monitoring solution, was installed on an Ubuntu Server VM (IP 192.168.10.20). This platform collects and visualizes performance data from all systems in the network.', fr: "Netdata, une solution de surveillance en temps réel puissante, a été installée sur une VM Ubuntu Server (IP 192.168.10.20). Cette plateforme collecte et visualise les données de performance de tous les systèmes du réseau." } },
+              { img: 'images/netdata_snmp_devices.png', title: { de: 'Zentrales Monitoring-Dashboard', en: 'Centralized Monitoring Dashboard', fr: 'Tableau de bord de surveillance centralisé' }, text: { de: 'Erfolgreiche Integration: Netdata sammelt nun via SNMP Leistungsdaten (CPU, RAM, Netzwerkverkehr) von der pfSense-Firewall und dem Windows Server. Das Dashboard bietet eine zentrale Übersicht über den Zustand der gesamten Infrastruktur in Echtzeit.', en: "Successful Integration: Netdata now collects performance data (CPU, RAM, network traffic) from the pfSense firewall and Windows Server via SNMP. The dashboard provides a central, real-time overview of the entire infrastructure's health.", fr: "Intégration réussie : Netdata collecte désormais les données de performance (CPU, RAM, trafic réseau) du pare-feu pfSense et du serveur Windows via SNMP. Le tableau de bord offre une vue d'ensemble centralisée et en temps réel de l'état de toute l'infrastructure." } }
+          ];
+
+          function updateModalTextOnly(index) {
+              const projectModal = document.getElementById('project-modal');
+              if (!projectModal) return;
+              const descriptionItems = projectModal.querySelectorAll('.project-modal-description-item');
+              if (descriptionItems && descriptionItems[index]) {
+                  const slideData = slidesData[index];
+                  descriptionItems[index].querySelector('h4').textContent = slideData.title[currentLang];
+                  descriptionItems[index].querySelector('p').textContent = slideData.text[currentLang];
+              }
+          }
           
           function updateLanguageSelectorUI(selectedLang) {
               document.querySelectorAll('.language-item').forEach(item => {
@@ -1182,6 +1115,7 @@
               }
               
               updateLanguageSelectorUI(currentLang);
+              updateModalTextOnly(currentProjectSlide);
           }
 
           languageItems.forEach(item => {
@@ -1323,97 +1257,25 @@
               });
           });
 
-          // === START: PROJECT CAROUSEL SCRIPT (WITH FIX) ===
-          const carousel = document.querySelector('.project-carousel');
-          if (carousel) {
-              const imageSlides = carousel.querySelectorAll('.carousel-slide');
-              const descriptionSlides = carousel.querySelectorAll('.slide-description');
-              const prevButton = carousel.querySelector('.carousel-arrow.prev');
-              const nextButton = carousel.querySelector('.carousel-arrow.next');
-              const slideCounter = carousel.querySelector('.slide-counter');
-              const carouselViewport = carousel.querySelector('.carousel-viewport');
-              let currentSlideIndex = 0;
-              const totalSlides = imageSlides.length;
-              let isTransitioning = false;
-
-              function showSlide(index) {
-                  if (isTransitioning) return;
-                  isTransitioning = true;
-                  
-                  const currentActiveDesc = carousel.querySelector('.slide-description.active');
-                  if (currentActiveDesc) {
-                      currentActiveDesc.classList.remove('active');
-                  }
-                  
-                  const currentActiveImg = carousel.querySelector('.carousel-slide.active');
-                  if (currentActiveImg) {
-                      currentActiveImg.classList.remove('active');
-                  }
-                  
-                  setTimeout(() => {
-                      imageSlides[index].classList.add('active');
-                      descriptionSlides[index].classList.add('active');
-                      if(slideCounter) {
-                          slideCounter.textContent = `${index + 1} / ${totalSlides}`;
-                      }
-                      // Allow new transition after animation completes
-                      setTimeout(() => {
-                          isTransitioning = false;
-                      }, 500); // Match CSS transition duration
-                  }, 50); 
-              }
-
-              nextButton.addEventListener('click', (e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  if (!isTransitioning) {
-                      currentSlideIndex = (currentSlideIndex + 1) % totalSlides;
-                      showSlide(currentSlideIndex);
-                  }
-              });
-
-              prevButton.addEventListener('click', (e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  if (!isTransitioning) {
-                      currentSlideIndex = (currentSlideIndex - 1 + totalSlides) % totalSlides;
-                      showSlide(currentSlideIndex);
-                  }
-              });
-              
-              carouselViewport.addEventListener('click', () => {
-                  const activeImage = imageSlides[currentSlideIndex].querySelector('img');
-                  if(activeImage) {
-                      const imageModal = document.getElementById('image-modal');
-                      const modalImageContent = document.getElementById('modal-image-content');
-                      modalImageContent.src = activeImage.src;
-                      openModal(imageModal);
-                  }
-              });
-              
-              showSlide(currentSlideIndex);
-          }
-          // === END: PROJECT CAROUSEL SCRIPT ===
-          
-          // === START: MODAL HANDLING SCRIPT ===
+          // === START: MODAL HANDLING AND PROJECT SHOWCASE SCRIPT ===
           const allModals = document.querySelectorAll('.modal');
           const videoModal = document.getElementById('video-modal');
           const diagramModal = document.getElementById('diagram-modal');
-          const imageModal = document.getElementById('image-modal');
+          const projectModal = document.getElementById('project-modal');
           let player;
           const youtubeVideoId = 'R_rKRfh7ceU';
 
           function openModal(modal) {
               if (modal) {
-                  modal.style.display = 'block';
+                  modal.classList.add('active');
                   document.body.classList.add('modal-open');
               }
           }
 
           function closeModal(modal) {
               if (modal) {
-                  modal.style.display = 'none';
-                  const isAnyModalOpen = Array.from(allModals).some(m => m.style.display === 'block');
+                  modal.classList.remove('active');
+                  const isAnyModalOpen = Array.from(allModals).some(m => m.classList.contains('active'));
                   if (!isAnyModalOpen) {
                       document.body.classList.remove('modal-open');
                   }
@@ -1453,10 +1315,91 @@
               closeModal(videoModal);
           });
           
+          // Project Modal Setup
+          if (projectModal) {
+              const modalImageContainer = projectModal.querySelector('.project-modal-image-wrapper');
+              const modalDescriptionContainer = projectModal.querySelector('.project-modal-description');
+
+              slidesData.forEach((slideData, index) => {
+                  const imgEl = document.createElement('img');
+                  imgEl.src = slideData.img;
+                  imgEl.className = 'project-modal-slide';
+                  if (index === 0) imgEl.classList.add('active');
+                  modalImageContainer.appendChild(imgEl);
+
+                  const descEl = document.createElement('div');
+                  descEl.className = 'project-modal-description-item';
+                  if (index === 0) descEl.classList.add('active');
+                  descEl.innerHTML = `<h4></h4><p></p>`;
+                  modalDescriptionContainer.appendChild(descEl);
+              });
+              
+              const modalImageSlides = projectModal.querySelectorAll('.project-modal-slide');
+              const modalDescriptionSlides = projectModal.querySelectorAll('.project-modal-description-item');
+              const modalCounter = document.getElementById('project-modal-counter');
+              const modalPrevBtn = projectModal.querySelector('.project-modal-arrow.prev');
+              const modalNextBtn = projectModal.querySelector('.project-modal-arrow.next');
+              let isTransitioning = false;
+
+              function showProjectSlide(nextIndex) {
+                  if (isTransitioning) return;
+                  isTransitioning = true;
+                  
+                  const currentIndex = currentProjectSlide;
+                  const currentImage = modalImageSlides[currentIndex];
+                  const currentDesc = modalDescriptionSlides[currentIndex];
+                  const nextImage = modalImageSlides[nextIndex];
+                  const nextDesc = modalDescriptionSlides[nextIndex];
+
+                  // 1. Start fading out current elements
+                  currentImage.classList.remove('active');
+                  currentDesc.classList.add('exiting');
+                  
+                  // 2. After a short delay, update content and fade in new elements
+                  setTimeout(() => {
+                      // Update text content for the next slide while it's hidden
+                      nextDesc.querySelector('h4').textContent = slidesData[nextIndex].title[currentLang];
+                      nextDesc.querySelector('p').textContent = slidesData[nextIndex].text[currentLang];
+                      
+                      // Make new slide active
+                      nextImage.classList.add('active');
+                      nextDesc.classList.remove('exiting'); // Remove exiting state before making active
+                      nextDesc.classList.add('active');
+                      
+                      // Clean up old slide's classes
+                      currentDesc.classList.remove('active');
+                      
+                      currentProjectSlide = nextIndex;
+                      modalCounter.textContent = `${nextIndex + 1} / ${slidesData.length}`;
+                      
+                      // Release the lock
+                      isTransitioning = false;
+                  }, 300); // This duration should match your CSS transition time
+              }
+
+              document.getElementById('open-project-modal')?.addEventListener('click', () => {
+                  currentProjectSlide = 0;
+                  updateModalTextOnly(0);
+                  modalImageSlides.forEach((slide, index) => slide.classList.toggle('active', index === 0));
+                  modalDescriptionSlides.forEach((desc, index) => desc.classList.toggle('active', index === 0));
+                  modalCounter.textContent = `1 / ${slidesData.length}`;
+                  openModal(projectModal);
+              });
+
+              modalNextBtn?.addEventListener('click', () => {
+                  const nextIndex = (currentProjectSlide + 1) % slidesData.length;
+                  showProjectSlide(nextIndex);
+              });
+              
+              modalPrevBtn?.addEventListener('click', () => {
+                  const nextIndex = (currentProjectSlide - 1 + slidesData.length) % slidesData.length;
+                  showProjectSlide(nextIndex);
+              });
+          }
+
+          document.getElementById('close-project-modal')?.addEventListener('click', () => closeModal(projectModal));
           document.getElementById('open-diagram-modal')?.addEventListener('click', () => openModal(diagramModal));
           document.getElementById('close-diagram-modal')?.addEventListener('click', () => closeModal(diagramModal));
-
-          document.getElementById('close-image-modal')?.addEventListener('click', () => closeModal(imageModal));
 
           window.addEventListener('click', (event) => {
               if (event.target === videoModal) {
@@ -1464,7 +1407,7 @@
                   closeModal(videoModal);
               }
               if (event.target === diagramModal) closeModal(diagramModal);
-              if (event.target === imageModal) closeModal(imageModal);
+              if (event.target === projectModal) closeModal(projectModal);
               
               if (!event.target.closest('.flip-card')) {
                   document.querySelectorAll('.flip-card-inner.is-flipped').forEach(inner => inner.classList.remove('is-flipped'));
@@ -1475,15 +1418,14 @@
           });
           window.addEventListener('keydown', (event) => {
               if (event.key === 'Escape') {
-                  if (videoModal && videoModal.style.display === 'block') {
-                      if (player && typeof player.stopVideo === 'function') player.stopVideo();
-                      closeModal(videoModal);
-                  }
-                  if (diagramModal && diagramModal.style.display === 'block') closeModal(diagramModal);
-                  if (imageModal && imageModal.style.display === 'block') closeModal(imageModal);
+                  allModals.forEach(modal => {
+                      if(modal.classList.contains('active')) {
+                          if (modal.id === 'video-modal' && player && typeof player.stopVideo === 'function') player.stopVideo();
+                          closeModal(modal);
+                      }
+                  });
               }
           });
-          // === END: MODAL HANDLING SCRIPT ===
       });
     </script>
 </body>
