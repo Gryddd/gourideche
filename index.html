@@ -400,8 +400,10 @@
             color: #fff; font-size: 31px; font-weight: bold;
             cursor: pointer; background: none; border: none; padding: 0;
         }
-        #diagram-modal .modal-content { max-width: 70rem; }
-        #diagram-modal img {
+        #diagram-modal .modal-content, #image-modal .modal-content {
+            max-width: 70rem;
+        }
+        #diagram-modal img, #image-modal img {
             width: 100%; height: auto; display: block; border-radius: 8px;
             max-height: 90vh; object-fit: contain;
         }
@@ -525,7 +527,7 @@
             display: flex; align-items: center; justify-content: center;
         }
         .project-modal-slide.active { opacity: 1; visibility: visible; }
-        .project-modal-image-wrapper img {
+        .project-modal-slide img {
             max-width: 100%; max-height: 100%; /* Image will scale down to fit */
             width: auto; height: auto; display: block;
         }
@@ -1360,11 +1362,9 @@
                   const currentIndex = currentProjectSlide;
                   
                   modalImageSlides[currentIndex].classList.remove('active');
-                  modalDescriptionSlides[currentIndex].classList.add('exiting');
+                  modalDescriptionSlides[currentIndex].classList.remove('active');
                   
                   setTimeout(() => {
-                      modalDescriptionSlides[currentIndex].classList.remove('active', 'exiting');
-                      
                       updateModalTextOnly(nextIndex);
                       modalImageSlides[nextIndex].classList.add('active');
                       modalDescriptionSlides[nextIndex].classList.add('active');
@@ -1428,3 +1428,4 @@
     </script>
 </body>
 </html>
+```
