@@ -517,8 +517,9 @@
         }
         .project-modal-slide {
             opacity: 0; visibility: hidden; transition: opacity 0.3s ease;
+            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
         }
-        .project-modal-slide.active { opacity: 1; visibility: visible; }
+        .project-modal-slide.active { opacity: 1; visibility: visible; position: relative; }
         .project-modal-image-wrapper img { width: 100%; height: auto; display: block; }
         
         .project-modal-description {
@@ -528,13 +529,15 @@
             position: absolute; top: 0; left: 0; right: 0;
             opacity: 0; visibility: hidden;
             transform: translateY(15px);
-            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s 0.3s;
         }
         .project-modal-description-item.active {
             opacity: 1; visibility: visible; transform: translateY(0);
+            transition: opacity 0.3s ease 0.3s, transform 0.3s ease 0.3s, visibility 0s 0s;
         }
         .project-modal-description-item.exiting {
             opacity: 0; transform: translateY(-15px);
+            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s 0.3s;
         }
         .project-modal-description h4 { font-size: 1.3rem; margin: 0 0 0.5rem 0; }
         .project-modal-description p { opacity: 0.9; margin: 0; }
@@ -942,7 +945,8 @@
     
     <div class="project-intro" data-aos="fade-up">
         <div class="project-intro-image">
-            <img src="images/virtual_machines_overview.png" alt="Overview of the virtualized home lab environment."/>
+            <!-- UPDATED: Changed the main project image to the diagram -->
+            <img src="images/diagram.png" alt="Diagram of the virtualized home lab topology."/>
         </div>
         <div class="project-intro-text">
             <h3 class="lang" data-de="Eine End-to-End-Infrastruktur" data-en="An End-to-End Infrastructure" data-fr="Une Infrastructure de Bout en Bout">Eine End-to-End-Infrastruktur</h3>
@@ -958,10 +962,10 @@
         <button aria-label="Close project modal" class="close-button" id="close-project-modal">×</button>
         <div class="project-modal-body">
             <div class="project-modal-image-wrapper">
-                <!-- The images will be populated here by JavaScript -->
+                <!-- Images are populated by JavaScript -->
             </div>
             <div class="project-modal-description">
-                 <!-- The description will be populated here by JavaScript -->
+                 <!-- Descriptions are populated by JavaScript -->
             </div>
             <div class="project-modal-controls">
                 <button class="project-modal-arrow prev" aria-label="Previous Slide">
@@ -1319,6 +1323,10 @@
           if (projectModal) {
               const modalImageContainer = projectModal.querySelector('.project-modal-image-wrapper');
               const modalDescriptionContainer = projectModal.querySelector('.project-modal-description');
+              
+              // Clear any placeholder content
+              modalImageContainer.innerHTML = '';
+              modalDescriptionContainer.innerHTML = '';
 
               slidesData.forEach((slideData, index) => {
                   const imgEl = document.createElement('img');
@@ -1346,35 +1354,20 @@
                   isTransitioning = true;
                   
                   const currentIndex = currentProjectSlide;
-                  const currentImage = modalImageSlides[currentIndex];
-                  const currentDesc = modalDescriptionSlides[currentIndex];
-                  const nextImage = modalImageSlides[nextIndex];
-                  const nextDesc = modalDescriptionSlides[nextIndex];
-
-                  // 1. Start fading out current elements
-                  currentImage.classList.remove('active');
-                  currentDesc.classList.add('exiting');
                   
-                  // 2. After a short delay, update content and fade in new elements
+                  // Hide old slide
+                  modalImageSlides[currentIndex].classList.remove('active');
+                  modalDescriptionSlides[currentIndex].classList.remove('active');
+                  
+                  // After a tiny delay, update content and show new slide
                   setTimeout(() => {
-                      // Update text content for the next slide while it's hidden
-                      nextDesc.querySelector('h4').textContent = slidesData[nextIndex].title[currentLang];
-                      nextDesc.querySelector('p').textContent = slidesData[nextIndex].text[currentLang];
-                      
-                      // Make new slide active
-                      nextImage.classList.add('active');
-                      nextDesc.classList.remove('exiting'); // Remove exiting state before making active
-                      nextDesc.classList.add('active');
-                      
-                      // Clean up old slide's classes
-                      currentDesc.classList.remove('active');
-                      
+                      updateModalTextOnly(nextIndex);
+                      modalImageSlides[nextIndex].classList.add('active');
+                      modalDescriptionSlides[nextIndex].classList.add('active');
                       currentProjectSlide = nextIndex;
                       modalCounter.textContent = `${nextIndex + 1} / ${slidesData.length}`;
-                      
-                      // Release the lock
                       isTransitioning = false;
-                  }, 300); // This duration should match your CSS transition time
+                  }, 300); // Match CSS transition duration
               }
 
               document.getElementById('open-project-modal')?.addEventListener('click', () => {
