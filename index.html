@@ -514,13 +514,20 @@
         .project-modal-image-wrapper {
             background: #111; border-radius: 8px; margin-bottom: 1.5rem;
             overflow: hidden; position: relative;
+            display: flex; align-items: center; justify-content: center;
+            height: 45vh; /* Consistent height for the container */
         }
         .project-modal-slide {
             opacity: 0; visibility: hidden; transition: opacity 0.3s ease;
             position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            display: flex; align-items: center; justify-content: center;
         }
-        .project-modal-slide.active { opacity: 1; visibility: visible; position: relative; }
-        .project-modal-image-wrapper img { width: 100%; height: auto; display: block; }
+        .project-modal-slide.active { opacity: 1; visibility: visible; }
+        .project-modal-image-wrapper img {
+            max-width: 100%; max-height: 100%;
+            width: auto; height: auto; display: block;
+            object-fit: contain;
+        }
         
         .project-modal-description {
             min-height: 120px; text-align: left; position: relative;
@@ -529,15 +536,15 @@
             position: absolute; top: 0; left: 0; right: 0;
             opacity: 0; visibility: hidden;
             transform: translateY(15px);
-            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s 0.3s;
+            transition: opacity 0.3s ease, transform 0.3s ease;
         }
         .project-modal-description-item.active {
             opacity: 1; visibility: visible; transform: translateY(0);
-            transition: opacity 0.3s ease 0.3s, transform 0.3s ease 0.3s, visibility 0s 0s;
+            transition-delay: 0.15s;
         }
         .project-modal-description-item.exiting {
             opacity: 0; transform: translateY(-15px);
-            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s 0.3s;
+            transition-delay: 0s;
         }
         .project-modal-description h4 { font-size: 1.3rem; margin: 0 0 0.5rem 0; }
         .project-modal-description p { opacity: 0.9; margin: 0; }
@@ -945,7 +952,6 @@
     
     <div class="project-intro" data-aos="fade-up">
         <div class="project-intro-image">
-            <!-- UPDATED: Changed the main project image to the diagram -->
             <img src="images/diagram.png" alt="Diagram of the virtualized home lab topology."/>
         </div>
         <div class="project-intro-text">
@@ -962,7 +968,7 @@
         <button aria-label="Close project modal" class="close-button" id="close-project-modal">×</button>
         <div class="project-modal-body">
             <div class="project-modal-image-wrapper">
-                <!-- Images are populated by JavaScript -->
+                <!-- Images are populated here by JavaScript -->
             </div>
             <div class="project-modal-description">
                  <!-- Descriptions are populated by JavaScript -->
@@ -984,7 +990,7 @@
     </div>
 </div>
 
-<!-- Other Modals -->
+<!-- Diagram Modal -->
 <div class="modal" id="diagram-modal">
     <div class="modal-content">
         <button aria-label="Close diagram modal" class="close-button" id="close-diagram-modal">×</button>
@@ -997,7 +1003,7 @@
 <div class="faq-accordion" data-aos="fade-up">
 <div class="faq-item"><button aria-controls="faq1-answer" aria-expanded="false" class="faq-question"><span class="lang" data-de="&lt;i&gt;Sie sind nicht in Deutschland. Wie sollen wir Sie überhaupt hierherbringen?&lt;/i&gt;" data-en="&lt;i&gt;You are not in Germany. How would we manage the relocation process?&lt;/i&gt;" data-fr="&lt;i&gt;Vous n'êtes pas en Allemagne. Comment gérerions-nous le processus de relocalisation ?&lt;/i&gt;"><i>Sie sind nicht in Deutschland. Wie sollen wir Sie überhaupt hierherbringen?</i></span><span class="faq-icon"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path></svg></span></button><div class="faq-answer" id="faq1-answer"><p class="lang" data-de="Ich verstehe diese Frage gut. Aber mit den richtigen Unterlagen und Dokumenten kann das Ganze wirklich reibungslos ablaufen. Ich war bereits in Deutschland und habe den Visaprozess selbst durchlaufen, daher kenne ich mich mit dem Ablauf aus. Ich kann die nötigen Schritte selbstständig übernehmen und mache es für beide Seiten so einfach wie möglich. Falls Sie sich ein Bild vom Ablauf machen möchten, empfehle ich &lt;a href='https://www.youtube.com/watch?v=VDlhPi9LNps' target='_blank' class='faq-video-link'&gt;dieses kurze Video, das den Prozess gut erklärt&lt;/a&gt;." data-en="I understand this concern. However, with the right paperwork, the process can be very smooth. Having already been to Germany and gone through the visa process myself, I am familiar with the procedure. I can handle the necessary steps independently to make it as simple as possible for both sides. If you would like to get an idea of the process, I recommend &lt;a href='https://www.youtube.com/watch?v=VDlhPi9LNps' target='_blank' class='faq-video-link'&gt;this short video that explains it well&lt;/a&gt;." data-fr="Je comprends bien cette préoccupation. Cependant, avec les bons documents, le processus peut être très fluide. Ayant déjà été en Allemagne et ayant moi-même suivi le processus de visa, je connais bien la procédure. Je peux gérer les étapes nécessaires de manière autonome pour rendre les choses aussi simples que possible pour les deux parties. Si vous souhaitez avoir une idée du processus, je recommande &lt;a href='https://www.youtube.com/watch?v=VDlhPi9LNps' target='_blank' class='faq-video-link'&gt;cette courte vidéo qui l'explique bien&lt;/a&gt;.">Ich verstehe diese Frage gut. Aber mit den richtigen Unterlagen und Dokumenten kann das Ganze wirklich reibungslos ablaufen. Ich war bereits in Deutschland und habe den Visaprozess selbst durchlaufen, daher kenne ich mich mit dem Ablauf aus. Ich kann die nötigen Schritte selbstständig übernehmen und mache es für beide Seiten so einfach wie möglich. Falls Sie sich ein Bild vom Ablauf machen möchten, empfehle ich <a class="faq-video-link" href="https://www.youtube.com/watch?v=VDlhPi9LNps" target="_blank">dieses kurze Video, das den Prozess gut erklärt</a>.</p></div></div>
 <div class="faq-item"><button aria-controls="faq2-answer" aria-expanded="false" class="faq-question"><span class="lang" data-de="&lt;i&gt;Wo werden Sie wohnen? Wir bieten keine Unterkunft an. Wie organisieren Sie das?&lt;/i&gt;" data-en="&lt;i&gt;Where would you live? We don't offer accommodation. How would you organize that?&lt;/i&gt;" data-fr="&lt;i&gt;Où vivriez-vous ? Nous ne proposons pas de logement. Comment organiseriez-vous cela ?&lt;/i&gt;"><i>Wo werden Sie wohnen? Wir bieten keine Unterkunft an. Wie organisieren Sie das?</i></span><span class="faq-icon"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path></svg></span></button><div class="faq-answer" id="faq2-answer"><p class="lang" data-de="Da ich bereits in Deutschland war, verfüge ich über ein gutes Netzwerk für Unterkunft und soziale Kontakte, die mir eine schnelle und zuverlässige Wohnungssuche ermöglichen. Somit ist die Wohnungsfrage für mich gesichert." data-en="Since I have already been to Germany, I have a good network for accommodation and social contacts that enable me to find housing quickly and reliably. Therefore, the housing issue is secured for me." data-fr="Comme j'ai déjà été en Allemagne, je dispose d'un bon réseau pour le logement et les contacts sociaux, ce qui me permet de trouver un logement rapidement et de manière fiable. La question du logement est donc assurée pour moi.">Da ich bereits in Deutschland war, verfüge ich über ein gutes Netzwerk für Unterkunft und soziale Kontakte, die mir eine schnelle und zuverlässige Wohnungssuche ermöglichen. Somit ist die Wohnungsfrage für mich gesichert.</p></div></div>
-<div class="faq-item"><button aria-controls="faq3-answer" aria-expanded="false" class="faq-question"><span class="lang" data-de="&lt;i&gt;Sie haben Erfahrung in der Pflege, sind aber IT-orientiert. Wie passt das zusammen?&lt;/i&gt;" data-en="&lt;i&gt;You have experience in nursing but are focused on IT. How does that fit together?&lt;/i&gt;" data-fr="&lt;i&gt;Vous avez de l'expérience en soins infirmiers mais êtes orienté vers l'informatique. Comment cela s'accorde-t-il ?&lt;/i&gt;"><i>Sie haben Erfahrung in der Pflege, sind aber IT-orientiert. Wie passt das zusammen?</i></span><span class="faq-icon"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path></svg></span></button><div class="faq-answer" id="faq3-answer"><p class="lang" data-de="Ich bin eigentlich im IT-Bereich orientiert, aber ich finde, dass ein grundlegendes Verständnis für Pflege und Gesundheit in vielen Lebenslagen wichtig ist. Als ich das Ausbildungsangebot im Pflegebereich bekam, habe ich es als Chance gesehen – erstens, um das deutsche Arbeitsumfeld besser kennenzulernen, und zweitens, um soziale und menschliche Fähigkeiten zu entwickeln, die mir auch in der IT weiterhelfen können. Diese Erfahrung hat mir definitiv geholfen, und ich bin dankbar dafür." data-en="I am fundamentally oriented towards IT, but I believe that a basic understanding of nursing and health is important in many aspects of life. When I received the training offer in the nursing field, I saw it as an opportunity—firstly, to get to know the German work environment better, and secondly, to develop social and interpersonal skills that can also help me in IT. This experience has definitely helped me, and I am grateful for it." data-fr="Je suis fondamentalement orienté vers l'informatique, mais je crois qu'une compréhension de base des soins et de la santé est importante dans de nombreux aspects de la vie. Quand j'ai reçu l'offre de formation dans le domaine des soins, je l'ai vue comme une opportunité - d'abord, pour mieux connaître l'environnement de travail allemand, et ensuite, pour développer des compétences sociales et interpersonnelles qui peuvent également m'aider en informatique. Cette expérience m'a certainement aidé, et j'en suis reconnaissant.">Ich bin eigentlich im IT-Bereich orientiert, aber ich finde, dass ein grundlegendes Verständnis für Pflege und Gesundheit in vielen Lebenslagen wichtig ist. Als ich das Ausbildungsangebot im Pflegebereich bekam, habe ich es als Chance gesehen – erstens, um das deutsche Arbeitsumfeld besser kennenzulernen, und zweitens, um soziale und menschliche Fähigkeiten zu entwickeln, die mir auch in der IT weiterhelfen können. Diese Erfahrung hat mir definitiv geholfen, und ich bin dankbar dafür.</p></div></div>
+<div class="faq-item"><button aria-controls="faq3-answer" aria-expanded="false" class="faq-question"><span class="lang" data-de="&lt;i&gt;Sie haben Erfahrung in der Pflege, sind aber IT-orientiert. Wie passt das zusammen?&lt;/i&gt;" data-en="&lt;i&gt;You have experience in nursing but are focused on IT. How does that fit together?&lt;/i&gt;" data-fr="&lt;i&gt;Vous avez de l'expérience en soins infirmiers mais êtes orienté vers l'informatique. Comment cela s'accorde-t-il ?&lt;/i&gt;"><i>Sie haben Erfahrung in der Pflege, sind aber IT-orientiert. Wie passt das zusammen?</i></span><span class="faq-icon"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path></svg></span></button><div class="faq-answer" id="faq3-answer"><p class="lang" data-de="Ich bin eigentlich im IT-Bereich orientiert, aber ich finde, dass ein grundlegendes Verständnis für Pflege und Gesundheit in vielen Lebenslagen wichtig ist. Als ich das Ausbildungsangebot im Pflegebereich bekam, habe ich es als Chance gesehen – erstens, um das deutsche Arbeitsumfeld besser kennenzulernen, und zweitens, um soziale und menschliche Fähigkeiten zu entwickeln, die mir auch in der IT weiterhelfen können. Diese Erfahrung hat mir definitiv geholfen, und ich bin dankbar dafür." data-en="I am fundamentally oriented towards IT, but I believe that a basic understanding of nursing and health is important in many aspects of life. When I received the training offer in the nursing field, I saw it as an opportunity—firstly, to get to know the German work environment better, and secondly, to develop social and interpersonal skills that can also help me in IT. This experience has definitely helped me, and I am grateful for it." data-fr="Je suis fondamentalement orienté vers l'informatique, mais je crois qu'une compréhension de base des soins et de la santé est importante dans de nombreux aspects de la vie. Quand j'ai reçu l'offre de formation dans le domaine des soins, je l'ai vue comme une opportunité - d'abord, pour mieux connaître l'environnement de travail allemand, et ensuite, pour développer des compétences sociales et interpersonnelles qui can également m'aider en informatique. Cette expérience m'a certainement aidé, et j'en suis reconnaissant.">Ich bin eigentlich im IT-Bereich orientiert, aber ich finde, dass ein grundlegendes Verständnis für Pflege und Gesundheit in vielen Lebenslagen wichtig ist. Als ich das Ausbildungsangebot im Pflegebereich bekam, habe ich es als Chance gesehen – erstens, um das deutsche Arbeitsumfeld besser kennenzulernen, und zweitens, um soziale und menschliche Fähigkeiten zu entwickeln, die mir auch in der IT weiterhelfen können. Diese Erfahrung hat mir definitiv geholfen, und ich bin dankbar dafür.</p></div></div>
 <div class="faq-item"><button aria-controls="faq4-answer" aria-expanded="false" class="faq-question"><span class="lang" data-de="&lt;i&gt;Warum Deutschland?&lt;/i&gt;" data-en="&lt;i&gt;Why Germany?&lt;/i&gt;" data-fr="&lt;i&gt;Pourquoi l'Allemagne ?&lt;/i&gt;"><i>Warum Deutschland?</i></span><span class="faq-icon"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path></svg></span></button><div class="faq-answer" id="faq4-answer"><p class="lang" data-de="Deutschland bietet sehr gute Ausbildungsmöglichkeiten und berufliche Perspektiven, besonders im IT-Bereich. Außerdem schätze ich die hohe Arbeitsqualität und die internationale Atmosphäre hier." data-en="Germany offers excellent training opportunities and career prospects, especially in the IT sector. Furthermore, I appreciate the high quality of work and the international atmosphere here." data-fr="L'Allemagne offre d'excellentes opportunités de formation et des perspectives de carrière, en particulier dans le secteur informatique. De plus, j'apprécie la haute qualité du travail et l'atmosphère internationale qui y règne.">Deutschland bietet sehr gute Ausbildungsmöglichkeiten und berufliche Perspektiven, besonders im IT-Bereich. Außerdem schätze ich die hohe Arbeitsqualität und die internationale Atmosphäre hier.</p></div></div>
 <div class="faq-item"><button aria-controls="faq5-answer" aria-expanded="false" class="faq-question"><span class="lang" data-de="&lt;i&gt;Wie gut sind Ihre Deutsch- und Englischkenntnisse?&lt;/i&gt;" data-en="&lt;i&gt;How proficient are your German and English skills?&lt;/i&gt;" data-fr="&lt;i&gt;Quel est votre niveau de compétence en allemand et en anglais ?&lt;/i&gt;"><i>Wie gut sind Ihre Deutsch- und Englischkenntnisse?</i></span><span class="faq-icon"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path></svg></span></button><div class="faq-answer" id="faq5-answer"><p class="lang" data-de="Mein Deutsch hat sich während meines Aufenthalts in Deutschland stark verbessert, sodass ich mich gut an verschiedene Situationen anpassen kann. Mein Englisch habe ich auf ein Niveau der muttersprachlichen Kompetenz gebracht." data-en="My German improved significantly during my stay in Germany, allowing me to adapt well to various situations. I have brought my English to a level of native-like proficiency." data-fr="Mon allemand s'est considérablement amélioré pendant mon séjour en Allemagne, me permettant de bien m'adapter à diverses situations. J'ai amené mon anglais à un niveau de compétence quasi natif.">Mein Deutsch hat sich während meines Aufenthalts in Deutschland stark verbessert, sodass ich mich gut an verschiedene Situationen anpassen kann. Mein Englisch habe ich auf ein Niveau der muttersprachlichen Kompetenz gebracht.</p></div></div>
 </div>
@@ -1076,7 +1082,7 @@
               { img: 'images/ubuntu_server_netdata.png', title: { de: 'Einrichtung des Netdata Monitoring-Servers', en: 'Setting up the Netdata Monitoring Server', fr: 'Mise en place du serveur de surveillance Netdata' }, text: { de: 'Auf einer Ubuntu Server VM (IP 192.168.10.20) wurde Netdata installiert, eine leistungsstarke Echtzeit-Monitoring-Lösung. Diese Plattform sammelt und visualisiert Leistungsdaten aller Systeme im Netzwerk.', en: 'Netdata, a powerful real-time monitoring solution, was installed on an Ubuntu Server VM (IP 192.168.10.20). This platform collects and visualizes performance data from all systems in the network.', fr: "Netdata, une solution de surveillance en temps réel puissante, a été installée sur une VM Ubuntu Server (IP 192.168.10.20). Cette plateforme collecte et visualise les données de performance de tous les systèmes du réseau." } },
               { img: 'images/netdata_snmp_devices.png', title: { de: 'Zentrales Monitoring-Dashboard', en: 'Centralized Monitoring Dashboard', fr: 'Tableau de bord de surveillance centralisé' }, text: { de: 'Erfolgreiche Integration: Netdata sammelt nun via SNMP Leistungsdaten (CPU, RAM, Netzwerkverkehr) von der pfSense-Firewall und dem Windows Server. Das Dashboard bietet eine zentrale Übersicht über den Zustand der gesamten Infrastruktur in Echtzeit.', en: "Successful Integration: Netdata now collects performance data (CPU, RAM, network traffic) from the pfSense firewall and Windows Server via SNMP. The dashboard provides a central, real-time overview of the entire infrastructure's health.", fr: "Intégration réussie : Netdata collecte désormais les données de performance (CPU, RAM, trafic réseau) du pare-feu pfSense et du serveur Windows via SNMP. Le tableau de bord offre une vue d'ensemble centralisée et en temps réel de l'état de toute l'infrastructure." } }
           ];
-
+          
           function updateModalTextOnly(index) {
               const projectModal = document.getElementById('project-modal');
               if (!projectModal) return;
@@ -1324,7 +1330,6 @@
               const modalImageContainer = projectModal.querySelector('.project-modal-image-wrapper');
               const modalDescriptionContainer = projectModal.querySelector('.project-modal-description');
               
-              // Clear any placeholder content
               modalImageContainer.innerHTML = '';
               modalDescriptionContainer.innerHTML = '';
 
@@ -1355,19 +1360,21 @@
                   
                   const currentIndex = currentProjectSlide;
                   
-                  // Hide old slide
                   modalImageSlides[currentIndex].classList.remove('active');
-                  modalDescriptionSlides[currentIndex].classList.remove('active');
+                  modalDescriptionSlides[currentIndex].classList.add('exiting');
                   
-                  // After a tiny delay, update content and show new slide
                   setTimeout(() => {
+                      modalDescriptionSlides[currentIndex].classList.remove('active');
+                      modalDescriptionSlides[currentIndex].classList.remove('exiting');
+                      
                       updateModalTextOnly(nextIndex);
                       modalImageSlides[nextIndex].classList.add('active');
                       modalDescriptionSlides[nextIndex].classList.add('active');
+                      
                       currentProjectSlide = nextIndex;
                       modalCounter.textContent = `${nextIndex + 1} / ${slidesData.length}`;
                       isTransitioning = false;
-                  }, 300); // Match CSS transition duration
+                  }, 300);
               }
 
               document.getElementById('open-project-modal')?.addEventListener('click', () => {
