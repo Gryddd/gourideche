@@ -407,7 +407,6 @@
             max-height: 90vh; object-fit: contain;
         }
         
-        /* === FIX: Give image viewers a higher stacking order === */
         #image-modal, #diagram-modal {
             z-index: 1004;
         }
@@ -531,6 +530,8 @@
             justify-content: center;
             height: 45vh; /* This creates a stable container size */
         }
+        
+        /* === CHANGE: Reconstructed Slide and Icon Styles === */
         .project-modal-slide {
             opacity: 0; 
             visibility: hidden; 
@@ -543,12 +544,14 @@
             display: flex;              
             align-items: center;        
             justify-content: center;
-            cursor: zoom-in;
+            /* REMOVED 'cursor: zoom-in' to fix the bug */
         }
+        
         .project-modal-slide.active { 
             opacity: 1; 
             visibility: visible; 
         }
+
         .project-modal-slide img {
             max-width: 100%; 
             max-height: 100%; 
@@ -556,6 +559,41 @@
             height: auto; 
             display: block;
         }
+
+        /* ADDED: Styles for the new zoom icon */
+        .zoom-icon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 32px;
+            height: 32px;
+            background-color: rgba(13, 13, 13, 0.7);
+            border: 1px solid var(--border-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 5; /* Ensure it's on top of the image */
+            opacity: 0; /* Hidden by default */
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        
+        .project-modal-slide:hover .zoom-icon {
+            opacity: 1; /* Show on hover */
+        }
+        
+        .zoom-icon:hover {
+            transform: scale(1.1);
+            background-color: rgba(0, 191, 255, 0.3);
+        }
+
+        .zoom-icon svg {
+            width: 18px;
+            height: 18px;
+            fill: #fff;
+        }
+        /* === END OF CHANGE === */
         
         .project-modal-description {
             min-height: 120px; text-align: left; position: relative;
@@ -1437,28 +1475,44 @@
               modalImageContainer.innerHTML = '';
               modalDescriptionContainer.innerHTML = '';
 
+              // === CHANGE: Reconstructed Slide Generation Logic ===
               slidesData.forEach((slideData) => {
+                  // 1. Create the main slide container
                   const slideContainer = document.createElement('div');
                   slideContainer.className = 'project-modal-slide';
                   
+                  // 2. Create the image element
                   const imgEl = document.createElement('img');
                   imgEl.src = slideData.img;
-                  imgEl.alt = slideData.title.en; 
+                  imgEl.alt = slideData.title.en;
                   slideContainer.appendChild(imgEl);
-                  modalImageContainer.appendChild(slideContainer);
 
-                  slideContainer.addEventListener('click', () => {
+                  // 3. Create the new zoom icon
+                  const zoomIcon = document.createElement('div');
+                  zoomIcon.className = 'zoom-icon';
+                  zoomIcon.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/><path d="M12 10h-2v2H9v-2H7v-1h2V7h1v2h2v1z"/></svg>`;
+                  
+                  // 4. Add the click event listener ONLY to the icon
+                  zoomIcon.addEventListener('click', () => {
                       const imageModalImg = imageModal.querySelector('img');
                       imageModalImg.src = imgEl.src;
                       imageModalImg.alt = `Enlarged view of ${slideData.title[currentLang] || slideData.title.en}`;
                       openModal(imageModal);
                   });
-
+                  
+                  // 5. Append the icon to the slide container
+                  slideContainer.appendChild(zoomIcon);
+                  
+                  // 6. Append the whole slide to the image wrapper
+                  modalImageContainer.appendChild(slideContainer);
+                  
+                  // Create the corresponding description element (no change here)
                   const descEl = document.createElement('div');
                   descEl.className = 'project-modal-description-item';
                   descEl.innerHTML = `<h4></h4><p></p>`;
                   modalDescriptionContainer.appendChild(descEl);
               });
+              // === END OF CHANGE ===
               
               const modalImageSlides = projectModal.querySelectorAll('.project-modal-slide');
               const modalDescriptionSlides = projectModal.querySelectorAll('.project-modal-description-item');
