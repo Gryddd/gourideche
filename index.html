@@ -464,7 +464,7 @@
 
         .skills-grid {
             display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(16.5rem, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
             gap: 1.5rem;
         }
         .skill-card {
@@ -484,6 +484,8 @@
             margin-top: 0;
             overflow-wrap: break-word;
             word-break: break-word;
+            -webkit-hyphens: auto;
+            hyphens: auto;
         }
         .skill-card p { margin-bottom: 0; }
         
@@ -515,7 +517,7 @@
             max-width: 50rem; background: var(--background);
             border-radius: 12px; padding: 1rem; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
-        #project-modal .close-button { top: 10px; right: 15px; font-size: 24px; }
+        #project-modal .close-button { top: 10px; right: 15px; font-size: 24px; z-index: 10; }
         .project-modal-body { padding: 1.5rem; }
         .project-modal-image-wrapper {
             background: #111; border-radius: 8px; margin-bottom: 1.5rem;
@@ -812,6 +814,56 @@
             .flip-card-front, .flip-card-back { position: static; transform: none; backface-visibility: visible; width: 100%; height: auto; display: flex; }
             .flip-card-front { border-bottom-left-radius: 0; border-bottom-right-radius: 0; border-bottom: 1px dashed rgba(0, 191, 255, 0.2); padding: 1.5rem 1rem; }
             .flip-card-back { border-top-left-radius: 0; border-top-right-radius: 0; min-height: 4rem; padding: 1rem; font-size: 1rem; }
+        
+            /* === MOBILE PROJECT MODAL OVERRIDE === */
+            #project-modal.active {
+                background: var(--background);
+                -webkit-backdrop-filter: none;
+                backdrop-filter: none;
+            }
+            #project-modal .modal-content {
+                height: 100%; width: 100%; max-width: 100%;
+                border-radius: 0; padding: 0;
+                box-shadow: none;
+            }
+            #project-modal .project-modal-body {
+                display: flex; flex-direction: column;
+                height: 100%; padding: 0; box-sizing: border-box;
+            }
+            #project-modal .project-modal-image-wrapper {
+                flex-grow: 1;
+                height: 60%; /* Assign a relative height */
+                border-radius: 0;
+                margin-bottom: 0;
+                border-bottom: 1px solid var(--border-color);
+            }
+            #project-modal .project-modal-description {
+                flex-shrink: 0;
+                height: 40%; /* The rest of the height */
+                padding: 1.5rem 1rem 1rem 1rem;
+                display: flex; flex-direction: column;
+                box-sizing: border-box;
+                overflow-y: auto;
+            }
+            #project-modal .project-modal-description-item {
+                position: relative;
+                opacity: 1; visibility: visible;
+                transform: none; transition: none;
+                display: none;
+            }
+            #project-modal .project-modal-description-item.active {
+                display: block;
+            }
+            #project-modal .project-modal-controls {
+                margin-top: auto; /* Pushes controls to the bottom */
+                padding-top: 1rem;
+            }
+            #project-modal .close-button {
+                top: 1rem; right: 1rem;
+                font-size: 2rem;
+                color: #fff;
+                text-shadow: 0 0 5px rgba(0,0,0,0.7);
+            }
         }
 </style>
 </head>
@@ -1119,8 +1171,10 @@
               const descriptionItems = projectModal.querySelectorAll('.project-modal-description-item');
               if (descriptionItems && descriptionItems[index]) {
                   const slideData = slidesData[index];
-                  descriptionItems[index].querySelector('h4').textContent = slideData.title[currentLang];
-                  descriptionItems[index].querySelector('p').textContent = slideData.text[currentLang];
+                  const titleEl = descriptionItems[index].querySelector('h4');
+                  const textEl = descriptionItems[index].querySelector('p');
+                  if (titleEl) titleEl.textContent = slideData.title[currentLang];
+                  if (textEl) textEl.textContent = slideData.text[currentLang];
               }
           }
           
@@ -1374,7 +1428,6 @@
                   slideContainer.appendChild(imgEl);
                   modalImageContainer.appendChild(slideContainer);
 
-                  // Add click listener to open the image viewer modal
                   slideContainer.addEventListener('click', () => {
                       const imageModalImg = imageModal.querySelector('img');
                       imageModalImg.src = imgEl.src;
@@ -1396,7 +1449,7 @@
               let isTransitioning = false;
 
               function showProjectSlide(nextIndex) {
-                  if (isTransitioning) return;
+                  if (isTransitioning && window.innerWidth > 1023) return;
                   isTransitioning = true;
                   
                   const currentIndex = currentProjectSlide;
@@ -1412,7 +1465,7 @@
                       currentProjectSlide = nextIndex;
                       modalCounter.textContent = `${nextIndex + 1} / ${slidesData.length}`;
                       isTransitioning = false;
-                  }, 300); 
+                  }, window.innerWidth <= 1023 ? 50 : 300); 
               }
 
               document.getElementById('open-project-modal')?.addEventListener('click', () => {
@@ -1440,16 +1493,14 @@
           document.getElementById('close-diagram-modal')?.addEventListener('click', () => closeModal(diagramModal));
           document.getElementById('close-image-modal')?.addEventListener('click', () => closeModal(imageModal));
 
-
           window.addEventListener('click', (event) => {
-              if (event.target === videoModal) {
-                  if (player && typeof player.stopVideo === 'function') player.stopVideo();
-                  closeModal(videoModal);
+              if (event.target.classList.contains('modal')) {
+                  if (event.target.id === 'video-modal' && player && typeof player.stopVideo === 'function') {
+                      player.stopVideo();
+                  }
+                  closeModal(event.target);
               }
-              if (event.target === diagramModal) closeModal(diagramModal);
-              if (event.target === projectModal) closeModal(projectModal);
-              if (event.target === imageModal) closeModal(imageModal);
-
+              
               if (!event.target.closest('.flip-card')) {
                   document.querySelectorAll('.flip-card-inner.is-flipped').forEach(inner => inner.classList.remove('is-flipped'));
               }
@@ -1457,14 +1508,18 @@
                   document.querySelectorAll('.nav-dropdown.active').forEach(dropdown => dropdown.classList.remove('active'));
               }
           });
+          
           window.addEventListener('keydown', (event) => {
               if (event.key === 'Escape') {
-                  allModals.forEach(modal => {
-                      if(modal.classList.contains('active')) {
-                          if (modal.id === 'video-modal' && player && typeof player.stopVideo === 'function') player.stopVideo();
-                          closeModal(modal);
+                  const activeModals = document.querySelectorAll('.modal.active');
+                  if (activeModals.length > 0) {
+                      // Close the topmost modal
+                      const topModal = activeModals[activeModals.length - 1];
+                      if (topModal.id === 'video-modal' && player && typeof player.stopVideo === 'function') {
+                          player.stopVideo();
                       }
-                  });
+                      closeModal(topModal);
+                  }
               }
           });
       });
