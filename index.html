@@ -514,15 +514,22 @@
         .project-modal-image-wrapper {
             background: #111; border-radius: 8px; margin-bottom: 1.5rem;
             overflow: hidden; position: relative;
+            /* --- THE FIX IS HERE --- */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 45vh; /* Enforce a consistent container height */
         }
         .project-modal-slide {
             opacity: 0; visibility: hidden; transition: opacity 0.3s ease;
-            display: none; /* Hide by default */
+            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            display: flex; align-items: center; justify-content: center;
         }
-        .project-modal-slide.active { 
-            opacity: 1; visibility: visible; display: block;
+        .project-modal-slide.active { opacity: 1; visibility: visible; }
+        .project-modal-image-wrapper img {
+            max-width: 100%; max-height: 100%; /* Image will scale down to fit */
+            width: auto; height: auto; display: block;
         }
-        .project-modal-image-wrapper img { width: 100%; height: auto; display: block; }
         
         .project-modal-description {
             min-height: 120px; text-align: left; position: relative;
@@ -1355,11 +1362,12 @@
                   
                   const currentIndex = currentProjectSlide;
                   
-                  modalImageSlides[currentIndex].classList.remove('active');
-                  modalDescriptionSlides[currentIndex].classList.remove('active');
+                  modalDescriptionSlides[currentIndex].classList.add('exiting');
                   
-                  // After a tiny delay, update content and show new slide
                   setTimeout(() => {
+                      modalImageSlides[currentIndex].classList.remove('active');
+                      modalDescriptionSlides[currentIndex].classList.remove('active', 'exiting');
+
                       updateModalTextOnly(nextIndex);
                       modalImageSlides[nextIndex].classList.add('active');
                       modalDescriptionSlides[nextIndex].classList.add('active');
@@ -1367,7 +1375,7 @@
                       currentProjectSlide = nextIndex;
                       modalCounter.textContent = `${nextIndex + 1} / ${slidesData.length}`;
                       isTransitioning = false;
-                  }, 300); // This duration should match your CSS transition time
+                  }, 300);
               }
 
               document.getElementById('open-project-modal')?.addEventListener('click', () => {
