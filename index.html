@@ -360,6 +360,7 @@
         }
         .video-thumbnail:hover .play-button { transform: translate(-50%, -50%) scale(1.1); }
         
+        /* === FIX: The robust modal base style === */
         .modal {
             display: flex;
             align-items: center;
@@ -370,13 +371,20 @@
             -webkit-backdrop-filter: blur(8px);
             backdrop-filter: blur(8px);
             opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
+            pointer-events: none; /* Inactive by default */
+            transition: opacity 0.3s ease; /* Only transition opacity */
         }
+
         .modal.active {
             opacity: 1;
-            visibility: visible;
+            pointer-events: auto; /* Becomes active and clickable */
         }
+        
+        /* New class to disable underlying modal */
+        .modal.is-covered {
+            pointer-events: none;
+        }
+        
         .modal-content {
             position: relative; 
             width: 90%; 
@@ -398,6 +406,19 @@
             position: absolute; top: -40px; right: 0;
             color: #fff; font-size: 31px; font-weight: bold;
             cursor: pointer; background: none; border: none; padding: 0;
+        }
+        
+        /* Re-adding the image/diagram modal styles */
+        #diagram-modal .modal-content, #image-modal .modal-content {
+            max-width: 70rem;
+        }
+        #diagram-modal img, #image-modal img {
+            width: 100%; height: auto; display: block; border-radius: 8px;
+            max-height: 90vh; object-fit: contain;
+        }
+        
+        #image-modal, #diagram-modal {
+            z-index: 1004; /* Ensure they appear on top of other modals */
         }
 
         .timeline-wrapper { 
@@ -532,6 +553,7 @@
             display: flex;              
             align-items: center;        
             justify-content: center;
+            cursor: zoom-in; /* Re-enabled zoom cursor */
         }
         
         .project-modal-slide.active { 
@@ -603,7 +625,7 @@
             width: 100%;
             height: auto;
             display: block;
-            /* REMOVED: cursor: zoom-in; */
+            cursor: zoom-in; /* Re-enabled zoom cursor for mobile */
         }
         .mobile-project-text { padding: 1.5rem; }
         .mobile-project-text h4 { margin-top: 0; font-size: 1.3rem; }
@@ -1039,7 +1061,20 @@
     </div>
 </div>
 
-<!-- REMOVED: Diagram and Image Modals have been deleted to simplify the code -->
+<!-- Re-adding the Diagram and Image Modals -->
+<div class="modal" id="diagram-modal">
+    <div class="modal-content">
+        <button aria-label="Close diagram modal" class="close-button" id="close-diagram-modal">×</button>
+        <img src="images/diagram.png" alt="Home Lab Network Topology Diagram">
+    </div>
+</div>
+
+<div class="modal" id="image-modal">
+    <div class="modal-content">
+        <button aria-label="Close image modal" class="close-button" id="close-image-modal">×</button>
+        <img src="" alt="Enlarged project image">
+    </div>
+</div>
 
 <section class="container" id="faq">
 <h2 class="lang" data-de="Häufig Gestellte Fragen" data-en="Frequently Asked Questions" data-fr="Questions Fréquemment Posées">Häufig Gestellte Fragen</h2>
@@ -1129,7 +1164,9 @@
           const allModals = document.querySelectorAll('.modal');
           const videoModal = document.getElementById('video-modal');
           const projectModal = document.getElementById('project-modal');
-          // REMOVED: No longer need imageModal and diagramModal
+          // Re-adding variables for the image modals
+          const imageModal = document.getElementById('image-modal');
+          const diagramModal = document.getElementById('diagram-modal');
           let player;
           const youtubeVideoId = 'R_rKRfh7ceU';
           
@@ -1158,7 +1195,13 @@
                   const img = document.createElement('img');
                   img.src = slideData.img;
                   img.alt = slideData.title.en;
-                  // REMOVED: Click listener for zooming on mobile images
+                  // Re-adding click listener for mobile zoom
+                  img.addEventListener('click', () => {
+                      const imageModalImg = imageModal.querySelector('img');
+                      imageModalImg.src = img.src;
+                      imageModalImg.alt = `Enlarged view of ${slideData.title[currentLang] || slideData.title.en}`;
+                      openModal(imageModal);
+                  });
                   
                   const textDiv = document.createElement('div');
                   textDiv.className = 'mobile-project-text';
@@ -1352,7 +1395,7 @@
               });
           });
 
-          // === START: MODAL HANDLING AND PROJECT SHOWCASE SCRIPT (SIMPLIFIED) ===
+          // === START: MODAL HANDLING AND PROJECT SHOWCASE SCRIPT (ROBUST VERSION) ===
           function openModal(modal) {
               if (modal) {
                   modal.classList.add('active');
@@ -1360,19 +1403,21 @@
               }
           }
 
-          // === FIX: New robust closeModal function ===
           function closeModal(modal) {
-              if (!modal || !modal.classList.contains('active')) return;
-
+              if (!modal) return;
               modal.classList.remove('active');
-              
-              // Wait for the CSS transition to finish before altering the body
-              setTimeout(() => {
-                  const isAnyModalOpen = Array.from(allModals).some(m => m.classList.contains('active'));
-                  if (!isAnyModalOpen) {
-                      document.body.classList.remove('modal-open');
+
+              // If we are closing a viewer, make sure the project modal is interactive again.
+              if (modal.id === 'image-modal' || modal.id === 'diagram-modal') {
+                  if (projectModal) {
+                      projectModal.classList.remove('is-covered');
                   }
-              }, 300); // This duration must match your CSS transition time for .modal
+              }
+
+              const isAnyModalOpen = Array.from(allModals).some(m => m.classList.contains('active'));
+              if (!isAnyModalOpen) {
+                  document.body.classList.remove('modal-open');
+              }
           }
           
           function createPlayer() {
@@ -1404,7 +1449,7 @@
               createPlayer();
           });
           
-          // Desktop Project Modal Setup (Simplified)
+          // Desktop Project Modal Setup
           if (projectModal) {
               const modalImageContainer = projectModal.querySelector('.project-modal-image-wrapper');
               const modalDescriptionContainer = projectModal.querySelector('.project-modal-description');
@@ -1421,7 +1466,16 @@
                   imgEl.alt = slideData.title.en;
                   slideContainer.appendChild(imgEl);
                   
-                  // REMOVED: No more zoom icon or click listener on the slide.
+                  // Re-add the click listener for zooming
+                  slideContainer.addEventListener('click', () => {
+                      const imageModalImg = imageModal.querySelector('img');
+                      imageModalImg.src = imgEl.src;
+                      imageModalImg.alt = `Enlarged view of ${slideData.title[currentLang] || slideData.title.en}`;
+                      
+                      // CRITICAL FIX: Disable the underlying modal before opening the new one
+                      projectModal.classList.add('is-covered');
+                      openModal(imageModal);
+                  });
                   
                   modalImageContainer.appendChild(slideContainer);
                   
@@ -1491,6 +1545,7 @@
 
           // Universal closing logic
           window.addEventListener('click', (event) => {
+              // This logic now works correctly because of the pointer-events fix
               if (event.target.classList.contains('modal')) {
                   if (player && typeof player.stopVideo === 'function' && event.target.id === 'video-modal') {
                       player.stopVideo();
@@ -1510,7 +1565,7 @@
               if (event.key === 'Escape') {
                   const activeModals = Array.from(document.querySelectorAll('.modal.active'));
                   if (activeModals.length > 0) {
-                      // Close the top-most modal
+                      // Close the top-most modal, which is the last one in the array
                       const topModal = activeModals[activeModals.length - 1];
                       if (topModal.id === 'video-modal' && player && typeof player.stopVideo === 'function') {
                           player.stopVideo();
