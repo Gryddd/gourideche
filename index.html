@@ -98,7 +98,6 @@
             box-shadow: 0 4px 20px rgba(0,0,0,0.2);
             z-index: 1001; padding: 0.5rem 2rem; box-sizing: border-box;
         }
-        /* MODIFIED: This change pushes nav items to the edges */
         .nav-content {
             display: flex;
             justify-content: space-between;
@@ -475,12 +474,17 @@
         }
         .timeline-content ul li:not(:last-child) { margin-bottom: 10px; }
 
+        /* MODIFIED: This is the key change for centering the last item */
         .skills-grid {
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
             gap: 1.5rem;
         }
+
         .skill-card {
+            width: 18rem;
+            max-width: 100%;
             background: var(--card-bg);
             -webkit-backdrop-filter: var(--blur);
             backdrop-filter: var(--blur);
@@ -489,6 +493,7 @@
             transition: transform var(--transition-speed), box-shadow var(--transition-speed);
             box-shadow: 0 4px 20px rgba(0,0,0,0.15);
         }
+        
         .skill-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 30px rgba(0,0,0,0.25);
