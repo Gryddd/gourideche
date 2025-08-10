@@ -100,7 +100,8 @@
         }
         .nav-content {
             display: flex; justify-content: space-between; align-items: center;
-            max-width: 1140px; margin: 0 auto;
+            max-width: 1080px; /* MODIFIED: Reduced from 1140px */
+            margin: 0 auto;
         }
         .nav-links { display: flex; gap: 1.2rem; align-items: center; }
         .nav-links a {
@@ -110,7 +111,7 @@
             color: transparent;
             font-weight: 600;
             text-decoration: none;
-            font-size: 1rem;
+            font-size: 0.95rem; /* MODIFIED: Reduced from 1rem */
             padding: 0.5rem;
             position: relative;
         }
@@ -143,7 +144,7 @@
             align-items: center;
             gap: 0.5rem;
             font-family: var(--font-heading);
-            font-size: 1rem;
+            font-size: 0.95rem; /* MODIFIED: Reduced from 1rem */
             padding: 0.5rem;
         }
         .nav-dropdown-toggle .arrow-icon {
@@ -266,7 +267,7 @@
         
         .container {
             width: 90%; 
-            max-width: 59rem;
+            max-width: 56rem; /* MODIFIED: Reduced from 59rem */
             margin: 0 auto;
             padding-top: 80px; 
             padding-bottom: 100px;
@@ -360,7 +361,7 @@
         }
         .video-thumbnail:hover .play-button { transform: translate(-50%, -50%) scale(1.1); }
         
-        /* === FIX: The robust modal base style === */
+        /* The robust modal base style */
         .modal {
             display: flex;
             align-items: center;
@@ -372,7 +373,7 @@
             backdrop-filter: blur(8px);
             opacity: 0;
             pointer-events: none; /* Inactive by default */
-            transition: opacity 0.3s ease; /* Only transition opacity */
+            transition: opacity 0.3s ease;
         }
 
         .modal.active {
@@ -380,9 +381,8 @@
             pointer-events: auto; /* Becomes active and clickable */
         }
         
-        /* New class to disable underlying modal */
         .modal.is-covered {
-            pointer-events: none;
+            pointer-events: none; /* Disables clicks on underlying modal */
         }
         
         .modal-content {
@@ -408,7 +408,6 @@
             cursor: pointer; background: none; border: none; padding: 0;
         }
         
-        /* Re-adding the image/diagram modal styles */
         #diagram-modal .modal-content, #image-modal .modal-content {
             max-width: 70rem;
         }
@@ -418,7 +417,7 @@
         }
         
         #image-modal, #diagram-modal {
-            z-index: 1004; /* Ensure they appear on top of other modals */
+            z-index: 1004;
         }
 
         .timeline-wrapper { 
@@ -553,7 +552,7 @@
             display: flex;              
             align-items: center;        
             justify-content: center;
-            cursor: zoom-in; /* Re-enabled zoom cursor */
+            cursor: zoom-in;
         }
         
         .project-modal-slide.active { 
@@ -625,7 +624,7 @@
             width: 100%;
             height: auto;
             display: block;
-            cursor: zoom-in; /* Re-enabled zoom cursor for mobile */
+            cursor: zoom-in;
         }
         .mobile-project-text { padding: 1.5rem; }
         .mobile-project-text h4 { margin-top: 0; font-size: 1.3rem; }
@@ -1151,7 +1150,7 @@
           };
           
           const slidesData = [
-              { img: 'images/virtual_machines_overview.png', title: { de: 'Projektübersicht', en: 'Project Overview', fr: "Vue d'ensemble du projet" }, text: { de: 'Dieses Projekt demonstriert den Aufbau einer kompletten, virtualisierten IT-Umgebung in VMware. Es umfasst eine pfSense-Firewall, einen Windows Server als Domain Controller und einen Ubuntu Server für das Monitoring, um eine realistische Unternehmens-IT nachzubilden.', en: 'This project demonstrates the setup of a complete, virtualized IT environment in VMware. It includes a pfSense firewall, a Windows Server as a Domain Controller, and an Ubuntu Server for monitoring, replicating a realistic corporate IT setup.', fr: "Ce projet démontre la mise en place d'un environnement informatique complet et virtualisé sous VMware. Il comprend un pare-feu pfSense, un Windows Server en tant que contrôleur de domaine et un serveur Ubuntu pour la surveillance, répliquant une configuration informatique d'entreprise réaliste." } },
+              { img: 'images/virtual_machines_overview.png', title: { de: 'Projektübersicht', en: 'Project Overview', fr: "Vue d'ensemble du projet" }, text: { de: 'Dieses Projekt demonstriert den Aufbau einer kompletten, virtualisierten IT-Umgebung in VMware. Es umfasst eine pfSense-Firewall, einen Windows Server als Domain Controller und einen Ubuntu Server für das Monitoring, um eine realistische Unternehmens-IT nachzubilden.', en: 'This project demonstrates the setup of a complete, virtualized IT environment in VMware. It includes a pfSense firewall, a Windows Server as a Domain Controller, and an Ubuntu Server for monitoring, replicating a realistic corporate IT setup.', fr: "Ce projet virtualise un réseau d'entreprise complet sous VMware, avec un pare-feu pfSense, un contrôleur de domaine Windows Server, et un serveur Ubuntu pour la surveillance en temps réel." } }, // MODIFIED: Shortened French text
               { img: 'images/pfsense_dashboard.png', title: { de: 'pfSense-Firewall als Gateway', en: 'pfSense Firewall as Gateway', fr: 'Pare-feu pfSense comme passerelle' }, text: { de: 'Eine pfSense-VM agiert als zentraler Router und Firewall. Sie wurde mit einer statischen LAN-IP (192.168.10.2) konfiguriert und trennt das interne Netzwerk (LAN) sicher vom externen Netzwerk (WAN).', en: 'A pfSense VM acts as the central router and firewall. It was configured with a static LAN IP (192.168.10.2) and securely separates the internal network (LAN) from the external network (WAN).', fr: "Une VM pfSense sert de routeur et de pare-feu central. Elle a été configurée avec une IP LAN statique (192.168.10.2) et sépare de manière sécurisée le réseau interne (LAN) du réseau externe (WAN)." } },
               { img: 'images/pfsense_leases.png', title: { de: 'DHCP-Server-Konfiguration', en: 'DHCP Server Configuration', fr: 'Configuration du serveur DHCP' }, text: { de: "Der DHCP-Dienst auf pfSense wurde aktiviert, um automatisch IP-Adressen (192.168.10.100 - 192.168.10.150) an Clients wie die Windows 10 VM zu vergeben. Dies vereinfacht die Netzwerkverwaltung erheblich.", en: "The DHCP service on pfSense was enabled to automatically assign IP addresses (192.168.10.100 - 192.168.10.150) to clients like the Windows 10 VM. This significantly simplifies network administration.", fr: "Le service DHCP sur pfSense a été activé pour attribuer automatiquement des adresses IP (192.168.10.100 - 192.168.10.150) aux clients tels que la VM Windows 10. Cela simplifie considérablement l'administration du réseau." } },
               { img: 'images/windows_server_roles.png', title: { de: 'Windows Server als Domain Controller', en: 'Windows Server as Domain Controller', fr: 'Windows Server comme contrôleur de domaine' }, text: { de: "Ein Windows Server 2022 wurde mit der statischen IP 192.168.10.10 installiert. Anschließend wurden die Rollen Active Directory Domain Services (AD DS) und DNS installiert, um ihn zum Domain Controller für die Domäne 'homelab.local' zu machen.", en: "A Windows Server 2022 was installed with the static IP 192.168.10.10. The Active Directory Domain Services (AD DS) and DNS roles were then installed to make it the Domain Controller for the 'homelab.local' domain.", fr: "Un Windows Server 2022 a été installé avec l'adresse IP statique 192.168.10.10. Les rôles Active Directory Domain Services (AD DS) et DNS ont ensuite été installés pour en faire le contrôleur de domaine pour le domaine 'homelab.local'." } },
@@ -1164,7 +1163,6 @@
           const allModals = document.querySelectorAll('.modal');
           const videoModal = document.getElementById('video-modal');
           const projectModal = document.getElementById('project-modal');
-          // Re-adding variables for the image modals
           const imageModal = document.getElementById('image-modal');
           const diagramModal = document.getElementById('diagram-modal');
           let player;
@@ -1195,7 +1193,6 @@
                   const img = document.createElement('img');
                   img.src = slideData.img;
                   img.alt = slideData.title.en;
-                  // Re-adding click listener for mobile zoom
                   img.addEventListener('click', () => {
                       const imageModalImg = imageModal.querySelector('img');
                       imageModalImg.src = img.src;
@@ -1466,13 +1463,11 @@
                   imgEl.alt = slideData.title.en;
                   slideContainer.appendChild(imgEl);
                   
-                  // Re-add the click listener for zooming
                   slideContainer.addEventListener('click', () => {
                       const imageModalImg = imageModal.querySelector('img');
                       imageModalImg.src = imgEl.src;
                       imageModalImg.alt = `Enlarged view of ${slideData.title[currentLang] || slideData.title.en}`;
                       
-                      // CRITICAL FIX: Disable the underlying modal before opening the new one
                       projectModal.classList.add('is-covered');
                       openModal(imageModal);
                   });
@@ -1545,7 +1540,6 @@
 
           // Universal closing logic
           window.addEventListener('click', (event) => {
-              // This logic now works correctly because of the pointer-events fix
               if (event.target.classList.contains('modal')) {
                   if (player && typeof player.stopVideo === 'function' && event.target.id === 'video-modal') {
                       player.stopVideo();
@@ -1565,7 +1559,6 @@
               if (event.key === 'Escape') {
                   const activeModals = Array.from(document.querySelectorAll('.modal.active'));
                   if (activeModals.length > 0) {
-                      // Close the top-most modal, which is the last one in the array
                       const topModal = activeModals[activeModals.length - 1];
                       if (topModal.id === 'video-modal' && player && typeof player.stopVideo === 'function') {
                           player.stopVideo();
