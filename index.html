@@ -77,7 +77,8 @@
         }
         .highlight-keyword {
             font-family: var(--font-heading);
-            font-weight: 600;
+            font-weight: 700; /* Bold */
+            font-size: 1.05em; /* Slightly larger */
             background: var(--accent-gradient);
             -webkit-background-clip: text;
             background-clip: text;
@@ -519,23 +520,42 @@
             -webkit-backdrop-filter: var(--blur);
             backdrop-filter: var(--blur);
             border-radius: 12px;
-            padding: 2rem;
+            padding: 2.5rem;
             box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 2rem;
-            align-items: center;
         }
-        @media (min-width: 768px) {
-            .project-intro { grid-template-columns: 2fr 3fr; }
+        .project-title {
+            font-weight: 700;
+            text-align: center;
         }
-        .project-intro-image img {
-            width: 100%; height: auto; border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            cursor: zoom-in;
+        .project-intro-text h3 {
+            margin-top: 0;
+            font-size: 1.5rem;
+            text-align: center;
+            font-weight: 700;
         }
-        .project-intro-text h3 { margin-top: 0; font-size: 1.5rem; }
-        .project-intro-text p { opacity: 0.9; margin-bottom: 1.5rem; }
+        .project-intro-text p {
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+            text-align: left;
+        }
+        .project-intro-text p .project-details {
+            display: block;
+            margin-top: 1.5rem;
+            font-weight: 400; /* Normal weight for details */
+            font-size: 1em; /* Reset font size */
+        }
+        .project-intro-text p .highlight-keyword {
+            font-weight: 700;
+            font-size: 1.05em;
+        }
+        .project-intro-text .submit-btn-wrapper {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+        .project-intro .submit-btn {
+            font-weight: 700;
+        }
         
         .project-modal .modal-content {
             max-width: 50rem; background: var(--background);
@@ -886,7 +906,7 @@
 <a class="lang" data-de="Bildung" data-en="Education" data-fr="Éducation" href="#bildung">Bildung</a>
 <a class="lang" data-de="Erfahrung" data-en="Experience" data-fr="Expérience" href="#erfahrung">Erfahrung</a>
 <a class="lang" data-de="Kompetenzen" data-en="Competencies" data-fr="Compétences" href="#kompetenzen">Kompetenzen</a>
-<a class="lang" data-de="Projekt" data-en="Project" data-fr="Projet" href="#projekt">Projekte</a>
+<a class="lang" data-de="Projekt" data-en="Project" data-fr="Projet" href="#projekte">Projekt</a>
 <a class="lang" data-de="Kontakt" data-en="Contact" data-fr="Contact" href="#kontakt">Kontakt</a>
 <div class="nav-dropdown" id="documents-desktop-dropdown">
 <button class="nav-dropdown-toggle">
@@ -925,7 +945,7 @@
 <a class="lang" data-de="Bildungsweg" data-en="Education" data-fr="Parcours Éducatif" href="#bildung">Bildungsweg</a>
 <a class="lang" data-de="Erfahrung" data-en="Experience" data-fr="Expérience" href="#erfahrung">Erfahrung</a>
 <a class="lang" data-de="Kompetenzen" data-en="Competencies" data-fr="Compétences" href="#kompetenzen">Kompetenzen</a>
-<a class="lang" data-de="Projekt" data-en="Project" data-fr="Projet" href="#projekt">Projekte</a>
+<a class="lang" data-de="Projekt" data-en="Project" data-fr="Projet" href="#projekte">Projekt</a>
 <a class="lang" data-de="FAQ" data-en="FAQ" data-fr="FAQ" href="#faq">FAQ</a>
 <a class="lang" data-de="Kontakt" data-en="Contact" data-fr="Contact" href="#kontakt">Kontakt</a>
 <div class="mobile-documents-selector">
@@ -1020,9 +1040,9 @@
                     </p>
 </div>
 <div class="skill-card" data-aos="fade-up" data-aos-delay="200">
-<h3 class="lang" data-de="IT-Support &amp; Hardware" data-en="IT Support &amp; Hardware" data-fr="Support &amp; Matériel">IT-Support &amp; Hardware</h3>
-<p class="lang" data-de="Softwareinstallation, Fehleranalyse, Hardwarediagnose, Kundenberatung, techn. Dokumentation" data-en="Software Installation, Troubleshooting, Hardware Diagnostics, Customer Support, Tech Documentation" data-fr="Installation logiciels, Dépannage, Diagnostic matériel, Conseil client, Documentation technique">
-                       Softwareinstallation, Fehleranalyse, Hardwarediagnose, Kundenberatung, techn. Dokumentation
+<h3 class="lang" data-de="IT-Sicherheit" data-en="IT Security" data-fr="Sécurité Informatique">IT-Sicherheit</h3>
+<p class="lang" data-de="pfSense, Suricata (IPS/IDS), Nmap, pfBlockerNG, Schwachstellenanalyse, Regel-Tuning" data-en="pfSense, Suricata (IPS/IDS), Nmap, pfBlockerNG, Vulnerability Analysis, Rule Tuning" data-fr="pfSense, Suricata (IPS/IDS), Nmap, pfBlockerNG, Analyse de vulnérabilités, Optimisation des règles">
+                       pfSense, Suricata (IPS/IDS), Nmap, pfBlockerNG, Schwachstellenanalyse, Regel-Tuning
                     </p>
 </div>
 <div class="skill-card" data-aos="fade-up" data-aos-delay="300">
@@ -1044,21 +1064,19 @@
 <section class="container" id="projekte">
 
     <div class="project-container">
-        <h2 class="lang" data-de="Projekt: Design & Härtung eines virtualisierten Unternehmensnetzwerks" data-en="Project: Design & Hardening of a Virtualized Enterprise Network" data-fr="Projet : Conception & Durcissement d'un Réseau d'Entreprise Virtualisé">Projekt: Design & Härtung eines virtualisierten Unternehmensnetzwerks</h2>
+        <h2 class="lang project-title" data-de="Projekt: Design & Härtung eines virtualisierten Unternehmensnetzwerks" data-en="Project: Design & Hardening of a Virtualized Enterprise Network" data-fr="Projet : Conception & Durcissement d'un Réseau d'Entreprise Virtualisé">Projekt: Design & Härtung eines virtualisierten Unternehmensnetzwerks</h2>
         
         <div class="project-intro" data-aos="fade-up">
-            <div class="project-intro-image">
-                <img src="images/diagram.png" alt="Diagram of the full virtualized enterprise network topology."/>
-            </div>
             <div class="project-intro-text">
                 <h3 class="lang" data-de="Von der Infrastruktur zur Intrusion Prevention" data-en="From Infrastructure to Intrusion Prevention" data-fr="De l'Infrastructure à la Prévention d'Intrusion">Von der Infrastruktur zur Intrusion Prevention</h3>
                 <p class="lang" 
-                   data-de="Dieses umfassende Projekt zeigt den gesamten Lebenszyklus der Erstellung und Sicherung eines Unternehmensnetzwerks. Es beginnt mit dem Aufbau der Kerninfrastruktur und gipfelt in der Bereitstellung eines fortschrittlichen Intrusion Prevention Systems (IPS).<br><span class='highlight-keyword'>Ziel:</span> Demonstration von End-to-End-Fähigkeiten in den Bereichen Systemintegration, Netzwerk-Monitoring und Cybersicherheit.<br><span class='highlight-keyword'>Technologien:</span> VMware, pfSense, Windows Server, Active Directory, Netdata, Suricata (IPS), Nmap.<br><span class='highlight-keyword'>Ergebnis:</span> Ein vollständig instrumentiertes und verteidigtes Netzwerk, das die Fähigkeit zeigt, nicht nur Systeme aufzubauen, sondern sie auch proaktiv vor Bedrohungen zu schützen."
-                   data-en="This comprehensive project demonstrates the full lifecycle of creating and securing an enterprise network. It begins with building core infrastructure and culminates in deploying an advanced Intrusion Prevention System (IPS).<br><span class='highlight-keyword'>Goal:</span> To demonstrate end-to-end capabilities in system integration, network monitoring, and cybersecurity.<br><span class='highlight-keyword'>Technologies Used:</span> VMware, pfSense, Windows Server, Active Directory, Netdata, Suricata (IPS), Nmap.<br><span class='highlight-keyword'>Outcome:</span> A fully instrumented and defended network, showcasing the ability to not only build systems but to proactively secure them against threats."
-                   data-fr="Ce projet complet démontre le cycle de vie entier de la création et de la sécurisation d'un réseau d'entreprise. Il commence par la construction de l'infrastructure de base et culmine avec le déploiement d'un système de prévention d'intrusion (IPS) avancé.<br><span class='highlight-keyword'>Objectif :</span> Démontrer des capacités de bout en bout en intégration de systèmes, surveillance réseau et cybersécurité.<br><span class='highlight-keyword'>Technologies utilisées :</span> VMware, pfSense, Windows Server, Active Directory, Netdata, Suricata (IPS), Nmap.<br><span class='highlight-keyword'>Résultat :</span> Un réseau entièrement instrumenté et défendu, démontrant la capacité non seulement de construire des systèmes, mais aussi de les sécuriser de manière proactive contre les menaces.">
-                    Dieses umfassende Projekt zeigt den gesamten Lebenszyklus der Erstellung und Sicherung eines Unternehmensnetzwerks. Es beginnt mit dem Aufbau der Kerninfrastruktur und gipfelt in der Bereitstellung eines fortschrittlichen Intrusion Prevention Systems (IPS).<br><span class='highlight-keyword'>Ziel:</span> Demonstration von End-to-End-Fähigkeiten in den Bereichen Systemintegration, Netzwerk-Monitoring und Cybersicherheit.<br><span class='highlight-keyword'>Technologien:</span> VMware, pfSense, Windows Server, Active Directory, Netdata, Suricata (IPS), Nmap.<br><span class='highlight-keyword'>Ergebnis:</span> Ein vollständig instrumentiertes und verteidigtes Netzwerk, das die Fähigkeit zeigt, nicht nur Systeme aufzubauen, sondern sie auch proaktiv vor Bedrohungen zu schützen.
+                   data-de="Dieses umfassende Projekt zeigt den gesamten Lebenszyklus der Erstellung und Sicherung eines Unternehmensnetzwerks. Es beginnt mit dem Aufbau der Kerninfrastruktur – einschließlich Domain Controller und Performance-Monitoring – und gipfelt in der Bereitstellung eines fortschrittlichen Intrusion Prevention Systems (IPS) zur Abwehr simulierter Insider-Bedrohungen.<span class='project-details'><span class='highlight-keyword'>Ziel:</span> Demonstration von End-to-End-Fähigkeiten in den Bereichen Systemintegration, Netzwerk-Monitoring und Cybersicherheit.</span><span class='project-details'><span class='highlight-keyword'>Technologien:</span> VMware, pfSense, Windows Server, Active Directory, Netdata, Suricata (IPS), Nmap.</span><span class='project-details'><span class='highlight-keyword'>Ergebnis:</span> Ein vollständig instrumentiertes und verteidigtes Netzwerk, das die Fähigkeit zeigt, nicht nur Systeme aufzubauen, sondern sie auch proaktiv vor Bedrohungen zu schützen.</span>"
+                   data-en="This comprehensive project demonstrates the full lifecycle of creating and securing an enterprise network. It begins with building core infrastructure—including a domain controller and performance monitoring—and culminates in deploying an advanced Intrusion Prevention System (IPS) to defend against a simulated insider threat.<span class='project-details'><span class='highlight-keyword'>Goal:</span> To demonstrate end-to-end capabilities in system integration, network monitoring, and cybersecurity.</span><span class='project-details'><span class='highlight-keyword'>Technologies Used:</span> VMware, pfSense, Windows Server, Active Directory, Netdata, Suricata (IPS), Nmap.</span><span class='project-details'><span class='highlight-keyword'>Outcome:</span> A fully instrumented and defended network, showcasing the ability to not only build systems but to proactively secure them against threats.</span>"
+                   data-fr="Ce projet complet illustre le cycle de vie entier de la création et de la sécurisation d'un réseau d'entreprise. Il débute par la construction de l'infrastructure de base — incluant un contrôleur de domaine et une surveillance des performances — et se termine par le déploiement d'un système de prévention d'intrusion (IPS) avancé pour se défendre contre une menace interne simulée.<span class='project-details'><span class='highlight-keyword'>Objectif :</span> Démontrer des compétences complètes en intégration de systèmes, surveillance réseau et cybersécurité.</span><span class='project-details'><span class='highlight-keyword'>Technologies utilisées :</span> VMware, pfSense, Windows Server, Active Directory, Netdata, Suricata (IPS), Nmap.</span><span class='project-details'><span class='highlight-keyword'>Résultat :</span> Un réseau entièrement instrumenté et défendu, démontrant la capacité non seulement de construire des systèmes mais aussi de les sécuriser de manière proactive contre les menaces.</span>">
                 </p>
-                <button data-modal-id="project-modal-1" class="submit-btn open-project-modal-btn lang" data-de="Technische Details ansehen" data-en="View Technical Details" data-fr="Voir les Détails Techniques">Technische Details ansehen</button>
+                <div class="submit-btn-wrapper">
+                    <button data-modal-id="project-modal-1" class="submit-btn open-project-modal-btn lang" data-de="Technische Details ansehen" data-en="View Technical Details" data-fr="Voir les Détails Techniques">Technische Details ansehen</button>
+                </div>
             </div>
         </div>
         <div class="mobile-project-showcase" id="mobile-project-showcase-1"></div>
@@ -1085,6 +1103,7 @@
     </div>
 </div>
 
+
 <!-- Generic Diagram and Image Modals -->
 <div class="modal" id="diagram-modal">
     <div class="modal-content">
@@ -1103,7 +1122,7 @@
 <section class="container" id="faq">
 <h2 class="lang" data-de="Häufig Gestellte Fragen" data-en="Frequently Asked Questions" data-fr="Questions Fréquemment Posées">Häufig Gestellte Fragen</h2>
 <div class="faq-accordion" data-aos="fade-up">
-<div class="faq-item"><button aria-controls="faq1-answer" aria-expanded="false" class="faq-question"><span class="lang" data-de="&lt;i&gt;Sie sind nicht in Deutschland. Wie sollen wir Sie überhaupt hierherbringen?&lt;/i&gt;" data-en="&lt;i&gt;You are not in Germany. How would we manage the relocation process?&lt;/i&gt;" data-fr="&lt;i&gt;Vous n'êtes pas en Allemagne. Comment gérerions-nous le processus de relocalisation ?&lt;/i&gt;"><i>Sie sind nicht in Deutschland. Wie sollen wir Sie überhaupt hierherbringen?</i></span><span class="faq-icon"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path></svg></span></button><div class="faq-answer" id="faq1-answer"><p class="lang" data-de="Ich verstehe diese Frage gut. Aber mit den richtigen Unterlagen und Dokumenten kann das Ganze wirklich reibungslos ablaufen. Ich war bereits in Deutschland und habe den Visaprozess selbst durchlaufen, daher kenne ich mich mit dem Ablauf aus. Ich kann die nötigen Schritte selbstständig übernehmen und mache es für beide Seiten so einfach wie möglich. Falls Sie sich ein Bild vom Ablauf machen möchten, empfehle ich &lt;a href='https://www.youtube.com/watch?v=VDlhPi9LNps' target='_blank' class='faq-video-link'&gt;dieses kurze Video, das den Prozess gut erklärt&lt;/a&gt;." data-en="I understand this concern. However, with the right paperwork, the process can be very smooth. Having already been to Germany and gone through the visa process myself, I am familiar with the procedure. I can handle the necessary steps independently to make it as simple as possible for both sides. If you would like to get an idea of the process, I recommend &lt;a href='https://www.youtube.com/watch?v=VDlhPi9LNps' target='_blank' class='faq-video-link'&gt;this short video that explains it well&lt;/a&gt;." data-fr="Je comprends bien cette préoccupation. Cependant, avec les bons documents, le processus peut être très fluide. Ayant déjà été en Allemagne et ayant moi-même suivi le processus de visa, je connais bien la procédure. Je peux gérer les étapes nécessaires de manière autonome pour rendre les choses aussi simples que possible pour les deux parties. Si vous souhaitez avoir une idée du processus, je recommande &lt;a href='https://www.youtube.com/watch?v=VDlhPi9LNps' target='_blank' class='faq-video-link'&gt;cette courte vidéo qui l'explique bien&lt;/a&gt;.">Ich verstehe diese Frage gut. Aber mit den richtigen Unterlagen und Dokumenten kann das Ganze wirklich reibungslos ablaufen. Ich war bereits in Deutschland und habe den Visaprozess selbst durchlaufen, daher kenne ich mich mit dem Ablauf aus. Ich kann die nötigen Schritte selbstständig übernehmen und mache es für beide Seiten so einfach wie möglich. Falls Sie sich ein Bild vom Ablauf machen möchten, empfehle ich <a class="faq-video-link" href="https://www.youtube.com/watch?v=VDlhPi9LNps" target="_blank">dieses kurze Video, das den Prozess gut erklärt</a>.</p></div></div>
+<div class="faq-item"><button aria-controls="faq1-answer" aria-expanded="false" class="faq-question"><span class="lang" data-de="&lt;i&gt;Sie sind nicht in Deutschland. Wie soll der Umzug ablaufen?&lt;/i&gt;" data-en="&lt;i&gt;You are not in Germany. How would we manage the relocation process?&lt;/i&gt;" data-fr="&lt;i&gt;Vous n'êtes pas en Allemagne. Comment gérerions-nous votre relocalisation ?&lt;/i&gt;"><i>Sie sind nicht in Deutschland. Wie soll der Umzug ablaufen?</i></span><span class="faq-icon"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path></svg></span></button><div class="faq-answer" id="faq1-answer"><p class="lang" data-de="Ich verstehe diese Sorge. Der Prozess ist jedoch unkompliziert, da ich mich mit dem Visumverfahren auskenne, nachdem ich es bereits durchlaufen habe. Ich kann alle notwendigen Schritte eigenständig einleiten, um den Ablauf für Sie so reibungslos wie möglich zu gestalten. Dieses kurze &lt;a href='https://www.youtube.com/watch?v=VDlhPi9LNps' target='_blank' class='faq-video-link'&gt;Video&lt;/a&gt; erklärt den Prozess gut." data-en="I understand this concern. However, with the right paperwork, the process can be very smooth. Having already been to Germany and gone through the visa process myself, I am familiar with the procedure. I can handle the necessary steps independently to make it as simple as possible for both sides. If you would like to get an idea of the process, I recommend &lt;a href='https://www.youtube.com/watch?v=VDlhPi9LNps' target='_blank' class='faq-video-link'&gt;this short video that explains it well&lt;/a&gt;." data-fr="Je comprends cette préoccupation. Cependant, le processus peut être très fluide. Ayant déjà été en Allemagne et suivi moi-même la procédure de visa, je la connais bien. Je peux gérer les démarches nécessaires de manière autonome pour simplifier au maximum les choses pour nous deux. Pour un aperçu du processus, je recommande &lt;a href='https://www.youtube.com/watch?v=VDlhPi9LNps' target='_blank' class='faq-video-link'&gt;cette courte vidéo&lt;/a&gt; qui l'explique bien.">Ich verstehe diese Sorge. Der Prozess ist jedoch unkompliziert, da ich mich mit dem Visumverfahren auskenne, nachdem ich es bereits durchlaufen habe. Ich kann alle notwendigen Schritte eigenständig einleiten, um den Ablauf für Sie so reibungslos wie möglich zu gestalten. Dieses kurze <a class="faq-video-link" href="https://www.youtube.com/watch?v=VDlhPi9LNps" target="_blank">Video</a> erklärt den Prozess gut.</p></div></div>
 <div class="faq-item"><button aria-controls="faq2-answer" aria-expanded="false" class="faq-question"><span class="lang" data-de="&lt;i&gt;Wo werden Sie wohnen? Wir bieten keine Unterkunft an. Wie organisieren Sie das?&lt;/i&gt;" data-en="&lt;i&gt;Where would you live? We don't offer accommodation. How would you organize that?&lt;/i&gt;" data-fr="&lt;i&gt;Où vivriez-vous ? Nous ne proposons pas de logement. Comment organiseriez-vous cela ?&lt;/i&gt;"><i>Wo werden Sie wohnen? Wir bieten keine Unterkunft an. Wie organisieren Sie das?</i></span><span class="faq-icon"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path></svg></span></button><div class="faq-answer" id="faq2-answer"><p class="lang" data-de="Da ich bereits in Deutschland war, verfüge ich über ein gutes Netzwerk für Unterkunft und soziale Kontakte, die mir eine schnelle und zuverlässige Wohnungssuche ermöglichen. Somit ist die Wohnungsfrage für mich gesichert." data-en="Since I have already been to Germany, I have a good network for accommodation and social contacts that enable me to find housing quickly and reliably. Therefore, the housing issue is secured for me." data-fr="Comme j'ai déjà été en Allemagne, je dispose d'un bon réseau pour le logement et les contacts sociaux, ce qui me permet de trouver un logement rapidement et de manière fiable. La question du logement est donc assurée pour moi.">Da ich bereits in Deutschland war, verfüge ich über ein gutes Netzwerk für Unterkunft und soziale Kontakte, die mir eine schnelle und zuverlässige Wohnungssuche ermöglichen. Somit ist die Wohnungsfrage für mich gesichert.</p></div></div>
 <div class="faq-item"><button aria-controls="faq3-answer" aria-expanded="false" class="faq-question"><span class="lang" data-de="&lt;i&gt;Sie haben Erfahrung in der Pflege, sind aber IT-orientiert. Wie passt das zusammen?&lt;/i&gt;" data-en="&lt;i&gt;You have experience in nursing but are focused on IT. How does that fit together?&lt;/i&gt;" data-fr="&lt;i&gt;Vous avez de l'expérience en soins infirmiers mais êtes orienté vers l'informatique. Comment cela s'accorde-t-il ?&lt;/i&gt;"><i>Sie haben Erfahrung in der Pflege, sind aber IT-orientiert. Wie passt das zusammen?</i></span><span class="faq-icon"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path></svg></span></button><div class="faq-answer" id="faq3-answer"><p class="lang" data-de="Ich bin eigentlich im IT-Bereich orientiert, aber ich finde, dass ein grundlegendes Verständnis für Pflege und Gesundheit in vielen Lebenslagen wichtig ist. Als ich das Ausbildungsangebot im Pflegebereich bekam, habe ich es als Chance gesehen – erstens, um das deutsche Arbeitsumfeld besser kennenzulernen, und zweitens, um soziale und menschliche Fähigkeiten zu entwickeln, die mir auch in der IT weiterhelfen können. Diese Erfahrung hat mir definitiv geholfen, und ich bin dankbar dafür." data-en="I am fundamentally oriented towards IT, but I believe that a basic understanding of nursing and health is important in many aspects of life. When I received the training offer in the nursing field, I saw it as an opportunity—firstly, to get to know the German work environment better, and secondly, to develop social and interpersonal skills that can also help me in IT. This experience has definitely helped me, and I am grateful for it." data-fr="Je suis fondamentalement orienté vers l'informatique, mais je crois qu'une compréhension de base des soins et de la santé est importante dans de nombreux aspects de la vie. Quand j'ai reçu l'offre de formation dans le domaine des soins, je l'ai vue comme une opportunité - d'abord, pour mieux connaître l'environnement de travail allemand, et ensuite, pour développer des compétences sociales et interpersonnelles qui peuvent également m'aider en informatique. Cette expérience m'a certainement aidé, et j'en suis reconnaissant.">Ich bin eigentlich im IT-Bereich orientiert, aber ich finde, dass ein grundlegendes Verständnis für Pflege und Gesundheit in vielen Lebenslagen wichtig ist. Als ich das Ausbildungsangebot im Pflegebereich bekam, habe ich es als Chance gesehen – erstens, um das deutsche Arbeitsumfeld besser kennenzulernen, und zweitens, um soziale und menschliche Fähigkeiten zu entwickeln, die mir auch in der IT weiterhelfen können. Diese Erfahrung hat mir definitiv geholfen, und ich bin dankbar dafür.</p></div></div>
 <div class="faq-item"><button aria-controls="faq4-answer" aria-expanded="false" class="faq-question"><span class="lang" data-de="&lt;i&gt;Warum Deutschland?&lt;/i&gt;" data-en="&lt;i&gt;Why Germany?&lt;/i&gt;" data-fr="&lt;i&gt;Pourquoi l'Allemagne ?&lt;/i&gt;"><i>Warum Deutschland?</i></span><span class="faq-icon"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path></svg></span></button><div class="faq-answer" id="faq4-answer"><p class="lang" data-de="Deutschland bietet sehr gute Ausbildungsmöglichkeiten und berufliche Perspektiven, besonders im IT-Bereich. Außerdem schätze ich die hohe Arbeitsqualität und die internationale Atmosphäre hier." data-en="Germany offers excellent training opportunities and career prospects, especially in the IT sector. Furthermore, I appreciate the high quality of work and the international atmosphere here." data-fr="L'Allemagne offre d'excellentes opportunités de formation et des perspectives de carrière, en particulier dans le secteur informatique. De plus, j'apprécie la haute qualité du travail et l'atmosphère internationale qui y règne.">Deutschland bietet sehr gute Ausbildungsmöglichkeiten und berufliche Perspektiven, besonders im IT-Bereich. Außerdem schätze ich die hohe Arbeitsqualität und die internationale Atmosphäre hier.</p></div></div>
@@ -1187,12 +1206,36 @@
               "project-modal-1": {
                   currentSlide: 0,
                   slides: [
-                      { img: 'diagram.png', title: { de: 'Architekturübersicht', en: 'Architecture Overview', fr: "Vue d'ensemble de l'architecture" }, text: { de: 'Das Projekt begann mit dem Aufbau einer kompletten End-to-End-Unternehmensinfrastruktur. Dies beinhaltete die Konfiguration eines pfSense-Firewalls, eines Windows Servers als Domain Controller und die Segmentierung des Netzwerks, um eine realistische Umgebung zu schaffen.', en: 'The project began with the construction of a complete end-to-end enterprise infrastructure. This included configuring a pfSense firewall, a Windows Server as a Domain Controller, and segmenting the network to create a realistic environment.', fr: "Le projet a commencé par la construction d'une infrastructure d'entreprise complète de bout en bout. Cela comprenait la configuration d'un pare-feu pfSense, d'un serveur Windows en tant que contrôleur de domaine et la segmentation du réseau pour créer un environnement réaliste." } },
-                      { img: 'windows_server_roles.png', title: { de: 'Kerndienste: Domain Controller', en: 'Core Services: Domain Controller', fr: 'Services de base : Contrôleur de domaine' }, text: { de: 'Ein Windows Server 2022 wurde als Herzstück des Netzwerks bereitgestellt. Er wurde zur Rolle eines Domain Controllers für die Domäne „homelab.local“ heraufgestuft und verwaltet die zentralen Active Directory- und DNS-Dienste.', en: 'A Windows Server 2022 was deployed as the heart of the network. It was promoted to the role of a Domain Controller for the "homelab.local" domain, managing centralized Active Directory and DNS services.', fr: "Un serveur Windows 2022 a été déployé au cœur du réseau. Il a été promu au rôle de contrôleur de domaine pour le domaine « homelab.local », gérant les services centralisés Active Directory et DNS." } },
-                      { img: 'netdata_snmp_devices.png', title: { de: 'Netzwerk-Monitoring: Leistung', en: 'Network Monitoring: Performance', fr: 'Surveillance réseau : Performance' }, text: { de: 'Ein anfängliches Monitoring wurde mit Netdata implementiert, um Echtzeit-Leistungs- und Zustandsmetriken für die gesamte Kerninfrastruktur bereitzustellen. Dies gewährleistete die Stabilität und Leistung des Netzwerks, bevor Sicherheitsmaßnahmen hinzugefügt wurden.', en: 'Initial monitoring was implemented using Netdata to provide real-time performance and health metrics for all core infrastructure. This ensured network stability and performance before layering on security measures.', fr: "Une surveillance initiale a été mise en œuvre avec Netdata pour fournir des métriques de performance et de santé en temps réel pour toute l'infrastructure de base. Cela a garanti la stabilité et la performance du réseau avant l'ajout de mesures de sécurité." } },
-                      { img: '5.png', title: { de: 'Sicherheitshärtung: IPS-Bereitstellung', en: 'Security Hardening: IPS Deployment', fr: 'Durcissement de la sécurité : Déploiement de l\'IPS' }, text: { de: 'Mit dem funktionsfähigen Netzwerk verlagerte sich der Fokus auf die Sicherheit. Ein fortschrittliches Intrusion Prevention System (Suricata) wurde auf der pfSense-Firewall bereitgestellt. Die ETOpen-Regelsätze wurden aktiviert, um das System mit branchenüblicher Bedrohungsintelligenz auszustatten.', en: 'With the network operational, the focus shifted to security. An advanced Intrusion Prevention System (Suricata) was deployed on the pfSense firewall. The ETOpen rule sets were enabled to arm the system with industry-standard threat intelligence.', fr: "Le réseau étant opérationnel, l'accent a été mis sur la sécurité. Un système de prévention d'intrusion avancé (Suricata) a été déployé sur le pare-feu pfSense. Les ensembles de règles ETOpen ont été activés pour doter le système d'une intelligence sur les menaces conforme aux normes de l'industrie." } },
-                      { img: '6.png', title: { de: 'Simulation einer Insider-Bedrohung', en: 'Insider Threat Simulation', fr: "Simulation d'une menace interne" }, text: { de: 'Um das IPS zu validieren, wurde eine Insider-Bedrohung simuliert, indem ein Aufklärungsscan von einer internen Workstation (192.168.10.101) gegen den Domain Controller (192.168.10.10) mit Nmap gestartet wurde. Dies ahmt einen Angreifer nach, der das interne Netzwerk nach Schwachstellen absucht.', en: 'To validate the IPS, an insider threat was simulated by launching a reconnaissance scan from an internal workstation (192.168.10.101) against the Domain Controller (192.168.10.10) using Nmap. This mimics an attacker mapping the internal network for vulnerabilities.', fr: "Pour valider l'IPS, une menace interne a été simulée en lançant un scan de reconnaissance depuis un poste de travail interne (192.168.10.101) contre le contrôleur de domaine (192.168.10.10) avec Nmap. Cela imite un attaquant cartographiant le réseau interne à la recherche de vulnérabilités." } },
-                      { img: '7.png', title: { de: 'Erfolgreiche Bedrohungserkennung', en: 'Successful Threat Detection', fr: 'Détection de menace réussie' }, text: { de: 'Das IPS hat den feindlichen Scan sofort in Echtzeit erkannt. Mehrere hochpriore Alarme, einschließlich „ET SCAN Possible Nmap User-Agent“, wurden ausgelöst. Dies beweist die Fähigkeit des Systems, Bedrohungen innerhalb des vertrauenswürdigen Netzwerks zu identifizieren und darauf aufmerksam zu machen, was den Projekterfolg bestätigt.', en: 'The IPS successfully detected the hostile scan in real-time. Multiple high-priority alerts, including "ET SCAN Possible Nmap User-Agent", were triggered. This proves the system’s ability to identify and alert on threats within the trusted network, confirming the project’s success.', fr: "L'IPS a détecté avec succès le scan hostile en temps réel. Plusieurs alertes de haute priorité, y compris « ET SCAN Possible Nmap User-Agent », ont été déclenchées. Cela prouve la capacité du système à identifier et à alerter sur les menaces au sein du réseau de confiance, confirmant le succès du projet." } }
+                      { 
+                        img: 'diagram.png', 
+                        title: { de: 'Architekturübersicht', en: 'Architecture Overview', fr: "Vue d'ensemble de l'architecture" }, 
+                        text: { de: 'Das Projekt begann mit dem Aufbau einer kompletten End-to-End-Unternehmensinfrastruktur. Dies umfasste die Konfiguration eines pfSense-Firewalls, eines Windows Servers als Domänencontroller und die Netzwerksegmentierung, um eine realistische Umgebung zu schaffen.', en: 'The project began with the construction of a complete end-to-end enterprise infrastructure. This included configuring a pfSense firewall, a Windows Server as a Domain Controller, and segmenting the network to create a realistic environment.', fr: "Le projet a débuté par la mise en place d'une infrastructure d'entreprise complète. Cela incluait la configuration d'un pare-feu pfSense, d'un serveur Windows en tant que contrôleur de domaine, et la segmentation du réseau pour simuler un environnement professionnel." } 
+                      },
+                      { 
+                        img: 'windows_server_roles.png', 
+                        title: { de: 'Kerndienste: Domain Controller', en: 'Core Services: Domain Controller', fr: 'Services Clés : Contrôleur de Domaine' }, 
+                        text: { de: 'Ein Windows Server 2022 wurde als Herzstück des Netzwerks bereitgestellt. Er wurde zur Rolle eines Domänencontrollers für die Domäne „homelab.local“ heraufgestuft und verwaltet die zentralen Active Directory- und DNS-Dienste.', en: 'A Windows Server 2022 was deployed as the heart of the network. It was promoted to the role of a Domain Controller for the "homelab.local" domain, managing centralized Active Directory and DNS services.', fr: "Un serveur Windows 2022 a été déployé comme cœur du réseau. Promu au rôle de contrôleur de domaine pour 'homelab.local', il gère de manière centralisée les services Active Directory et DNS." } 
+                      },
+                      { 
+                        img: 'netdata_snmp_devices.png', 
+                        title: { de: 'Netzwerk-Monitoring: Leistung', en: 'Network Monitoring: Performance', fr: 'Surveillance Réseau : Performance' }, 
+                        text: { de: 'Ein anfängliches Monitoring wurde mit Netdata implementiert, um Echtzeit-Leistungs- und Zustandsmetriken für die gesamte Kerninfrastruktur zu liefern. Dies gewährleistete die Stabilität des Netzwerks, bevor weitere Sicherheitsmaßnahmen implementiert wurden.', en: 'Initial monitoring was implemented using Netdata to provide real-time performance and health metrics for all core infrastructure. This ensured network stability and performance before layering on security measures.', fr: "Une surveillance initiale des performances a été mise en place avec Netdata, offrant des métriques en temps réel sur l'état de l'infrastructure. Cette étape a garanti la stabilité du réseau avant l'intégration des dispositifs de sécurité." } 
+                      },
+                      { 
+                        img: '5.png', 
+                        title: { de: 'Sicherheitshärtung: IPS-Bereitstellung', en: 'Security Hardening: IPS Deployment', fr: 'Durcissement de la Sécurité : Déploiement de l\'IPS' }, 
+                        text: { de: 'Nachdem die Netzwerkstabilität sichergestellt war, verlagerte sich der Fokus auf die Sicherheit. Ein fortschrittliches Intrusion Prevention System (Suricata) wurde auf der pfSense-Firewall bereitgestellt und mit den branchenüblichen ETOpen-Regelsätzen zur Bedrohungserkennung ausgestattet.', en: 'With the network operational, the focus shifted to security. An advanced Intrusion Prevention System (Suricata) was deployed on the pfSense firewall. The ETOpen rule sets were enabled to arm the system with industry-standard threat intelligence.', fr: "Une fois le réseau opérationnel, l'accent a été mis sur la sécurité. Un système de prévention d'intrusion (IPS) avancé, Suricata, a été déployé sur le pare-feu pfSense, puis armé avec les règles de menaces standard de l'industrie (ETOpen)." } 
+                      },
+                      { 
+                        img: '6.png', 
+                        title: { de: 'Simulation einer Insider-Bedrohung', en: 'Insider Threat Simulation', fr: "Simulation d'une Menace Interne" }, 
+                        text: { de: 'Um das IPS zu validieren, wurde eine Insider-Bedrohung simuliert, indem ein Aufklärungsscan von einer internen Workstation (192.168.10.101) gegen den Domänencontroller (192.168.10.10) mit Nmap gestartet wurde. Dies ahmt einen Angreifer nach, der das interne Netzwerk nach Schwachstellen absucht.', en: 'To validate the IPS, an insider threat was simulated by launching a reconnaissance scan from an internal workstation (192.168.10.101) against the Domain Controller (192.168.10.10) using Nmap. This mimics an attacker mapping the internal network for vulnerabilities.', fr: "Pour valider l'IPS, une menace interne a été simulée en lançant un scan de reconnaissance depuis un poste de travail interne vers le contrôleur de domaine avec Nmap. Cette action imite un attaquant qui cartographie le réseau à la recherche de vulnérabilités." } 
+                      },
+                      { 
+                        img: '7.png', 
+                        title: { de: 'Erfolgreiche Bedrohungserkennung', en: 'Successful Threat Detection', fr: 'Détection de Menace Réussie' }, 
+                        text: { de: 'Das IPS hat den feindlichen Scan sofort in Echtzeit erkannt und mehrere hochpriore Alarme ausgelöst, darunter „ET SCAN Possible Nmap User-Agent“. Dies beweist die Fähigkeit des Systems, Bedrohungen innerhalb des vertrauenswürdigen Netzwerks zuverlässig zu identifizieren.', en: 'The IPS successfully detected the hostile scan in real-time. Multiple high-priority alerts, including "ET SCAN Possible Nmap User-Agent", were triggered. This proves the system’s ability to reliably identify and alert on threats within the trusted network, confirming the project’s success.', fr: "L'IPS a détecté avec succès le scan hostile en temps réel. De multiples alertes de haute priorité, incluant « ET SCAN Possible Nmap User-Agent », ont été déclenchées. Cela prouve la capacité du système à identifier et à signaler de manière fiable les menaces au sein du réseau de confiance, confirmant ainsi le succès du projet." } 
+                      }
                   ]
               }
           };
@@ -1306,14 +1349,21 @@
 
           function closeModal(modal) {
               if (!modal) return;
+              
               modal.classList.remove('active');
-              if (modal.id === 'image-modal' || modal.id === 'diagram-modal') {
-                  document.querySelectorAll('.project-modal.active').forEach(pm => pm.classList.remove('is-covered'));
+              
+              if ((modal.id === 'image-modal' || modal.id === 'diagram-modal') && lastActiveElement) {
+                  const parentModal = lastActiveElement.closest('.project-modal');
+                  if (parentModal) {
+                      parentModal.classList.remove('is-covered');
+                  }
               }
+
               const isAnyModalOpen = Array.from(allModals).some(m => m.classList.contains('active'));
               if (!isAnyModalOpen) {
                   document.body.classList.remove('modal-open');
               }
+              
               if (lastActiveElement) {
                   lastActiveElement.focus();
                   lastActiveElement = null;
@@ -1502,15 +1552,30 @@
           });
           
           window.addEventListener('keydown', (event) => {
-              const activeModal = document.querySelector('.modal.active');
+              if (event.key !== 'Escape') return;
+
+              const activeImageModal = document.getElementById('image-modal');
+              const activeDiagramModal = document.getElementById('diagram-modal');
+
+              if (activeImageModal && activeImageModal.classList.contains('active')) {
+                  closeModal(activeImageModal);
+              } else if (activeDiagramModal && activeDiagramModal.classList.contains('active')) {
+                  closeModal(activeDiagramModal);
+              } else {
+                  const activeModal = document.querySelector('.modal.active');
+                  if (activeModal) {
+                    if (activeModal.id === 'video-modal' && player?.stopVideo) player.stopVideo();
+                    closeModal(activeModal);
+                  }
+              }
+          });
+
+          // Separate listener for project modal arrow keys and tab trapping
+          window.addEventListener('keydown', (event) => {
+              const activeModal = document.querySelector('.project-modal.active');
               if (!activeModal) return;
 
-              if (event.key === 'Escape') {
-                  if (activeModal.id === 'video-modal' && player?.stopVideo) player.stopVideo();
-                  closeModal(activeModal);
-              }
-
-              if (activeModal.classList.contains('project-modal')) {
+              if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
                   const modalId = activeModal.id;
                   const project = projectsData[modalId];
                   if(project) {
@@ -1521,7 +1586,7 @@
 
               if (event.key === 'Tab') {
                   const focusableElements = Array.from(activeModal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'));
-                  if (focusableElements.length === 0) return;
+                  if (focusableElements.length === 0) { event.preventDefault(); return; }
                   const firstElement = focusableElements[0];
                   const lastElement = focusableElements[focusableElements.length - 1];
 
@@ -1539,6 +1604,7 @@
               }
           });
 
+
           document.querySelectorAll('.language-item').forEach(item => {
               item.addEventListener('click', (e) => {
                   e.preventDefault(); 
@@ -1551,6 +1617,7 @@
                       const toggle = mobileList.previousElementSibling;
                       toggle.classList.remove('active');
                       mobileList.style.maxHeight = null;
+                      setTimeout(toggleNav, 150);
                   }
               });
           });
