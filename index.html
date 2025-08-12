@@ -43,36 +43,34 @@
         :root {
             --background: #0d0d0d;
             --primary-blue: #00bfff;
-            --text-color: #f0f0f0; /* IMPROVED: Increased contrast from #e0e0e0 */
+            --text-color: #f0f0f0;
             --border-color: #333333;
             --font-heading: 'Space Mono', monospace;
             --font-body: 'Inter', sans-serif;
             --accent-gradient: linear-gradient(135deg, #06b6d4, #8b5cf6);
             --card-bg: rgba(255, 255, 255, 0.07);
-            --blur: blur(10px); /* IMPROVED: Slightly reduced blur for performance */
+            --blur: blur(10px);
             --transition-speed: 0.3s;
         }
-        /* Fix for horizontal overflow and layout consistency */
         *,
         *::before,
         *::after {
             box-sizing: border-box;
-            min-width: 0; /* Prevents flex/grid items from causing overflow */
+            min-width: 0;
         }
         html { 
             scroll-behavior: smooth; 
-            font-size: 100%; /* Base font size */
+            font-size: 100%;
             max-width: 100%;
             overflow-x: hidden;
         }
         body {
             background-color: var(--background); color: var(--text-color);
             font-family: var(--font-body); margin: 0; padding: 0; overflow-x: hidden;
-            font-weight: 400; /* Default body weight */
-            line-height: 1.7; /* IMPROVED: Increased for better readability */
+            font-weight: 400;
+            line-height: 1.7;
             max-width: 100%;
         }
-        /* Style for when a modal is open */
         body.modal-open {
             overflow: hidden;
         }
@@ -87,8 +85,8 @@
         }
         .highlight-keyword {
             font-family: var(--font-heading);
-            font-weight: 700; /* Bold */
-            font-size: 1.05em; /* Slightly larger */
+            font-weight: 700;
+            font-size: 1.05em;
             background: var(--accent-gradient);
             -webkit-background-clip: text;
             background-clip: text;
@@ -224,7 +222,7 @@
             opacity: 1; color: var(--primary-blue); font-weight: bold;
         }
         
-        .mobile-language-selector, .mobile-documents-selector {
+        .mobile-language-selector {
             margin-top: 20px; text-align: center;
         }
         .mobile-toggle {
@@ -266,13 +264,6 @@
             margin: 4px 0; transition: 0.4s;
         }
         
-        /* REMOVED: These rules animated the hamburger icon into an 'X' */
-        /*
-        .change .bar1 { transform: translate(0, 8px) rotate(-45deg); }
-        .change .bar2 { opacity: 0; }
-        .change .bar3 { transform: translate(0, -8px) rotate(45deg); }
-        */
-
         .mobile-nav-overlay {
             height: 100%; width: 0; position: fixed; z-index: 1001; top: 0; left: 0;
             background: rgba(13, 13, 13, 0.7);
@@ -555,8 +546,8 @@
         .project-intro-text p .project-details {
             display: block;
             margin-top: 1.5rem;
-            font-weight: 400; /* Normal weight for details */
-            font-size: 1em; /* Reset font size */
+            font-weight: 400;
+            font-size: 1em;
         }
         .project-intro-text p .highlight-keyword {
             font-weight: 700;
@@ -767,7 +758,7 @@
         
         .contact-form-section { padding-top: 80px; }
         #contact-form {
-            max-width: 47rem;
+            max-width: 40rem; /* MODIFIED: Reduced width for a more compact form */
             margin: 0 auto;
             display: flex;
             flex-direction: column;
@@ -835,11 +826,99 @@
             font-weight: bold;
             min-height: 1.6em;
         }
-        #form-status .success { color: #22c55e; } /* green-500 */
-        #form-status .error { color: #ef4444; } /* red-500 */
+        #form-status .success { color: #22c55e; }
+        #form-status .error { color: #ef4444; }
 
         .main-footer { text-align: center; padding: 2rem; border-top: 1px solid var(--border-color); }
         .main-footer p { margin: 0; }
+
+        /* === HERO CTA DROPDOWN (STYLES UPDATED FOR ROUNDED GRADIENT BORDER) === */
+        .hero-cta-dropdown {
+            position: relative;
+            margin-top: 2rem;
+            display: inline-block;
+        }
+
+        .hero-cta-dropdown .cta-dropdown-toggle {
+            background: linear-gradient(rgba(20, 20, 20, 0.7), rgba(20, 20, 20, 0.7)) padding-box,
+                        var(--accent-gradient) border-box;
+            border: 2px solid transparent;
+            -webkit-backdrop-filter: blur(5px);
+            backdrop-filter: blur(5px);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            cursor: pointer;
+            font-family: var(--font-heading);
+            font-size: 1rem;
+            font-weight: 700;
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .hero-cta-dropdown .cta-dropdown-toggle:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.3), 0 0 20px rgba(139, 92, 246, 0.3);
+        }
+
+        .hero-cta-dropdown .cta-dropdown-toggle .arrow-icon {
+            width: 16px; 
+            height: 16px; 
+            fill: white;
+            transition: transform 0.3s ease;
+        }
+
+        .hero-cta-dropdown.active .cta-dropdown-toggle .arrow-icon {
+            transform: rotate(180deg);
+        }
+
+        .hero-cta-dropdown .cta-dropdown-menu {
+            list-style: none;
+            padding: 0.5rem 0;
+            margin: 0;
+            position: absolute;
+            bottom: calc(100% + 10px);
+            left: 50%;
+            width: max-content;
+            min-width: 100%;
+            background: linear-gradient(145deg, rgba(30,30,30,0.95), rgba(45,45,45,0.95));
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+            border-radius: 8px;
+            z-index: 100;
+            opacity: 0;
+            visibility: hidden;
+            transform-origin: bottom center;
+            transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
+            transform: translateX(-50%) translateY(10px);
+        }
+
+        .hero-cta-dropdown.active .cta-dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .hero-cta-dropdown .cta-dropdown-menu a {
+            font-family: var(--font-heading);
+            color: var(--text-color);
+            text-decoration: none;
+            display: block;
+            padding: 9px 20px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            transition: background 0.2s, color 0.2s, opacity 0.2s;
+            white-space: nowrap;
+            text-align: center;
+        }
+
+        .hero-cta-dropdown .cta-dropdown-menu a:hover {
+            background-color: rgba(0, 191, 255, 0.15);
+            color: white;
+            opacity: 1;
+        }
         
         @media screen and (min-width: 1100px) {
             html { font-size: calc(16px + 4 * ((100vw - 1100px) / (1920 - 1100))); }
@@ -882,7 +961,7 @@
             .mobile-nav-overlay-content > a:nth-of-type(5) { animation-delay: 0.6s; }
             .mobile-nav-overlay-content > a:nth-of-type(6) { animation-delay: 0.7s; }
             @keyframes fadeInLink { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-            .mobile-documents-selector, .mobile-language-selector { margin-top: auto; padding-bottom: 30px; }
+            .mobile-language-selector { margin-top: auto; padding-bottom: 30px; }
             .mobile-toggle { background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-color); border-radius: 8px; }
             .timeline-wrapper::before { left: 10px; }
             .timeline-item { padding-left: 40px; margin-bottom: 30px; }
@@ -927,17 +1006,6 @@
 <a class="lang" data-de="Kompetenzen" data-en="Competencies" data-fr="Compétences" href="#kompetenzen">Kompetenzen</a>
 <a class="lang" data-de="Projekt" data-en="Project" data-fr="Projet" href="#projekte">Projekt</a>
 <a class="lang" data-de="Kontakt" data-en="Contact" data-fr="Contact" href="#kontakt">Kontakt</a>
-<div class="nav-dropdown" id="documents-desktop-dropdown">
-<button class="nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false" id="documents-toggle">
-<span class="lang" data-de="Dokumente" data-en="Documents" data-fr="Documents">Dokumente</span>
-<svg class="arrow-icon" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"></path></svg>
-</button>
-<ul class="nav-dropdown-menu" aria-labelledby="documents-toggle">
-<li><a class="lang" data-de="Lebenslauf" data-en="CV / Resume" data-fr="CV" download="Walid_Gourideche_Lebenslauf.pdf" href="resume/lebenslauf.pdf">Lebenslauf</a></li>
-<li><a class="lang" data-de="Anschreiben" data-en="Cover Letter" data-fr="Lettre de Motivation" download="Walid_Gourideche_Anschreiben.pdf" href="resume/anschreiben.pdf">Anschreiben</a></li>
-<li><a class="lang" data-de="Zeugnisse" data-en="Certificates" data-fr="Certificats" download="Walid_Gourideche_Zeugnisse.pdf" href="resume/zeugnisse.pdf">Zeugnisse</a></li>
-</ul>
-</div>
 </div>
 <!-- Language switcher -->
 <div class="nav-dropdown" id="lang-desktop-dropdown">
@@ -967,17 +1035,6 @@
 <a class="lang" data-de="Projekt" data-en="Project" data-fr="Projet" href="#projekte">Projekt</a>
 <a class="lang" data-de="FAQ" data-en="FAQ" data-fr="FAQ" href="#faq">FAQ</a>
 <a class="lang" data-de="Kontakt" data-en="Contact" data-fr="Contact" href="#kontakt">Kontakt</a>
-<div class="mobile-documents-selector">
-<button class="mobile-toggle">
-<span class="lang" data-de="Dokumente" data-en="Documents" data-fr="Documents">Dokumente</span>
-<svg class="arrow-icon" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"></path></svg>
-</button>
-<ul class="mobile-list">
-<li><a class="lang" data-de="Lebenslauf" data-en="CV / Resume" data-fr="CV" download="Walid_Gourideche_Lebenslauf.pdf" href="resume/lebenslauf.pdf">Lebenslauf</a></li>
-<li><a class="lang" data-de="Anschreiben" data-en="Cover Letter" data-fr="Lettre de Motivation" download="Walid_Gourideche_Anschreiben.pdf" href="resume/anschreiben.pdf">Anschreiben</a></li>
-<li><a class="lang" data-de="Zeugnisse" data-en="Certificates" data-fr="Certificats" download="Walid_Gourideche_Zeugnisse.pdf" href="resume/zeugnisse.pdf">Zeugnisse</a></li>
-</ul>
-</div>
 <div class="mobile-language-selector">
 <button class="mobile-toggle">
 <span class="lang" data-de="Sprache wählen" data-en="Select Language" data-fr="Choisir la langue">Sprache wählen</span>
@@ -1005,6 +1062,18 @@
 <p class="hero-description lang" data-de="Ein 23-jähriger angehender IT-Spezialist mit vielfältiger Erfahrung in Netzwerktechnik und Systemadministration. Bringt internationale Perspektive, praxisnahe Kenntnisse und den Antrieb mit, effiziente IT-Lösungen von Marokko bis Deutschland voranzubringen." data-en="A 23-year-old aspiring IT specialist with diverse experience in network technology and system administration. Bringing an international perspective, practical knowledge, and the drive to advance efficient IT solutions from Morocco to Germany." data-fr="Un futur spécialiste en informatique de 23 ans avec une expérience diversifiée en technologie réseau et administration système. Apportant une perspective internationale, des connaissances pratiques et la volonté de faire progresser des solutions informatiques efficaces du Maroc à l'Allemagne.">
     Ein 23-jähriger angehender IT-Spezialist mit vielfältiger Erfahrung in Netzwerktechnik und Systemadministration. Bringt internationale Perspektive, praxisnahe Kenntnisse und den Antrieb mit, effiziente IT-Lösungen von Marokko bis Deutschland voranzubringen.
 </p>
+<div class="hero-cta-dropdown">
+<button class="cta-dropdown-toggle">
+<span class="lang" data-de="Dokumente ansehen" data-en="View Documents" data-fr="Voir les Documents">Dokumente ansehen</span>
+<svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"></path></svg>
+</button>
+<ul class="cta-dropdown-menu">
+<!-- MODIFIED: Links now open in a new tab for viewing -->
+<li><a class="lang" data-de="Lebenslauf" data-en="CV / Resume" data-fr="CV" href="resume/lebenslauf.pdf" target="_blank" rel="noopener noreferrer">Lebenslauf</a></li>
+<li><a class="lang" data-de="Anschreiben" data-en="Cover Letter" data-fr="Lettre de Motivation" href="resume/anschreiben.pdf" target="_blank" rel="noopener noreferrer">Anschreiben</a></li>
+<li><a class="lang" data-de="Zeugnisse" data-en="Certificates" data-fr="Certificats" href="resume/zeugnisse.pdf" target="_blank" rel="noopener noreferrer">Zeugnisse</a></li>
+</ul>
+</div>
 </div>
 </section>
 <section class="container" id="intro-video">
@@ -1331,7 +1400,7 @@
                   const img = document.createElement('img');
                   img.src = "images/" + slideData.img;
                   img.alt = slideData.title[currentLang] || slideData.title.en;
-                  img.loading = 'lazy'; // IMPROVED: Lazy load images
+                  img.loading = 'lazy';
                   
                   img.addEventListener('click', function() {
                       const imageModalImg = imageModal.querySelector('img');
@@ -1454,7 +1523,7 @@
                   const imgEl = document.createElement('img');
                   imgEl.src = "images/" + slideData.img;
                   imgEl.alt = slideData.title.en;
-                  imgEl.loading = 'lazy'; // IMPROVED: Lazy load images
+                  imgEl.loading = 'lazy';
                   slideContainer.appendChild(imgEl);
                   
                   slideContainer.addEventListener('click', function() {
@@ -1504,6 +1573,11 @@
           switchLanguage(currentLang);
           
           // --- GENERAL EVENT LISTENERS ---
+          document.querySelector('.hero-cta-dropdown .cta-dropdown-toggle')?.addEventListener('click', function(e) {
+              e.stopPropagation();
+              this.parentElement.classList.toggle('active');
+          });
+          
           document.querySelectorAll('.project-intro-image').forEach(introImage => {
               introImage.addEventListener('click', function() {
                   const img = this.querySelector('img');
@@ -1555,7 +1629,6 @@
                               submitBtn.innerHTML = `<span>${originalBtnText}</span>`;
                           }
                       }).catch(() => {
-                          // IMPROVED: Corrected the object access for i18n
                           const errorMessages = {de: 'Netzwerkfehler. Bitte versuchen Sie es erneut.', en: 'Network error. Please try again.', fr: 'Erreur réseau. Veuillez réessayer.'};
                           formStatus.innerHTML = `<p class="error">${errorMessages[currentLang]}</p>`;
                           submitBtn.disabled = false;
@@ -1566,10 +1639,14 @@
 
           window.addEventListener('click', (event) => {
               if (event.target.classList.contains('modal')) closeModal(event.target);
-              if (!event.target.closest('.nav-dropdown')) document.querySelectorAll('.nav-dropdown.active').forEach(dd => {
-                  dd.classList.remove('active');
-                  dd.querySelector('.nav-dropdown-toggle').setAttribute('aria-expanded', 'false');
-              });
+              if (!event.target.closest('.nav-dropdown, .hero-cta-dropdown')) {
+                  document.querySelectorAll('.nav-dropdown.active, .hero-cta-dropdown.active').forEach(dd => {
+                      dd.classList.remove('active');
+                      if(dd.querySelector('.nav-dropdown-toggle')) {
+                          dd.querySelector('.nav-dropdown-toggle').setAttribute('aria-expanded', 'false');
+                      }
+                  });
+              }
               if (!event.target.closest('.flip-card')) document.querySelectorAll('.flip-card-inner.is-flipped').forEach(inner => inner.classList.remove('is-flipped'));
           });
           
@@ -1592,7 +1669,6 @@
               }
           });
 
-          // Separate listener for project modal arrow keys and tab trapping
           window.addEventListener('keydown', (event) => {
               const activeModal = document.querySelector('.project-modal.active');
               if (!activeModal) return;
@@ -1666,7 +1742,6 @@
               const parent = toggle.closest('.nav-dropdown'); 
               const isActive = parent.classList.contains('active');
               
-              // Close all other dropdowns
               document.querySelectorAll('.nav-dropdown.active').forEach(d => { 
                   if (d !== parent) {
                       d.classList.remove('active');
@@ -1674,7 +1749,6 @@
                   }
               }); 
               
-              // Toggle current dropdown
               parent.classList.toggle('active');
               toggle.setAttribute('aria-expanded', !isActive);
           }));
