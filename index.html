@@ -513,7 +513,13 @@
         }
         .skill-card p { margin-bottom: 0; }
         
-        /* === PROJECT INTRO STYLES === */
+        /* === PROJECT SECTION & MODAL STYLES === */
+        .project-container + .project-container {
+            margin-top: 100px;
+            padding-top: 100px;
+            border-top: 1px solid var(--border-color);
+        }
+
         .project-intro {
             background: var(--card-bg);
             -webkit-backdrop-filter: var(--blur);
@@ -532,16 +538,16 @@
         .project-intro-image img {
             width: 100%; height: auto; border-radius: 8px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            cursor: zoom-in;
         }
         .project-intro-text h3 { margin-top: 0; font-size: 1.5rem; }
         .project-intro-text p { opacity: 0.9; margin-bottom: 1.5rem; }
         
-        /* === PROJECT MODAL STYLES (DESKTOP) === */
-        #project-modal .modal-content {
+        .project-modal .modal-content {
             max-width: 50rem; background: var(--background);
             border-radius: 12px; padding: 1rem; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
-        #project-modal .close-button { top: 10px; right: 15px; font-size: 24px; }
+        .project-modal .close-button { top: 10px; right: 15px; font-size: 24px; }
         .project-modal-body { padding: 1.5rem; }
         .project-modal-image-wrapper {
             background: #111; border-radius: 8px; margin-bottom: 1.5rem;
@@ -549,7 +555,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 45vh; /* This creates a stable container size */
+            height: 45vh;
         }
         
         .project-modal-slide {
@@ -557,13 +563,8 @@
             visibility: hidden; 
             transition: opacity 0.3s ease;
             position: absolute; 
-            top: 0; 
-            left: 0; 
-            right: 0; 
-            bottom: 0;
-            display: flex;              
-            align-items: center;        
-            justify-content: center;
+            top: 0; left: 0; right: 0; bottom: 0;
+            display: flex; align-items: center; justify-content: center;
             cursor: zoom-in;
         }
         
@@ -573,15 +574,14 @@
         }
 
         .project-modal-slide img {
-            max-width: 100%; 
-            max-height: 100%; 
-            width: auto; 
-            height: auto; 
-            display: block;
+            max-width: 100%; max-height: 100%; 
+            width: auto; height: auto; display: block;
         }
         
         .project-modal-description {
-            min-height: 120px; text-align: left; position: relative;
+            position: relative;
+            text-align: left;
+            transition: height 0.3s ease-in-out;
         }
         .project-modal-description-item {
             position: absolute; top: 0; left: 0; right: 0;
@@ -591,12 +591,9 @@
         }
         .project-modal-description-item.active {
             opacity: 1; visibility: visible; transform: translateY(0);
-            transition-delay: 0.15s;
+            position: relative;
         }
-        .project-modal-description-item.exiting {
-            opacity: 0; transform: translateY(-15px);
-            transition-delay: 0s;
-        }
+        
         .project-modal-description h4 { font-size: 1.3rem; margin: 0 0 0.5rem 0; }
         .project-modal-description p { opacity: 0.9; margin: 0; }
         
@@ -624,7 +621,7 @@
         }
         
         /* === MOBILE PROJECT SHOWCASE === */
-        #mobile-project-showcase { display: none; margin-top: 3rem; }
+        .mobile-project-showcase { display: none; margin-top: 3rem; }
         .mobile-project-item {
             background: var(--card-bg);
             border-radius: 12px;
@@ -633,9 +630,7 @@
             box-shadow: 0 4px 20px rgba(0,0,0,0.15);
         }
         .mobile-project-item img {
-            width: 100%;
-            height: auto;
-            display: block;
+            width: 100%; height: auto; display: block;
             cursor: zoom-in;
         }
         .mobile-project-text { padding: 1.5rem; }
@@ -875,11 +870,11 @@
 
         /* HIDE/SHOW ELEMENTS BASED ON SCREEN SIZE */
         @media (max-width: 768px) {
-            #open-project-modal { display: none; }
-            #mobile-project-showcase { display: block; }
+            .open-project-modal-btn { display: none; }
+            .mobile-project-showcase { display: block; }
         }
         @media (min-width: 769px) {
-            #mobile-project-showcase { display: none; }
+            .mobile-project-showcase { display: none; }
         }
 </style>
 </head>
@@ -968,7 +963,6 @@
 <div class="hero-image" data-aos="fade-up">
 <picture>
 <source srcset="images/aura.webp" type="image/webp"/>
-<!-- IMPROVEMENT: Removed loading="lazy" for above-the-fold hero image -->
 <img alt="Ein professionelles Foto von Walid Gourideche" id="profile-picture" src="images/aura.jpg"/>
 </picture>
 </div>
@@ -1051,69 +1045,104 @@
 </div>
 </div>
 </section>
-<!-- ========== PROJECT SECTION ========== -->
+
+<!-- ========== PROJECTS SECTION ========== -->
 <section class="container" id="projekte">
-    <h2 class="lang" data-de="Projekt: Virtualisiertes Home-Lab" data-en="Project: Virtualized Home Lab" data-fr="Projet : Labo Maison Virtualisé">Projekt: Virtualisiertes Home-Lab</h2>
-    
-    <div class="project-intro" data-aos="fade-up">
-        <div class="project-intro-image">
-            <img src="images/diagram.png" alt="Diagram of the virtualized home lab topology."/>
+
+    <!-- PROJECT 1: HOME LAB -->
+    <div class="project-container">
+        <h2 class="lang" data-de="Projekt 1: Virtualisiertes Home-Lab" data-en="Project 1: Virtualized Home Lab" data-fr="Projet 1 : Labo Maison Virtualisé">Projekt 1: Virtualisiertes Home-Lab</h2>
+        <div class="project-intro" data-aos="fade-up">
+            <div class="project-intro-image">
+                <img src="images/diagram.png" alt="Diagram of the virtualized home lab topology."/>
+            </div>
+            <div class="project-intro-text">
+                <h3 class="lang" data-de="Eine End-to-End-Infrastruktur" data-en="An End-to-End Infrastructure" data-fr="Une Infrastructure de Bout en Bout">Eine End-to-End-Infrastruktur</h3>
+                <p class="lang" 
+       data-de="Dieses Projekt simuliert eine kleine Unternehmens-IT in einer virtualisierten Umgebung.<br><span class='highlight-keyword'>Ziel:</span> Praktische Erfahrung mit Kerninfrastrukturdiensten sammeln.<br><span class='highlight-keyword'>Technologien:</span> VMware, pfSense (Firewall), Windows Server 2022 (Active Directory, DNS) und Ubuntu Server mit Netdata (Monitoring).<br><span class='highlight-keyword'>Ergebnis:</span> Ein voll funktionsfähiges, segmentiertes Netzwerk mit zentraler Benutzerverwaltung und Echtzeit-Monitoring, das End-to-End-Systemintegrationsfähigkeiten demonstriert." 
+       data-en="This project simulates a small enterprise IT environment within a virtualized setup.<br><span class='highlight-keyword'>Goal:</span> To gain practical experience with core infrastructure services.<br><span class='highlight-keyword'>Technologies Used:</span> VMware, pfSense (firewall), Windows Server 2022 (Active Directory, DNS), and Ubuntu Server with Netdata (monitoring).<br><span class='highlight-keyword'>Outcome:</span> A fully functional, segmented network with centralized user management and real-time monitoring, demonstrating end-to-end system integration skills." 
+       data-fr="Ce projet simule un environnement informatique de petite entreprise dans une configuration virtualisée.<br><span class='highlight-keyword'>Objectif :</span> Acquérir une expérience pratique des services d'infrastructure de base.<br><span class='highlight-keyword'>Technologies utilisées :</span> VMware, pfSense (pare-feu), Windows Server 2022 (Active Directory, DNS) et Ubuntu Server avec Netdata (surveillance).<br><span class='highlight-keyword'>Résultat :</span> Un réseau segmenté entièrement fonctionnel avec gestion centralisée des utilisateurs et surveillance en temps réel, démontrant des compétences d'intégration de systèmes de bout en bout.">
+        Dieses Projekt simuliert eine kleine Unternehmens-IT in einer virtualisierten Umgebung.<br><span class='highlight-keyword'>Ziel:</span> Praktische Erfahrung mit Kerninfrastrukturdiensten sammeln.<br><span class='highlight-keyword'>Technologien:</span> VMware, pfSense (Firewall), Windows Server 2022 (Active Directory, DNS) und Ubuntu Server mit Netdata (Monitoring).<br><span class='highlight-keyword'>Ergebnis:</span> Ein voll funktionsfähiges, segmentiertes Netzwerk mit zentraler Benutzerverwaltung und Echtzeit-Monitoring, das End-to-End-Systemintegrationsfähigkeiten demonstriert.
+    </p>
+                <button data-modal-id="project-modal-1" class="submit-btn open-project-modal-btn lang" data-de="Technische Details ansehen" data-en="View Technical Details" data-fr="Voir les Détails Techniques">Technische Details ansehen</button>
+            </div>
         </div>
-        <div class="project-intro-text">
-            <h3 class="lang" data-de="Eine End-to-End-Infrastruktur" data-en="An End-to-End Infrastructure" data-fr="Une Infrastructure de Bout en Bout">Eine End-to-End-Infrastruktur</h3>
-            <p class="lang" 
-   data-de="Dieses Projekt simuliert eine kleine Unternehmens-IT in einer virtualisierten Umgebung.<br><span class='highlight-keyword'>Ziel:</span> Praktische Erfahrung mit Kerninfrastrukturdiensten sammeln.<br><span class='highlight-keyword'>Technologien:</span> VMware, pfSense (Firewall), Windows Server 2022 (Active Directory, DNS) und Ubuntu Server mit Netdata (Monitoring).<br><span class='highlight-keyword'>Ergebnis:</span> Ein voll funktionsfähiges, segmentiertes Netzwerk mit zentraler Benutzerverwaltung und Echtzeit-Monitoring, das End-to-End-Systemintegrationsfähigkeiten demonstriert." 
-   data-en="This project simulates a small enterprise IT environment within a virtualized setup.<br><span class='highlight-keyword'>Goal:</span> To gain practical experience with core infrastructure services.<br><span class='highlight-keyword'>Technologies Used:</span> VMware, pfSense (firewall), Windows Server 2022 (Active Directory, DNS), and Ubuntu Server with Netdata (monitoring).<br><span class='highlight-keyword'>Outcome:</span> A fully functional, segmented network with centralized user management and real-time monitoring, demonstrating end-to-end system integration skills." 
-   data-fr="Ce projet simule un environnement informatique de petite entreprise dans une configuration virtualisée.<br><span class='highlight-keyword'>Objectif :</span> Acquérir une expérience pratique des services d'infrastructure de base.<br><span class='highlight-keyword'>Technologies utilisées :</span> VMware, pfSense (pare-feu), Windows Server 2022 (Active Directory, DNS) et Ubuntu Server avec Netdata (surveillance).<br><span class='highlight-keyword'>Résultat :</span> Un réseau segmenté entièrement fonctionnel avec gestion centralisée des utilisateurs et surveillance en temps réel, démontrant des compétences d'intégration de systèmes de bout en bout.">
-    Dieses Projekt simuliert eine kleine Unternehmens-IT in einer virtualisierten Umgebung.<br><span class='highlight-keyword'>Ziel:</span> Praktische Erfahrung mit Kerninfrastrukturdiensten sammeln.<br><span class='highlight-keyword'>Technologien:</span> VMware, pfSense (Firewall), Windows Server 2022 (Active Directory, DNS) und Ubuntu Server mit Netdata (Monitoring).<br><span class='highlight-keyword'>Ergebnis:</span> Ein voll funktionsfähiges, segmentiertes Netzwerk mit zentraler Benutzerverwaltung und Echtzeit-Monitoring, das End-to-End-Systemintegrationsfähigkeiten demonstriert.
-</p>
-            <button id="open-project-modal" class="submit-btn lang" data-de="Technische Details ansehen" data-en="View Technical Details" data-fr="Voir les Détails Techniques">Technische Details ansehen</button>
-        </div>
+        <div class="mobile-project-showcase" id="mobile-project-showcase-1"></div>
     </div>
-    
-    <!-- This container will be populated by JS and is only visible on mobile -->
-    <div id="mobile-project-showcase"></div>
+
+    <!-- PROJECT 2: SURICATA IPS -->
+    <div class="project-container">
+        <h2 class="lang" data-de="Projekt 2: Intrusion Prevention System" data-en="Project 2: Intrusion Prevention System" data-fr="Projet 2 : Système de Prévention d'Intrusion">Projekt 2: Intrusion Prevention System</h2>
+        <div class="project-intro" data-aos="fade-up">
+            <div class="project-intro-image">
+                <img src="images/10.png" alt="A list of IP addresses blocked by the Suricata IPS."/>
+            </div>
+            <div class="project-intro-text">
+                <h3 class="lang" data-de="Analyse von Insider-Bedrohungen" data-en="Insider Threat Analysis" data-fr="Analyse des Menaces Internes">Analyse von Insider-Bedrohungen</h3>
+                <p class="lang" 
+                   data-de="Dieses Projekt demonstriert die Bereitstellung eines Suricata IPS zur Erkennung und Minderung von Bedrohungen innerhalb eines vertrauenswürdigen Netzwerks.<br><span class='highlight-keyword'>Ziel:</span> Simulation und Analyse einer Insider-Bedrohung, um fortgeschrittene Fähigkeiten in der Netzwerksicherheit zu demonstrieren.<br><span class='highlight-keyword'>Technologien:</span> pfSense, Suricata (IPS), pfBlockerNG, Nmap, VMware.<br><span class='highlight-keyword'>Ergebnis:</span> Ein voll funktionsfähiges IPS, das eine feindliche Aufklärungsscans erfolgreich erkennt, die Fähigkeit zur aktiven Blockierung demonstriert und ein tiefes Verständnis für die Fehlerbehebung bei Software-Anomalien auf Treiberebene zeigt."
+                   data-en="This project showcases the deployment of a Suricata IPS to detect and mitigate threats within a trusted network segment.<br><span class='highlight-keyword'>Goal:</span> To simulate and analyze an insider threat, demonstrating advanced network security and troubleshooting skills.<br><span class='highlight-keyword'>Technologies Used:</span> pfSense, Suricata (IPS), pfBlockerNG, Nmap, VMware.<br><span class='highlight-keyword'>Outcome:</span> A fully functional IPS that successfully detects a hostile reconnaissance scan, demonstrates active blocking capabilities, and proves a deep understanding of troubleshooting software/driver anomalies."
+                   data-fr="Ce projet présente le déploiement d'un IPS Suricata pour détecter et atténuer les menaces au sein d'un segment de réseau de confiance.<br><span class='highlight-keyword'>Objectif :</span> Simuler et analyser une menace interne, démontrant des compétences avancées en sécurité réseau et en dépannage.<br><span class='highlight-keyword'>Technologies utilisées :</span> pfSense, Suricata (IPS), pfBlockerNG, Nmap, VMware.<br><span class='highlight-keyword'>Résultat :</span> Un IPS entièrement fonctionnel qui détecte avec succès un scan de reconnaissance hostile, démontre des capacités de blocage actif et prouve une compréhension approfondie du dépannage des anomalies logicielles/pilotes.">
+                    Dieses Projekt demonstriert die Bereitstellung eines Suricata IPS zur Erkennung und Minderung von Bedrohungen innerhalb eines vertrauenswürdigen Netzwerks.<br><span class='highlight-keyword'>Ziel:</span> Simulation und Analyse einer Insider-Bedrohung, um fortgeschrittene Fähigkeiten in der Netzwerksicherheit zu demonstrieren.<br><span class='highlight-keyword'>Technologien:</span> pfSense, Suricata (IPS), pfBlockerNG, Nmap, VMware.<br><span class='highlight-keyword'>Ergebnis:</span> Ein voll funktionsfähiges IPS, das eine feindliche Aufklärungsscans erfolgreich erkennt, die Fähigkeit zur aktiven Blockierung demonstriert und ein tiefes Verständnis für die Fehlerbehebung bei Software-Anomalien auf Treiberebene zeigt.
+                </p>
+                <button data-modal-id="project-modal-2" class="submit-btn open-project-modal-btn lang" data-de="Technische Details ansehen" data-en="View Technical Details" data-fr="Voir les Détails Techniques">Technische Details ansehen</button>
+            </div>
+        </div>
+        <div class="mobile-project-showcase" id="mobile-project-showcase-2"></div>
+    </div>
 </section>
 
-<!-- Project Modal (Desktop Only) -->
-<div class="modal" id="project-modal">
+<!-- Project Modal 1 (Home Lab) -->
+<div class="modal project-modal" id="project-modal-1">
     <div class="modal-content">
-        <button aria-label="Close project modal" class="close-button" id="close-project-modal">×</button>
+        <button aria-label="Close project modal" class="close-button">×</button>
         <div class="project-modal-body">
-            <div class="project-modal-image-wrapper">
-                <!-- Images are populated here by JavaScript -->
-            </div>
-            <div class="project-modal-description">
-                 <!-- Descriptions are populated by JavaScript -->
-            </div>
+            <div class="project-modal-image-wrapper"></div>
+            <div class="project-modal-description"></div>
             <div class="project-modal-controls">
                 <button class="project-modal-arrow prev" aria-label="Previous Slide">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"/>
-                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"/></svg>
                 </button>
-                <div id="project-modal-counter" class="project-modal-counter"></div>
+                <div class="project-modal-counter"></div>
                 <button class="project-modal-arrow next" aria-label="Next Slide">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
-                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
                 </button>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Re-adding the Diagram and Image Modals -->
+<!-- Project Modal 2 (Suricata) -->
+<div class="modal project-modal" id="project-modal-2">
+    <div class="modal-content">
+        <button aria-label="Close project modal" class="close-button">×</button>
+        <div class="project-modal-body">
+            <div class="project-modal-image-wrapper"></div>
+            <div class="project-modal-description"></div>
+            <div class="project-modal-controls">
+                <button class="project-modal-arrow prev" aria-label="Previous Slide">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"/></svg>
+                </button>
+                <div class="project-modal-counter"></div>
+                <button class="project-modal-arrow next" aria-label="Next Slide">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Generic Diagram and Image Modals -->
 <div class="modal" id="diagram-modal">
     <div class="modal-content">
-        <button aria-label="Close diagram modal" class="close-button" id="close-diagram-modal">×</button>
-        <img src="images/diagram.png" alt="Home Lab Network Topology Diagram">
+        <button aria-label="Close diagram modal" class="close-button">×</button>
+        <img src="" alt="Enlarged diagram view">
     </div>
 </div>
 
 <div class="modal" id="image-modal">
     <div class="modal-content">
-        <button aria-label="Close image modal" class="close-button" id="close-image-modal">×</button>
+        <button aria-label="Close image modal" class="close-button">×</button>
         <img src="" alt="Enlarged project image">
     </div>
 </div>
@@ -1178,14 +1207,11 @@
           
           document.getElementById('copyright-year').textContent = new Date().getFullYear();
           
-          // --- GLOBAL STATE ---
-          let currentLang = localStorage.getItem('preferredLang') || 'de'; // IMPROVEMENT: Language persistence
-          let currentProjectSlide = 0;
+          let currentLang = localStorage.getItem('preferredLang') || 'de';
           let player;
-          let lastActiveElement; // For modal focus management
+          let lastActiveElement;
           const youtubeVideoId = 'R_rKRfh7ceU';
 
-          // --- DOM ELEMENT REFERENCES ---
           const languageItems = document.querySelectorAll('.language-item');
           const translatableElements = document.querySelectorAll('.lang');
           const translatablePlaceholders = document.querySelectorAll('.lang-placeholder');
@@ -1194,40 +1220,44 @@
           
           const allModals = document.querySelectorAll('.modal');
           const videoModal = document.getElementById('video-modal');
-          const projectModal = document.getElementById('project-modal');
           const imageModal = document.getElementById('image-modal');
           const diagramModal = document.getElementById('diagram-modal');
           const contactForm = document.getElementById('contact-form');
 
-
-          // --- DATA ---
           const altTexts = {
               de: "Ein professionelles Portraitfoto von Walid Gourideche",
               en: "A professional portrait of Walid Gourideche",
               fr: "Un portrait professionnel de Walid Gourideche"
           };
           
-          const slidesData = [
-              { img: 'images/virtual_machines_overview.png', title: { de: 'Projektübersicht', en: 'Project Overview', fr: "Vue d'ensemble du projet" }, text: { de: 'Dieses Projekt demonstriert den Aufbau einer kompletten, virtualisierten IT-Umgebung in VMware. Es umfasst eine pfSense-Firewall, einen Windows Server als Domain Controller und einen Ubuntu Server für das Monitoring, um eine realistische Unternehmens-IT nachzubilden.', en: 'This project demonstrates the setup of a complete, virtualized IT environment in VMware. It includes a pfSense firewall, a Windows Server as a Domain Controller, and an Ubuntu Server for monitoring, replicating a realistic corporate IT setup.', fr: "Ce projet virtualise un réseau d'entreprise complet sous VMware, avec un pare-feu pfSense, un contrôleur de domaine Windows Server, et un serveur Ubuntu pour la surveillance en temps réel." } },
-              { img: 'images/pfsense_dashboard.png', title: { de: 'pfSense-Firewall als Gateway', en: 'pfSense Firewall as Gateway', fr: 'Pare-feu pfSense comme passerelle' }, text: { de: 'Eine pfSense-VM agiert als zentraler Router und Firewall. Sie wurde mit einer statischen LAN-IP (192.168.10.2) konfiguriert und trennt das interne Netzwerk (LAN) sicher vom externen Netzwerk (WAN).', en: 'A pfSense VM acts as the central router and firewall. It was configured with a static LAN IP (192.168.10.2) and securely separates the internal network (LAN) from the external network (WAN).', fr: "Une VM pfSense sert de routeur et de pare-feu central. Elle a été configurée avec une IP LAN statique (192.168.10.2) et sépare de manière sécurisée le réseau interne (LAN) du réseau externe (WAN)." } },
-              { img: 'images/pfsense_leases.png', title: { de: 'DHCP-Server-Konfiguration', en: 'DHCP Server Configuration', fr: 'Configuration du serveur DHCP' }, text: { de: "Der DHCP-Dienst auf pfSense wurde aktiviert, um automatisch IP-Adressen (192.168.10.100 - 192.168.10.150) an Clients wie die Windows 10 VM zu vergeben. Dies vereinfacht die Netzwerkverwaltung erheblich.", en: "The DHCP service on pfSense was enabled to automatically assign IP addresses (192.168.10.100 - 192.168.10.150) to clients like the Windows 10 VM. This significantly simplifies network administration.", fr: "Le service DHCP sur pfSense a été activé pour attribuer automatiquement des adresses IP (192.168.10.100 - 192.168.10.150) aux clients tels que la VM Windows 10. Cela simplifie considérablement l'administration du réseau." } },
-              { img: 'images/windows_server_roles.png', title: { de: 'Windows Server als Domain Controller', en: 'Windows Server as Domain Controller', fr: 'Windows Server comme contrôleur de domaine' }, text: { de: "Ein Windows Server 2022 wurde mit der statischen IP 192.168.10.10 installiert. Anschließend wurden die Rollen Active Directory Domain Services (AD DS) und DNS installiert, um ihn zum Domain Controller für die Domäne 'homelab.local' zu machen.", en: "A Windows Server 2022 was installed with the static IP 192.168.10.10. The Active Directory Domain Services (AD DS) and DNS roles were then installed to make it the Domain Controller for the 'homelab.local' domain.", fr: "Un Windows Server 2022 a été installé avec l'adresse IP statique 192.168.10.10. Les rôles Active Directory Domain Services (AD DS) et DNS ont ensuite été installés pour en faire le contrôleur de domaine pour le domaine 'homelab.local'." } },
-              { img: 'images/windows_10_joined.png', title: { de: 'Windows 10 Client in der Domäne', en: 'Windows 10 Client in the Domain', fr: 'Client Windows 10 dans le domaine' }, text: { de: "Eine Windows 10 VM wurde installiert, erhielt eine IP-Adresse von pfSense und wurde erfolgreich der 'homelab.local'-Domäne hinzugefügt. Dies ermöglicht die zentrale Benutzerverwaltung und die Anmeldung mit Domänenkonten.", en: "A Windows 10 VM was installed, received an IP address from pfSense, and was successfully joined to the 'homelab.local' domain. This allows for centralized user management and logging in with domain accounts.", fr: "Une VM Windows 10 a été installée, a reçu une adresse IP de pfSense et a été jointe avec succès au domaine 'homelab.local'. Cela permet une gestion centralisée des utilisateurs et la connexion avec des comptes de domaine." } },
-              { img: 'images/pfsense_snmp.png', title: { de: 'Aktivierung von SNMP für das Monitoring', en: 'Enabling SNMP for Monitoring', fr: 'Activation de SNMP pour la surveillance' }, text: { de: "Um die Netzwerkgeräte überwachen zu können, wurde der SNMP-Dienst auf der pfSense-Firewall und dem Windows Server aktiviert. Es wurde eine sichere Community-String 'homelab-snmp' konfiguriert und der Zugriff auf den Monitoring-Server beschränkt.", en: "To monitor the network devices, the SNMP service was enabled on the pfSense firewall and the Windows Server. A secure community string 'homelab-snmp' was configured, and access was restricted to the monitoring server.", fr: "Pour surveiller les périphériques réseau, le service SNMP a été activé sur le pare-feu pfSense et le serveur Windows. Une chaîne de communauté sécurisée 'homelab-snmp' a été configurée et l'accès a été restreint au serveur de surveillance." } },
-              { img: 'images/ubuntu_server_netdata.png', title: { de: 'Einrichtung des Netdata Monitoring-Servers', en: 'Setting up the Netdata Monitoring Server', fr: 'Mise en place du serveur de surveillance Netdata' }, text: { de: 'Auf einer Ubuntu Server VM (IP 192.168.10.20) wurde Netdata installiert, eine leistungsstarke Echtzeit-Monitoring-Lösung. Diese Plattform sammelt und visualisiert Leistungsdaten aller Systeme im Netzwerk.', en: 'Netdata, a powerful real-time monitoring solution, was installed on an Ubuntu Server VM (IP 192.168.10.20). This platform collects and visualizes performance data from all systems in the network.', fr: "Netdata, une solution de surveillance en temps réel puissante, a été installée sur une VM Ubuntu Server (IP 192.168.10.20). Cette plateforme collecte et visualise les données de performance de tous les systèmes du réseau." } },
-              { img: 'images/netdata_snmp_devices.png', title: { de: 'Zentrales Monitoring-Dashboard', en: 'Centralized Monitoring Dashboard', fr: 'Tableau de bord de surveillance centralisé' }, text: { de: 'Erfolgreiche Integration: Netdata sammelt nun via SNMP Leistungsdaten (CPU, RAM, Netzwerkverkehr) von der pfSense-Firewall und dem Windows Server. Das Dashboard bietet eine zentrale Übersicht über den Zustand der gesamten Infrastruktur in Echtzeit.', en: "Successful Integration: Netdata now collects performance data (CPU, RAM, network traffic) from the pfSense firewall and Windows Server via SNMP. The dashboard provides a central, real-time overview of the entire infrastructure's health.", fr: "Intégration réussie : Netdata collecte désormais les données de performance (CPU, RAM, trafic réseau) du pare-feu pfSense et du serveur Windows via SNMP. Le tableau de bord offre une vue d'ensemble centralisée et en temps réel de l'état de toute l'infrastructure." } }
-          ];
-          
-          
-          // --- FUNCTIONS ---
-          
-          /**
-           * Switches the language of the entire page and persists the choice.
-           * @param {string} newLang - The language code to switch to (e.g., 'de', 'en').
-           */
+          const projectsData = {
+              "project-modal-1": {
+                  currentSlide: 0,
+                  slides: [
+                      { img: 'images/virtual_machines_overview.png', title: { de: 'Projektübersicht', en: 'Project Overview', fr: "Vue d'ensemble du projet" }, text: { de: 'Dieses Projekt demonstriert den Aufbau einer kompletten, virtualisierten IT-Umgebung in VMware. Es umfasst eine pfSense-Firewall, einen Windows Server als Domain Controller und einen Ubuntu Server für das Monitoring, um eine realistische Unternehmens-IT nachzubilden.', en: 'This project demonstrates the setup of a complete, virtualized IT environment in VMware. It includes a pfSense firewall, a Windows Server as a Domain Controller, and an Ubuntu Server for monitoring, replicating a realistic corporate IT setup.', fr: "Ce projet virtualise un réseau d'entreprise complet sous VMware, avec un pare-feu pfSense, un contrôleur de domaine Windows Server, et un serveur Ubuntu pour la surveillance en temps réel." } },
+                      { img: 'images/pfsense_dashboard.png', title: { de: 'pfSense-Firewall als Gateway', en: 'pfSense Firewall as Gateway', fr: 'Pare-feu pfSense comme passerelle' }, text: { de: 'Eine pfSense-VM agiert als zentraler Router und Firewall. Sie wurde mit einer statischen LAN-IP (192.168.10.2) konfiguriert und trennt das interne Netzwerk (LAN) sicher vom externen Netzwerk (WAN).', en: 'A pfSense VM acts as the central router and firewall. It was configured with a static LAN IP (192.168.10.2) and securely separates the internal network (LAN) from the external network (WAN).', fr: "Une VM pfSense sert de routeur et de pare-feu central. Elle a été configurée avec une IP LAN statique (192.168.10.2) et sépare de manière sécurisée le réseau interne (LAN) du réseau externe (WAN)." } },
+                      { img: 'images/pfsense_leases.png', title: { de: 'DHCP-Server-Konfiguration', en: 'DHCP Server Configuration', fr: 'Configuration du serveur DHCP' }, text: { de: "Der DHCP-Dienst auf pfSense wurde aktiviert, um automatisch IP-Adressen (192.168.10.100 - 192.168.10.150) an Clients wie die Windows 10 VM zu vergeben. Dies vereinfacht die Netzwerkverwaltung erheblich.", en: "The DHCP service on pfSense was enabled to automatically assign IP addresses (192.168.10.100 - 192.168.10.150) to clients like the Windows 10 VM. This significantly simplifies network administration.", fr: "Le service DHCP sur pfSense a été activé pour attribuer automatiquement des adresses IP (192.168.10.100 - 192.168.10.150) aux clients tels que la VM Windows 10. Cela simplifie considérablement l'administration du réseau." } },
+                      { img: 'images/windows_server_roles.png', title: { de: 'Windows Server als Domain Controller', en: 'Windows Server as Domain Controller', fr: 'Windows Server comme contrôleur de domaine' }, text: { de: "Ein Windows Server 2022 wurde mit der statischen IP 192.168.10.10 installiert. Anschließend wurden die Rollen Active Directory Domain Services (AD DS) und DNS installiert, um ihn zum Domain Controller für die Domäne 'homelab.local' zu machen.", en: "A Windows Server 2022 was installed with the static IP 192.168.10.10. The Active Directory Domain Services (AD DS) and DNS roles were then installed to make it the Domain Controller for the 'homelab.local' domain.", fr: "Un Windows Server 2022 a été installé avec l'adresse IP statique 192.168.10.10. Les rôles Active Directory Domain Services (AD DS) et DNS ont ensuite été installés pour en faire le contrôleur de domaine pour le domaine 'homelab.local'." } },
+                      { img: 'images/windows_10_joined.png', title: { de: 'Windows 10 Client in der Domäne', en: 'Windows 10 Client in the Domain', fr: 'Client Windows 10 dans le domaine' }, text: { de: "Eine Windows 10 VM wurde installiert, erhielt eine IP-Adresse von pfSense und wurde erfolgreich der 'homelab.local'-Domäne hinzugefügt. Dies ermöglicht die zentrale Benutzerverwaltung und die Anmeldung mit Domänenkonten.", en: "A Windows 10 VM was installed, received an IP address from pfSense, and was successfully joined to the 'homelab.local' domain. This allows for centralized user management and logging in with domain accounts.", fr: "Une VM Windows 10 a été installée, a reçu une adresse IP de pfSense et a été jointe avec succès au domaine 'homelab.local'. Cela permet une gestion centralisée des utilisateurs et la connexion avec des comptes de domaine." } },
+                      { img: 'images/pfsense_snmp.png', title: { de: 'Aktivierung von SNMP für das Monitoring', en: 'Enabling SNMP for Monitoring', fr: 'Activation de SNMP pour la surveillance' }, text: { de: "Um die Netzwerkgeräte überwachen zu können, wurde der SNMP-Dienst auf der pfSense-Firewall und dem Windows Server aktiviert. Es wurde eine sichere Community-String 'homelab-snmp' konfiguriert und der Zugriff auf den Monitoring-Server beschränkt.", en: "To monitor the network devices, the SNMP service was enabled on the pfSense firewall and the Windows Server. A secure community string 'homelab-snmp' was configured, and access was restricted to the monitoring server.", fr: "Pour surveiller les périphériques réseau, le service SNMP a été activé sur le pare-feu pfSense et le serveur Windows. Une chaîne de communauté sécurisée 'homelab-snmp' a été configurée et l'accès a été restreint au serveur de surveillance." } },
+                      { img: 'images/ubuntu_server_netdata.png', title: { de: 'Einrichtung des Netdata Monitoring-Servers', en: 'Setting up the Netdata Monitoring Server', fr: 'Mise en place du serveur de surveillance Netdata' }, text: { de: 'Auf einer Ubuntu Server VM (IP 192.168.10.20) wurde Netdata installiert, eine leistungsstarke Echtzeit-Monitoring-Lösung. Diese Plattform sammelt und visualisiert Leistungsdaten aller Systeme im Netzwerk.', en: 'Netdata, a powerful real-time monitoring solution, was installed on an Ubuntu Server VM (IP 192.168.10.20). This platform collects and visualizes performance data from all systems in the network.', fr: "Netdata, une solution de surveillance en temps réel puissante, a été installée sur une VM Ubuntu Server (IP 192.168.10.20). Cette plateforme collecte et visualise les données de performance de tous les systèmes du réseau." } },
+                      { img: 'images/netdata_snmp_devices.png', title: { de: 'Zentrales Monitoring-Dashboard', en: 'Centralized Monitoring Dashboard', fr: 'Tableau de bord de surveillance centralisé' }, text: { de: 'Erfolgreiche Integration: Netdata sammelt nun via SNMP Leistungsdaten (CPU, RAM, Netzwerkverkehr) von der pfSense-Firewall und dem Windows Server. Das Dashboard bietet eine zentrale Übersicht über den Zustand der gesamten Infrastruktur in Echtzeit.', en: "Successful Integration: Netdata now collects performance data (CPU, RAM, network traffic) from the pfSense firewall and Windows Server via SNMP. The dashboard provides a central, real-time overview of the entire infrastructure's health.", fr: "Intégration réussie : Netdata collecte désormais les données de performance (CPU, RAM, trafic réseau) du pare-feu pfSense et du serveur Windows via SNMP. Le tableau de bord offre une vue d'ensemble centralisée et en temps réel de l'état de toute l'infrastructure." } }
+                  ]
+              },
+              "project-modal-2": {
+                  currentSlide: 0,
+                  slides: [
+                      { img: 'images/18.png', title: { de: 'Projektübersicht & Architektur', en: 'Project Overview & Architecture', fr: "Vue d'ensemble et architecture" }, text: { de: "Dieses Projekt zeigt die Bereitstellung eines Suricata IPS zur Erkennung einer Insider-Bedrohung. Der Sensor überwacht den internen LAN-Verkehr zwischen einer 'Angreifer'-Workstation und einem 'Ziel'-Server. Dieses Szenario testet die Fähigkeit des IPS, feindliche Aktivitäten innerhalb eines vertrauenswürdigen Netzwerks zu erkennen.", en: "This project demonstrates deploying a Suricata IPS to detect an insider threat. The sensor monitors internal LAN traffic between an 'attacker' workstation and a 'target' server. This scenario tests the IPS's ability to detect hostile activity within a trusted network.", fr: "Ce projet démontre le déploiement d'un IPS Suricata pour détecter une menace interne. Le capteur surveille le trafic LAN interne entre un poste de travail 'attaquant' et un serveur 'cible', testant la capacité de l'IPS à détecter une activité hostile au sein d'un réseau de confiance." } },
+                      { img: 'images/5.png', title: { de: 'Konfiguration der Bedrohungsregeln', en: 'Threat Rule Configuration', fr: 'Configuration des règles de menace' }, text: { de: "Die Effektivität eines IPS hängt von seiner Intelligenz ab. Die ETOpen (Emerging Threats) Regeln wurden als primäre Signaturquelle ausgewählt. Spezifische Kategorien wie 'scan', 'info' und 'exploit' wurden aktiviert, um das System auf die Erkennung von Aufklärungs- und Angriffsversuchen zu konzentrieren.", en: "An IPS's effectiveness depends on its intelligence. The ETOpen (Emerging Threats) rules were chosen as the primary signature source. Specific categories like 'scan', 'info', and 'exploit' were enabled to focus the system on detecting reconnaissance and attack attempts.", fr: "L'efficacité d'un IPS dépend de son intelligence. Les règles ETOpen (Emerging Threats) ont été choisies comme source de signature principale. Des catégories spécifiques comme 'scan', 'info' et 'exploit' ont été activées pour concentrer le système sur la détection des tentatives de reconnaissance et d'attaque." } },
+                      { img: 'images/6.png', title: { de: 'Simulation der Bedrohung', en: 'Threat Simulation', fr: 'Simulation de la menace' }, text: { de: "Um das IPS zu validieren, wurde eine feindliche Aufklärung simuliert. Ein 'aggressiver' Nmap-Scan (-A) wurde von einer Windows-10-Workstation gegen einen kritischen Windows-Server-Domänencontroller gestartet. Diese Aktion imitiert die ersten Schritte eines Angreifers, der das Netzwerk nach Schwachstellen absucht.", en: "To validate the IPS, a hostile reconnaissance scan was simulated. An 'aggressive' Nmap scan (-A) was launched from a Windows 10 workstation against a critical Windows Server domain controller. This action mimics the initial steps of an attacker mapping the network for vulnerabilities.", fr: "Pour valider l'IPS, un scan de reconnaissance hostile a été simulé. Un scan Nmap 'agressif' (-A) a été lancé depuis un poste de travail Windows 10 contre un contrôleur de domaine Windows Server critique. Cette action imite les premières étapes d'un attaquant cartographiant le réseau pour les vulnérabilités." } },
+                      { img: 'images/7.png', title: { de: 'Erfolgreiche Erkennung', en: 'Successful Detection', fr: 'Détection réussie' }, text: { de: "Das System hat die Bedrohung sofort erkannt. Der Suricata-Alarm-Log wurde mit mehreren Signaturen wie 'ET SCAN Possible Nmap User-Agent' gefüllt. Die Protokolle korrelieren die Quell-IP des Angreifers (192.168.10.101) und die Ziel-IP (192.168.10.10) eindeutig und liefern klares, umsetzbares Sicherheits-Feedback.", en: "The system immediately detected the threat. The Suricata alert log was populated with multiple signatures, including 'ET SCAN Possible Nmap User-Agent'. The logs clearly correlate the attacker's source IP (192.168.10.101) and the target's IP (192.168.10.10), providing clear, actionable security intelligence.", fr: "Le système a immédiatement détecté la menace. Le journal d'alertes Suricata a été rempli de plusieurs signatures, y compris 'ET SCAN Possible Nmap User-Agent'. Les journaux corrèlent clairement l'IP source de l'attaquant (192.168.10.101) et l'IP de la cible (192.168.10.10), fournissant une intelligence de sécurité claire et exploitable." } }
+                  ]
+              }
+          };
+
           function switchLanguage(newLang) {
               currentLang = newLang;
-              localStorage.setItem('preferredLang', newLang); // IMPROVEMENT: Persist language choice
+              localStorage.setItem('preferredLang', newLang);
               document.documentElement.lang = currentLang;
               
               translatableElements.forEach(el => {
@@ -1245,10 +1275,9 @@
               if (profilePicture) { profilePicture.alt = altTexts[currentLang]; }
               
               updateLanguageSelectorUI(currentLang);
-              if (projectModal?.classList.contains('active')) {
-                  updateModalTextOnly(currentProjectSlide);
-              }
-              populateMobileShowcase();
+              
+              updateAllProjectModalsText();
+              Object.keys(projectsData).forEach(populateMobileShowcase);
           }
 
           function updateLanguageSelectorUI(selectedLang) {
@@ -1257,23 +1286,48 @@
               });
           }
           
-          /**
-           * Populates the mobile-only project showcase section.
-           */
-          function populateMobileShowcase() {
-              const container = document.getElementById('mobile-project-showcase');
+          function updateAllProjectModalsText() {
+              Object.keys(projectsData).forEach(modalId => {
+                  const project = projectsData[modalId];
+                  const modal = document.getElementById(modalId);
+                  if (!project || !modal) return;
+                  
+                  const descriptionItems = modal.querySelectorAll('.project-modal-description-item');
+                  project.slides.forEach((slideData, index) => {
+                      if (descriptionItems[index]) {
+                          descriptionItems[index].querySelector('h4').textContent = slideData.title[currentLang];
+                          descriptionItems[index].querySelector('p').innerHTML = slideData.text[currentLang];
+                      }
+                  });
+
+                  // Update height of currently active slide description if modal is open
+                  if(modal.classList.contains('active')) {
+                      const activeDesc = modal.querySelector('.project-modal-description-item.active');
+                      const descContainer = modal.querySelector('.project-modal-description');
+                      if(activeDesc && descContainer) {
+                          descContainer.style.height = activeDesc.scrollHeight + 'px';
+                      }
+                  }
+              });
+          }
+
+          function populateMobileShowcase(modalId) {
+              const project = projectsData[modalId];
+              const showcaseId = `mobile-project-showcase-${modalId.split('-')[2]}`;
+              const container = document.getElementById(showcaseId);
+
               if (!container) return;
               container.innerHTML = ''; 
 
-              slidesData.forEach(slideData => {
+              project.slides.forEach(slideData => {
                   const item = document.createElement('div');
                   item.className = 'mobile-project-item';
                   item.setAttribute('data-aos', 'fade-up');
 
                   const img = document.createElement('img');
-                  img.src = slideData.img;
+                  img.src = "images/" + slideData.img;
                   img.alt = slideData.title[currentLang] || slideData.title.en;
-                  img.loading = 'lazy'; // IMPROVEMENT: Lazy load project images
+                  img.loading = 'lazy';
                   
                   img.addEventListener('click', function() {
                       const imageModalImg = imageModal.querySelector('img');
@@ -1288,7 +1342,7 @@
                   const title = document.createElement('h4');
                   title.textContent = slideData.title[currentLang];
                   const text = document.createElement('p');
-                  text.textContent = slideData.text[currentLang];
+                  text.innerHTML = slideData.text[currentLang];
                   
                   textDiv.appendChild(title);
                   textDiv.appendChild(text);
@@ -1298,175 +1352,107 @@
               });
           }
           
-          /**
-           * Opens a modal and handles focus management for accessibility.
-           * @param {HTMLElement} modal - The modal element to open.
-           * @param {HTMLElement} [triggerElement] - The element that triggered the modal opening.
-           */
           function openModal(modal, triggerElement) {
               if (!modal) return;
-              
-              lastActiveElement = triggerElement || document.activeElement; // Store the element to return focus to
-              
+              lastActiveElement = triggerElement || document.activeElement;
               modal.classList.add('active');
               document.body.classList.add('modal-open');
-              
-              // Focus the first focusable element in the modal (usually the close button)
               const firstFocusable = modal.querySelector('button, [href]');
               setTimeout(() => firstFocusable?.focus(), 100);
           }
 
-          /**
-           * Closes a modal and returns focus to the trigger element.
-           * @param {HTMLElement} modal - The modal element to close.
-           */
           function closeModal(modal) {
               if (!modal) return;
-              
               modal.classList.remove('active');
               if (modal.id === 'image-modal' || modal.id === 'diagram-modal') {
-                  projectModal?.classList.remove('is-covered');
+                  document.querySelectorAll('.project-modal.active').forEach(pm => pm.classList.remove('is-covered'));
               }
-              
               const isAnyModalOpen = Array.from(allModals).some(m => m.classList.contains('active'));
               if (!isAnyModalOpen) {
                   document.body.classList.remove('modal-open');
               }
-              
               if (lastActiveElement) {
-                  lastActiveElement.focus(); // Return focus to the element that opened the modal
+                  lastActiveElement.focus();
                   lastActiveElement = null;
               }
           }
 
           function createPlayer() {
-              // YouTube Player creation logic (unchanged)
               if (typeof YT === 'undefined' || typeof YT.Player === 'undefined') {
                   const tag = document.createElement('script');
                   tag.src = "https://www.youtube.com/iframe_api";
                   const firstScriptTag = document.getElementsByTagName('script')[0];
                   firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-                  window.onYouTubeIframeAPIReady = function() {
-                      player = new YT.Player('youtube-player-container', {
-                          height: '100%', width: '100%', videoId: youtubeVideoId,
-                          playerVars: { 'autoplay': 1, 'controls': 1, 'rel': 0 }
-                      });
+                  window.onYouTubeIframeAPIReady = () => {
+                      player = new YT.Player('youtube-player-container', { height: '100%', width: '100%', videoId: youtubeVideoId, playerVars: { 'autoplay': 1, 'controls': 1, 'rel': 0 } });
                   };
               } else {
                   if (!player) {
-                      player = new YT.Player('youtube-player-container', {
-                          height: '100%', width: '100%', videoId: youtubeVideoId,
-                          playerVars: { 'autoplay': 1, 'controls': 1, 'rel': 0 }
-                      });
+                      player = new YT.Player('youtube-player-container', { height: '100%', width: '100%', videoId: youtubeVideoId, playerVars: { 'autoplay': 1, 'controls': 1, 'rel': 0 } });
                   } else {
                       player.playVideo();
                   }
               }
           }
           
-          /**
-           * Updates only the text content of the project modal slide.
-           * @param {number} index - The index of the slide to update.
-           */
-          function updateModalTextOnly(index) {
-              if (!projectModal) return;
-              const descriptionItems = projectModal.querySelectorAll('.project-modal-description-item');
-              if (descriptionItems && descriptionItems[index]) {
-                  const slideData = slidesData[index];
-                  descriptionItems[index].querySelector('h4').textContent = slideData.title[currentLang];
-                  descriptionItems[index].querySelector('p').textContent = slideData.text[currentLang];
+          function showProjectSlide(modalId, nextIndex) {
+              const project = projectsData[modalId];
+              const modal = document.getElementById(modalId);
+              if (!project || !modal) return;
+
+              const modalImageSlides = modal.querySelectorAll('.project-modal-slide');
+              const modalDescriptionContainer = modal.querySelector('.project-modal-description');
+              const modalDescriptionSlides = modal.querySelectorAll('.project-modal-description-item');
+              const modalCounter = modal.querySelector('.project-modal-counter');
+              
+              const currentActiveDesc = modalDescriptionSlides[project.currentSlide];
+              if (currentActiveDesc) currentActiveDesc.classList.remove('active');
+              
+              modalImageSlides[project.currentSlide].classList.remove('active');
+              
+              const nextActiveDesc = modalDescriptionSlides[nextIndex];
+              if(nextActiveDesc) {
+                  nextActiveDesc.classList.add('active');
+                  modalDescriptionContainer.style.height = nextActiveDesc.scrollHeight + 'px';
               }
+
+              const newActiveImg = modalImageSlides[nextIndex].querySelector('img');
+              if (newActiveImg) newActiveImg.alt = project.slides[nextIndex].title[currentLang] || project.slides[nextIndex].title.en;
+
+              modalImageSlides[nextIndex].classList.add('active');
+              
+              project.currentSlide = nextIndex;
+              modalCounter.textContent = `${nextIndex + 1} / ${project.slides.length}`;
           }
 
-          // --- EVENT LISTENERS & INITIALIZATION ---
-
-          // Initialize language
-          switchLanguage(currentLang);
-          
-          // Navigation listeners
-          languageItems.forEach(item => {
-              item.addEventListener('click', (e) => {
-                  e.preventDefault();
-                  switchLanguage(item.getAttribute('data-lang'));
-                  const activeDropdown = item.closest('.nav-dropdown.active, .mobile-toggle.active');
-                  activeDropdown?.classList.remove('active');
-                  const list = activeDropdown?.nextElementSibling;
-                  if (list && list.style.maxHeight) list.style.maxHeight = null;
-              });
-          });
-
-          document.querySelectorAll('.faq-question').forEach(button => {
-              button.addEventListener('click', () => {
-                  const answerPanel = button.nextElementSibling;
-                  const isExpanded = button.getAttribute('aria-expanded') === 'true';
-                  button.classList.toggle('active');
-                  button.setAttribute('aria-expanded', !isExpanded);
-                  answerPanel.style.maxHeight = answerPanel.style.maxHeight ? null : answerPanel.scrollHeight + 'px';
-              });
-          });
-          
-          // Mobile navigation listeners (unchanged)
-          const mobileMenuIcon = document.querySelector('.mobile-menu-icon');
-          const mobileNavOverlay = document.getElementById("mobile-nav");
-          function toggleNav() {
-              mobileNavOverlay.style.width = mobileNavOverlay.style.width === "100%" ? "0%" : "100%";
-          }
-          mobileMenuIcon.addEventListener('click', toggleNav);
-          mobileNavOverlay.querySelectorAll('a, .language-item').forEach(link => {
-            link.addEventListener('click', () => setTimeout(toggleNav, 150));
-          });
-          document.querySelectorAll('.mobile-toggle').forEach(toggle => {
-              toggle.addEventListener('click', () => {
-                  const list = toggle.nextElementSibling;
-                  toggle.classList.toggle('active');
-                  list.style.maxHeight = list.style.maxHeight ? null : list.scrollHeight + 'px';
-              });
-          });
-          document.querySelectorAll('.nav-dropdown-toggle').forEach(toggle => {
-              toggle.addEventListener('click', (event) => {
-                  event.stopPropagation();
-                  const parentDropdown = toggle.closest('.nav-dropdown');
-                  document.querySelectorAll('.nav-dropdown.active').forEach(dd => {
-                      if (dd !== parentDropdown) dd.classList.remove('active');
-                  });
-                  parentDropdown.classList.toggle('active');
-              });
-          });
-
-          // Modal Triggers
-          document.getElementById('open-video-modal')?.addEventListener('click', function() {
-              openModal(videoModal, this);
-              createPlayer();
-          });
-          document.querySelector('.project-intro-image')?.addEventListener('click', function() {
-              openModal(diagramModal, this);
-          });
-          
-          // Desktop Project Modal setup and listeners
-          if (projectModal) {
-              const modalImageContainer = projectModal.querySelector('.project-modal-image-wrapper');
-              const modalDescriptionContainer = projectModal.querySelector('.project-modal-description');
+          // --- INITIALIZE ALL PROJECTS ---
+          Object.keys(projectsData).forEach(modalId => {
+              const project = projectsData[modalId];
+              const modal = document.getElementById(modalId);
+              if (!modal) return;
+              
+              const modalImageContainer = modal.querySelector('.project-modal-image-wrapper');
+              const modalDescriptionContainer = modal.querySelector('.project-modal-description');
               modalImageContainer.innerHTML = '';
               modalDescriptionContainer.innerHTML = '';
 
-              slidesData.forEach((slideData) => {
+              project.slides.forEach((slideData) => {
                   const slideContainer = document.createElement('div');
                   slideContainer.className = 'project-modal-slide';
                   
                   const imgEl = document.createElement('img');
-                  imgEl.src = slideData.img;
-                  imgEl.alt = slideData.title.en; // Will be updated on slide change
-                  imgEl.loading = 'lazy'; // IMPROVEMENT: Lazy load project images
+                  imgEl.src = "images/" + slideData.img;
+                  imgEl.alt = slideData.title.en;
+                  imgEl.loading = 'lazy';
                   slideContainer.appendChild(imgEl);
                   
                   slideContainer.addEventListener('click', function() {
                       const imageModalImg = imageModal.querySelector('img');
                       imageModalImg.src = imgEl.src;
                       imageModalImg.alt = `Enlarged view of ${slideData.title[currentLang] || slideData.title.en}`;
-                      projectModal.classList.add('is-covered');
+                      modal.classList.add('is-covered');
                       openModal(imageModal, this);
                   });
-                  
                   modalImageContainer.appendChild(slideContainer);
                   
                   const descEl = document.createElement('div');
@@ -1475,45 +1461,63 @@
                   modalDescriptionContainer.appendChild(descEl);
               });
               
-              const modalImageSlides = projectModal.querySelectorAll('.project-modal-slide');
-              const modalDescriptionSlides = projectModal.querySelectorAll('.project-modal-description-item');
-              const modalCounter = document.getElementById('project-modal-counter');
-              const modalPrevBtn = projectModal.querySelector('.project-modal-arrow.prev');
-              const modalNextBtn = projectModal.querySelector('.project-modal-arrow.next');
-              let isTransitioning = false;
+              const modalPrevBtn = modal.querySelector('.project-modal-arrow.prev');
+              const modalNextBtn = modal.querySelector('.project-modal-arrow.next');
 
-              const showProjectSlide = (nextIndex) => {
-                  if (isTransitioning) return;
-                  isTransitioning = true;
-                  
-                  modalImageSlides[currentProjectSlide].classList.remove('active');
-                  modalDescriptionSlides[currentProjectSlide].classList.remove('active');
-                  
-                  setTimeout(() => {
-                      updateModalTextOnly(nextIndex);
-                      const newActiveImg = modalImageSlides[nextIndex].querySelector('img');
-                      if (newActiveImg) newActiveImg.alt = slidesData[nextIndex].title[currentLang] || slidesData[nextIndex].title.en;
-                      
-                      modalImageSlides[nextIndex].classList.add('active');
-                      modalDescriptionSlides[nextIndex].classList.add('active');
-                      
-                      currentProjectSlide = nextIndex;
-                      modalCounter.textContent = `${nextIndex + 1} / ${slidesData.length}`;
-                      isTransitioning = false;
-                  }, 300);
-              };
-
-              document.getElementById('open-project-modal')?.addEventListener('click', function() {
-                  currentProjectSlide = 0;
-                  showProjectSlide(0);
-                  openModal(projectModal, this);
-              });
-
-              modalNextBtn?.addEventListener('click', () => showProjectSlide((currentProjectSlide + 1) % slidesData.length));
-              modalPrevBtn?.addEventListener('click', () => showProjectSlide((currentProjectSlide - 1 + slidesData.length) % slidesData.length));
-          }
+              modalNextBtn?.addEventListener('click', () => showProjectSlide(modalId, (project.currentSlide + 1) % project.slides.length));
+              modalPrevBtn?.addEventListener('click', () => showProjectSlide(modalId, (project.currentSlide - 1 + project.slides.length) % project.slides.length));
+          });
           
-          // Contact Form handler (unchanged from previous improvement)
+          document.querySelectorAll('.open-project-modal-btn').forEach(button => {
+              button.addEventListener('click', function() {
+                  const modalId = this.dataset.modalId;
+                  const project = projectsData[modalId];
+                  const modal = document.getElementById(modalId);
+                  if (!project || !modal) return;
+                  
+                  updateAllProjectModalsText(); 
+                  
+                  project.currentSlide = 0;
+
+                  modal.querySelectorAll('.project-modal-slide').forEach((s, i) => s.classList.toggle('active', i === 0));
+                  modal.querySelectorAll('.project-modal-description-item').forEach((d, i) => d.classList.toggle('active', i === 0));
+
+                  showProjectSlide(modalId, 0); // This also sets the initial height
+                  openModal(modal, this);
+              });
+          });
+
+          // Initialize Language
+          switchLanguage(currentLang);
+          
+          // --- GENERAL EVENT LISTENERS ---
+          document.querySelectorAll('.project-intro-image').forEach(introImage => {
+              introImage.addEventListener('click', function() {
+                  const img = this.querySelector('img');
+                  if(img) {
+                      diagramModal.querySelector('img').src = img.src;
+                      diagramModal.querySelector('img').alt = img.alt;
+                      openModal(diagramModal, this);
+                  }
+              });
+          });
+
+          document.getElementById('open-video-modal')?.addEventListener('click', function() {
+              openModal(videoModal, this);
+              createPlayer();
+          });
+          
+          allModals.forEach(modal => {
+             const closeBtn = modal.querySelector('.close-button');
+             if(closeBtn) {
+                 closeBtn.addEventListener('click', () => {
+                    if (modal.id === 'video-modal' && player && typeof player.stopVideo === 'function') player.stopVideo();
+                    closeModal(modal);
+                 });
+             }
+          });
+          
+          // Contact Form and other general listeners...
           if(contactForm) {
               const submitBtn = contactForm.querySelector('.submit-btn');
               const formStatus = document.getElementById('form-status');
@@ -1546,51 +1550,42 @@
               });
           }
 
-          // Universal event listeners for closing modals and dropdowns
           window.addEventListener('click', (event) => {
-              if (event.target.classList.contains('modal')) {
-                  closeModal(event.target);
-              }
-              if (!event.target.closest('.nav-dropdown')) {
-                  document.querySelectorAll('.nav-dropdown.active').forEach(dd => dd.classList.remove('active'));
-              }
-              if (!event.target.closest('.flip-card')) {
-                  document.querySelectorAll('.flip-card-inner.is-flipped').forEach(inner => inner.classList.remove('is-flipped'));
-              }
+              if (event.target.classList.contains('modal')) closeModal(event.target);
+              if (!event.target.closest('.nav-dropdown')) document.querySelectorAll('.nav-dropdown.active').forEach(dd => dd.classList.remove('active'));
+              if (!event.target.closest('.flip-card')) document.querySelectorAll('.flip-card-inner.is-flipped').forEach(inner => inner.classList.remove('is-flipped'));
           });
           
-          // Centralized Keyboard Listener for Accessibility
           window.addEventListener('keydown', (event) => {
               const activeModal = document.querySelector('.modal.active');
               if (!activeModal) return;
 
-              // --- Escape Key to Close Modal ---
               if (event.key === 'Escape') {
                   if (activeModal.id === 'video-modal' && player?.stopVideo) player.stopVideo();
                   closeModal(activeModal);
               }
 
-              // --- Arrow Keys for Project Modal ---
-              if (activeModal.id === 'project-modal') {
-                  if (event.key === 'ArrowRight') {
-                      activeModal.querySelector('.project-modal-arrow.next')?.click();
-                  } else if (event.key === 'ArrowLeft') {
-                      activeModal.querySelector('.project-modal-arrow.prev')?.click();
+              if (activeModal.classList.contains('project-modal')) {
+                  const modalId = activeModal.id;
+                  const project = projectsData[modalId];
+                  if(project) {
+                    if (event.key === 'ArrowRight') showProjectSlide(modalId, (project.currentSlide + 1) % project.slides.length);
+                    if (event.key === 'ArrowLeft') showProjectSlide(modalId, (project.currentSlide - 1 + project.slides.length) % project.slides.length);
                   }
               }
 
-              // --- Tab Key for Focus Trapping ---
               if (event.key === 'Tab') {
                   const focusableElements = Array.from(activeModal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'));
+                  if (focusableElements.length === 0) return;
                   const firstElement = focusableElements[0];
                   const lastElement = focusableElements[focusableElements.length - 1];
 
-                  if (event.shiftKey) { // Shift + Tab
+                  if (event.shiftKey) { 
                       if (document.activeElement === firstElement) {
                           lastElement.focus();
                           event.preventDefault();
                       }
-                  } else { // Tab
+                  } else {
                       if (document.activeElement === lastElement) {
                           firstElement.focus();
                           event.preventDefault();
@@ -1598,6 +1593,40 @@
                   }
               }
           });
+
+          // General UI Listeners
+          document.querySelectorAll('.language-item').forEach(item => {
+              item.addEventListener('click', (e) => {
+                  e.preventDefault(); 
+                  switchLanguage(item.getAttribute('data-lang'));
+                  const activeDropdown = item.closest('.nav-dropdown.active');
+                  if (activeDropdown) activeDropdown.classList.remove('active');
+                  
+                  const mobileList = item.closest('.mobile-list');
+                  if(mobileList) {
+                      const toggle = mobileList.previousElementSibling;
+                      toggle.classList.remove('active');
+                      mobileList.style.maxHeight = null;
+                  }
+              });
+          });
+
+          document.querySelectorAll('.faq-question').forEach(button => button.addEventListener('click', () => { const panel = button.nextElementSibling; button.classList.toggle('active'); button.setAttribute('aria-expanded', button.classList.contains('active')); panel.style.maxHeight = panel.style.maxHeight ? null : panel.scrollHeight + 'px'; }));
+          const mobileMenuIcon = document.querySelector('.mobile-menu-icon');
+          const mobileNavOverlay = document.getElementById("mobile-nav");
+          const toggleNav = () => {
+            const isOpen = mobileMenuIcon.classList.toggle('change');
+            mobileNavOverlay.style.width = isOpen ? "100%" : "0%";
+          }
+          mobileMenuIcon.addEventListener('click', toggleNav);
+          mobileNavOverlay.querySelectorAll('a:not(.language-item)').forEach(link => {
+            if(link.getAttribute('href')?.startsWith('#')) {
+              link.addEventListener('click', () => setTimeout(toggleNav, 150));
+            }
+          });
+          document.querySelectorAll('.mobile-toggle').forEach(toggle => toggle.addEventListener('click', () => { const list = toggle.nextElementSibling; toggle.classList.toggle('active'); list.style.maxHeight = list.style.maxHeight ? null : list.scrollHeight + 'px'; }));
+          document.querySelectorAll('.nav-dropdown-toggle').forEach(toggle => toggle.addEventListener('click', (e) => { e.stopPropagation(); const parent = toggle.closest('.nav-dropdown'); document.querySelectorAll('.nav-dropdown.active').forEach(d => { if (d !== parent) d.classList.remove('active'); }); parent.classList.toggle('active'); }));
+          document.querySelectorAll('.flip-card').forEach(card => { card.addEventListener('click', function() { this.querySelector('.flip-card-inner').classList.toggle('is-flipped'); }); card.querySelectorAll('a').forEach(a => a.addEventListener('click', e => e.stopPropagation())); });
 
       });
     </script>
