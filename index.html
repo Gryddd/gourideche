@@ -514,12 +514,6 @@
         .skill-card p { margin-bottom: 0; }
         
         /* === PROJECT SECTION & MODAL STYLES === */
-        .project-container + .project-container {
-            margin-top: 100px;
-            padding-top: 100px;
-            border-top: 1px solid var(--border-color);
-        }
-
         .project-intro {
             background: var(--card-bg);
             -webkit-backdrop-filter: var(--blur);
@@ -621,7 +615,7 @@
         }
         
         /* === MOBILE PROJECT SHOWCASE === */
-        .mobile-project-showcase { display: none; margin-top: 3rem; }
+        #mobile-project-showcase { display: none; margin-top: 3rem; }
         .mobile-project-item {
             background: var(--card-bg);
             border-radius: 12px;
@@ -892,7 +886,7 @@
 <a class="lang" data-de="Bildung" data-en="Education" data-fr="Éducation" href="#bildung">Bildung</a>
 <a class="lang" data-de="Erfahrung" data-en="Experience" data-fr="Expérience" href="#erfahrung">Erfahrung</a>
 <a class="lang" data-de="Kompetenzen" data-en="Competencies" data-fr="Compétences" href="#kompetenzen">Kompetenzen</a>
-<a class="lang" data-de="Projekte" data-en="Projects" data-fr="Projets" href="#projekte">Projekte</a>
+<a class="lang" data-de="Projekt" data-en="Project" data-fr="Projet" href="#projekt">Projekte</a>
 <a class="lang" data-de="Kontakt" data-en="Contact" data-fr="Contact" href="#kontakt">Kontakt</a>
 <div class="nav-dropdown" id="documents-desktop-dropdown">
 <button class="nav-dropdown-toggle">
@@ -931,7 +925,7 @@
 <a class="lang" data-de="Bildungsweg" data-en="Education" data-fr="Parcours Éducatif" href="#bildung">Bildungsweg</a>
 <a class="lang" data-de="Erfahrung" data-en="Experience" data-fr="Expérience" href="#erfahrung">Erfahrung</a>
 <a class="lang" data-de="Kompetenzen" data-en="Competencies" data-fr="Compétences" href="#kompetenzen">Kompetenzen</a>
-<a class="lang" data-de="Projekte" data-en="Projects" data-fr="Projets" href="#projekte">Projekte</a>
+<a class="lang" data-de="Projekt" data-en="Project" data-fr="Projet" href="#projekt">Projekte</a>
 <a class="lang" data-de="FAQ" data-en="FAQ" data-fr="FAQ" href="#faq">FAQ</a>
 <a class="lang" data-de="Kontakt" data-en="Contact" data-fr="Contact" href="#kontakt">Kontakt</a>
 <div class="mobile-documents-selector">
@@ -1046,74 +1040,33 @@
 </div>
 </section>
 
-<!-- ========== PROJECTS SECTION ========== -->
+<!-- ========== MAJOR PROJECT SECTION ========== -->
 <section class="container" id="projekte">
 
-    <!-- PROJECT 1: HOME LAB -->
     <div class="project-container">
-        <h2 class="lang" data-de="Projekt 1: Virtualisiertes Home-Lab" data-en="Project 1: Virtualized Home Lab" data-fr="Projet 1 : Labo Maison Virtualisé">Projekt 1: Virtualisiertes Home-Lab</h2>
+        <h2 class="lang" data-de="Projekt: Design & Härtung eines virtualisierten Unternehmensnetzwerks" data-en="Project: Design & Hardening of a Virtualized Enterprise Network" data-fr="Projet : Conception & Durcissement d'un Réseau d'Entreprise Virtualisé">Projekt: Design & Härtung eines virtualisierten Unternehmensnetzwerks</h2>
+        
         <div class="project-intro" data-aos="fade-up">
             <div class="project-intro-image">
-                <img src="images/diagram.png" alt="Diagram of the virtualized home lab topology."/>
+                <img src="images/diagram.png" alt="Diagram of the full virtualized enterprise network topology."/>
             </div>
             <div class="project-intro-text">
-                <h3 class="lang" data-de="Eine End-to-End-Infrastruktur" data-en="An End-to-End Infrastructure" data-fr="Une Infrastructure de Bout en Bout">Eine End-to-End-Infrastruktur</h3>
+                <h3 class="lang" data-de="Von der Infrastruktur zur Intrusion Prevention" data-en="From Infrastructure to Intrusion Prevention" data-fr="De l'Infrastructure à la Prévention d'Intrusion">Von der Infrastruktur zur Intrusion Prevention</h3>
                 <p class="lang" 
-       data-de="Dieses Projekt simuliert eine kleine Unternehmens-IT in einer virtualisierten Umgebung.<br><span class='highlight-keyword'>Ziel:</span> Praktische Erfahrung mit Kerninfrastrukturdiensten sammeln.<br><span class='highlight-keyword'>Technologien:</span> VMware, pfSense (Firewall), Windows Server 2022 (Active Directory, DNS) und Ubuntu Server mit Netdata (Monitoring).<br><span class='highlight-keyword'>Ergebnis:</span> Ein voll funktionsfähiges, segmentiertes Netzwerk mit zentraler Benutzerverwaltung und Echtzeit-Monitoring, das End-to-End-Systemintegrationsfähigkeiten demonstriert." 
-       data-en="This project simulates a small enterprise IT environment within a virtualized setup.<br><span class='highlight-keyword'>Goal:</span> To gain practical experience with core infrastructure services.<br><span class='highlight-keyword'>Technologies Used:</span> VMware, pfSense (firewall), Windows Server 2022 (Active Directory, DNS), and Ubuntu Server with Netdata (monitoring).<br><span class='highlight-keyword'>Outcome:</span> A fully functional, segmented network with centralized user management and real-time monitoring, demonstrating end-to-end system integration skills." 
-       data-fr="Ce projet simule un environnement informatique de petite entreprise dans une configuration virtualisée.<br><span class='highlight-keyword'>Objectif :</span> Acquérir une expérience pratique des services d'infrastructure de base.<br><span class='highlight-keyword'>Technologies utilisées :</span> VMware, pfSense (pare-feu), Windows Server 2022 (Active Directory, DNS) et Ubuntu Server avec Netdata (surveillance).<br><span class='highlight-keyword'>Résultat :</span> Un réseau segmenté entièrement fonctionnel avec gestion centralisée des utilisateurs et surveillance en temps réel, démontrant des compétences d'intégration de systèmes de bout en bout.">
-        Dieses Projekt simuliert eine kleine Unternehmens-IT in einer virtualisierten Umgebung.<br><span class='highlight-keyword'>Ziel:</span> Praktische Erfahrung mit Kerninfrastrukturdiensten sammeln.<br><span class='highlight-keyword'>Technologien:</span> VMware, pfSense (Firewall), Windows Server 2022 (Active Directory, DNS) und Ubuntu Server mit Netdata (Monitoring).<br><span class='highlight-keyword'>Ergebnis:</span> Ein voll funktionsfähiges, segmentiertes Netzwerk mit zentraler Benutzerverwaltung und Echtzeit-Monitoring, das End-to-End-Systemintegrationsfähigkeiten demonstriert.
-    </p>
+                   data-de="Dieses umfassende Projekt zeigt den gesamten Lebenszyklus der Erstellung und Sicherung eines Unternehmensnetzwerks. Es beginnt mit dem Aufbau der Kerninfrastruktur und gipfelt in der Bereitstellung eines fortschrittlichen Intrusion Prevention Systems (IPS).<br><span class='highlight-keyword'>Ziel:</span> Demonstration von End-to-End-Fähigkeiten in den Bereichen Systemintegration, Netzwerk-Monitoring und Cybersicherheit.<br><span class='highlight-keyword'>Technologien:</span> VMware, pfSense, Windows Server, Active Directory, Netdata, Suricata (IPS), Nmap.<br><span class='highlight-keyword'>Ergebnis:</span> Ein vollständig instrumentiertes und verteidigtes Netzwerk, das die Fähigkeit zeigt, nicht nur Systeme aufzubauen, sondern sie auch proaktiv vor Bedrohungen zu schützen."
+                   data-en="This comprehensive project demonstrates the full lifecycle of creating and securing an enterprise network. It begins with building core infrastructure and culminates in deploying an advanced Intrusion Prevention System (IPS).<br><span class='highlight-keyword'>Goal:</span> To demonstrate end-to-end capabilities in system integration, network monitoring, and cybersecurity.<br><span class='highlight-keyword'>Technologies Used:</span> VMware, pfSense, Windows Server, Active Directory, Netdata, Suricata (IPS), Nmap.<br><span class='highlight-keyword'>Outcome:</span> A fully instrumented and defended network, showcasing the ability to not only build systems but to proactively secure them against threats."
+                   data-fr="Ce projet complet démontre le cycle de vie entier de la création et de la sécurisation d'un réseau d'entreprise. Il commence par la construction de l'infrastructure de base et culmine avec le déploiement d'un système de prévention d'intrusion (IPS) avancé.<br><span class='highlight-keyword'>Objectif :</span> Démontrer des capacités de bout en bout en intégration de systèmes, surveillance réseau et cybersécurité.<br><span class='highlight-keyword'>Technologies utilisées :</span> VMware, pfSense, Windows Server, Active Directory, Netdata, Suricata (IPS), Nmap.<br><span class='highlight-keyword'>Résultat :</span> Un réseau entièrement instrumenté et défendu, démontrant la capacité non seulement de construire des systèmes, mais aussi de les sécuriser de manière proactive contre les menaces.">
+                    Dieses umfassende Projekt zeigt den gesamten Lebenszyklus der Erstellung und Sicherung eines Unternehmensnetzwerks. Es beginnt mit dem Aufbau der Kerninfrastruktur und gipfelt in der Bereitstellung eines fortschrittlichen Intrusion Prevention Systems (IPS).<br><span class='highlight-keyword'>Ziel:</span> Demonstration von End-to-End-Fähigkeiten in den Bereichen Systemintegration, Netzwerk-Monitoring und Cybersicherheit.<br><span class='highlight-keyword'>Technologien:</span> VMware, pfSense, Windows Server, Active Directory, Netdata, Suricata (IPS), Nmap.<br><span class='highlight-keyword'>Ergebnis:</span> Ein vollständig instrumentiertes und verteidigtes Netzwerk, das die Fähigkeit zeigt, nicht nur Systeme aufzubauen, sondern sie auch proaktiv vor Bedrohungen zu schützen.
+                </p>
                 <button data-modal-id="project-modal-1" class="submit-btn open-project-modal-btn lang" data-de="Technische Details ansehen" data-en="View Technical Details" data-fr="Voir les Détails Techniques">Technische Details ansehen</button>
             </div>
         </div>
         <div class="mobile-project-showcase" id="mobile-project-showcase-1"></div>
     </div>
-
-    <!-- PROJECT 2: SURICATA IPS -->
-    <div class="project-container">
-        <h2 class="lang" data-de="Projekt 2: Intrusion Prevention System" data-en="Project 2: Intrusion Prevention System" data-fr="Projet 2 : Système de Prévention d'Intrusion">Projekt 2: Intrusion Prevention System</h2>
-        <div class="project-intro" data-aos="fade-up">
-            <div class="project-intro-image">
-                <img src="images/10.png" alt="A list of IP addresses blocked by the Suricata IPS."/>
-            </div>
-            <div class="project-intro-text">
-                <h3 class="lang" data-de="Analyse von Insider-Bedrohungen" data-en="Insider Threat Analysis" data-fr="Analyse des Menaces Internes">Analyse von Insider-Bedrohungen</h3>
-                <p class="lang" 
-                   data-de="Dieses Projekt demonstriert die Bereitstellung eines Suricata IPS zur Erkennung und Minderung von Bedrohungen innerhalb eines vertrauenswürdigen Netzwerks.<br><span class='highlight-keyword'>Ziel:</span> Simulation und Analyse einer Insider-Bedrohung, um fortgeschrittene Fähigkeiten in der Netzwerksicherheit zu demonstrieren.<br><span class='highlight-keyword'>Technologien:</span> pfSense, Suricata (IPS), pfBlockerNG, Nmap, VMware.<br><span class='highlight-keyword'>Ergebnis:</span> Ein voll funktionsfähiges IPS, das eine feindliche Aufklärungsscans erfolgreich erkennt, die Fähigkeit zur aktiven Blockierung demonstriert und ein tiefes Verständnis für die Fehlerbehebung bei Software-Anomalien auf Treiberebene zeigt."
-                   data-en="This project showcases the deployment of a Suricata IPS to detect and mitigate threats within a trusted network segment.<br><span class='highlight-keyword'>Goal:</span> To simulate and analyze an insider threat, demonstrating advanced network security and troubleshooting skills.<br><span class='highlight-keyword'>Technologies Used:</span> pfSense, Suricata (IPS), pfBlockerNG, Nmap, VMware.<br><span class='highlight-keyword'>Outcome:</span> A fully functional IPS that successfully detects a hostile reconnaissance scan, demonstrates active blocking capabilities, and proves a deep understanding of troubleshooting software/driver anomalies."
-                   data-fr="Ce projet présente le déploiement d'un IPS Suricata pour détecter et atténuer les menaces au sein d'un segment de réseau de confiance.<br><span class='highlight-keyword'>Objectif :</span> Simuler et analyser une menace interne, démontrant des compétences avancées en sécurité réseau et en dépannage.<br><span class='highlight-keyword'>Technologies utilisées :</span> pfSense, Suricata (IPS), pfBlockerNG, Nmap, VMware.<br><span class='highlight-keyword'>Résultat :</span> Un IPS entièrement fonctionnel qui détecte avec succès un scan de reconnaissance hostile, démontre des capacités de blocage actif et prouve une compréhension approfondie du dépannage des anomalies logicielles/pilotes.">
-                    Dieses Projekt demonstriert die Bereitstellung eines Suricata IPS zur Erkennung und Minderung von Bedrohungen innerhalb eines vertrauenswürdigen Netzwerks.<br><span class='highlight-keyword'>Ziel:</span> Simulation und Analyse einer Insider-Bedrohung, um fortgeschrittene Fähigkeiten in der Netzwerksicherheit zu demonstrieren.<br><span class='highlight-keyword'>Technologien:</span> pfSense, Suricata (IPS), pfBlockerNG, Nmap, VMware.<br><span class='highlight-keyword'>Ergebnis:</span> Ein voll funktionsfähiges IPS, das eine feindliche Aufklärungsscans erfolgreich erkennt, die Fähigkeit zur aktiven Blockierung demonstriert und ein tiefes Verständnis für die Fehlerbehebung bei Software-Anomalien auf Treiberebene zeigt.
-                </p>
-                <button data-modal-id="project-modal-2" class="submit-btn open-project-modal-btn lang" data-de="Technische Details ansehen" data-en="View Technical Details" data-fr="Voir les Détails Techniques">Technische Details ansehen</button>
-            </div>
-        </div>
-        <div class="mobile-project-showcase" id="mobile-project-showcase-2"></div>
-    </div>
 </section>
 
-<!-- Project Modal 1 (Home Lab) -->
+<!-- Unified Project Modal -->
 <div class="modal project-modal" id="project-modal-1">
-    <div class="modal-content">
-        <button aria-label="Close project modal" class="close-button">×</button>
-        <div class="project-modal-body">
-            <div class="project-modal-image-wrapper"></div>
-            <div class="project-modal-description"></div>
-            <div class="project-modal-controls">
-                <button class="project-modal-arrow prev" aria-label="Previous Slide">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"/></svg>
-                </button>
-                <div class="project-modal-counter"></div>
-                <button class="project-modal-arrow next" aria-label="Next Slide">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Project Modal 2 (Suricata) -->
-<div class="modal project-modal" id="project-modal-2">
     <div class="modal-content">
         <button aria-label="Close project modal" class="close-button">×</button>
         <div class="project-modal-body">
@@ -1234,23 +1187,12 @@
               "project-modal-1": {
                   currentSlide: 0,
                   slides: [
-                      { img: 'images/virtual_machines_overview.png', title: { de: 'Projektübersicht', en: 'Project Overview', fr: "Vue d'ensemble du projet" }, text: { de: 'Dieses Projekt demonstriert den Aufbau einer kompletten, virtualisierten IT-Umgebung in VMware. Es umfasst eine pfSense-Firewall, einen Windows Server als Domain Controller und einen Ubuntu Server für das Monitoring, um eine realistische Unternehmens-IT nachzubilden.', en: 'This project demonstrates the setup of a complete, virtualized IT environment in VMware. It includes a pfSense firewall, a Windows Server as a Domain Controller, and an Ubuntu Server for monitoring, replicating a realistic corporate IT setup.', fr: "Ce projet virtualise un réseau d'entreprise complet sous VMware, avec un pare-feu pfSense, un contrôleur de domaine Windows Server, et un serveur Ubuntu pour la surveillance en temps réel." } },
-                      { img: 'images/pfsense_dashboard.png', title: { de: 'pfSense-Firewall als Gateway', en: 'pfSense Firewall as Gateway', fr: 'Pare-feu pfSense comme passerelle' }, text: { de: 'Eine pfSense-VM agiert als zentraler Router und Firewall. Sie wurde mit einer statischen LAN-IP (192.168.10.2) konfiguriert und trennt das interne Netzwerk (LAN) sicher vom externen Netzwerk (WAN).', en: 'A pfSense VM acts as the central router and firewall. It was configured with a static LAN IP (192.168.10.2) and securely separates the internal network (LAN) from the external network (WAN).', fr: "Une VM pfSense sert de routeur et de pare-feu central. Elle a été configurée avec une IP LAN statique (192.168.10.2) et sépare de manière sécurisée le réseau interne (LAN) du réseau externe (WAN)." } },
-                      { img: 'images/pfsense_leases.png', title: { de: 'DHCP-Server-Konfiguration', en: 'DHCP Server Configuration', fr: 'Configuration du serveur DHCP' }, text: { de: "Der DHCP-Dienst auf pfSense wurde aktiviert, um automatisch IP-Adressen (192.168.10.100 - 192.168.10.150) an Clients wie die Windows 10 VM zu vergeben. Dies vereinfacht die Netzwerkverwaltung erheblich.", en: "The DHCP service on pfSense was enabled to automatically assign IP addresses (192.168.10.100 - 192.168.10.150) to clients like the Windows 10 VM. This significantly simplifies network administration.", fr: "Le service DHCP sur pfSense a été activé pour attribuer automatiquement des adresses IP (192.168.10.100 - 192.168.10.150) aux clients tels que la VM Windows 10. Cela simplifie considérablement l'administration du réseau." } },
-                      { img: 'images/windows_server_roles.png', title: { de: 'Windows Server als Domain Controller', en: 'Windows Server as Domain Controller', fr: 'Windows Server comme contrôleur de domaine' }, text: { de: "Ein Windows Server 2022 wurde mit der statischen IP 192.168.10.10 installiert. Anschließend wurden die Rollen Active Directory Domain Services (AD DS) und DNS installiert, um ihn zum Domain Controller für die Domäne 'homelab.local' zu machen.", en: "A Windows Server 2022 was installed with the static IP 192.168.10.10. The Active Directory Domain Services (AD DS) and DNS roles were then installed to make it the Domain Controller for the 'homelab.local' domain.", fr: "Un Windows Server 2022 a été installé avec l'adresse IP statique 192.168.10.10. Les rôles Active Directory Domain Services (AD DS) et DNS ont ensuite été installés pour en faire le contrôleur de domaine pour le domaine 'homelab.local'." } },
-                      { img: 'images/windows_10_joined.png', title: { de: 'Windows 10 Client in der Domäne', en: 'Windows 10 Client in the Domain', fr: 'Client Windows 10 dans le domaine' }, text: { de: "Eine Windows 10 VM wurde installiert, erhielt eine IP-Adresse von pfSense und wurde erfolgreich der 'homelab.local'-Domäne hinzugefügt. Dies ermöglicht die zentrale Benutzerverwaltung und die Anmeldung mit Domänenkonten.", en: "A Windows 10 VM was installed, received an IP address from pfSense, and was successfully joined to the 'homelab.local' domain. This allows for centralized user management and logging in with domain accounts.", fr: "Une VM Windows 10 a été installée, a reçu une adresse IP de pfSense et a été jointe avec succès au domaine 'homelab.local'. Cela permet une gestion centralisée des utilisateurs et la connexion avec des comptes de domaine." } },
-                      { img: 'images/pfsense_snmp.png', title: { de: 'Aktivierung von SNMP für das Monitoring', en: 'Enabling SNMP for Monitoring', fr: 'Activation de SNMP pour la surveillance' }, text: { de: "Um die Netzwerkgeräte überwachen zu können, wurde der SNMP-Dienst auf der pfSense-Firewall und dem Windows Server aktiviert. Es wurde eine sichere Community-String 'homelab-snmp' konfiguriert und der Zugriff auf den Monitoring-Server beschränkt.", en: "To monitor the network devices, the SNMP service was enabled on the pfSense firewall and the Windows Server. A secure community string 'homelab-snmp' was configured, and access was restricted to the monitoring server.", fr: "Pour surveiller les périphériques réseau, le service SNMP a été activé sur le pare-feu pfSense et le serveur Windows. Une chaîne de communauté sécurisée 'homelab-snmp' a été configurée et l'accès a été restreint au serveur de surveillance." } },
-                      { img: 'images/ubuntu_server_netdata.png', title: { de: 'Einrichtung des Netdata Monitoring-Servers', en: 'Setting up the Netdata Monitoring Server', fr: 'Mise en place du serveur de surveillance Netdata' }, text: { de: 'Auf einer Ubuntu Server VM (IP 192.168.10.20) wurde Netdata installiert, eine leistungsstarke Echtzeit-Monitoring-Lösung. Diese Plattform sammelt und visualisiert Leistungsdaten aller Systeme im Netzwerk.', en: 'Netdata, a powerful real-time monitoring solution, was installed on an Ubuntu Server VM (IP 192.168.10.20). This platform collects and visualizes performance data from all systems in the network.', fr: "Netdata, une solution de surveillance en temps réel puissante, a été installée sur une VM Ubuntu Server (IP 192.168.10.20). Cette plateforme collecte et visualise les données de performance de tous les systèmes du réseau." } },
-                      { img: 'images/netdata_snmp_devices.png', title: { de: 'Zentrales Monitoring-Dashboard', en: 'Centralized Monitoring Dashboard', fr: 'Tableau de bord de surveillance centralisé' }, text: { de: 'Erfolgreiche Integration: Netdata sammelt nun via SNMP Leistungsdaten (CPU, RAM, Netzwerkverkehr) von der pfSense-Firewall und dem Windows Server. Das Dashboard bietet eine zentrale Übersicht über den Zustand der gesamten Infrastruktur in Echtzeit.', en: "Successful Integration: Netdata now collects performance data (CPU, RAM, network traffic) from the pfSense firewall and Windows Server via SNMP. The dashboard provides a central, real-time overview of the entire infrastructure's health.", fr: "Intégration réussie : Netdata collecte désormais les données de performance (CPU, RAM, trafic réseau) du pare-feu pfSense et du serveur Windows via SNMP. Le tableau de bord offre une vue d'ensemble centralisée et en temps réel de l'état de toute l'infrastructure." } }
-                  ]
-              },
-              "project-modal-2": {
-                  currentSlide: 0,
-                  slides: [
-                      { img: 'images/18.png', title: { de: 'Projektübersicht & Architektur', en: 'Project Overview & Architecture', fr: "Vue d'ensemble et architecture" }, text: { de: "Dieses Projekt zeigt die Bereitstellung eines Suricata IPS zur Erkennung einer Insider-Bedrohung. Der Sensor überwacht den internen LAN-Verkehr zwischen einer 'Angreifer'-Workstation und einem 'Ziel'-Server. Dieses Szenario testet die Fähigkeit des IPS, feindliche Aktivitäten innerhalb eines vertrauenswürdigen Netzwerks zu erkennen.", en: "This project demonstrates deploying a Suricata IPS to detect an insider threat. The sensor monitors internal LAN traffic between an 'attacker' workstation and a 'target' server. This scenario tests the IPS's ability to detect hostile activity within a trusted network.", fr: "Ce projet démontre le déploiement d'un IPS Suricata pour détecter une menace interne. Le capteur surveille le trafic LAN interne entre un poste de travail 'attaquant' et un serveur 'cible', testant la capacité de l'IPS à détecter une activité hostile au sein d'un réseau de confiance." } },
-                      { img: 'images/5.png', title: { de: 'Konfiguration der Bedrohungsregeln', en: 'Threat Rule Configuration', fr: 'Configuration des règles de menace' }, text: { de: "Die Effektivität eines IPS hängt von seiner Intelligenz ab. Die ETOpen (Emerging Threats) Regeln wurden als primäre Signaturquelle ausgewählt. Spezifische Kategorien wie 'scan', 'info' und 'exploit' wurden aktiviert, um das System auf die Erkennung von Aufklärungs- und Angriffsversuchen zu konzentrieren.", en: "An IPS's effectiveness depends on its intelligence. The ETOpen (Emerging Threats) rules were chosen as the primary signature source. Specific categories like 'scan', 'info', and 'exploit' were enabled to focus the system on detecting reconnaissance and attack attempts.", fr: "L'efficacité d'un IPS dépend de son intelligence. Les règles ETOpen (Emerging Threats) ont été choisies comme source de signature principale. Des catégories spécifiques comme 'scan', 'info' et 'exploit' ont été activées pour concentrer le système sur la détection des tentatives de reconnaissance et d'attaque." } },
-                      { img: 'images/6.png', title: { de: 'Simulation der Bedrohung', en: 'Threat Simulation', fr: 'Simulation de la menace' }, text: { de: "Um das IPS zu validieren, wurde eine feindliche Aufklärung simuliert. Ein 'aggressiver' Nmap-Scan (-A) wurde von einer Windows-10-Workstation gegen einen kritischen Windows-Server-Domänencontroller gestartet. Diese Aktion imitiert die ersten Schritte eines Angreifers, der das Netzwerk nach Schwachstellen absucht.", en: "To validate the IPS, a hostile reconnaissance scan was simulated. An 'aggressive' Nmap scan (-A) was launched from a Windows 10 workstation against a critical Windows Server domain controller. This action mimics the initial steps of an attacker mapping the network for vulnerabilities.", fr: "Pour valider l'IPS, un scan de reconnaissance hostile a été simulé. Un scan Nmap 'agressif' (-A) a été lancé depuis un poste de travail Windows 10 contre un contrôleur de domaine Windows Server critique. Cette action imite les premières étapes d'un attaquant cartographiant le réseau pour les vulnérabilités." } },
-                      { img: 'images/7.png', title: { de: 'Erfolgreiche Erkennung', en: 'Successful Detection', fr: 'Détection réussie' }, text: { de: "Das System hat die Bedrohung sofort erkannt. Der Suricata-Alarm-Log wurde mit mehreren Signaturen wie 'ET SCAN Possible Nmap User-Agent' gefüllt. Die Protokolle korrelieren die Quell-IP des Angreifers (192.168.10.101) und die Ziel-IP (192.168.10.10) eindeutig und liefern klares, umsetzbares Sicherheits-Feedback.", en: "The system immediately detected the threat. The Suricata alert log was populated with multiple signatures, including 'ET SCAN Possible Nmap User-Agent'. The logs clearly correlate the attacker's source IP (192.168.10.101) and the target's IP (192.168.10.10), providing clear, actionable security intelligence.", fr: "Le système a immédiatement détecté la menace. Le journal d'alertes Suricata a été rempli de plusieurs signatures, y compris 'ET SCAN Possible Nmap User-Agent'. Les journaux corrèlent clairement l'IP source de l'attaquant (192.168.10.101) et l'IP de la cible (192.168.10.10), fournissant une intelligence de sécurité claire et exploitable." } }
+                      { img: 'diagram.png', title: { de: 'Architekturübersicht', en: 'Architecture Overview', fr: "Vue d'ensemble de l'architecture" }, text: { de: 'Das Projekt begann mit dem Aufbau einer kompletten End-to-End-Unternehmensinfrastruktur. Dies beinhaltete die Konfiguration eines pfSense-Firewalls, eines Windows Servers als Domain Controller und die Segmentierung des Netzwerks, um eine realistische Umgebung zu schaffen.', en: 'The project began with the construction of a complete end-to-end enterprise infrastructure. This included configuring a pfSense firewall, a Windows Server as a Domain Controller, and segmenting the network to create a realistic environment.', fr: "Le projet a commencé par la construction d'une infrastructure d'entreprise complète de bout en bout. Cela comprenait la configuration d'un pare-feu pfSense, d'un serveur Windows en tant que contrôleur de domaine et la segmentation du réseau pour créer un environnement réaliste." } },
+                      { img: 'windows_server_roles.png', title: { de: 'Kerndienste: Domain Controller', en: 'Core Services: Domain Controller', fr: 'Services de base : Contrôleur de domaine' }, text: { de: 'Ein Windows Server 2022 wurde als Herzstück des Netzwerks bereitgestellt. Er wurde zur Rolle eines Domain Controllers für die Domäne „homelab.local“ heraufgestuft und verwaltet die zentralen Active Directory- und DNS-Dienste.', en: 'A Windows Server 2022 was deployed as the heart of the network. It was promoted to the role of a Domain Controller for the "homelab.local" domain, managing centralized Active Directory and DNS services.', fr: "Un serveur Windows 2022 a été déployé au cœur du réseau. Il a été promu au rôle de contrôleur de domaine pour le domaine « homelab.local », gérant les services centralisés Active Directory et DNS." } },
+                      { img: 'netdata_snmp_devices.png', title: { de: 'Netzwerk-Monitoring: Leistung', en: 'Network Monitoring: Performance', fr: 'Surveillance réseau : Performance' }, text: { de: 'Ein anfängliches Monitoring wurde mit Netdata implementiert, um Echtzeit-Leistungs- und Zustandsmetriken für die gesamte Kerninfrastruktur bereitzustellen. Dies gewährleistete die Stabilität und Leistung des Netzwerks, bevor Sicherheitsmaßnahmen hinzugefügt wurden.', en: 'Initial monitoring was implemented using Netdata to provide real-time performance and health metrics for all core infrastructure. This ensured network stability and performance before layering on security measures.', fr: "Une surveillance initiale a été mise en œuvre avec Netdata pour fournir des métriques de performance et de santé en temps réel pour toute l'infrastructure de base. Cela a garanti la stabilité et la performance du réseau avant l'ajout de mesures de sécurité." } },
+                      { img: '5.png', title: { de: 'Sicherheitshärtung: IPS-Bereitstellung', en: 'Security Hardening: IPS Deployment', fr: 'Durcissement de la sécurité : Déploiement de l\'IPS' }, text: { de: 'Mit dem funktionsfähigen Netzwerk verlagerte sich der Fokus auf die Sicherheit. Ein fortschrittliches Intrusion Prevention System (Suricata) wurde auf der pfSense-Firewall bereitgestellt. Die ETOpen-Regelsätze wurden aktiviert, um das System mit branchenüblicher Bedrohungsintelligenz auszustatten.', en: 'With the network operational, the focus shifted to security. An advanced Intrusion Prevention System (Suricata) was deployed on the pfSense firewall. The ETOpen rule sets were enabled to arm the system with industry-standard threat intelligence.', fr: "Le réseau étant opérationnel, l'accent a été mis sur la sécurité. Un système de prévention d'intrusion avancé (Suricata) a été déployé sur le pare-feu pfSense. Les ensembles de règles ETOpen ont été activés pour doter le système d'une intelligence sur les menaces conforme aux normes de l'industrie." } },
+                      { img: '6.png', title: { de: 'Simulation einer Insider-Bedrohung', en: 'Insider Threat Simulation', fr: "Simulation d'une menace interne" }, text: { de: 'Um das IPS zu validieren, wurde eine Insider-Bedrohung simuliert, indem ein Aufklärungsscan von einer internen Workstation (192.168.10.101) gegen den Domain Controller (192.168.10.10) mit Nmap gestartet wurde. Dies ahmt einen Angreifer nach, der das interne Netzwerk nach Schwachstellen absucht.', en: 'To validate the IPS, an insider threat was simulated by launching a reconnaissance scan from an internal workstation (192.168.10.101) against the Domain Controller (192.168.10.10) using Nmap. This mimics an attacker mapping the internal network for vulnerabilities.', fr: "Pour valider l'IPS, une menace interne a été simulée en lançant un scan de reconnaissance depuis un poste de travail interne (192.168.10.101) contre le contrôleur de domaine (192.168.10.10) avec Nmap. Cela imite un attaquant cartographiant le réseau interne à la recherche de vulnérabilités." } },
+                      { img: '7.png', title: { de: 'Erfolgreiche Bedrohungserkennung', en: 'Successful Threat Detection', fr: 'Détection de menace réussie' }, text: { de: 'Das IPS hat den feindlichen Scan sofort in Echtzeit erkannt. Mehrere hochpriore Alarme, einschließlich „ET SCAN Possible Nmap User-Agent“, wurden ausgelöst. Dies beweist die Fähigkeit des Systems, Bedrohungen innerhalb des vertrauenswürdigen Netzwerks zu identifizieren und darauf aufmerksam zu machen, was den Projekterfolg bestätigt.', en: 'The IPS successfully detected the hostile scan in real-time. Multiple high-priority alerts, including "ET SCAN Possible Nmap User-Agent", were triggered. This proves the system’s ability to identify and alert on threats within the trusted network, confirming the project’s success.', fr: "L'IPS a détecté avec succès le scan hostile en temps réel. Plusieurs alertes de haute priorité, y compris « ET SCAN Possible Nmap User-Agent », ont été déclenchées. Cela prouve la capacité du système à identifier et à alerter sur les menaces au sein du réseau de confiance, confirmant le succès du projet." } }
                   ]
               }
           };
@@ -1277,7 +1219,10 @@
               updateLanguageSelectorUI(currentLang);
               
               updateAllProjectModalsText();
-              Object.keys(projectsData).forEach(populateMobileShowcase);
+              Object.keys(projectsData).forEach(modalId => {
+                  const showcaseId = `mobile-project-showcase-${modalId.split('-')[2]}`;
+                  populateMobileShowcase(modalId, showcaseId);
+              });
           }
 
           function updateLanguageSelectorUI(selectedLang) {
@@ -1300,7 +1245,6 @@
                       }
                   });
 
-                  // Update height of currently active slide description if modal is open
                   if(modal.classList.contains('active')) {
                       const activeDesc = modal.querySelector('.project-modal-description-item.active');
                       const descContainer = modal.querySelector('.project-modal-description');
@@ -1311,9 +1255,8 @@
               });
           }
 
-          function populateMobileShowcase(modalId) {
+          function populateMobileShowcase(modalId, showcaseId) {
               const project = projectsData[modalId];
-              const showcaseId = `mobile-project-showcase-${modalId.split('-')[2]}`;
               const container = document.getElementById(showcaseId);
 
               if (!container) return;
@@ -1466,6 +1409,9 @@
 
               modalNextBtn?.addEventListener('click', () => showProjectSlide(modalId, (project.currentSlide + 1) % project.slides.length));
               modalPrevBtn?.addEventListener('click', () => showProjectSlide(modalId, (project.currentSlide - 1 + project.slides.length) % project.slides.length));
+              
+              const showcaseId = `mobile-project-showcase-${modalId.split('-')[2]}`;
+              populateMobileShowcase(modalId, showcaseId);
           });
           
           document.querySelectorAll('.open-project-modal-btn').forEach(button => {
@@ -1482,7 +1428,7 @@
                   modal.querySelectorAll('.project-modal-slide').forEach((s, i) => s.classList.toggle('active', i === 0));
                   modal.querySelectorAll('.project-modal-description-item').forEach((d, i) => d.classList.toggle('active', i === 0));
 
-                  showProjectSlide(modalId, 0); // This also sets the initial height
+                  showProjectSlide(modalId, 0); 
                   openModal(modal, this);
               });
           });
@@ -1517,7 +1463,6 @@
              }
           });
           
-          // Contact Form and other general listeners...
           if(contactForm) {
               const submitBtn = contactForm.querySelector('.submit-btn');
               const formStatus = document.getElementById('form-status');
@@ -1594,7 +1539,6 @@
               }
           });
 
-          // General UI Listeners
           document.querySelectorAll('.language-item').forEach(item => {
               item.addEventListener('click', (e) => {
                   e.preventDefault(); 
