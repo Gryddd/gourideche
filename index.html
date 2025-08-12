@@ -113,6 +113,12 @@
             backdrop-filter: blur(20px);
             box-shadow: 0 4px 20px rgba(0,0,0,0.2);
             z-index: 1001; padding: 0.5rem 2rem;
+            transition: transform 0.4s ease-out, opacity 0.4s ease-out;
+        }
+        .main-nav.nav-hidden {
+            transform: translateY(-100%);
+            opacity: 0;
+            pointer-events: none;
         }
         .nav-content {
             display: flex;
@@ -420,6 +426,40 @@
             position: absolute; top: -40px; right: 0;
             color: #fff; font-size: 31px; font-weight: bold;
             cursor: pointer; background: none; border: none; padding: 0;
+            z-index: 20;
+        }
+        
+        .modal-lang-switcher {
+            position: absolute;
+            top: 10px;
+            left: 15px;
+            display: flex;
+            gap: 8px;
+            z-index: 15;
+        }
+        .modal-lang-switcher button {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 5px 10px;
+            font-family: var(--font-heading);
+            font-size: 0.8rem;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            opacity: 0.8;
+        }
+        .modal-lang-switcher button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: var(--primary-blue);
+            opacity: 1;
+        }
+        .modal-lang-switcher button.active {
+            background: var(--primary-blue);
+            color: var(--background);
+            border-color: var(--primary-blue);
+            opacity: 1;
         }
         
         #diagram-modal .modal-content, #image-modal .modal-content {
@@ -565,7 +605,7 @@
             max-width: 50rem; background: var(--background);
             border-radius: 12px; padding: 1rem; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
-        .project-modal .close-button { top: 10px; right: 15px; font-size: 24px; }
+        .project-modal .close-button { top: 10px; right: 15px; font-size: 24px; position: absolute; }
         .project-modal-body { padding: 1.5rem; }
         .project-modal-image-wrapper {
             background: #111; border-radius: 8px; margin-bottom: 1.5rem;
@@ -1088,6 +1128,11 @@
 </section>
 <div class="modal" id="video-modal">
 <div class="modal-content">
+<div class="modal-lang-switcher">
+<button data-lang="de">DE</button>
+<button data-lang="en">EN</button>
+<button data-lang="fr">FR</button>
+</div>
 <button aria-label="Close video modal" class="close-button" id="close-video-modal">×</button>
 <div class="video-responsive-wrapper">
 <div id="youtube-player-container"></div>
@@ -1174,6 +1219,11 @@
 <!-- Unified Project Modal -->
 <div class="modal project-modal" id="project-modal-1">
     <div class="modal-content">
+<div class="modal-lang-switcher">
+<button data-lang="de">DE</button>
+<button data-lang="en">EN</button>
+<button data-lang="fr">FR</button>
+</div>
         <button aria-label="Close project modal" class="close-button">×</button>
         <div class="project-modal-body">
             <div class="project-modal-image-wrapper"></div>
@@ -1195,6 +1245,11 @@
 <!-- Generic Diagram and Image Modals -->
 <div class="modal" id="diagram-modal">
     <div class="modal-content">
+<div class="modal-lang-switcher">
+<button data-lang="de">DE</button>
+<button data-lang="en">EN</button>
+<button data-lang="fr">FR</button>
+</div>
         <button aria-label="Close diagram modal" class="close-button">×</button>
         <img src="" alt="Enlarged diagram view" loading="lazy">
     </div>
@@ -1202,6 +1257,11 @@
 
 <div class="modal" id="image-modal">
     <div class="modal-content">
+<div class="modal-lang-switcher">
+<button data-lang="de">DE</button>
+<button data-lang="en">EN</button>
+<button data-lang="fr">FR</button>
+</div>
         <button aria-label="Close image modal" class="close-button">×</button>
         <img src="" alt="Enlarged project image" loading="lazy">
     </div>
@@ -1272,6 +1332,7 @@
           let lastActiveElement;
           const youtubeVideoId = 'R_rKRfh7ceU';
 
+          const mainNav = document.querySelector('.main-nav');
           const languageItems = document.querySelectorAll('.language-item');
           const translatableElements = document.querySelectorAll('.lang');
           const translatablePlaceholders = document.querySelectorAll('.lang-placeholder');
@@ -1328,6 +1389,12 @@
               }
           };
 
+          function updateModalLangSwitchers(selectedLang) {
+              document.querySelectorAll('.modal-lang-switcher button').forEach(button => {
+                  button.classList.toggle('active', button.dataset.lang === selectedLang);
+              });
+          }
+
           function switchLanguage(newLang) {
               currentLang = newLang;
               localStorage.setItem('preferredLang', newLang);
@@ -1348,6 +1415,7 @@
               if (profilePicture) { profilePicture.alt = altTexts[currentLang]; }
               
               updateLanguageSelectorUI(currentLang);
+              updateModalLangSwitchers(currentLang);
               
               updateAllProjectModalsText();
               Object.keys(projectsData).forEach(modalId => {
@@ -1427,9 +1495,11 @@
           
           function openModal(modal, triggerElement) {
               if (!modal) return;
+              mainNav.classList.add('nav-hidden');
               lastActiveElement = triggerElement || document.activeElement;
               modal.classList.add('active');
               document.body.classList.add('modal-open');
+              updateModalLangSwitchers(currentLang);
               const firstFocusable = modal.querySelector('button, [href]');
               setTimeout(() => firstFocusable?.focus(), 100);
           }
@@ -1449,6 +1519,7 @@
               const isAnyModalOpen = Array.from(allModals).some(m => m.classList.contains('active'));
               if (!isAnyModalOpen) {
                   document.body.classList.remove('modal-open');
+                  mainNav.classList.remove('nav-hidden');
               }
               
               if (lastActiveElement) {
@@ -1719,6 +1790,16 @@
                       toggle.classList.remove('active');
                       mobileList.style.maxHeight = null;
                       setTimeout(toggleNav, 150);
+                  }
+              });
+          });
+
+          document.querySelectorAll('.modal-lang-switcher button').forEach(button => {
+              button.addEventListener('click', function (e) {
+                  e.preventDefault();
+                  const newLang = this.dataset.lang;
+                  if (newLang !== currentLang) {
+                      switchLanguage(newLang);
                   }
               });
           });
