@@ -61,16 +61,16 @@
         html { 
             scroll-behavior: smooth; 
             font-size: 90%;
-            max-width: 100%;
-            overflow-x: hidden;
+            /* max-width: 100%; REMOVED */
+            overflow-x: hidden; /* This is the single, definitive rule */
         }
         body {
             background-color: var(--background); color: var(--text-color);
             font-family: var(--font-body); margin: 0; padding: 0; 
             font-weight: 400;
             line-height: 1.7;
-            max-width: 100vw;      /* FIX: Prevents horizontal overflow */
-            overflow-x: hidden;    /* FIX: Hides overflowing content */
+            /* max-width: 100vw;      REMOVED */
+            /* overflow-x: hidden;    REMOVED */
         }
         body.modal-open {
             overflow: hidden;
@@ -317,6 +317,7 @@
         .hero-text { 
             flex-basis: 29.5rem;
             text-align: left; 
+            max-width: 100%; /* ADDED: This is the key fix */
         }
         h1 {
             display: inline-block;
