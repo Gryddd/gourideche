@@ -60,16 +60,15 @@
         }
         html { 
             scroll-behavior: smooth; 
-            font-size: 100%;
+            font-size: 90%;
             max-width: 100%;
             overflow-x: hidden;
         }
         body {
             background-color: var(--background); color: var(--text-color);
-            font-family: var(--font-body); margin: 0; padding: 0; overflow-x: hidden;
+            font-family: var(--font-body); margin: 0; padding: 0; 
             font-weight: 400;
             line-height: 1.7;
-            max-width: 100%;
         }
         body.modal-open {
             overflow: hidden;
@@ -539,7 +538,7 @@
         }
 
         .skill-card {
-            width: 18rem;
+            width: 20rem; /* MODIFIED: Increased width for better text spacing */
             max-width: 100%;
             background: var(--card-bg);
             -webkit-backdrop-filter: var(--blur);
@@ -802,7 +801,7 @@
         
         .contact-form-section { padding-top: 80px; }
         #contact-form {
-            max-width: 40rem; /* MODIFIED: Reduced width for a more compact form */
+            max-width: 40rem;
             margin: 0 auto;
             display: flex;
             flex-direction: column;
@@ -964,23 +963,23 @@
             opacity: 1;
         }
         
-        @media screen and (min-width: 1100px) {
-            html { font-size: calc(16px + 4 * ((100vw - 1100px) / (1920 - 1100))); }
+        @media screen and (min-width: 990px) {
+            html { font-size: calc(14.4px + 3.6 * ((100vw - 990px) / (1728 - 990))); }
         }
-        @media screen and (min-width: 2800px) {
-            html { font-size: 21px; }
+        @media screen and (min-width: 2520px) {
+            html { font-size: 18.9px; }
         }
-        @media (max-width: 768px) {
+        @media (max-width: 691px) {
           section { padding: 4rem 1rem; }
         }
-        @media screen and (min-width: 480px) {
+        @media screen and (min-width: 432px) {
             .contact-grid { grid-template-columns: repeat(2, 1fr); }
         }
-        @media screen and (min-width: 768px) {
+        @media screen and (min-width: 692px) {
             .contact-grid { grid-template-columns: repeat(4, 1fr); }
         }
         
-        @media screen and (max-width: 1023px) {
+        @media screen and (max-width: 921px) {
             .main-nav { background-color: transparent; border-bottom: none; }
             .nav-content { display: none; }
             .mobile-menu-icon { display: block; }
@@ -989,7 +988,7 @@
             .hero-text { text-align: left; }
         }
         
-        @media screen and (max-width: 1023px) {
+        @media screen and (max-width: 921px) {
             .mobile-nav-overlay-content {
                 top: 0; padding: 60px 0; display: flex; flex-direction: column;
                 justify-content: center; height: 100%;
@@ -1008,11 +1007,11 @@
             .mobile-language-selector { margin-top: auto; padding-bottom: 30px; }
             .mobile-toggle { background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-color); border-radius: 8px; }
             .timeline-wrapper::before { left: 10px; }
-            .timeline-item { padding-left: 30px; margin-bottom: 30px; } /* MODIFIED: Reduced left padding */
+            .timeline-item { padding-left: 30px; margin-bottom: 30px; }
             .timeline-item::before { left: 4px; width: 13px; height: 13px; }
-            .timeline-content { padding: 1.5rem 1rem; } /* MODIFIED: Reduced horizontal padding */
+            .timeline-content { padding: 1.5rem 1rem; }
             .contact-grid { grid-template-columns: 1fr; }
-            @media (min-width: 500px) { .contact-grid { grid-template-columns: repeat(2, 1fr); } }
+            @media (min-width: 450px) { .contact-grid { grid-template-columns: repeat(2, 1fr); } }
             .flip-card { height: auto; min-height: 10rem; perspective: none; }
             .flip-card-inner { position: static; transform-style: flat; transform: none !important; transition: none; }
             .flip-card-front, .flip-card-back { position: static; transform: none; backface-visibility: visible; width: 100%; height: auto; display: flex; }
@@ -1020,16 +1019,16 @@
             .flip-card-back { border-top-left-radius: 0; border-top-right-radius: 0; min-height: 4rem; padding: 1rem; font-size: 1rem; }
         }
 
-        @media screen and (max-width: 380px) {
+        @media screen and (max-width: 342px) {
             h1 { font-size: 1.6rem; }
         }
 
         /* HIDE/SHOW ELEMENTS BASED ON SCREEN SIZE */
-        @media (max-width: 768px) {
+        @media (max-width: 691px) {
             .open-project-modal-btn { display: none; }
             #mobile-project-showcase { display: block; }
         }
-        @media (min-width: 769px) {
+        @media (min-width: 692px) {
             #mobile-project-showcase { display: none; }
         }
 </style>
@@ -1112,7 +1111,6 @@
 <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"></path></svg>
 </button>
 <ul class="cta-dropdown-menu">
-<!-- MODIFIED: Links now open in a new tab for viewing -->
 <li><a class="lang" data-de="Lebenslauf" data-en="CV / Resume" data-fr="CV" href="resume/lebenslauf.pdf" target="_blank" rel="noopener noreferrer">Lebenslauf</a></li>
 <li><a class="lang" data-de="Anschreiben" data-en="Cover Letter" data-fr="Lettre de Motivation" href="resume/anschreiben.pdf" target="_blank" rel="noopener noreferrer">Anschreiben</a></li>
 <li><a class="lang" data-de="Zeugnisse" data-en="Certificates" data-fr="Certificats" href="resume/zeugnisse.pdf" target="_blank" rel="noopener noreferrer">Zeugnisse</a></li>
@@ -1185,11 +1183,11 @@
 <div class="skill-card" data-aos="fade-up" data-aos-delay="300">
     <h3 class="lang" data-de="Sprachen" data-en="Languages" data-fr="Langues">Sprachen</h3>
     <p class="lang" 
-       data-de="<b>Deutsch:</b> Gute Kenntnisse (Goethe-Zertifikat B2)<br><b>Englisch:</b> Nahezu muttersprachlich (C2)<br><b>Französisch:</b> Fließend<br><b>Arabisch:</b> Muttersprache" 
-       data-en="<b>German:</b> Proficient (Goethe-Certificate B2)<br><b>English:</b> Near-Native Proficiency (C2)<br><b>French:</b> Fluent<br><b>Arabic:</b> Native Speaker" 
-       data-fr="<b>Allemand:</b> Compétent (Certificat Goethe B2)<br><b>Anglais:</b> Quasi natif (C2)<br><b>Français:</b> Courant<br><b>Arabe:</b> Langue maternelle">
+       data-de="<b>Deutsch:</b> Gute Kenntnisse (Goethe-Zertifikat B2)<br><b>Englisch:</b> Nahezu muttersprachlich <br><b>Französisch:</b> Fließend<br><b>Arabisch:</b> Muttersprache" 
+       data-en="<b>German:</b> Proficient (Goethe-Certificate B2)<br><b>English:</b> Near-Native Proficiency <br><b>French:</b> Fluent<br><b>Arabic:</b> Native Speaker" 
+       data-fr="<b>Allemand:</b> Compétent (Certificat Goethe B2)<br><b>Anglais:</b> Quasi natif <br><b>Français:</b> Courant<br><b>Arabe:</b> Langue maternelle">
         <b>German:</b> Proficient (Goethe-Certificate B2)<br>
-        <b>English:</b> Near-Native Proficiency (C2)<br>
+        <b>English:</b> Near-Native Proficiency <br>
         <b>French:</b> Fluent<br>
         <b>Arabic:</b> Native Speaker
     </p>
