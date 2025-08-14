@@ -61,16 +61,16 @@
         html { 
             scroll-behavior: smooth; 
             font-size: 90%;
-            /* max-width: 100%; REMOVED */
-            overflow-x: hidden; /* This is the single, definitive rule */
+            /* max-width: 100%; REMOVED. Let body handle overflow. */
+            /* overflow-x: hidden; REMOVED. Let body handle overflow. */
         }
         body {
             background-color: var(--background); color: var(--text-color);
             font-family: var(--font-body); margin: 0; padding: 0; 
             font-weight: 400;
             line-height: 1.7;
-            /* max-width: 100vw;      REMOVED */
-            /* overflow-x: hidden;    REMOVED */
+            width: 100%; /* ADDED: Force body to viewport width */
+            overflow-x: hidden; /* ADDED: Hide any internal overflow */
         }
         body.modal-open {
             overflow: hidden;
@@ -317,7 +317,6 @@
         .hero-text { 
             flex-basis: 29.5rem;
             text-align: left; 
-            max-width: 100%; /* ADDED: This is the key fix */
         }
         h1 {
             display: inline-block;
@@ -1186,9 +1185,9 @@
 <div class="skill-card" data-aos="fade-up" data-aos-delay="300">
     <h3 class="lang" data-de="Sprachen" data-en="Languages" data-fr="Langues">Sprachen</h3>
     <p class="lang" 
-       data-de="<b>Deutsch:</b> Gute Kenntnisse (Goethe-Zertifikat B2)<br><b>Englisch:</b> Nahezu muttersprachlich <br><b>Französisch:</b> Fließend<br><b>Arabisch:</b> Muttersprache" 
-       data-en="<b>German:</b> Proficient (Goethe-Certificate B2)<br><b>English:</b> Near-Native Proficiency <br><b>French:</b> Fluent<br><b>Arabic:</b> Native Speaker" 
-       data-fr="<b>Allemand:</b> Compétent (Certificat Goethe B2)<br><b>Anglais:</b> Quasi natif <br><b>Français:</b> Courant<br><b>Arabe:</b> Langue maternelle">
+       data-de="<b>Deutsch:</b> Gute Kenntnisse (Goethe-Zertifikat B2)<br><b>Englisch:</b> Nahezu muttersprachlich (C2)<br><b>Französisch:</b> Fließend<br><b>Arabisch:</b> Muttersprache" 
+       data-en="<b>German:</b> Proficient (Goethe-Certificate B2)<br><b>English:</b> Near-Native Proficiency (C2)<br><b>French:</b> Fluent<br><b>Arabic:</b> Native Speaker" 
+       data-fr="<b>Allemand:</b> Compétent (Certificat Goethe B2)<br><b>Anglais:</b> Quasi natif (C2)<br><b>Français:</b> Courant<br><b>Arabe:</b> Langue maternelle">
         <b>German:</b> Proficient (Goethe-Certificate B2)<br>
         <b>English:</b> Near-Native Proficiency (C2)<br>
         <b>French:</b> Fluent<br>
