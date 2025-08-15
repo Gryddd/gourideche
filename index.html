@@ -318,11 +318,14 @@ body.modal-open {
              box-shadow: 0 0 25px rgba(0, 191, 255, 0.4);
         }
 .hero-text { 
-    width: 100%;          /* On mobile, be 100% of the available width */
-    max-width: calc(29.5rem - 0.5rem);
+    width: 100%;
+    max-width: 29.5rem;
     overflow: hidden;
     text-align: left;
-    min-width: 0;         /* The essential flexbox safeguard */
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
         h1 {
             display: inline-block;
