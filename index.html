@@ -58,22 +58,28 @@
             box-sizing: border-box;
             min-width: 0;
         }
-        html { 
-            scroll-behavior: smooth; 
-            font-size: 90%;
-            overflow-x: hidden;
-        }
-        body {
-            background-color: var(--background); color: var(--text-color);
-            font-family: var(--font-body); margin: 0; padding: 0; 
-            font-weight: 400;
-            line-height: 1.7;
-            max-width: 100%;      /* FIX: Prevents horizontal overflow */
-            overflow-x: hidden;    /* FIX: Hides overflowing content */
-        }
-        body.modal-open {
-            overflow: hidden;
-        }
+html { 
+    scroll-behavior: smooth; 
+    font-size: 90%;
+    /* No width or overflow properties needed here. Let it be natural. */
+}
+body {
+    background-color: var(--background);
+    color: var(--text-color);
+    font-family: var(--font-body);
+    margin: 0;
+    padding: 0; 
+    font-weight: 400;
+    line-height: 1.7;
+
+    /* These two lines are the solution */
+    width: 100%;
+    overflow-x: hidden;
+}
+/* Make sure your body modal-open rule is still there */
+body.modal-open {
+    overflow: hidden;
+}
         h1, h2, h3, .nav-links a, .nav-dropdown button { font-family: var(--font-heading); }
 
         h1, h2, h3, h4 {
