@@ -320,10 +320,14 @@ body.modal-open {
              border: 3px solid var(--primary-blue);
              box-shadow: 0 0 25px rgba(0, 191, 255, 0.4);
         }
-        .hero-text { 
-            flex-basis: 29.5rem;
-            text-align: left; 
-        }
+.hero-text { 
+    /* Instead of a fixed flex-basis, we use a responsive width */
+    width: 100%;          /* On mobile, be 100% of the available width */
+    max-width: 29.5rem;   /* On desktop, don't grow wider than 29.5rem */
+    
+    text-align: left;
+    min-width: 0;         /* The essential flexbox safeguard */
+}
         h1 {
             display: inline-block;
             border-right: 2px solid var(--primary-blue);
