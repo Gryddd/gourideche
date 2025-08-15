@@ -318,10 +318,9 @@ body.modal-open {
              box-shadow: 0 0 25px rgba(0, 191, 255, 0.4);
         }
 .hero-text { 
-    /* Instead of a fixed flex-basis, we use a responsive width */
     width: 100%;          /* On mobile, be 100% of the available width */
-    max-width: 29.5rem;   /* On desktop, don't grow wider than 29.5rem */
-    
+    max-width: 29.5rem;
+    overflow: hidden;
     text-align: left;
     min-width: 0;         /* The essential flexbox safeguard */
 }
