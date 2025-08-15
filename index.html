@@ -61,7 +61,7 @@
 html { 
     scroll-behavior: smooth; 
     font-size: 90%;
-    /* No width or overflow properties needed here. Let it be natural. */
+    overflow-x: hidden;
 }
 body {
     background-color: var(--background);
@@ -71,12 +71,8 @@ body {
     padding: 0; 
     font-weight: 400;
     line-height: 1.7;
-
-    /* These two lines are the solution */
-    width: 100%;
     overflow-x: hidden;
 }
-/* Make sure your body modal-open rule is still there */
 body.modal-open {
     overflow: hidden;
 }
