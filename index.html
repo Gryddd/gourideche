@@ -327,17 +327,15 @@ body.modal-open {
     flex-direction: column;
     align-items: flex-start;
 }
-        h1 {
-            display: inline-block;
-            border-right: 2px solid var(--primary-blue);
-            font-size: 2.5rem;
-            white-space: nowrap;
-            overflow: hidden;
-            margin: 0;
-            margin-left: 0.5rem;
-            animation: typing 2s steps(18, end), blink-caret .75s step-end infinite;
-        }
-
+h1 {
+    display: inline-block;
+    border-right: 2px solid var(--primary-blue);
+    font-size: 2.5rem;
+    white-space: nowrap;
+    overflow: hidden;
+    margin: 0;
+    animation: typing 2s steps(18, end), blink-caret .75s step-end infinite;
+}
         @keyframes typing { from { max-width: 0 } to { max-width: 18ch } }
         @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: var(--primary-blue); } }
         
