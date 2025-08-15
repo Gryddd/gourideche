@@ -334,7 +334,7 @@ body.modal-open {
             animation: typing 2s steps(18, end), blink-caret .75s step-end infinite;
         }
 
-        @keyframes typing { from { width: 0 } to { width: 18ch } }
+        @keyframes typing { from { width: 0 } to { width: calc(18ch + 2px) } }
         @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: var(--primary-blue); } }
         
         .hero-job-title {
