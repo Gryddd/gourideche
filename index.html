@@ -911,6 +911,7 @@ h1 {
             display: inline-flex;
             align-items: center;
             gap: 0.75rem;
+            text-decoration: none;
         }
 
         .hero-cta-dropdown .cta-dropdown-toggle:hover {
@@ -1011,6 +1012,7 @@ h1 {
             gap: 0.6rem;
             transition: transform var(--transition-speed), box-shadow var(--transition-speed);
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            text-decoration: none;
         }
         #nav-cta-dropdown .cta-dropdown-toggle:hover {
             transform: translateY(-2px);
@@ -1170,15 +1172,7 @@ h1 {
 </div>
 <!-- NEW: Floating CTA Dropdown -->
 <div id="nav-cta-dropdown">
-<button class="cta-dropdown-toggle">
-<span class="lang" data-de="Dokumente ansehen" data-en="View Documents" data-fr="Voir les Documents">View Documents</span>
-<svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"></path></svg>
-</button>
-<ul class="cta-dropdown-menu">
-<li><a class="lang" data-de="Lebenslauf" data-en="CV / Resume" data-fr="CV" href="resume/lebenslauf.pdf#zoom=33" target="_blank" rel="noopener noreferrer">Lebenslauf</a></li>
-<li><a class="lang" data-de="Anschreiben" data-en="Cover Letter" data-fr="Lettre de Motivation" href="resume/anschreiben.pdf#zoom=33" target="_blank" rel="noopener noreferrer">Anschreiben</a></li>
-<li><a class="lang" data-de="Zeugnisse" data-en="Certificates" data-fr="Certificats" href="resume/zeugnisse.pdf#zoom=33" target="_blank" rel="noopener noreferrer">Zeugnisse</a></li>
-</ul>
+<a href="resume/lebenslauf.pdf" target="_blank" rel="noopener noreferrer" class="cta-dropdown-toggle lang" data-de="Lebenslauf ansehen" data-en="View CV / Resume" data-fr="Voir le CV">Lebenslauf ansehen</a>
 </div>
 </nav>
 <button aria-label="Menü öffnen" class="mobile-menu-icon lang-aria" data-de="Menü öffnen" data-en="Open menu" data-fr="Ouvrir le menu">
@@ -1223,15 +1217,7 @@ h1 {
     Ein 23-jähriger angehender IT-Spezialist mit vielfältiger Erfahrung in Netzwerktechnik und Systemadministration. Bringt internationale Perspektive, praxisnahe Kenntnisse und den Antrieb mit, effiziente IT-Lösungen von Marokko bis Deutschland voranzubringen.
 </p>
 <div class="hero-cta-dropdown">
-<button class="cta-dropdown-toggle">
-<span class="lang" data-de="Dokumente ansehen" data-en="View Documents" data-fr="Voir les Documents">Dokumente ansehen</span>
-<svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"></path></svg>
-</button>
-<ul class="cta-dropdown-menu">
-<li><a class="lang" data-de="Lebenslauf" data-en="CV / Resume" data-fr="CV" href="resume/lebenslauf.pdf#zoom=33" target="_blank" rel="noopener noreferrer">Lebenslauf</a></li>
-<li><a class="lang" data-de="Anschreiben" data-en="Cover Letter" data-fr="Lettre de Motivation" href="resume/anschreiben.pdf#zoom=33" target="_blank" rel="noopener noreferrer">Anschreiben</a></li>
-<li><a class="lang" data-de="Zeugnisse" data-en="Certificates" data-fr="Certificats" href="resume/zeugnisse.pdf#zoom=33" target="_blank" rel="noopener noreferrer">Zeugnisse</a></li>
-</ul>
+<a href="resume/lebenslauf.pdf#zoom=33" target="_blank" rel="noopener noreferrer" class="cta-dropdown-toggle lang" data-de="Lebenslauf ansehen" data-en="View CV / Resume" data-fr="Voir le CV">Lebenslauf ansehen</a>
 </div>
 </div>
 </section>
@@ -1778,19 +1764,9 @@ h1 {
                       navCtaDropdown.classList.remove('active'); // Close dropdown when it hides
                   }
               }, { passive: true });
-          
-              navCtaDropdown.querySelector('.cta-dropdown-toggle')?.addEventListener('click', function(e) {
-                  e.stopPropagation();
-                  this.parentElement.classList.toggle('active');
-              });
           }
 
           // --- GENERAL EVENT LISTENERS ---
-          document.querySelector('.hero-cta-dropdown .cta-dropdown-toggle')?.addEventListener('click', function(e) {
-              e.stopPropagation();
-              this.parentElement.classList.toggle('active');
-          });
-          
           document.querySelectorAll('.project-intro-image').forEach(introImage => {
               introImage.addEventListener('click', function() {
                   const img = this.querySelector('img');
