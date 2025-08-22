@@ -38,18 +38,7 @@
         "addressCountry": "MA"
       }
     }
-</script>
-
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-MLF026YD8R"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-MLF026YD8R');
-</script>
-
+    </script>
 <style>
         :root {
             --background: #0d0d0d;
@@ -1137,77 +1126,6 @@ h1 {
             .flip-card-back { border-top-left-radius: 0; border-top-right-radius: 0; min-height: 4rem; padding: 1rem; font-size: 1rem; }
         }
 
-        /* === CUSTOM COOKIE CONSENT BANNER === */
-        #cookie-consent-banner {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: var(--card-bg);
-            -webkit-backdrop-filter: var(--blur);
-            backdrop-filter: var(--blur);
-            padding: 1.5rem 2rem;
-            z-index: 1010;
-            border-top: 1px solid var(--border-color);
-            box-shadow: 0 -5px 20px rgba(0,0,0,0.3);
-            transform: translateY(100%);
-            transition: transform 0.5s ease-in-out;
-            visibility: hidden;
-        }
-
-        #cookie-consent-banner.show {
-            transform: translateY(0);
-            visibility: visible;
-        }
-
-        .cookie-consent-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-        }
-
-        .cookie-consent-content p {
-            margin: 0;
-            font-size: 0.9rem;
-            line-height: 1.6;
-            flex-grow: 1;
-            opacity: 0.9;
-        }
-
-        .cookie-consent-content a {
-            color: var(--primary-blue);
-            text-decoration: underline;
-            font-weight: bold;
-        }
-
-        .cookie-consent-buttons {
-            display: flex;
-            gap: 1rem;
-            flex-shrink: 0;
-        }
-
-        .cookie-consent-buttons button {
-            padding: 0.6rem 1.2rem;
-            font-size: 0.9rem;
-            font-weight: 700;
-        }
-
-        #cookie-decline-btn {
-            background: transparent;
-            border: 1px solid var(--border-color);
-            color: var(--text-color);
-        }
-        #cookie-decline-btn:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: var(--text-color);
-            transform: translateY(0); /* Override default button hover */
-            box-shadow: none;
-        }
-        
         @media screen and (max-width: 342px) {
             h1 { font-size: 1.6rem; }
         }
@@ -1510,28 +1428,6 @@ h1 {
           AOS.init({
               duration: 1000,
               once: true,
-          });
-
-          // --- CUSTOM COOKIE CONSENT LOGIC ---
-          const cookieBanner = document.getElementById('cookie-consent-banner');
-          const acceptBtn = document.getElementById('cookie-accept-btn');
-          const declineBtn = document.getElementById('cookie-decline-btn');
-
-          // Check if user has already consented
-          if (!localStorage.getItem('cookie_consent')) {
-              setTimeout(() => {
-                  cookieBanner.classList.add('show');
-              }, 1000); // Show banner after 1 second
-          }
-
-          acceptBtn.addEventListener('click', () => {
-              localStorage.setItem('cookie_consent', 'accepted');
-              cookieBanner.classList.remove('show');
-          });
-
-          declineBtn.addEventListener('click', () => {
-              localStorage.setItem('cookie_consent', 'declined');
-              cookieBanner.classList.remove('show');
           });
           
           document.getElementById('copyright-year').textContent = new Date().getFullYear();
@@ -2059,15 +1955,5 @@ h1 {
 
       });
     </script>
-<div id="cookie-consent-banner">
-    <div class="cookie-consent-content">
-        <p class="lang" data-de="Diese Website verwendet Cookies, um die Benutzererfahrung zu analysieren und zu verbessern. Durch die weitere Nutzung der Website stimmen Sie der Verwendung von Cookies zu." data-en="This website uses cookies to analyze and improve the user experience. By continuing to use the site, you agree to the use of cookies." data-fr="Ce site utilise des cookies pour analyser et améliorer l'expérience utilisateur. En continuant à utiliser le site, vous acceptez l'utilisation de cookies.">
-        </p>
-        <div class="cookie-consent-buttons">
-            <button id="cookie-decline-btn" class="lang" data-de="Ablehnen" data-en="Decline" data-fr="Refuser">Ablehnen</button>
-            <button id="cookie-accept-btn" class="submit-btn lang" data-de="Akzeptieren" data-en="Accept" data-fr="Accepter">Akzeptieren</button>
-        </div>
-    </div>
-</div>
 </body>
 </html>
