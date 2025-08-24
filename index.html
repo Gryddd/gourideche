@@ -173,15 +173,6 @@ body.modal-open {
             font-size: 0.95rem;
             padding: 0.5rem;
         }
-        .nav-dropdown-toggle:hover {
-            background: var(--accent-gradient);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            opacity: 0.8; /* Adds a subtle visual feedback on hover */
-            transform: none;
-            box-shadow: none;
-        }
         .nav-dropdown-toggle .arrow-icon {
             width: 12px; height: 12px; fill: var(--text-color);
             transition: transform 0.3s ease;
@@ -283,22 +274,25 @@ body.modal-open {
     max-height: 0;
     overflow: hidden; 
     transition: max-height 0.3s ease-out;
-    background: rgba(26, 26, 26, 0.8);
+    background: rgba(26, 26, 26, 0.9); /* Slightly more opaque */
     -webkit-backdrop-filter: blur(15px);
     backdrop-filter: blur(15px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 8px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     position: absolute;
     top: calc(100% + 5px);
     left: 50%;
     transform: translateX(-50%);
-    width: 70%; /* Match button width */
-    z-index: 5;
+    width: 180px; /* Compact width */
+    z-index: 10; /* Higher z-index */
 }
 .mobile-list li a { 
-    font-size: 14px !important; /* Smaller font */
-    padding: 8px !important; /* Reduced padding */
+    font-size: 0.9rem !important;
+    padding: 8px 15px !important; /* Compact padding */
+    animation: none !important;
+    opacity: 1 !important;
+    white-space: nowrap;
 }
         .mobile-menu-icon { 
             display: none; cursor: pointer; z-index: 1002;
@@ -325,18 +319,20 @@ body.modal-open {
     width: 100%;
     text-align: center; 
     margin-top: 0; 
-    padding: 60px 0 20px 0; /* Top padding to avoid hamburger icon */
+    padding: 60px 20px 20px 20px; /* Reduced top padding */
     display: flex; 
     flex-direction: column;
-    justify-content: flex-start; /* Changed from center to flex-start */
-    align-items: center; /* Center horizontally */
-    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Changed from height to min-height */
     overflow-y: auto;
+    gap: 6px; /* Reduced gap for tighter spacing */
+    box-sizing: border-box;
 }
 .mobile-nav-overlay a {
-    padding: 8px; /* Reduced from 12px */
+    padding: 10px; /* Reduced padding */
     text-decoration: none; 
-    font-size: 1.1rem; /* Reduced from 1.3rem */
+    font-size: 1.1rem; /* Slightly smaller */
     color: var(--text-color); 
     display: block; 
     transition: 0.3s;
@@ -604,7 +600,7 @@ h1 {
         }
 
         .skill-card {
-            width: 26rem; /* MODIFIED: Increased width for better text spacing */
+            width: 20rem; /* MODIFIED: Increased width for better text spacing */
             max-width: 100%;
             background: var(--card-bg);
             -webkit-backdrop-filter: var(--blur);
@@ -775,11 +771,6 @@ h1 {
             font-size: 1.1rem; cursor: pointer;
             display: flex; justify-content: space-between; align-items: center;
         }
-        .faq-question:hover {
-            transform: translateY(-2px);
-            color: var(--primary-blue);
-            transition: all var(--transition-speed);
-        }
         .faq-question i { font-style: normal; font-weight: bold; }
         .faq-icon {
             flex-shrink: 0;
@@ -873,18 +864,11 @@ h1 {
         
         .contact-form-section { padding-top: 80px; }
         #contact-form {
-            max-width: 28rem; /* Reduced from 32rem to make it smaller */
+            max-width: 40rem;
             margin: 0 auto;
             display: flex;
             flex-direction: column;
             gap: 1.5rem;
-            background: var(--card-bg);
-            border: 1px solid rgba(59, 130, 246, 0.1);
-            border-radius: 12px;
-            padding: 2rem;
-            backdrop-filter: var(--blur);
-            -webkit-backdrop-filter: var(--blur);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
         }
         .form-group {
             display: flex;
@@ -894,59 +878,48 @@ h1 {
         .form-group label {
             margin-bottom: 0.5rem;
             font-family: var(--font-heading);
-            font-weight: 500;
-            color: var(--text-color);
-            font-size: 0.95rem;
         }
         .form-group input, .form-group textarea {
-            background: rgba(255, 255, 255, 0.05);  /* Subtle background */
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            background-color: #1a1a1a;
+            border: 1px solid var(--border-color);
             color: var(--text-color);
-            padding: 1rem 1.25rem;
+            padding: 1rem;
             font-family: var(--font-body);
             font-size: 1rem;
-            border-radius: 8px;  /* Match your existing border radius */
-            transition: all 0.3s ease;
+            border-radius: 8px;
         }
         .form-group input:focus, .form-group textarea:focus {
             outline: none;
-            border-color: var(--primary-blue);  /* Use your primary blue */
-            background: rgba(255, 255, 255, 0.08);
-            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+            border-color: var(--primary-blue);
         }
         .form-group textarea {
-            min-height: 100px;
+            min-height: 150px;
             resize: vertical;
         }
         button, .submit-btn {
-            background: var(--accent-gradient);  /* Use your existing gradient */
+            background: var(--accent-gradient);
             border: none;
             color: white;
-            padding: 1rem 2rem;
-            border-radius: 8px;  /* Match your existing border radius */
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
             cursor: pointer;
             font-family: var(--font-heading);
-            font-weight: 600;
-            font-size: 1rem;
-            transition: all var(--transition-speed);  /* Use your existing transition */
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
             align-self: center;
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
         }
-        .submit-btn:hover {
-            background: var(--accent-gradient);  /* Keep same gradient */
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
-            opacity: 0.9;
+        button:hover, .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
         }
 
         .submit-btn:disabled {
-            background: var(--accent-gradient);
-            opacity: 0.8;
+            background: #0080a7;
+            border-color: #0080a7;
+            color: var(--background);
             cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
         }
         .submit-btn svg {
             width: 20px;
@@ -955,14 +928,11 @@ h1 {
 
         #form-status {
             text-align: center;
-            margin-top: 1.5rem;
-            font-weight: 500;
-            min-height: 1.5em;
-            max-width: 28rem; /* Matched to the new form width */
-            margin-left: auto;
-            margin-right: auto;
+            margin-top: 1rem;
+            font-weight: bold;
+            min-height: 1.6em;
         }
-        #form-status .success { color: #10b981; }
+        #form-status .success { color: #22c55e; }
         #form-status .error { color: #ef4444; }
 
         /* === HERO CTA DROPDOWN (STYLES UPDATED FOR ROUNDED GRADIENT BORDER) === */
@@ -1257,13 +1227,13 @@ h1 {
         @media screen and (max-width: 921px) {
     .mobile-nav-overlay-content {
         top: 0; 
-        padding: 60px 0 20px 0; /* Top padding to avoid hamburger icon */
+        padding: 60px 0 60px 0; /* Top and bottom padding */
         display: flex; 
         flex-direction: column;
-        justify-content: flex-start; /* Start from top */
+        justify-content: center; /* Center vertically */
         align-items: center; /* Center horizontally */
-        height: auto; /* Remove fixed height */
-        min-height: 100vh; /* Minimum full height */
+        height: auto;
+        min-height: auto;
     }
     .mobile-nav-overlay a {
         font-size: 1.3rem; 
@@ -1277,30 +1247,41 @@ h1 {
             .mobile-nav-overlay-content > a:nth-of-type(4) { animation-delay: 0.5s; }
             .mobile-nav-overlay-content > a:nth-of-type(5) { animation-delay: 0.6s; }
             .mobile-nav-overlay-content > a:nth-of-type(6) { animation-delay: 0.7s; }
+            .mobile-nav-overlay-content > a:nth-of-type(7) { animation-delay: 0.8s; }
             @keyframes fadeInLink { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
- .mobile-language-selector {
-    margin-top: -200px; /* Remove extra margin */
-    text-align: center;
-    position: relative;
-    width: 100%;
-}
-    .mobile-toggle {
-    background: rgba(255, 255, 255, 0.05);
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: var(--text-color);
-    font-family: var(--font-heading);
-    font-size: 16px;
-    padding: 9px 20px;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    width: 80%;
-    justify-content: center;
-    border-radius: 8px;
-}            .timeline-wrapper::before { left: 10px; }
+
+            .mobile-language-buttons {
+                display: flex;
+                justify-content: center;
+                gap: 1rem;
+                margin-top: 1.5rem;
+                opacity: 0;
+                animation: fadeInLink 0.5s ease-out forwards;
+                animation-delay: 0.9s;
+            }
+            .mobile-language-buttons .language-item {
+                background: rgba(255, 255, 255, 0.05);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                color: var(--text-color);
+                font-family: var(--font-heading);
+                font-size: 1rem;
+                padding: 8px 18px;
+                border-radius: 8px;
+                cursor: pointer;
+                transition: all 0.2s ease;
+            }
+            .mobile-language-buttons .language-item:hover {
+                background: rgba(255, 255, 255, 0.2);
+                border-color: var(--primary-blue);
+            }
+            .mobile-language-buttons .language-item.active {
+                background: var(--primary-blue);
+                color: var(--background);
+                border-color: var(--primary-blue);
+                font-weight: bold;
+            }
+
+            .timeline-wrapper::before { left: 10px; }
             .timeline-item { padding-left: 30px; margin-bottom: 30px; }
             .timeline-item::before { left: 4px; width: 13px; height: 13px; }
             .timeline-content { padding: 1.5rem 1rem; }
@@ -1393,7 +1374,7 @@ h1 {
 </div>
 <!-- NEW: Floating CTA Dropdown -->
 <div id="nav-cta-dropdown">
-<a href="resume/lebenslauf.pdf" target="_blank" rel="noopener noreferrer" class="cta-dropdown-toggle lang" data-de="Lebenslauf ansehen" data-en="View CV / Resume" data-fr="Voir le CV">View CV / Resume</a>
+<a href="resume/cv-walid-gourideche.pdf" target="_blank" rel="noopener noreferrer" class="cta-dropdown-toggle lang" data-de="Lebenslauf ansehen" data-en="View CV / Resume" data-fr="Voir le CV">View CV / Resume</a>
 </div>
 </nav>
 <button aria-label="Open menu" class="mobile-menu-icon lang-aria" data-de="Menü öffnen" data-en="Open menu" data-fr="Ouvrir le menu">
@@ -1410,17 +1391,10 @@ h1 {
 <a class="lang" data-de="Projekt" data-en="Project" data-fr="Projet" href="#projekte">Project</a>
 <a class="lang" data-de="FAQ" data-en="FAQ" data-fr="FAQ" href="#faq">FAQ</a>
 <a class="lang" data-de="Kontakt" data-en="Contact" data-fr="Contact" href="#kontakt">Contact</a>
-</div>
-<div class="mobile-language-selector">
-<button class="mobile-toggle">
-<span class="lang" data-de="Sprache wählen" data-en="Select Language" data-fr="Choisir la langue">Select Language</span>
-<svg class="arrow-icon" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"></path></svg>
-</button>
-<ul class="mobile-list">
-<li><a class="language-item" data-lang="de" href="#">Deutsch</a></li>
-<li><a class="language-item" data-lang="en" href="#">English</a></li>
-<li><a class="language-item" data-lang="fr" href="#">Français</a></li>
-</ul>
+<div class="mobile-language-buttons">
+<button class="language-item" data-lang="de">DE</button>
+<button class="language-item" data-lang="en">EN</button>
+<button class="language-item" data-lang="fr">FR</button>
 </div>
 </div>
 </div>
@@ -1439,7 +1413,7 @@ h1 {
     A 23-year-old aspiring IT specialist with diverse experience in network technology and system administration. Bringing an international perspective, practical knowledge, and the drive to advance efficient IT solutions from Morocco to Germany.
 </p>
 <div class="hero-cta-dropdown">
-<a href="resume/lebenslauf.pdf" target="_blank" rel="noopener noreferrer" class="cta-dropdown-toggle lang" data-de="Lebenslauf ansehen" data-en="View CV / Resume" data-fr="Voir le CV">View CV / Resume</a>
+<a href="resume/cv-walid-gourideche.pdf" target="_blank" rel="noopener noreferrer" class="cta-dropdown-toggle lang" data-de="Lebenslauf ansehen" data-en="View CV / Resume" data-fr="Voir le CV">View CV / Resume</a>
 </div>
 </div>
 </section>
@@ -1636,8 +1610,8 @@ h1 {
 <button class="submit-btn" data-de="Senden" data-en="Send" data-fr="Envoyer" data-sending-de="Sende..." data-sending-en="Sending..." data-sending-fr="Envoi..." data-sent-de="Gesendet" data-sent-en="Sent" data-sent-fr="Envoyé" type="submit">
 <span class="lang" data-de="Senden" data-en="Send" data-fr="Envoyer">Send</span>
 </button>
-</form>
 <div id="form-status"></div>
+</form>
 </div>
 </section>
 </main>
@@ -2169,17 +2143,16 @@ h1 {
               item.addEventListener('click', (e) => {
                   e.preventDefault(); 
                   switchLanguage(item.getAttribute('data-lang'));
+                  
+                  // Close desktop dropdown if open
                   const activeDropdown = item.closest('.nav-dropdown.active');
                   if (activeDropdown) {
                       activeDropdown.classList.remove('active');
                       activeDropdown.querySelector('.nav-dropdown-toggle').setAttribute('aria-expanded', 'false');
                   }
                   
-                  const mobileList = item.closest('.mobile-list');
-                  if(mobileList) {
-                      const toggle = mobileList.previousElementSibling;
-                      toggle.classList.remove('active');
-                      mobileList.style.maxHeight = null;
+                  // If it's a mobile button, close the nav overlay
+                  if(item.closest('.mobile-language-buttons')) {
                       setTimeout(toggleNav, 150);
                   }
               });
@@ -2201,6 +2174,7 @@ h1 {
           const toggleNav = () => {
             const isOpen = mobileMenuIcon.classList.toggle('change');
             mobileNavOverlay.style.width = isOpen ? "100%" : "0%";
+            document.body.classList.toggle('modal-open', isOpen);
           }
           mobileMenuIcon.addEventListener('click', toggleNav);
           mobileNavOverlay.querySelectorAll('a:not(.language-item)').forEach(link => {
@@ -2208,7 +2182,7 @@ h1 {
               link.addEventListener('click', () => setTimeout(toggleNav, 150));
             }
           });
-          document.querySelectorAll('.mobile-toggle').forEach(toggle => toggle.addEventListener('click', () => { const list = toggle.nextElementSibling; toggle.classList.toggle('active'); list.style.maxHeight = list.style.maxHeight ? null : list.scrollHeight + 'px'; }));
+          
           document.querySelectorAll('.nav-dropdown-toggle').forEach(toggle => toggle.addEventListener('click', (e) => { 
               e.stopPropagation(); 
               const parent = toggle.closest('.nav-dropdown'); 
