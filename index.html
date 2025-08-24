@@ -173,6 +173,15 @@ body.modal-open {
             font-size: 0.95rem;
             padding: 0.5rem;
         }
+        .nav-dropdown-toggle:hover {
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            opacity: 0.8; /* Adds a subtle visual feedback on hover */
+            transform: none;
+            box-shadow: none;
+        }
         .nav-dropdown-toggle .arrow-icon {
             width: 12px; height: 12px; fill: var(--text-color);
             transition: transform 0.3s ease;
@@ -766,6 +775,11 @@ h1 {
             font-size: 1.1rem; cursor: pointer;
             display: flex; justify-content: space-between; align-items: center;
         }
+        .faq-question:hover {
+            transform: translateY(-2px);
+            color: var(--primary-blue);
+            transition: all var(--transition-speed);
+        }
         .faq-question i { font-style: normal; font-weight: bold; }
         .faq-icon {
             flex-shrink: 0;
@@ -859,11 +873,18 @@ h1 {
         
         .contact-form-section { padding-top: 80px; }
         #contact-form {
-            max-width: 26rem;
+            max-width: 28rem; /* Reduced from 32rem to make it smaller */
             margin: 0 auto;
             display: flex;
             flex-direction: column;
             gap: 1.5rem;
+            background: var(--card-bg);
+            border: 1px solid rgba(59, 130, 246, 0.1);
+            border-radius: 12px;
+            padding: 2rem;
+            backdrop-filter: var(--blur);
+            -webkit-backdrop-filter: var(--blur);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
         }
         .form-group {
             display: flex;
@@ -873,48 +894,59 @@ h1 {
         .form-group label {
             margin-bottom: 0.5rem;
             font-family: var(--font-heading);
+            font-weight: 500;
+            color: var(--text-color);
+            font-size: 0.95rem;
         }
         .form-group input, .form-group textarea {
-            background-color: #1a1a1a;
-            border: 1px solid var(--border-color);
+            background: rgba(255, 255, 255, 0.05);  /* Subtle background */
+            border: 1px solid rgba(255, 255, 255, 0.15);
             color: var(--text-color);
-            padding: 1rem;
+            padding: 1rem 1.25rem;
             font-family: var(--font-body);
             font-size: 1rem;
-            border-radius: 8px;
+            border-radius: 8px;  /* Match your existing border radius */
+            transition: all 0.3s ease;
         }
         .form-group input:focus, .form-group textarea:focus {
             outline: none;
-            border-color: var(--primary-blue);
+            border-color: var(--primary-blue);  /* Use your primary blue */
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
         }
         .form-group textarea {
-            min-height: 150px;
+            min-height: 100px;
             resize: vertical;
         }
         button, .submit-btn {
-            background: var(--accent-gradient);
+            background: var(--accent-gradient);  /* Use your existing gradient */
             border: none;
             color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 8px;
+            padding: 1rem 2rem;
+            border-radius: 8px;  /* Match your existing border radius */
             cursor: pointer;
             font-family: var(--font-heading);
-            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all var(--transition-speed);  /* Use your existing transition */
             align-self: center;
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
         }
-        button:hover, .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        .submit-btn:hover {
+            background: var(--accent-gradient);  /* Keep same gradient */
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+            opacity: 0.9;
         }
 
         .submit-btn:disabled {
-            background: #0080a7;
-            border-color: #0080a7;
-            color: var(--background);
+            background: var(--accent-gradient);
+            opacity: 0.8;
             cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
         }
         .submit-btn svg {
             width: 20px;
@@ -923,11 +955,14 @@ h1 {
 
         #form-status {
             text-align: center;
-            margin-top: 1rem;
-            font-weight: bold;
-            min-height: 1.6em;
+            margin-top: 1.5rem;
+            font-weight: 500;
+            min-height: 1.5em;
+            max-width: 28rem; /* Matched to the new form width */
+            margin-left: auto;
+            margin-right: auto;
         }
-        #form-status .success { color: #22c55e; }
+        #form-status .success { color: #10b981; }
         #form-status .error { color: #ef4444; }
 
         /* === HERO CTA DROPDOWN (STYLES UPDATED FOR ROUNDED GRADIENT BORDER) === */
@@ -1601,8 +1636,8 @@ h1 {
 <button class="submit-btn" data-de="Senden" data-en="Send" data-fr="Envoyer" data-sending-de="Sende..." data-sending-en="Sending..." data-sending-fr="Envoi..." data-sent-de="Gesendet" data-sent-en="Sent" data-sent-fr="Envoyé" type="submit">
 <span class="lang" data-de="Senden" data-en="Send" data-fr="Envoyer">Send</span>
 </button>
-<div id="form-status"></div>
 </form>
+<div id="form-status"></div>
 </div>
 </section>
 </main>
