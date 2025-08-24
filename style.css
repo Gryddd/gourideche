@@ -686,7 +686,7 @@ h2::after {
     gap: 1.5rem;
 }
 .skill-card {
-    width: 20rem;
+    width: 26rem;
     max-width: 100%;
     background: var(--card-bg);
     -webkit-backdrop-filter: var(--blur);
@@ -1094,7 +1094,7 @@ button:hover,
     box-shadow: 0 4px 20px rgb(0 0 0 / 0.3);
 }
 .submit-btn:disabled {
-    background: #0080a7;
+    background: var(--accent-gradient);
     border-color: #0080a7;
     color: var(--background);
     cursor: not-allowed;
